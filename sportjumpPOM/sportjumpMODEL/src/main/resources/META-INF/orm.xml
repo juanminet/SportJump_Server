@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="1.0" xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	
+	
+	<!-- Coach -->
+	 <named-query name="findAllCoaches">
+		<query>from Coach</query>
+	</named-query>
+	<named-query name="findCoachByNameSurname">
+		<query>from Coach c where c.name = :name and c.surname = :surname</query>
+	</named-query> 
+	
+	
+	
+	<!-- Team -->
+	 <named-query name="findAllTeams">
+		<query>from Team</query>
+	</named-query>	
+	<!--<named-query name="findAllTeamsByCoach">
+		<query>from Team t where t.coach.idUser := idCoach</query>
+	</named-query>
+	<named-query name="findTeamByName">
+		<query>from Team t inner join t.coach c where t.name = :name and c.idUser := idCoach</query>
+	</named-query> -->
+	
+	
+	
+	<!-- Athlete -->
+	<named-query name="findAllAthletes">
+		<query>from Athlete</query>
+	</named-query>
+	<named-query name="findAthleteByNameSurname">
+		<query>from Athlete a where a.name = :name and a.surname = :surname</query>
+	</named-query>
+	<!-- <named-query name="findAthleteFromTeam">
+		<query>from Athlete a join a.team t where t.idTeam = :idTeam</query>
+	</named-query>
+	<named-query name="findAthleteFromCoach">
+		<query>from Athlete a join a.team t join t.coach c where c.idCoach = :idCoach</query>
+	</named-query> -->
+	
+	
+	
+	
+	
+	
+	
+</entity-mappings>

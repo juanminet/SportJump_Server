@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+	
+<tiles-definitions>
+
+	<definition name="test" extends="testTemplate">
+		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+	    	<put-attribute name="body" value="/WEB-INF/jsp/components/bodyTest.jsp" />	    
+	</definition>	
+	
+	
+	
+	<!-- 
+	<definition name="login" extends="standardLayout">
+		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
+		<put-attribute name="dwrEngine" value="false"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
+	</definition>
+		
+	<definition name="accessDenied" extends="standardLayout">
+		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/accessDenied.jsp" />
+	</definition>
+	
+	<definition name="error" extends="standardLayout">
+		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/error.jsp" />
+	</definition>
+	
+	<definition name="index" template="/index.jsp" />
+	
+
+
+	<definition name="foo" extends="standardLayout">
+		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
+		<put-attribute name="dwrEngine" value="false"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/helloWorld.jsp" />
+	</definition> -->
+
+</tiles-definitions>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.directwebremoting.org/schema/spring-dwr
+    http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd">
+
+
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    	<property name="order" value="1"/>
+		<property value="true" name="alwaysUseFullPath"></property>
+	  	<property name="mappings">
+	    	<props>
+		      <prop key="/dwr/**/*">dwrController</prop>
+		    </props>
+		 </property>
+	</bean>
+
+	<!-- Escaneo de servicios Ajax -->	
+ 	 <context:annotation-config />
+	<dwr:annotation-scan base-package="es.uma.sportjump.sjs.web.ajax"/>  
+	
+	<dwr:controller id="dwrController" debug="true" >
+		<dwr:config-param name="info" value="true"/>
+		<dwr:config-param name="debug" value="true"/>
+		<dwr:config-param name="fileUploadMaxBytes" value="${dwr.upload.fileSize}"/>
+	</dwr:controller>
+
+
+
+	<dwr:configuration>
+		<!-- Beans de la aplicacion -->
+		<!-- <dwr:convert type="bean" class="es.mma.ejemplo.dto.*"/> -->
+
+		<!-- Enumeraciones -->
+		<!-- <dwr:convert type="enum" class="es.mma.ejemplo.dto.enum.MyEnum"/> -->
+		
+		<!-- Excepciones -->
+		<dwr:convert type="exception" class="java.lang.Exception"/>
+		<dwr:convert type="bean" class="java.lang.StackTraceElement"/>
+	</dwr:configuration>
+	
+</beans>
+
+
+

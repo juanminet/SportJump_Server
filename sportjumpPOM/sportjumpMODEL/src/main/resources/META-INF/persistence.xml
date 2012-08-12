@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence 	version="1.0" 
+			xmlns="http://java.sun.com/xml/ns/persistence" 
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+							http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="sportjumpJpaPU">
+		<description>JPA Persistence unit for sportjumpdb</description>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		 <class>es.uma.sportjump.sjs.model.entities.User</class> 
+		 <class>es.uma.sportjump.sjs.model.entities.Athlete</class> 
+		 <class>es.uma.sportjump.sjs.model.entities.Coach</class> 
+		 <class>es.uma.sportjump.sjs.model.entities.Team</class> 
+	
+		
+		<properties>
+			<!-- Configure trace for development -->
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			
+			<!-- Configure connection to data base -->
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.url" value="${database.connection.url}"/>
+			<property name="hibernate.connection.username" value="${database.connection.user}"/>
+			<property name="hibernate.connection.password" value="${database.connection.password}"/>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			
+			<!-- Configure C3p0 pool -->
+			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+			<property name="hibernate.c3p0.min_size" value="5"/>
+			<property name="hibernate.c3p0.max_size" value="10"/>
+			<property name="hibernate.c3p0.timeout" value="300"/>
+			<property name="hibernate.c3p0.max_statements" value="50"/>
+			<property name="hibernate.c3p0.idle_test_period" value="3600"/>
+			
+			<!-- Configure boundary and type of tx --> 
+			<property name="hibernate.connection.release_mode" value="auto"/>
+			<property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory"/>
+			<property name="hibernate.current_session_context_class" value="thread"/>
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>Ejemplo arquetipo</display-name> 
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/spring/application/**/*.xml</param-value>
+	</context-param> 
+
+
+
+	<!-- Enforce UTF-8 Character Encoding -->
+<!-- 	<filter>
+		<description>Filtro para forzar la codificacion de la peticion y respuesta a UTF-8</description>
+		<filter-name>charEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter> -->
+
+	<!-- <filter-mapping>
+		<filter-name>charEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+	
+ <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+
+   <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping> 
+
+	<!-- Listeners -->
+	
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- <session-config>
+		<session-timeout>0</session-timeout>
+	</session-config> -->
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+<!-- 	<error-page>
+		<error-code>500</error-code>
+		<location>/action/error</location>
+	</error-page>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/action/error</location>
+	</error-page>
+
+	<error-page>
+		<error-code>403</error-code>
+		<location>/action/accessDenied</location>
+	</error-page>
+-->
+	<servlet>
+		<description>Dispatcher Servlet de Spring MVC</description>
+		<servlet-name>SpringServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/spring/SpringServlet/**/*.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet> 
+
+	<!-- <servlet>
+		<description>Sonda de aplicaciones Web</description>
+		<display-name>SondaServlet</display-name>
+		<servlet-name>SondaServlet</servlet-name>
+		<servlet-class>es.mma.sonda.servlets.SondaServlet</servlet-class>
+		<init-param>
+			<description>Archivo de configuracion de la sonda</description>
+			<param-name>xml-conf</param-name>
+			<param-value>sonda/config.xml</param-value>
+		</init-param>
+		<init-param>
+			<description>IPs desde donde se puede acceder a la sonda</description>
+			<param-name>ip-filter</param-name>
+			<param-value>172.18.0.*,172.18.1.*,192.168.11.*,192.168.12.*,192.168.13.*</param-value>
+		</init-param>
+	</servlet> -->
+
+ 	<servlet-mapping>
+		<servlet-name>SpringServlet</servlet-name>
+		<url-pattern>/action/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>SpringServlet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>SpringServlet</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+ 
+	<!-- <servlet-mapping>
+		<servlet-name>SondaServlet</servlet-name>
+		<url-pattern>/SondaServlet</url-pattern>
+	</servlet-mapping> -->
+
+	<!-- <security-constraint>
+		<display-name>actionConst</display-name>
+		<web-resource-collection>
+			<web-resource-name>action</web-resource-name>
+			<url-pattern>/action/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>PUT</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>POST</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>OPTIONS</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>adminAuth</description>
+			<role-name>administrador</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>jspConstraint</display-name>
+		<web-resource-collection>
+			<web-resource-name>jsps</web-resource-name>
+			<url-pattern>/WEB-INF/jsp/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>PUT</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>POST</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>OPTIONS</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>adminAuth</description>
+			<role-name>administrador</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<display-name>dwrConst</display-name>
+		<web-resource-collection>
+			<web-resource-name>ajax</web-resource-name>
+			<url-pattern>/dwr/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>PUT</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>POST</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>OPTIONS</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description>
+			adminAuth</description>
+			<role-name>administrador</role-name>
+		</auth-constraint>
+	</security-constraint> -->
+	
+<!-- 	<security-role>
+		<role-name>administrador</role-name>
+	</security-role> -->
+
+ 	<jsp-config>
+		<jsp-property-group>
+			<description>Forzamos la codificacion de los jsp a UTF-8 e incluimos los tag libraries mas usados en todas las paginas</description>
+			<url-pattern>*.jsp</url-pattern>
+			<page-encoding>UTF-8</page-encoding>
+			<include-prelude>/WEB-INF/includes/prefix.jspf</include-prelude>
+		</jsp-property-group>
+	</jsp-config> 
+
+	<!-- <login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/action/login</form-login-page>
+			<form-error-page>/action/login?login_error=-1</form-error-page>
+		</form-login-config>
+	</login-config>
+ -->
+
+
+
+ 
+</web-app> 
+

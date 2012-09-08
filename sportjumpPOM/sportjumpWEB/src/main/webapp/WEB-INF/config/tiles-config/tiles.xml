@@ -3,12 +3,18 @@
 	
 <tiles-definitions>
 
+
+	<definition name="login" template="/WEB-INF/jsp/login.jsp" />
+	
+	<definition name="home" template="/WEB-INF/jsp/home.jsp" />
+
 	<definition name="test" extends="testTemplate">
 		<put-attribute name="title" value="test.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 	    	<put-attribute name="body" value="/WEB-INF/jsp/components/bodyTest.jsp" />	    
 	</definition>	
 	
+		
 	
 	
 	<!-- 

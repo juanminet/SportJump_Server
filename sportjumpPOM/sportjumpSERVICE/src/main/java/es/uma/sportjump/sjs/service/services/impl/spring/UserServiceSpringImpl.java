@@ -1,15 +1,19 @@
 package es.uma.sportjump.sjs.service.services.impl.spring;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.uma.sportjump.sjs.dao.daos.UserDao; 
+
+import es.uma.sportjump.sjs.dao.daos.UserDao;
 import es.uma.sportjump.sjs.model.entities.Athlete;
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Team;
 import es.uma.sportjump.sjs.service.services.UserService;
+
 
 
 @Service("userService")
@@ -17,8 +21,8 @@ public class UserServiceSpringImpl  implements UserService{
 	
 	@Autowired
 	UserDao userDao;
-	
-	
+
+
 	/**********************************************************************************************************************/
 	/*******************************************        COACH        ******************************************************/
 	/**********************************************************************************************************************/
@@ -143,7 +147,7 @@ public class UserServiceSpringImpl  implements UserService{
 		userDao.deleteAthlete(athlete.getIdUser());			
 	}
 
-
+	
 
 
 }

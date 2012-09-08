@@ -10,17 +10,20 @@ import es.uma.sportjump.sjs.web.ajax.TestAjaxService;
 
 
 
+
+
+
 @RemoteProxy(name = "TestAjaxService")
 public class TestAjaxServiceImpl implements TestAjaxService {
 
 	@Autowired
-	private UserService athleteService;
+	private UserService userService;
 	
 
 	@RemoteMethod
 	public void addUser(String userName) {
 
-	//	athleteService.setNewAthlete(userName, userName);
+	//	userService.setNewAthlete(userName, userName);
 		System.out.println("SDF");
 
 	}
@@ -30,7 +33,7 @@ public class TestAjaxServiceImpl implements TestAjaxService {
 		
 //		System.out.println("el usuario a buscar es: " + userName);
 //		
-//		return athleteService.existsAthlete(userName,userName);
+//		return userService.existsAthlete(userName,userName);
 		System.out.println("SDF");
 		return false;
 		

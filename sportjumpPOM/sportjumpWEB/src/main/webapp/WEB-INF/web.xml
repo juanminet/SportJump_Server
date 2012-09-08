@@ -51,9 +51,9 @@
 		<session-timeout>0</session-timeout>
 	</session-config> -->
 
-	<welcome-file-list>
+	<!-- <welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
+	</welcome-file-list> -->
 
 <!-- 	<error-page>
 		<error-code>500</error-code>
@@ -70,6 +70,24 @@
 		<location>/action/accessDenied</location>
 	</error-page>
 -->
+
+	<servlet>
+		<description>Dispatcher Servlet de DwrSpringServlet</description>
+		<servlet-name>DwrSpringServlet</servlet-name>
+		<servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet> 
+	
+
+ 	<servlet-mapping>
+		<servlet-name>DwrSpringServlet</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping> 
+	
 	<servlet>
 		<description>Dispatcher Servlet de Spring MVC</description>
 		<servlet-name>SpringServlet</servlet-name>
@@ -78,45 +96,14 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:/spring/SpringServlet/**/*.xml</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet> 
-
-	<!-- <servlet>
-		<description>Sonda de aplicaciones Web</description>
-		<display-name>SondaServlet</display-name>
-		<servlet-name>SondaServlet</servlet-name>
-		<servlet-class>es.mma.sonda.servlets.SondaServlet</servlet-class>
-		<init-param>
-			<description>Archivo de configuracion de la sonda</description>
-			<param-name>xml-conf</param-name>
-			<param-value>sonda/config.xml</param-value>
-		</init-param>
-		<init-param>
-			<description>IPs desde donde se puede acceder a la sonda</description>
-			<param-name>ip-filter</param-name>
-			<param-value>172.18.0.*,172.18.1.*,192.168.11.*,192.168.12.*,192.168.13.*</param-value>
-		</init-param>
-	</servlet> -->
+	
 
  	<servlet-mapping>
 		<servlet-name>SpringServlet</servlet-name>
-		<url-pattern>/action/*</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>SpringServlet</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>SpringServlet</servlet-name>
-		<url-pattern>/dwr/*</url-pattern>
-	</servlet-mapping>
- 
-	<!-- <servlet-mapping>
-		<servlet-name>SondaServlet</servlet-name>
-		<url-pattern>/SondaServlet</url-pattern>
-	</servlet-mapping> -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping> 
 
 	<!-- <security-constraint>
 		<display-name>actionConst</display-name>

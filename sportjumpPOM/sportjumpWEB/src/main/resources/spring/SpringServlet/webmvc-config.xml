@@ -26,6 +26,7 @@
 	<context:component-scan base-package="es.uma.sportjump.sjs.web.controller" />
 	<context:component-scan base-package="es.uma.sportjump.sjs.web.rest" />
 	
+	
 	<!--
 		- This bean resolves specific types of exceptions to corresponding logical 
 		- view names for error views. The default behaviour of DispatcherServlet 
@@ -36,10 +37,10 @@
 		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="org.springframework.web.HttpSessionRequiredException">
+			<!-- 	<prop key="org.springframework.web.HttpSessionRequiredException">
 					index
 				</prop>
-			<!-- 	<prop key="es.mma.architecture.dao.DataAccessException">
+				<prop key="es.mma.architecture.dao.DataAccessException">
 					error
 				</prop>
 				<prop key="es.mma.architecture.service.ServiceException">

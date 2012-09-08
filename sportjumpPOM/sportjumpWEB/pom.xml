@@ -67,11 +67,11 @@
 					<container>
 						<containerId>tomcat7x</containerId>
 						<type>installed</type>						
-						<home>/opt/tomcat-7.0.26</home>	
+						<home>/opt/tomcat-7.0.29</home>	
 					</container>
 					<configuration>
 						<type>existing</type>
-						<home>/opt/tomcat-7.0.26</home>		
+						<home>/opt/tomcat-7.0.29</home>		
 						<!-- <properties>
 							<cargo.tomcat.manager.url>http://localhost:8080/manager/html</cargo.tomcat.manager.url>
 							<cargo.remote.username>manager</cargo.remote.username>

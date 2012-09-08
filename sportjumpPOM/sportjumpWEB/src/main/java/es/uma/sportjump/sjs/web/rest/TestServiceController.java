@@ -8,20 +8,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+
 import es.uma.sportjump.sjs.model.entities.Athlete;
+
 import es.uma.sportjump.sjs.service.services.UserService;
+
 
 @Controller
 @RequestMapping("/rest/testservice")
 public class TestServiceController {
 	
 	@Autowired
-	private UserService athleteService;
-
-
+	private UserService userService;
+	
+	
 	@RequestMapping(value ="/{id}" ,  method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteValue(@PathVariable("id") String id){		
@@ -41,7 +43,7 @@ public class TestServiceController {
 //	public void createValue(@RequestBody String athlete){		
 //		
 //		System.out.println("Test for POST Method with JSON request body. [athlete: " + athlete + "]" );
-//		athleteService.setNewAthlete(athlete, athlete);
+//		userService.setNewAthlete(athlete, athlete);
 //	}
 //	
 //	@RequestMapping(value ="/{id}" ,  method = RequestMethod.GET)
@@ -50,7 +52,7 @@ public class TestServiceController {
 //		
 //		System.out.println("Test for GET Method with JSON request body. [id " + id + "]");	
 //		
-//		Athlete athlete = athleteService.findAthlete(id);
+//		Athlete athlete = userService.findAthlete(id);
 //		
 //		return athlete;
 //	}
@@ -61,7 +63,7 @@ public class TestServiceController {
 //		
 //		System.out.println("Test for GET Method with JSON request body. [name " + name + "]");			
 //		
-//		return athleteService.existsAthlete(name, name);
+//		return userService.existsAthlete(name, name);
 //	}
 	
 	

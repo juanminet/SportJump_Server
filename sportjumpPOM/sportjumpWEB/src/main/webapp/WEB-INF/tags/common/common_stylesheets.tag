@@ -12,7 +12,6 @@
 		<%-- AQUI VAN LOS RECURSOS REQUERIDOS POR LA APLICACION --%>
 		<link href="${base}/css/reset.css" type="text/css" charset="UTF-8" rel="stylesheet"></link>
 		<link href="${base}/css/appestilos.css" type="text/css" charset="UTF-8" rel="stylesheet"></link>
-		<link href="${base}/css/jquery-ui-mutua/jquery-ui-mutua.css" rel="stylesheet" type="text/css" />
 		<link href="${base}/css/jquery-timepicker/jquery.timepicker.css" rel="stylesheet" type="text/css" />
 		<!--[if lte IE 7]>		
 			<link rel="stylesheet" href="${base}/css/estilos-ie.css" type="text/css" media="screen, projection" />

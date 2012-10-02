@@ -4,6 +4,7 @@ package es.uma.sportjump.sjs.dao.daos.impl.jpa;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
@@ -50,13 +51,17 @@ public class UserDaoJpaImpl  implements UserDao{
 
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Coach> getCoachByNameSurname(String name, String surname) {
+	public Coach getCoachByUserName(String userName) {
 		
-		Query query = em.createNamedQuery("findCoachByNameSurname")
-				.setParameter("name", name)
-				.setParameter("surname", surname);
+		Query query = em.createNamedQuery("findCoachByUserName")
+				.setParameter("userName", userName);
+		Coach resListCoach = null;
 		
-		List<Coach> resListCoach = query.getResultList();
+		try{
+			resListCoach = (Coach) query.getSingleResult();
+		}catch(NoResultException noResultException){
+			resListCoach = null;
+		}
 		
 		return resListCoach;
 	}
@@ -140,13 +145,18 @@ public class UserDaoJpaImpl  implements UserDao{
 
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public List<Athlete> getAthleteByNameSurname(String name, String surname) {		
+	public Athlete getAthleteByUserName(String userName) {		
 								
-		Query query = em.createNamedQuery("findAthleteByNameSurname")
-				.setParameter("name", name)
-				.setParameter("surname", surname);
+		Query query = em.createNamedQuery("findAthleteByUserName")
+				.setParameter("userName", userName);
 		
-		List<Athlete> resAthlete =  query.getResultList();	
+		Athlete resAthlete =  null;
+		
+		try{
+			resAthlete = (Athlete) query.getSingleResult();	
+		}catch(NoResultException noResultException){
+			resAthlete = null;
+		}
 		
 		return resAthlete;
 	}
@@ -160,9 +170,6 @@ public class UserDaoJpaImpl  implements UserDao{
 		
 		return resListAthletes;
 	}
-	
-
-
 
 	
 

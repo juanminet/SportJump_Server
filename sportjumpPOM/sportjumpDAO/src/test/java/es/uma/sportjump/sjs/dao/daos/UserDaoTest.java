@@ -25,7 +25,7 @@ public class UserDaoTest {
 	private static ApplicationContext applicationContextMock = null;
 	
 	private String nameCoachAux = "Vicente";
-	private String surnameCoachAux = "Del Bosque";	
+	private String userNameCoachAux = "Del Bosque";	
 	
 	private String nameTeamAux = "Auxiliar Team";
 
@@ -98,10 +98,11 @@ public class UserDaoTest {
 		
 		//Initialize variables
 		String name = "Jose";
-		String surname ="Mourinho";
+		String userName ="Mourinho";
+	
 		
 		//Create coach
-		Long idCoach = createCoach(name,surname);
+		Long idCoach = createCoach(name,userName);
 		
 		//Make assert
 		assertNotNull(idCoach);
@@ -110,7 +111,7 @@ public class UserDaoTest {
 		Coach coach = readCoach(idCoach);
 		
 		//Make assert
-		makeAssertCoach(name,surname,coach);
+		makeAssertCoach(name,userName,coach);
 		
 		
 		//Delete coach
@@ -127,13 +128,13 @@ public class UserDaoTest {
 	
 	
 	@Test
-	public void testGetCoachByNameSurnameJpa() {
+	public void testGetCoachByUserNameJpa() {
 		
 		//select application context for JPA
 		applicationContext = applicationContextJpa;
 		
 		//call testCoachCRUD
-		testGetCoachByNameSurname();
+		testGetCoachByUserName();
 		
 		//remove application context
 		applicationContext = null;
@@ -141,33 +142,33 @@ public class UserDaoTest {
 	}
 	
 	@Test
-	public void testGetCoachByNameSurnameMock() {
+	public void testGetCoachByUserNameMock() {
 		
 		//select application context for JPA
 		applicationContext = applicationContextMock;
 		
 		//call testCoachCRUD
-		testGetCoachByNameSurname();
+		testGetCoachByUserName();
 		
 		//remove application context
 		applicationContext = null;
 	
 	}
 
-	private void testGetCoachByNameSurname() {
+	private void testGetCoachByUserName() {
 		
 		//Initialize variables
 		String name1 = "Sebastian";
-		String surname1 ="Coe";
+		String userName1 ="Coe";
 		String name2 = "Fermin";
-		String surname2 ="Cacho";
+		String userName2 ="Cacho";
 		String name3 = "Carl";
-		String surname3 ="Lewis";
+		String userName3 ="Lewis";
 		
 		//Create coaches
-		Long idCoach1 = createCoach(name1,surname1);
-		Long idCoach2 = createCoach(name2,surname2);
-		Long idCoach3 = createCoach(name3,surname3);
+		Long idCoach1 = createCoach(name1,userName1);
+		Long idCoach2 = createCoach(name2,userName2);
+		Long idCoach3 = createCoach(name3,userName3);
 		
 		//Make assert
 		assertNotNull(idCoach1);
@@ -175,16 +176,16 @@ public class UserDaoTest {
 		assertNotNull(idCoach3);
 		
 		//Read coach by name and surname
-		List<Coach> listCoaches = readCoachByNameSurname(name1,surname1);
+		Coach coach = readCoachByUserName(userName1);
 		
 		//Make assert
-		makeAssertCoach(name1,surname1,listCoaches.get(0));
+		makeAssertCoach(name1,userName1,coach);
 		
 		//Read coach by name and surname
-		listCoaches = readCoachByNameSurname(name3,surname3);
+		coach = readCoachByUserName(userName3);
 		
 		//Make assert
-		makeAssertCoach(name3,surname3,listCoaches.get(0));
+		makeAssertCoach(name3,userName3,coach);
 				
 				
 		//Delete coaches
@@ -193,10 +194,10 @@ public class UserDaoTest {
 		deleteCoach(readCoach(idCoach3));
 		
 		//Read coach by name and surname
-		listCoaches = readCoachByNameSurname(name1,surname1);	
+		coach = readCoachByUserName(userName1);	
 		
 		//Make assert
-		assertEquals(0, listCoaches.size());
+		assertNull(coach);
 		
 		
 		
@@ -237,16 +238,16 @@ public class UserDaoTest {
 		
 		//Initialize variables
 		String name1 = "Sebastian";
-		String surname1 ="Coe";
+		String userName1 ="Coe";
 		String name2 = "Fermin";
-		String surname2 ="Cacho";
+		String userName2 ="Cacho";
 		String name3 = "Carl";
-		String surname3 ="Lewis";
+		String userName3 ="Lewis";
 		
 		//Create coaches
-		Long idCoach1 = createCoach(name1,surname1);
-		Long idCoach2 = createCoach(name2,surname2);
-		Long idCoach3 = createCoach(name3,surname3);
+		Long idCoach1 = createCoach(name1,userName1);
+		Long idCoach2 = createCoach(name2,userName2);
+		Long idCoach3 = createCoach(name3,userName3);
 		
 		//Make assert
 		assertNotNull(idCoach1);
@@ -280,7 +281,7 @@ public class UserDaoTest {
 		
 		
 		//Make assert
-		makeAssertCoach(name1,surname1,listCoaches.get(0));
+		makeAssertCoach(name1,userName1,listCoaches.get(0));
 				
 				
 		//Delete coaches
@@ -348,7 +349,7 @@ public class UserDaoTest {
 		String name = "Team Athletics";
 				
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,surnameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
 		
 		
 		//Create team
@@ -415,7 +416,7 @@ public class UserDaoTest {
 	private void testGetAllTeams() {
 		
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,surnameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
 		
 		//Initialize variables
 		String name1 = "England";		
@@ -525,16 +526,16 @@ public class UserDaoTest {
 		
 		//Initialize variables
 		String name = "Sebastian";
-		String surname ="Coe";
+		String userName ="Coe";
 
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,surnameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
 		
 		//Create team
 		Long idTeam = createTeam(nameTeamAux,idCoach);
 		
 		//Create athlete
-		Long idAthlete = createAthlete(name,surname, idTeam);
+		Long idAthlete = createAthlete(name,userName, idTeam);
 		
 		//Make assert
 		assertNotNull(idAthlete);
@@ -543,7 +544,7 @@ public class UserDaoTest {
 		Athlete athlete = readAthlete(idAthlete);
 		
 		//Make assert
-		makeAssertAthlete(name,surname,athlete);
+		makeAssertAthlete(name,userName,athlete);
 		
 		
 		//Delete athlete
@@ -570,13 +571,13 @@ public class UserDaoTest {
 	
 	
 	@Test
-	public void testGetAthleteByNameSurnameJpa() {
+	public void testGetAthleteByUserNameJpa() {
 		
 		//select application context for JPA
 		applicationContext = applicationContextJpa;
 		
 		//call testAthleteCRUD
-		testGetAthleteByNameSurname();
+		testGetAthleteByUserName();
 		
 		//remove application context
 		applicationContext = null;
@@ -584,41 +585,41 @@ public class UserDaoTest {
 	}
 	
 	@Test
-	public void testGetAthleteByNameSurnameMock() {
+	public void testGetAthleteByUserNameMock() {
 		
 		//select application context for JPA
 		applicationContext = applicationContextMock;
 		
 		//call testAthleteCRUD
-		testGetAthleteByNameSurname();
+		testGetAthleteByUserName();
 		
 		//remove application context
 		applicationContext = null;
 	
 	}
 
-	private void testGetAthleteByNameSurname() {
+	private void testGetAthleteByUserName() {
 		
 		//Initialize variables
 		String name1 = "Sebastian";
-		String surname1 ="Coe";
+		String userName1 ="Coe";
 		String name2 = "Usain";
-		String surname2 ="Bolt";
+		String userName2 ="Bolt";
 		String name3 = "Carl";
-		String surname3 ="Lewis";
+		String userName3 ="Lewis";
 		
 		
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,surnameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
 		
 		//Create team
 		Long idTeam = createTeam(nameTeamAux,idCoach);
 		
 				
 		//Create athletes
-		Long idAthlete1 = createAthlete(name1,surname1,idTeam);
-		Long idAthlete2 = createAthlete(name2,surname2,idTeam);
-		Long idAthlete3 = createAthlete(name3,surname3,idTeam);
+		Long idAthlete1 = createAthlete(name1,userName1,idTeam);
+		Long idAthlete2 = createAthlete(name2,userName2,idTeam);
+		Long idAthlete3 = createAthlete(name3,userName3,idTeam);
 		
 		//Make assert
 		assertNotNull(idAthlete1);
@@ -626,16 +627,16 @@ public class UserDaoTest {
 		assertNotNull(idAthlete3);
 		
 		//Read athlete by name and surname
-		List<Athlete> listAthlete = readAthleteByNameSurname(name1,surname1);
+		Athlete athlete = readAthleteByUserName(userName1);
 		
 		//Make assert
-		makeAssertAthlete(name1,surname1,listAthlete.get(0));
+		makeAssertAthlete(name1,userName1,athlete);
 		
 		//Read athlete by name and surname
-		listAthlete = readAthleteByNameSurname(name2,surname2);
+		athlete = readAthleteByUserName(userName2);
 		
 		//Make assert
-		makeAssertAthlete(name2,surname2,listAthlete.get(0));
+		makeAssertAthlete(name2,userName2,athlete);
 				
 				
 		//Delete athlete
@@ -644,10 +645,10 @@ public class UserDaoTest {
 		deleteAthlete(readAthlete(idAthlete3));
 		
 		//Read athlete by name and surname
-		listAthlete = readAthleteByNameSurname(name2,surname2);			
+		athlete = readAthleteByUserName(userName2);			
 		
 		//Make assert
-		assertEquals(0, listAthlete.size());
+		assertNull(athlete);
 		
 		
 		//Delete team
@@ -692,24 +693,24 @@ public class UserDaoTest {
 	private void testGetAllAthletes() {
 		
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,surnameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
 		
 		//Create team
 		Long idTeam = createTeam(nameTeamAux,idCoach);
 		
 		//Initialize variables
 		String name1 = "Sebastian";
-		String surname1 ="Coe";
+		String userName1 ="Coe";
 		String name2 = "Usain";
-		String surname2 ="Bolt";
+		String userName2 ="Bolt";
 		String name3 = "Carl";
-		String surname3 ="Lewis";
+		String userName3 ="Lewis";
 		
 		
 		//Create athletes
-		Long idAthlete1 = createAthlete(name1,surname1,idTeam);
-		Long idAthlete2 = createAthlete(name2,surname2,idTeam);
-		Long idAthlete3 = createAthlete(name3,surname3,idTeam);
+		Long idAthlete1 = createAthlete(name1,userName1,idTeam);
+		Long idAthlete2 = createAthlete(name2,userName2,idTeam);
+		Long idAthlete3 = createAthlete(name3,userName3,idTeam);
 		
 		//Make assert
 		assertNotNull(idAthlete1);
@@ -727,7 +728,7 @@ public class UserDaoTest {
 		
 		
 		//Delete athlete
-		deleteTeam(readTeam(idAthlete2));
+		deleteAthlete(readAthlete(idAthlete2));
 		
 		//Read all athletes
 		listAthlete = readAllAthletes();
@@ -739,7 +740,7 @@ public class UserDaoTest {
 				
 		
 		//Delete athlete
-		deleteTeam(readTeam(idAthlete3));
+		deleteAthlete(readAthlete(idAthlete3));
 		
 		//Read all athletes
 		listAthlete = readAllAthletes();
@@ -749,10 +750,10 @@ public class UserDaoTest {
 		
 		
 		//Make assert
-		makeAssertAthlete(name1, surname1, listAthlete.get(0));
+		makeAssertAthlete(name1, userName1, listAthlete.get(0));
 				
 		//Delete athlete
-		deleteTeam(readTeam(idAthlete3));
+		deleteAthlete(readAthlete(idAthlete1));
 		
 		//Read all athletes
 		listAthlete = readAllAthletes();
@@ -777,14 +778,14 @@ public class UserDaoTest {
 	//------------------------------------------------   CREATE  --------------------------------------------------------
 	
 	
-	private Long createCoach(String name, String surname) {
+	private Long createCoach(String name, String userName) {
 		//Get bean 
 		UserDao userDao = applicationContext.getBean(UserDao.class);
 		
 		//Create coach
 		Coach coach = new Coach();
 		coach.setName(name);
-		coach.setSurname(surname);
+		coach.setUserName(userName);
 		
 		//Persist coach		
 		userDao.persistCoach(coach);
@@ -808,6 +809,7 @@ public class UserDaoTest {
 		team.setName(name);
 		team.setCoach(coach);
 		
+		System.out.println("SDDFASDFASDF");
 		//Persist team		
 		userDao.persistTeam(team);
 		
@@ -817,7 +819,7 @@ public class UserDaoTest {
 	}
 	
 	
-	private Long createAthlete(String name, String surname, Long idTeam) {
+	private Long createAthlete(String name, String userName, Long idTeam) {
 		//Get bean 
 		UserDao userDao = applicationContext.getBean(UserDao.class);
 		
@@ -827,7 +829,7 @@ public class UserDaoTest {
 		//Create athlete
 		Athlete athlete = new Athlete();
 		athlete.setName(name);
-		athlete.setSurname(surname);
+		athlete.setUserName(userName);
 		athlete.setTeam(team);
 		
 		//Persist athlete		
@@ -857,14 +859,14 @@ public class UserDaoTest {
 	}
 	
 
-	private List<Coach> readCoachByNameSurname(String name, String surname) {
+	private Coach readCoachByUserName(String userName) {
 		//Get bean
 		UserDao userDao = applicationContext.getBean(UserDao.class);
 		
 		//Read Coach
-		List<Coach> listCoaches = userDao.getCoachByNameSurname(name, surname);
+		Coach coach = userDao.getCoachByUserName(userName);
 		
-		return listCoaches;
+		return coach;
 	}
 	
 	
@@ -910,14 +912,14 @@ public class UserDaoTest {
 		return athlete;
 	}
 	
-	private List<Athlete> readAthleteByNameSurname(String name, String surname) {
+	private Athlete readAthleteByUserName(String userName) {
 		//Get bean
 		UserDao userDao = applicationContext.getBean(UserDao.class);
 		
 		//Read athlete
-		List<Athlete>  listAthletes = userDao.getAthleteByNameSurname(name, surname);
+		Athlete  athlete = userDao.getAthleteByUserName(userName);
 		
-		return listAthletes;
+		return athlete;
 	}
 	
 	private List<Athlete> readAllAthletes() {
@@ -968,9 +970,9 @@ public class UserDaoTest {
 	//------------------------------------------------   ASSERT  --------------------------------------------------------
 
 
-	private void makeAssertCoach(String name, String surname, Coach coach){
+	private void makeAssertCoach(String name, String userName, Coach coach){
 		assertEquals(coach.getName(), name);
-		assertEquals(coach.getSurname(), surname);
+		assertEquals(coach.getUserName(), userName);
 	}
 	
 	
@@ -981,9 +983,9 @@ public class UserDaoTest {
 	}	
 	
 	
-	private void makeAssertAthlete(String name, String surname, Athlete athlete) {
+	private void makeAssertAthlete(String name, String userName, Athlete athlete) {
 		assertEquals(athlete.getName(),name);
-		assertEquals(athlete.getSurname(),surname);		
+		assertEquals(athlete.getUserName(),userName);
 	}
 	
 

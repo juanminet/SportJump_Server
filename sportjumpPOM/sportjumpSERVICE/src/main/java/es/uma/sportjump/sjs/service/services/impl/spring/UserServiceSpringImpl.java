@@ -26,12 +26,14 @@ public class UserServiceSpringImpl  implements UserService{
 	/**********************************************************************************************************************/
 	/*******************************************        COACH        ******************************************************/
 	/**********************************************************************************************************************/
-	public Long setNewCoach(String name, String surname) {
+	public Long setNewCoach(String name, String userName,String surname, String email) {
 		
 		//Create coach
 		Coach coach = new Coach();
 		coach.setName(name);
+		coach.setUserName(userName);
 		coach.setSurname(surname);
+		coach.setEmail(email);
 		
 		//persist coach
 		userDao.persistCoach(coach);
@@ -49,8 +51,8 @@ public class UserServiceSpringImpl  implements UserService{
 		return userDao.getAllCoaches();
 	}
 	
-	public List<Coach> findCoachesByNameSurname(String name, String surname) {
-		return userDao.getCoachByNameSurname(name, surname);
+	public Coach findCoachesByUserName(String userName) {
+		return userDao.getCoachByUserName(userName);
 	}
 
 
@@ -111,12 +113,14 @@ public class UserServiceSpringImpl  implements UserService{
 	/**********************************************************************************************************************/	
 
 	
-	public Long setNewAthlete(String name, String surname, Team team) {
+	public Long setNewAthlete(String name, String userName,String surname, String email, Team team) {
 		
 		//Crate object athlete
 		Athlete athlete = new Athlete();
 		athlete.setName(name);
+		athlete.setUserName(userName);
 		athlete.setSurname(surname);
+		athlete.setEmail(email);
 		athlete.setTeam(team);
 		
 		//Persist athlete
@@ -137,8 +141,8 @@ public class UserServiceSpringImpl  implements UserService{
 		return userDao.getAllAthletes();
 	}
 	
-	public List<Athlete> findAthletesByNameSurname(String name, String surname) {
-		return userDao.getAthleteByNameSurname(name, surname);
+	public Athlete findAthletesByUserName(String userName) {
+		return userDao.getAthleteByUserName(userName);
 	}
 
 

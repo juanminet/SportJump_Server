@@ -26,8 +26,8 @@ public class AthleteModelEntityTest {
 		
 		//Create coach
 		String name = "Pepe";
-		String surname = "Garcia";
-		coach = createCoach(name, surname);
+		String userName = "Garcia";
+		coach = createCoach(name, userName);
 		
 		//Create team		
 		String nameTeam = "Equipo";
@@ -66,9 +66,11 @@ public class AthleteModelEntityTest {
 		// Definition Athlete
 		String name = "Sebastian";
 		String surname = "Coe";
+		String userName = "sebas";
+		String email = "coe@coe.es";
 
 		// Create athlete
-		Long idAthlete = createAthlete(name, surname);
+		Long idAthlete = createAthlete(name, surname,userName, email);
 
 		// Make assert
 		assertNotNull(idAthlete);
@@ -101,13 +103,15 @@ public class AthleteModelEntityTest {
 
 	}
 
-	private Long createAthlete(String name, String surname) {
+	private Long createAthlete(String name, String surname, String userName, String email) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		//Create athlete
 		Athlete athlete = new Athlete();
 		athlete.setName(name);
 		athlete.setSurname(surname);
+		athlete.setUserName(userName);
+		athlete.setEmail(email);
 		athlete.setTeam(team);
 		
 		//Persist entity
@@ -162,13 +166,13 @@ public class AthleteModelEntityTest {
 	
 	//BEFORE & AFTER CLASS data
 	
-	private static  Coach createCoach(String name, String surname) {
+	private static  Coach createCoach(String name, String userName) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		//Create coach
 		Coach coach = new Coach();
 		coach.setName(name);
-		coach.setSurname(surname);
+		coach.setUserName(userName);
 		
 		//Persist entity
 		entityManager.getTransaction().begin();

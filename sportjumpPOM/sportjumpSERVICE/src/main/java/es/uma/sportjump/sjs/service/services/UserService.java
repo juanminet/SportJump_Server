@@ -19,7 +19,7 @@ public interface UserService {
 	 * @param surname
 	 * @return
 	 */
-	public Long setNewCoach(String name, String surname);
+	public Long setNewCoach(String name, String userName, String surname, String email);
 	
 	
 	/**
@@ -39,11 +39,10 @@ public interface UserService {
 	
 	/**
 	 * 
-	 * @param name
-	 * @param surname
+	 * @param username
 	 * @return
 	 */
-	public List<Coach> findCoachesByNameSurname(String name, String surname);
+	public Coach findCoachesByUserName(String userName);
 	
 	
 	/**
@@ -102,7 +101,7 @@ public interface UserService {
 	 * @param surname
 	 * @return
 	 */
-	public Long setNewAthlete(String name, String surname, Team team);
+	public Long setNewAthlete(String name, String userName, String surname, String email, Team team);
 	
 	
 	/**
@@ -126,7 +125,7 @@ public interface UserService {
 	 * @param surname
 	 * @return
 	 */
-	public List<Athlete> findAthletesByNameSurname(String name, String surname);
+	public Athlete findAthletesByUserName(String userName);
 	
 	
 	/**

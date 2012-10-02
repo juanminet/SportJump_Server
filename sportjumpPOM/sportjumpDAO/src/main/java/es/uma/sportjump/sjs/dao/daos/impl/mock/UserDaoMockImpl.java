@@ -80,13 +80,14 @@ public class UserDaoMockImpl implements UserDao{
 
 
 	@Override
-	public List<Coach> getCoachByNameSurname(String name, String surname) {
-		List<Coach> resListCoaches = new ArrayList<Coach>();
+	public Coach getCoachByUserName(String userName) {
+		Coach resListCoaches = null;
 		
 		//find coach		
 		for(Coach coach : listCoaches){
-			if(coach.getName().equals(name) && coach.getSurname().equals(surname)){
-				resListCoaches.add(coach);				
+			if(coach.getUserName().equals(userName)){
+				resListCoaches = coach;
+				break;
 			}
 		}
 		
@@ -110,14 +111,18 @@ public class UserDaoMockImpl implements UserDao{
 	
 	@Override
 	public void persistTeam(Team team) {
-		//check coach
-		if (listCoaches.contains(team.getCoach())){
+		
+		
+		
+		if (getCoachById(team.getCoach().getIdUser()) != null){			
 		
 			//add athlete to list
 			listTeams.add(team);
 					
 			//set id 
 			team.setIdTeam((long)listTeams.indexOf(team));	
+			
+			
 		
 		}
 	}
@@ -230,13 +235,13 @@ public class UserDaoMockImpl implements UserDao{
 
 
 	@Override
-	public List<Athlete> getAthleteByNameSurname(String name, String surname) {
-		 List<Athlete> resListAthletes = new ArrayList<Athlete>();
+	public Athlete getAthleteByUserName(String userName) {
+		 Athlete resListAthletes = null;
 		
 		//find athlete
 		for(Athlete athlete : listAthletes){
-			if(athlete.getName().equals(name) && athlete.getSurname().equals(surname)){
-				resListAthletes.add(athlete);
+			if(athlete.getUserName().equals(userName)){
+				resListAthletes = athlete;
 			}
 		}
 				

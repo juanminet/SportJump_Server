@@ -5,6 +5,7 @@
 
 
 	<definition name="login" template="/WEB-INF/jsp/login.jsp" />
+	<definition name="registration" template="/WEB-INF/jsp/registration.jsp" />
 	
 	<definition name="home" template="/WEB-INF/jsp/home.jsp" />
 

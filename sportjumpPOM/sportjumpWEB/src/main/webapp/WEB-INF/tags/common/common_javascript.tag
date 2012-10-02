@@ -12,7 +12,7 @@
 <script src="${base}/js/jquery-ui.min.js" type="text/javascript" charset="UTF-8"></script>
 <script src="${base}/js/jquery.ui.datepicker-es.js" type="text/javascript" charset="UTF-8"></script>
 <script src="${base}/js/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="${base}/js/validacionesMutua.js" type="text/javascript" charset="UTF-8"></script>
+
 
 <!--[if lte IE 6]>
 	<script src="${base}/js/DD_belatedPNG.js" type="text/javascript"></script>

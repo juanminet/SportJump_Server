@@ -301,6 +301,14 @@
 					</exclusion>
 				</exclusions>
 			</dependency> -->
+			
+			<!-- APACHE -->
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>1.4</version>
+			</dependency>
+            
 
 			<dependency>
 				<groupId>org.slf4j</groupId>
@@ -355,9 +363,21 @@
 				<compilerOptimize>false</compilerOptimize>
 
 				<!-- Configure connection to data base -->
+				<database.connection.driver.class.name>com.mysql.jdbc.Driver</database.connection.driver.class.name>
 				<database.connection.url>jdbc:mysql://localhost:3306/sportjumpdb</database.connection.url>
 				<database.connection.user>juanmi</database.connection.user>
 				<database.connection.password>12345678</database.connection.password>
+				<database.connection.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</database.connection.dialect>
+				
+				
+				<!-- Configure authetication to data base -->
+				<database.auth.driver.class.name>com.mysql.jdbc.Driver</database.auth.driver.class.name>
+				<database.auth.url>jdbc:mysql://localhost:3306/sportjumpauth</database.auth.url>
+				<database.auth.user>juanmi</database.auth.user>
+				<database.auth.password>12345678</database.auth.password>
+				
+				<!-- Others -->
+				<resource.filtering.web>false</resource.filtering.web>
 			</properties>
 		</profile>
 

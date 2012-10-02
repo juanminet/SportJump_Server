@@ -41,7 +41,7 @@ public interface UserDao {
 	 * @param surname
 	 * @return
 	 */
-	public List<Coach> getCoachByNameSurname(String name, String surname);
+	public Coach getCoachByUserName(String userName);
 	
 	
 	/**
@@ -123,7 +123,7 @@ public interface UserDao {
 	 * @param surname
 	 * @return
 	 */
-	public List<Athlete> getAthleteByNameSurname(String name, String surname);
+	public Athlete getAthleteByUserName(String UserName);
 	
 
 	/**

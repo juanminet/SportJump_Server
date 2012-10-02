@@ -13,11 +13,7 @@ import javax.persistence.*;
 public class Athlete extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name="NAME")
-	private String name;
 	
-	@Column(name="SURNAME")
-	private String surname;
 	
 	@ManyToOne(fetch=FetchType.LAZY , targetEntity = es.uma.sportjump.sjs.model.entities.Team.class) 
 	@JoinColumn(name = "ID_TEAM", nullable = false)
@@ -27,29 +23,7 @@ public class Athlete extends User implements Serializable {
 	    super();
     }
 
-
-	
-
-
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-	
-	public String getSurname() {
-		return this.surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-	
+    
 	public Team getTeam() {
 		return team;
 	}

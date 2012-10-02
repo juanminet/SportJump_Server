@@ -20,11 +20,11 @@
 			<property name="hibernate.format_sql" value="true"/>
 			
 			<!-- Configure connection to data base -->
-			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.driver_class" value="${database.connection.driver.class.name}"/>
 			<property name="hibernate.connection.url" value="${database.connection.url}"/>
 			<property name="hibernate.connection.username" value="${database.connection.user}"/>
 			<property name="hibernate.connection.password" value="${database.connection.password}"/>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.dialect" value="${database.connection.dialect}"/>
 			
 			<!-- Configure C3p0 pool -->
 			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>

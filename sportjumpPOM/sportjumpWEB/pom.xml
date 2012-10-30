@@ -201,36 +201,7 @@
 			<artifactId>tiles-jsp</artifactId>
 		</dependency>
 		
-		<!-- DWR -->
-<!-- 		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr-spring</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr-protocol-dwrp</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr-protocol-json</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr-ui-dojo</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr-ui-dwr</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr-ui-gi</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.directwebremoting</groupId>
-			<artifactId>dwr-webwork</artifactId>
-		</dependency> -->
-		
+		<!-- DWR -->		
 		<dependency>
 			<groupId>org.directwebremoting</groupId>
 			<artifactId>dwr</artifactId>

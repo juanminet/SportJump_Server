@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<h1>HOMEadsf</h1>
+	<h1>HOME</h1>
 	
 	<h2>Bienvenido  ${loggedUser.userName} </h2>
 	

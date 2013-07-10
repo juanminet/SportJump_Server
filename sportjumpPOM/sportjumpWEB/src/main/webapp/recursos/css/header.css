@@ -1,0 +1,69 @@
+@CHARSET "ISO-8859-1";
+
+.header{
+	height:inherit;
+}
+
+#header_top{
+	height: 70%;
+}
+
+#header_bottom{
+	height: 30%;
+}
+
+#logo{
+    height: 100%;
+    width: 30%;
+    float: left;    
+}
+
+#profile{
+    height: 100%;
+    width: 30%;
+    float: right;
+    margin-top: 12px;
+    text-align:right;
+}
+
+/*----------------------------------------------------------- */
+/*------------------------- BUTTONS ------------------------- */
+/*----------------------------------------------------------- */
+
+.header_button{
+	height: 3ex;
+    min-width: 6em;
+	background: none repeat scroll 0 0 white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    float: right;    
+    padding-bottom: 0.5ex;
+    padding-top: 0.5ex; 
+    margin-left: 0.5em;   	
+    margin-right: 0.5em; 
+    text-align : center;
+    z-index: 100000000;
+    position: relative;
+}
+
+.header_button a{
+	color: #444466 !important;
+    font-size: 10px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    text-decoration: none;
+}
+
+.header_button:hover{
+	border-color: #D19290;
+	box-shadow: 1px 1px 1px 0.1px #ccc;	
+	cursor:pointer;
+}
+
+
+.header_flags img{
+	margin-left: 0.3em;   
+}
+
+.header_flags img:hover{
+	cursor:pointer;
+}

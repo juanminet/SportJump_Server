@@ -4,7 +4,7 @@
 
 <script type='text/javascript'>
 
-	alert("dwr cargado");
+	/* alert("dwr cargado"); */
 	
 	//Handler que controla el fin de sesión
 	/* dwr.engine.setTextHtmlHandler(

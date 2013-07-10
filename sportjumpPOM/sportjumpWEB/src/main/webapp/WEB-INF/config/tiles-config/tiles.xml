@@ -7,17 +7,29 @@
 	<definition name="login" template="/WEB-INF/jsp/login.jsp" />
 	<definition name="registration" template="/WEB-INF/jsp/registration.jsp" />
 	
-	<definition name="home" template="/WEB-INF/jsp/home.jsp" />
+	<!-- <definition name="home" template="/WEB-INF/jsp/test/homeTest.jsp" />	   -->
 
-	<definition name="test" extends="testTemplate">
-		<put-attribute name="title" value="test.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
-	    	<put-attribute name="body" value="/WEB-INF/jsp/components/bodyTest.jsp" />	    
-	</definition>	
+	
 	
 		
+ 	<definition name="home" extends="standardTemplate">
+		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/bodyHome.jsp" />	  
+	 </definition> 
 	
 	
+	<definition name="admin" extends="standardTemplate">
+		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdmin.jsp" />	  
+	 </definition> 
+	 
+	 <definition name="training" extends="standardTemplate">
+		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTraining.jsp" />	  
+	 </definition> 
 	<!-- 
 	<definition name="login" extends="standardLayout">
 		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
@@ -44,5 +56,13 @@
 		<put-attribute name="dwrEngine" value="false"/>
 		<put-attribute name="body" value="/WEB-INF/jsp/helloWorld.jsp" />
 	</definition> -->
+	
+	
+	<!-- TEST -->
+	<definition name="test" extends="testTemplate">
+		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+	    <put-attribute name="body" value="/WEB-INF/jsp/test/components/bodyTest.jsp" />	    
+	</definition>	
 
 </tiles-definitions>

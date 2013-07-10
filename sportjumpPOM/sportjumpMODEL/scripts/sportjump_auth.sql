@@ -1,4 +1,6 @@
+DROP TABLE IF EXISTS `authorities`;
 DROP TABLE IF EXISTS `users`;
+
 CREATE TABLE  `users` (
   `username` varchar(45) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -6,7 +8,7 @@ CREATE TABLE  `users` (
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `authorities`;
+
 CREATE TABLE  `authorities` (
   `username` varchar(50) NOT NULL,
   `authority` varchar(50) NOT NULL,

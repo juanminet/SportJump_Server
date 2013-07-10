@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+
+#header{
+	height:120px
+}
+
+#center-content{	
+	min-height: 435px;	
+}
+
+#footer{
+	height:50px;
+	background-color: black;
+}

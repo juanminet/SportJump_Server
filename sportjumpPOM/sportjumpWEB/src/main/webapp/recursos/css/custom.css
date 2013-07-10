@@ -1,3 +1,47 @@
+html{overflow-y:scroll;}
+
+body{	
+	background-color: #F6F4F0;
+    color: #000000;
+    font-size: 12px;    
+	margin-left: 5em;
+    margin-right: 5em;
+    min-width: 1024px;    
+}
+
+p,td,ul{
+	line-height:140%;
+}
+
+body,p,h1,h2,h3,h4,table,td,th,ul,ol,textarea,input{
+	font-family:verdana,helvetica,arial,sans-serif;
+}
+
+iframe 	{margin:0px;}
+img		{border:0;}
+
+table,th,td,input,textarea{
+	font-size:100%;
+}
+
+h1 {font-size:210%;margin-top:0px;font-weight:normal}
+h2 {font-size:180%;margin-top:10px;margin-bottom:10px;font-weight:normal}
+h3 {font-size:140%;font-weight:normal}
+h4 {font-size:120%;}
+h5 {font-size:90%;}
+h6 {font-size:80%;}
+
+h1,h2,h3,h4,h5,h6{
+	background-color:transparent;
+	color:#000000;
+}
+
+
+
+
+
+
+
 #capaEtiquetas{width:707px;	margin: 0 auto;padding-left:6px;}
 #imagenVerisign{border:0 none;vertical-align:middle;}
 

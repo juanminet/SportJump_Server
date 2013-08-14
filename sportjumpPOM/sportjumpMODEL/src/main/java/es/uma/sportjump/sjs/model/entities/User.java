@@ -82,5 +82,9 @@ public abstract class User {
 		this.email = email;
 	}
 	
+	public String getCompleteName(){
+		return (this.name + " " + this.surname);
+	}
+	
 	
 }

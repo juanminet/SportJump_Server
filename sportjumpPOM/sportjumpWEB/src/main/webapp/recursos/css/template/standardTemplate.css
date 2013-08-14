@@ -1,14 +1,210 @@
 @CHARSET "ISO-8859-1";
 
-#header{
-	height:120px
+html{overflow-y:scroll;}
+
+body {
+/* 	background: white;
+	font-family: Arial, Helvetica, sans-serif; */
+	background: #F6F4F0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #646464;
+	text-align: center;
 }
 
-#center-content{	
-	min-height: 435px;	
+.container {
+	text-align: left;
+	width: 1024px;
+	margin: 0 auto;
 }
+
+
+#header{
+	height:170px
+}
+
+#holder_container{	
+	background-color: #EEEEEE;
+	padding: 6px;
+}
+
+#body_container{	
+	border: 1px solid #ddd;
+	min-height:500px;
+	width:100%;
+	display:inline-block;
+	background-color: #FCFCFC;
+	
+}
+
+
 
 #footer{
 	height:50px;
 	background-color: black;
+}
+
+/*----------------------------------------------------------- */
+/*------------------------ MENU BAR ------------------------- */
+/*----------------------------------------------------------- */
+
+.menu_bar {	width: auto; height: 6ex; padding: 6px;	margin: 0 0 30px 0; list-style: none outside none; background: #EEEEEE no-repeat left top;}
+
+.menu_bar ul { background: none no-repeat scroll left top #FCFCFC; border: 1px solid #ddd; height: inherit; list-style: none outside none;  width: auto;}
+
+.menu_bar li {float: left;	height: inherit; border-right: 1px solid #ddd;}
+
+.menu_bar li a {display: block;	float: left; font-weight:normal;  height: 37px;  line-height: 37px;	text-decoration: none;	color: #646464;	padding: 0 20px;}
+
+.menu_bar li.logout {float: right;	border-left: 1px solid #ddd;	border-right: none;}
+
+.menu_bar li:hover {background-color:#F2E3E3;cursor: pointer;}
+
+.menu_bar li a.active, .menu_bar li a.active {background: #f0f0f0 repeat-x left top; color: #454545; font-weight: bold;}
+
+
+/*----------------------------------------------------------- */
+/*------------------------ SIDE BAR ------------------------- */
+/*----------------------------------------------------------- */
+
+.sidebar { border-right: 1px solid #DDDDDD; float: left; min-height: 500px; width: 17%;}
+
+.sidebar ul {width: 100%; }
+
+.sidebar ul li {border-bottom: 1px solid #ddd; width: 100%; }
+
+.sidebar ul li a {display: block;	color: #646464;	background: #f6f6f6; text-decoration: none;	height: 29px; line-height: 29px; padding: 0 10%; width: 80%;}
+
+.sidebar ul li a:hover {background: #F2E3E3; }
+
+.sidebar ul li a.active, #sidebar .sideNav li a.active:hover {background: #f0f0f0;	color: #454545; font-weight: bold}
+
+/*----------------------------------------------------------- */
+/*------------------------ TABLE2 ------------------------- */
+/*----------------------------------------------------------- */
+table tr{
+	line-height: 2
+}
+
+table  tr.even:hover td, table tr.even:hover td.sorting_1{
+    background: #F2E3E3;
+    cursor: pointer;
+}
+ 
+table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
+    background: #F2E3E3;
+    cursor: pointer;
+}
+
+
+.dataTables_filter {
+    float: left;
+    text-align: left;
+    width: 100%;
+}
+
+/*----------------------------------------------------------- */
+/*------------------------- MAIN BODY  ---------------------- */
+/*----------------------------------------------------------- */
+#body_home{
+	float:right;
+	width:82%;
+}
+
+#body_home_container{
+	margin: 2%;
+    width: 95%;	
+}
+
+.caja {
+    background-color: #EEEEEE;    
+    margin-bottom: 4em;
+    padding: 2em;
+}
+.caja .form-row{
+	line-height: 3;
+}
+
+.caja .form-row label {
+    display: inline-table;
+    width: 20%;
+    vertical-align: top;
+}
+
+.caja .form-row label:last-child {
+    width: 40%
+}
+.caja .form-row textarea{
+	margin-top: 0.5em;
+	width:78%
+}
+
+/*----------------------------------------------------------- */
+/*------------------------- BUTTONS ------------------------- */
+/*----------------------------------------------------------- */
+
+.button{
+	height: 3ex;
+    min-width: 6em;
+	background-color: #FCFCFC;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    float: right;    
+    padding-top: 0.4ex; 
+    margin-left: 0.5em;   	
+    margin-right: 0.5em; 
+    text-align : center;
+    z-index: 100000000;
+    position: relative;
+}
+
+.button a{
+	color: #444466 !important;
+    font-size: 10px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    text-decoration: none;
+    vertical-align: text-bottom;
+    font-weight: bold;
+}
+
+.button:hover{
+	border-color: #D19290;
+	box-shadow: 1px 1px 1px 0.1px #ccc;	
+	cursor:pointer;
+}
+
+
+.button_submit{
+	height: 4ex;
+    min-width: 6em;
+	background-color: #FCFCFC;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    float: right; 
+    margin-left: 0.5em;   	
+    margin-right: 0.5em; 
+    text-align : center;
+    z-index: 100000000;
+    position: relative;
+}
+.button_submit:hover{
+	border-color: #D19290;
+	box-shadow: 1px 1px 1px 0.1px #ccc;	
+	cursor:pointer;
+}
+
+/*----------------------------------------------------------- */
+/*------------------------- ERRORS -------------------------- */
+/*----------------------------------------------------------- */
+
+.error {
+	color: #ff0000;
+}
+ 
+.errorblock {
+	color: #000;
+	background-color: #ffEEEE;
+	border: 3px solid #ff0000;
+	line-height:1.5;
+	padding: 8px;
+	margin: 16px;
 }

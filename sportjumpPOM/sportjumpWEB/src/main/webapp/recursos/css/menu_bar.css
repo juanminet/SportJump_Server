@@ -1,132 +1,16 @@
 /* MAIN MENU */
-.menu_bar ul {
-	height: 4ex;
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-	list-style-position: outside;
-	border-bottom: 1px solid #990000;
-	position: relative;
-	z-index: 100000;
-}
 
-.menu_bar li {
-	float: left;
-	position: relative;
-	width: 100%;
-	height: 100%;
-}
+.menu_bar {	width: auto; height: 6ex; padding: 6px;	margin: 0 0 30px 0; list-style: none outside none; background: #EEEEEE no-repeat left top;}
 
-.menu_bar>ul>li {
-	float: left;
-    position: relative;
-    text-align: center;
-    width: auto;
-}
+.menu_bar ul { background: none no-repeat scroll left top #FCFCFC; border: 1px solid #ddd; height: inherit; list-style: none outside none;  width: auto;}
 
-.menu_bar a {
-	color: #990000;
-    font-size: 16px;
-    padding-left: 2em;
-    padding-right: 2em;
-    text-align: center;
-    vertical-align: sub;
-}
+.menu_bar li {float: left;	height: inherit;	border-right: 1px solid #ddd;}
 
+.menu_bar li a {display: block;	float: left;	height: 37px;	font-weight: bold;	line-height: 37px;	text-decoration: none;	color: #646464;	padding: 0 20px;}
 
-/* SUB MENUS */
-/* .menu_bar>ul ul {
-	position: absolute;
-	width: 100%;
-	top: 1.5em;
-	display: none;
-	border-right: 1px solid #CCC;
-	border-left: 1px solid #CCC;
-	border-top: 1px solid transparent;
-	right: -1px;
-	visibility: hidden;
-}
+.menu_bar li.logout {float: right;	border-left: 1px solid #ddd;	border-right: none;}
 
-.menu_bar>ul ul ul {
-	top: -2px;
-	left: 100%;
-	width: 100%;
-}
+.menu_bar li:hover {background-color:#F2E3E3;cursor: pointer;}
 
-.menu_bar > ul li:first-child ul ul {
-    left: -102%;
-}
-
-.menu_bar li li {
-	background: no-repeat left center white;
-	border-bottom: 1px dotted #CCC;
-	display: block;
-	color: #0283B1;
-	float: none;
-	height: auto;
-    min-height: 1em;
-}
-
-ul li ul li ul li:first-child {
-	border-top: 1px dotted #CCC;
-} */
-
-/* HOVERS */
-.menu_bar > ul > li:hover {	
-	background-color:#990000;
-	opacity:0.4;
-	cursor: pointer;
-}
-
-.menu_bar > ul >li:hover>a {
-	color: white;	
-}
-
-.menu_bar ul ul li:hover {
-	background: #F9F9F9;
-}
-
-.menu_bar ul ul a:hover {
-	text-decoration: underline;
-}
-
-.menu_bar > ul li:hover ul ul,.menu_bar > ul li:hover ul ul ul,.menu_bar > ul li:hover ul ul ul ul
-	{
-	display: none;
-}
-
-.menu_bar > ul li:hover ul,.menu_bar > ul li li:hover ul,.menu_bar > ul li li li:hover ul,.menu_bar > ul li li li li:hover ul
-	{
-	display: block;
-}
-
-/*----------------------------------------------------------- */
-/*------------------------- BUTTONS ------------------------- */
-/*----------------------------------------------------------- */
-
-.menu_bar_button li {
-    background-color: #009EE0;
-    float: left;
-    height: 1.25em;
-    padding-top: 0.25em;
-    position: relative;
-    text-align: right;
-    width: 8.5em;
-}
-
-
-.menu_bar_button img {
-    vertical-align: baseline;
-}
-.menu_bar_button a {
-    border: medium none;
-    color: white;
-    display: inline-block;
-    font-size: 12px;
-    padding-left: 0;
-    padding-right: 1em;
-    text-align: right;
-    text-decoration: none;
-    vertical-align: bottom;
-}
+.menu_bar li a.active, .menu_bar li a.active {background: #f0f0f0repeat-x left top;color: #454545;}
 

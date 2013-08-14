@@ -2,5 +2,5 @@
 
 <div id ="body_home">
 	<h1>ADMINISTRACIÓN</h1>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </div>

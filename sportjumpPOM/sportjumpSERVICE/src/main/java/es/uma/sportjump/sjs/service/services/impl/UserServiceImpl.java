@@ -1,7 +1,8 @@
-package es.uma.sportjump.sjs.service.services.impl.spring;
+package es.uma.sportjump.sjs.service.services.impl;
 
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import es.uma.sportjump.sjs.service.services.UserService;
 
 
 @Service("userService")
-public class UserServiceSpringImpl  implements UserService{
+public class UserServiceImpl  implements UserService{
 	
 	@Autowired
 	UserDao userDao;
@@ -75,11 +76,14 @@ public class UserServiceSpringImpl  implements UserService{
 	/********************************************        TEAMS        *****************************************************/
 	/**********************************************************************************************************************/
 	
-	public Long setNewTeam(String name, Coach coach) {
+	public Long setNewTeam(String name, String type, String description, Date dateCreate,  Coach coach) {
 		
 		//Create team
 		Team team = new Team();
 		team.setName(name);
+		team.setType(type);
+		team.setDescription(description);
+		team.setDateCreate(dateCreate);
 		team.setCoach(coach);
 		
 		//persist team

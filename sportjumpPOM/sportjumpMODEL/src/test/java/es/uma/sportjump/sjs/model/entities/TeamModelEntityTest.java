@@ -2,10 +2,14 @@ package es.uma.sportjump.sjs.model.entities;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 
+import org.hibernate.PropertyValueException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -57,10 +61,13 @@ public class TeamModelEntityTest {
 	public void testCRUD() {
 
 		// Definition Team
-		String name = "Equipo";		
+		String name = "Equipo";
+		String type = "Velocidad";
+		String description = "Grupo de la velocidad";
+		Date createDate = new Date();
 
 		// Create Team
-		Long idTeam = createTeam(name);
+		Long idTeam = createTeam(name,type, description,createDate);
 
 		// Make assert
 		assertNotNull(idTeam);
@@ -93,14 +100,93 @@ public class TeamModelEntityTest {
 		assertNull(team);
 
 	}
-
-	private Long createTeam(String name) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
+	
+	@Test
+	public void testNullables() {
 		//Create team
 		Team team = new Team();
-		team.setName(name);	
+		checkNullableTeam(team);
+		
+		//check name
+		team= createCompleteTeam();
+		team.setName(null);
+		checkNullableTeam(team);
+		
+		//check name
+		team= createCompleteTeam();
+		team.setType(null);
+		checkNullableTeam(team);
+		
+		
+		//check name
+		team= createCompleteTeam();
+		team.setDescription(null);
+		checkNullableTeam(team);
+		
+		
+		//check name
+		team= createCompleteTeam();
+		team.setDateCreate(null);
+		checkNullableTeam(team);
+		
+		
+		//check name
+		team= createCompleteTeam();
+		team.setCoach(null);
+		checkNullableTeam(team);
+	}
+	
+	private Team createCompleteTeam(){
+		// Definition Team
+		String name = "Equipo";
+		String type = "Velocidad";
+		String description = "Grupo de la velocidad";
+		Date dateCreate = new Date();
+				
+		//Create team
+		Team team = new Team();
+				
+		team.setName(name);
+		team.setType(type);
+		team.setDescription(description);
+		team.setDateCreate(dateCreate);
 		team.setCoach(coach);
+		
+		return team;
+	}
+
+	private void checkNullableTeam(Team team) {
+		
+		boolean check = false;
+		
+		try{
+			persistTeam(team);
+		}catch (PersistenceException persistenceException) {
+			check=true;
+		}
+		
+		assertTrue(check);
+	}
+
+	private Long createTeam(String name, String type, String description, Date dateCreate) {		
+		//Create team
+		Team team = new Team();
+		team.setName(name);
+		team.setType(type);
+		team.setDescription(description);
+		team.setDateCreate(dateCreate);
+		team.setCoach(coach);
+		
+		//Persist entity
+		Long res = persistTeam(team);
+		
+		//return idTeam
+		return res;
+	}
+	
+	private Long persistTeam(Team team){
+		
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		//Persist entity
 		entityManager.getTransaction().begin();

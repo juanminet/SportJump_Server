@@ -25,7 +25,11 @@ $(document).ready( function() {
 	  	
 }); 
 	
-	
+	function pulsado(idTeam){
+		alert(idTeam);
+		
+		 location.href='${pageContext.request.contextPath}/action/admin/groups/' + idTeam; 
+	}
 	
 </script>
     
@@ -39,45 +43,29 @@ $(document).ready( function() {
 		<br/>
 	    <div class="caja">
 		<table class="display" id="table_groups">
-	        <thead>
-	          <tr>
-	            <th><fmt:message key="admin.groups.table.name" /> </th>
-	            <th><fmt:message key="admin.groups.table.type" /></th>
-	            <th><fmt:message key="admin.groups.table.athletes.tam" /></th>
-	          </tr>
+	    	<thead>
+	        	<tr>
+	            	<th><fmt:message key="admin.groups.table.name" /> </th>
+	            	<th><fmt:message key="admin.groups.table.type" /></th>
+	            	<th><fmt:message key="admin.groups.table.athletes.tam" /></th>
+	          	</tr>
 	        </thead>
 	        <tbody>
-	          <tr class="odd gradeU">
-	            <td>Trident</td>            
-	            <td>Win 95+</td>
-	            <td class="center"> 4</td>
-	          </tr>
-	          <tr class="even gradeU">
-	            <td>Kelia</td>
-	            <td>Win 95+</td>
-	            <td class="center">5</td>
-	          </tr>
-	          <tr class="odd gradeU">
-	            <td>Kelia</td>
-	            <td>Win 95+</td>
-	            <td class="center">5.5</td>
-	          </tr>
-	          <tr class="even gradeU">
-	            <td>Trident</td>
-	            <td>Win 98+</td>
-	            <td class="center">6</td>
-	          </tr>
-	          <tr class="odd gradeU">
-	            <td>Trident</td>
-	            <td>Win XP SP2+</td>
-	            <td class="center">7</td>
-	          </tr>
-	          <tr class="even gradeU">
-	            <td>Trident</td>
-	            <td>Win XP</td>
-	            <td class="center">6</td>
-	          </tr>
-	        
+	        	<c:forEach var="team" items="${listTeams}" >
+			    	<c:choose>
+		          		<c:when test="${rowCounter.count % 2 == 0}">
+		            		<c:set var="rowStyle" scope="page" value="odd"/>
+		          		</c:when>
+		          		<c:otherwise>
+		           			<c:set var="rowStyle" scope="page" value="even"/>
+		          		</c:otherwise>
+		        	</c:choose>
+		        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/admin/groups/${team.idTeam}';">
+			            <td>${team.name}</td>            
+			            <td>${team.type}</td>
+			            <td class="center">0</td>
+		        	</tr>
+	        	</c:forEach>	         
 	        </tbody>
 	      </table>
       </div>

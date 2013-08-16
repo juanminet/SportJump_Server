@@ -1,5 +1,7 @@
 package es.uma.sportjump.sjs.model.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,8 +23,17 @@ public class Team {
 	@Column(name="ID_Team")
 	private Long idTeam;
 	
-	@Column(name="NAME")
+	@Column(name="NAME", nullable = false)
 	private String name;
+	
+	@Column(name="TEAM_TYPE", nullable = false)
+	private String type;
+	
+	@Column(name="DESCRIPTION", nullable = false)
+	private String description;
+	
+	@Column(name="DATE_CREATE", nullable = false)
+	private Date dateCreate;
 	
 	@ManyToOne(fetch=FetchType.LAZY , targetEntity = es.uma.sportjump.sjs.model.entities.Coach.class) 
 	@JoinColumn(name = "ID_COACH", nullable = false)
@@ -49,9 +60,31 @@ public class Team {
 
 	public void setName(String name) {
 		this.name = name;
+	}	
+
+	public String getType() {
+		return type;
 	}
-	
-	
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getDateCreate() {
+		return dateCreate;
+	}
+
+	public void setDateCreate(Date dateCreate) {
+		this.dateCreate = dateCreate;
+	}
 
 	public Coach getCoach() {
 		return coach;

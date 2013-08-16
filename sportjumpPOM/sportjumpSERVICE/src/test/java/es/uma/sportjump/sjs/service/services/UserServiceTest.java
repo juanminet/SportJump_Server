@@ -1,12 +1,11 @@
 package es.uma.sportjump.sjs.service.services;
 
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -17,7 +16,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import es.uma.sportjump.sjs.dao.daos.UserDao;
 import es.uma.sportjump.sjs.model.entities.Athlete;
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Team;
@@ -86,7 +84,7 @@ public class UserServiceTest {
 	@Test
 	public void testCoachCRUD(){
 		//Get UserService
-		UserService userService = applicationContext.getBean(UserService.class);
+		UserService userService = (UserService) applicationContext.getBean("userService");
 		
 		//Create coach 1
 		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);
@@ -194,7 +192,7 @@ public class UserServiceTest {
 				
 		
 		//Create team 
-		Long idTeam = userService.setNewTeam(teamName1, coach);
+		Long idTeam = createTeam(teamName1, coach); 
 				
 		assertEquals(new Long(0), idTeam);
 		
@@ -217,6 +215,8 @@ public class UserServiceTest {
 	}
 	
 	
+
+
 	@Test
 	public void testGetAllTeams(){
 		//Get UserService
@@ -228,9 +228,9 @@ public class UserServiceTest {
 		Coach coach = userService.findCoach(idCoach);
 		
 		//Create teams
-		Long idTeam1 = userService.setNewTeam(teamName1, coach);	
-		Long idTeam2 = userService.setNewTeam(teamName2, coach);
-		Long idTeam3 = userService.setNewTeam(teamName3, coach);
+		Long idTeam1 = createTeam(teamName1, coach); 	
+		Long idTeam2 = createTeam(teamName2, coach); 
+		Long idTeam3 = createTeam(teamName3, coach); 
 		
 		//Get teams 
 		Team team = userService.findTeam(idTeam1);
@@ -270,7 +270,7 @@ public class UserServiceTest {
 		Coach coach = userService.findCoach(idCoach1);
 		
 		//Create team 
-		Long idTeam = userService.setNewTeam(teamName1, coach);
+		Long idTeam = createTeam(teamName1, coach);
 		
 		//Get team 
 		Team team = userService.findTeam(idTeam);
@@ -315,7 +315,7 @@ public class UserServiceTest {
 		//Get coach 
 		Coach coach = userService.findCoach(idCoach);
 		//Create team 
-		Long idTeam = userService.setNewTeam(teamName1, coach);		
+		Long idTeam = createTeam(teamName1, coach);		
 		//Get team 
 		Team team = userService.findTeam(idTeam);
 		
@@ -364,7 +364,7 @@ public class UserServiceTest {
 		//Get coach 
 		Coach coach = userService.findCoach(idCoach);
 		//Create team 
-		Long idTeam = userService.setNewTeam(teamName1, coach);		
+		Long idTeam = createTeam(teamName1, coach);		
 		//Get team 
 		Team team = userService.findTeam(idTeam);
 		
@@ -407,7 +407,18 @@ public class UserServiceTest {
 
 
 	
-	
+	private Long createTeam(String teanName, Coach coach) {
+		//Get UserService
+		UserService userService = applicationContext.getBean(UserService.class);
+		
+		//Nullable attributes
+		String type = "sprinters";
+		String description = "Group for sprinter";
+		Date dateCreate = new Date();
+		
+		Long idTeam = userService.setNewTeam(teamName1,type, description, dateCreate, coach);		
+		return idTeam;
+	}
 	
 	
 	

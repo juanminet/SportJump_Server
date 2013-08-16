@@ -2,6 +2,8 @@ package es.uma.sportjump.sjs.model.entities;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -199,9 +201,18 @@ public class AthleteModelEntityTest {
 	private static  Team createTeam(String name) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
+		//data not nullable
+		String type = "Velocidad";
+		String description = "Grupo dedicado a la velocidad (pruebas 100, 200, 400 metros).";
+		Date date = new Date(System.currentTimeMillis());
+		
 		//Create team
 		Team team = new Team();
 		team.setName(name);
+		team.setType(type);
+		team.setDescription(description);
+		team.setDateCreate(date);
+		
 		team.setCoach(coach);
 		
 		//Persist entity

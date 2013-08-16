@@ -22,38 +22,67 @@ $(document).ready( function() {
 
 		<h1><fmt:message key="admin.groups.group.data" /></h1>
 		<br/>
-		<form:form commandName="groupCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/admin/groups/save" method="POST">
-			<fieldset>
-				<form:errors path="*" cssClass="errorblock" element="div" />
+		<div <c:if test="${empty newTeam}">style="display: none;"</c:if>>		
+			<form:form commandName="groupCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/admin/groups/save" method="POST" >
+				<fieldset>
+					<form:errors path="*" cssClass="errorblock" element="div" />
+			        <div class="form-row">
+			            <label for="name">Nombre:</label>
+			            <span class="input"><form:input path="name" size="40"/>   <form:errors path="name" cssClass="error" /></span>
+			        </div>   
+			        <div class="form-row">
+			            <label for="type">tipo:</label>
+			            <span class="input"><form:input path="type" size="20"/>   <form:errors path="type" cssClass="error" /></span>
+			        </div>  
+			        <div class="form-row">
+			            <label for="coachName">Entrenador:</label>
+			            <span class="input"><form:label path="coachName" cssClass="second-col">${groupCommand.coachName}</form:label></span><br>
+			        </div>         
+			        <div class="form-row">
+			            <label for="createDate">Fecha creacion:</label>
+			           <span class="input"> <form:label path="createDate" size="40"><fmt:formatDate value="${groupCommand.createDate}" pattern="dd/MM/yyyy"/></form:label></span>
+			        </div>           
+			        <div class="form-row">
+			            <label for="name">Descripcion:</label>
+			            <span class="input"><form:textarea path="description" cols="73" /></span>
+			            <form:errors path="description" cssClass="error" />
+			        </div> 
+			        <input type="submit" value="Guardar" class="button_submit">
+			     </fieldset>		
+			</form:form>
+		</div>
+		 
+		 <div>
+		 <div class="caja" <c:if test="${not empty newTeam}">style="display: none;"</c:if>>
+		 	<div class="button"><a>Eliminar</a></div>
+		 	<div class="button"><a>Modificar</a></div>
+		 	<div class="button"><a>Volver</a></div>
+		 	
+		 	<br/>
+			<fieldset>				
 		        <div class="form-row">
 		            <label for="name">Nombre:</label>
-		            <span class="input"><form:input path="name" size="40"/>   <form:errors path="name" cssClass="error" /></span>
+		           <span class="input"><label>${groupCommand.name}</label></span>
 		        </div>   
 		        <div class="form-row">
 		            <label for="type">tipo:</label>
-		            <span class="input"><form:input path="type" size="20"/>   <form:errors path="type" cssClass="error" /></span>
+		            <span class="input"><label>${groupCommand.type}</label></span>
 		        </div>  
 		        <div class="form-row">
 		            <label for="coachName">Entrenador:</label>
-		            <span class="input"><form:label path="coachName" cssClass="second-col">${groupCommand.coachName}</form:label></span><br>
+		            <span class="input"><label class="second-col">${groupCommand.coachName}</label></span>
 		        </div>         
 		        <div class="form-row">
 		            <label for="createDate">Fecha creacion:</label>
-		           <span class="input"> <form:label path="createDate" size="40"><fmt:formatDate value="${groupCommand.createDate}" pattern="dd/MM/yyyy"/></form:label></span>
+		           <span class="input"> <label><fmt:formatDate value="${groupCommand.createDate}" pattern="dd/MM/yyyy"/></label></span>
 		        </div>           
 		        <div class="form-row">
 		            <label for="name">Descripcion:</label>
-		            <span class="input"><form:textarea path="description" cols="73" /></span>
-		            <form:errors path="description" cssClass="error" />
-		        </div> 
-		        <input type="submit" value="Guardar" class="button_submit">
-		     </fieldset>
-		     
-	
-		     
-		     
-		
-		</form:form>
+		            <span class="input"><textarea path="description" cols="73"  disabled="disabled"/>${groupCommand.description}</textarea></span>		            
+		        </div> 		        
+		     </fieldset>		
+		</div>
+		</div> 
 				
 	
 		<h1><fmt:message key="admin.groups.athletes.list" /></h1>

@@ -1,5 +1,6 @@
 package es.uma.sportjump.sjs.service.services;
 
+import java.util.Date;
 import java.util.List;
 
 import es.uma.sportjump.sjs.model.entities.Athlete;
@@ -63,7 +64,7 @@ public interface UserService {
 	 * @param surname
 	 * @return
 	 */
-	public Long setNewTeam(String name, Coach coach);
+	public Long setNewTeam(String name, String type, String description, Date dateCreate, Coach coach);
 	
 	
 	/**

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -805,8 +806,15 @@ public class UserDaoTest {
 		coach.setIdUser(idCoach);
 		
 		//Create team
+		String type = "Sprinters";
+		String description = "Group for sprinters";
+		Date dateCreate = new Date();
+		
 		Team team = new Team();
 		team.setName(name);
+		team.setType(type);
+		team.setDescription(description);
+		team.setDateCreate(dateCreate);
 		team.setCoach(coach);
 		
 		System.out.println("SDDFASDFASDF");

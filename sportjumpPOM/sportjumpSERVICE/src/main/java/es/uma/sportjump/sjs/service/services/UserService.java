@@ -26,6 +26,12 @@ public interface UserService {
 	
 	/**
 	 * 
+	 * @param coach
+	 */
+	public void updateCoach(Coach coach);
+	
+	/**
+	 * 
 	 * @param idCoach
 	 * @return
 	 */	
@@ -67,7 +73,11 @@ public interface UserService {
 	 */
 	public Long setNewTeam(String name, String type, String description, Date dateCreate, Coach coach);
 	
-	
+	/**
+	 * 
+	 * @param team
+	 */
+	public void updateTeam(Team team);
 	/**
 	 * 
 	 * @param idTeam
@@ -82,14 +92,19 @@ public interface UserService {
 	 */
 	public List<Team> findAllTeams();	
 	
-	
-	
+		
 	
 	/**
 	 * 
-	 * @param idTeam
+	 * @param team
 	 */
 	public void removeTeam(Team team);
+	
+	/**
+	 * 
+	 * @param coach
+	 */
+	public List<Team>  findTeamsByCoach(Coach coach);
 
 	
 	
@@ -108,6 +123,11 @@ public interface UserService {
 			Date dateBirth, Team team);
 	
 	
+	/**
+	 * 
+	 * @param athlete
+	 */
+	public void updateAthlete(Athlete athlete);
 	/**
 	 * 
 	 * @param idAthlete

@@ -82,6 +82,8 @@ public class UserDaoJpaImpl  implements UserDao{
 	
 	
 	
+	
+	
 	/**********************************************************************************************************************/
 	/********************************************        Team        *****************************************************/
 	/**********************************************************************************************************************/
@@ -112,6 +114,17 @@ public class UserDaoJpaImpl  implements UserDao{
 	public List<Team> getAllTeams() {
 		
 		Query query = em.createNamedQuery("findAllTeams");
+		
+		List<Team> resListTeams = query.getResultList();
+		
+		return resListTeams;
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public List<Team> getTeamsByCoach(Coach coach) {
+		
+		Query query = em.createNamedQuery("findAllTeamsByCoach")
+				.setParameter("idCoach", coach.getIdUser());
 		
 		List<Team> resListTeams = query.getResultList();
 		
@@ -170,7 +183,6 @@ public class UserDaoJpaImpl  implements UserDao{
 		
 		return resListAthletes;
 	}
-
 	
 
 }

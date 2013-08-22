@@ -54,6 +54,12 @@ public class UserServiceImpl  implements UserService{
 
 
 
+
+	@Override
+	public void updateCoach(Coach coach) {
+		userDao.persistCoach(coach);	
+	}
+
 	public Coach findCoach(Long idCoach) {
 		return userDao.getCoachById(idCoach);
 	}
@@ -102,6 +108,12 @@ public class UserServiceImpl  implements UserService{
 		return team.getIdTeam();
 	}
 	
+	@Override
+	public void updateTeam(Team team) {
+		userDao.persistTeam(team);
+		
+	}
+
 
 	public Team findTeam(Long idTeam) {
 		return userDao.getTeamById(idTeam);
@@ -118,7 +130,11 @@ public class UserServiceImpl  implements UserService{
 		
 	}
 	
-	
+
+	@Override
+	public List<Team> findTeamsByCoach(Coach coach) {
+		return userDao.getTeamsByCoach(coach);		
+	}
 	
 	
 	
@@ -153,6 +169,11 @@ public class UserServiceImpl  implements UserService{
 	}
 
 
+	@Override
+	public void updateAthlete(Athlete athlete) {
+		userDao.persistAthlete(athlete);
+	}
+	
 	public Athlete findAthlete(Long idAthlete) {	
 		
 		return userDao.getAthleteById(idAthlete);
@@ -172,6 +193,15 @@ public class UserServiceImpl  implements UserService{
 	public void removeAthlete(Athlete athlete) {		
 		userDao.deleteAthlete(athlete.getIdUser());			
 	}
+
+
+
+
+
+
+
+
+
 
 
 

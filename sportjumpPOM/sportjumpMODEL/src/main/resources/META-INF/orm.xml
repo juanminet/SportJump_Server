@@ -15,10 +15,10 @@
 	 <named-query name="findAllTeams">
 		<query>from Team</query>
 	</named-query>	
-	<!--<named-query name="findAllTeamsByCoach">
-		<query>from Team t where t.coach.idUser := idCoach</query>
+	<named-query name="findAllTeamsByCoach">
+		<query>from Team t where t.coach.idUser = :idCoach</query>
 	</named-query>
-	<named-query name="findTeamByName">
+	<!-- <named-query name="findTeamByName">
 		<query>from Team t inner join t.coach c where t.name = :name and c.idUser := idCoach</query>
 	</named-query> -->
 	

@@ -40,15 +40,17 @@ public class AdminController {
 	protected static String GROUPS_REDIRECT = "redirect:/action/admin/groups";	
 	
 	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
-	public String home(Model model) {
-		return adminGroups(model);
+	public String home(Model model,HttpSession session) {
+		return adminGroups(model,session);
 		
 	}	
 	
 	@RequestMapping(value={"/groups"})
-	public String adminGroups(Model model) {
+	public String adminGroups(Model model, HttpSession session) {
 		
-		List<Team> listTeams = userService.findAllTeams();
+		Coach  coach = (Coach) session.getAttribute("loggedUser");	
+		
+		List<Team> listTeams = userService.findTeamsByCoach(coach);
 		model.addAttribute("listTeams", listTeams);
 	
 		return "admin_groups";		
@@ -85,11 +87,26 @@ public class AdminController {
 		
 		Coach  coach = (Coach) session.getAttribute("loggedUser");
 		
-		userService.setNewTeam(groupCommand.getName(), groupCommand.getType(), groupCommand.getDescription(), groupCommand.getCreateDate(), coach);
+		
+		Long idTeam = groupCommand.getIdTeam();
+		if (idTeam == null){	//Create
+			userService.setNewTeam(groupCommand.getName(), groupCommand.getType(), groupCommand.getDescription(), groupCommand.getCreateDate(), coach);
+		}else{ //update		
+			Team team = userService.findTeam(groupCommand.getIdTeam());
+			userService.updateTeam(fillTeam(team,groupCommand));
+		}
 		
 		return GROUPS_REDIRECT;		
 	}
 	
+	private Team fillTeam(Team team, GroupCommand groupCommand) {
+		team.setName(groupCommand.getName());
+		team.setType(groupCommand.getType());
+		team.setDescription(groupCommand.getDescription());		
+		
+		return team;
+	}
+
 	@RequestMapping(value={"/groups/remove/{idTeam}"}, method=RequestMethod.GET)
 	public String removeGroup(@PathVariable("idTeam") Long idTeam, Model model, HttpSession session) {		
 			
@@ -117,10 +134,7 @@ public class AdminController {
 	@RequestMapping(value={"/athletes/new"})
 	public String newAthlete(Model model, HttpSession session) {	
 		
-		initAthleteModel(model,session);	
-		
-		List<Team> listTeams = userService.findAllTeams();
-		model.addAttribute("listTeams", listTeams);
+		initAthleteModel(model,session);
 		
 		
 		return NEW_ATHLETE_FORM;		
@@ -204,6 +218,10 @@ public class AdminController {
 	private void initAthleteModel(Model model, HttpSession session) {
 		AthleteCommand athleteCommand = new AthleteCommand();
 		model.addAttribute("athleteCommand", athleteCommand);
-		model.addAttribute("newAthlete", true);		
+		model.addAttribute("newAthlete", true);				
+		
+		Coach  coach = (Coach) session.getAttribute("loggedUser");	
+		List<Team> listTeams = userService.findTeamsByCoach(coach);
+		model.addAttribute("listTeams", listTeams);
 	}
 }

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.awt.dnd.DnDConstants;
 import java.util.Date;
 import java.util.List;
 
@@ -93,7 +92,6 @@ public class UserServiceTest {
 		//Get UserService
 		UserService userService = (UserService) applicationContext.getBean("userService");
 		
-		Date date;
 		//Create coach 1
 		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);
 		
@@ -106,6 +104,15 @@ public class UserServiceTest {
 		assertEquals(coachUserName1, coach.getUserName());
 		assertEquals(coachSurname1, coach.getSurname());
 		assertEquals(coachEmail1, coach.getEmail());
+		
+		//update coach
+		coach.setName(coachName2);
+		userService.updateCoach(coach);
+		
+		//Get coach 1
+		coach = userService.findCoach(idCoach1);
+		
+		assertEquals(coachName2,coach.getName());
 		
 		//Remove coach1
 		userService.removeCoach(coach);
@@ -208,6 +215,15 @@ public class UserServiceTest {
 		Team team = userService.findTeam(idTeam);
 		
 		assertEquals(teamName1,team.getName());
+		
+		//update team
+		team.setName(teamName2);
+		userService.updateTeam(team);
+		
+		//Get team 
+		team = userService.findTeam(idTeam);
+		
+		assertEquals(teamName2,team.getName());
 			
 		//Remove team
 		userService.removeTeam(team);
@@ -266,6 +282,52 @@ public class UserServiceTest {
 	
 	}
 	
+	@Test
+	public void testGetTeamsByCoach(){
+		//Get UserService
+		UserService userService = applicationContext.getBean(UserService.class);
+		
+		//Create coach
+		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);	
+		Long idCoach2 = userService.setNewCoach(coachName2, coachUserName2,coachSurname2, coachDni2,coachEmail2,null,null,null,null,null);	
+	
+		//Get coach 
+		Coach coach1 = userService.findCoach(idCoach);
+		Coach coach2 = userService.findCoach(idCoach2);
+		
+		//Create teams
+		Long idTeam1 = createTeam(teamName1, coach1); 	
+		Long idTeam2 = createTeam(teamName2, coach2); 
+		Long idTeam3 = createTeam(teamName3, coach1); 
+		
+		//Get teams 
+		Team team1 = userService.findTeam(idTeam1);
+		Team team2 = userService.findTeam(idTeam2);
+		Team team3 = userService.findTeam(idTeam3);
+				
+		
+		
+		//Get teams
+		List<Team> listTeams1 = userService.findTeamsByCoach(coach1);
+		List<Team> listTeams2 = userService.findTeamsByCoach(coach2);
+		
+		assertTrue(listTeams1.contains(team1));
+		assertTrue(listTeams2.contains(team2));
+		assertTrue(listTeams1.contains(team3));
+		assertEquals(2, listTeams1.size());
+		assertEquals(1, listTeams2.size());
+		
+		//Remove teams
+		userService.removeTeam(team1);	
+		userService.removeTeam(team2);	
+		userService.removeTeam(team3);
+		
+		//Remove coach
+		userService.removeCoach(coach1);
+		userService.removeCoach(coach2);
+	
+	}
+	
 	
 	@Test
 	public void testAthleteCRUD(){
@@ -296,6 +358,16 @@ public class UserServiceTest {
 		assertEquals(athleteName1,athlete.getName());
 		assertEquals(athleteUserName1, athlete.getUserName());
 		
+		//Update athlete
+		athlete.setName(athleteName2);
+		athlete.setUserName(athleteUserName2);
+		userService.updateAthlete(athlete);
+		
+		//Get athlete 
+		athlete = userService.findAthlete(idAthlete1);
+		
+		assertEquals(athleteName2,athlete.getName());
+		assertEquals(athleteUserName2, athlete.getUserName());
 		//Remove athlete
 		userService.removeAthlete(athlete);
 		

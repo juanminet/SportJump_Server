@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.sun.org.apache.regexp.internal.recompile;
-
 import es.uma.sportjump.sjs.dao.daos.UserDao;
 import es.uma.sportjump.sjs.model.entities.Athlete;
 import es.uma.sportjump.sjs.model.entities.Coach;
@@ -27,11 +25,19 @@ public class UserDaoMockImpl implements UserDao{
 	
 	@Override
 	public void persistCoach(Coach coach) {
-		//add team to list
-		listCoaches.add(coach);
-				
-		//set id 
-		coach.setIdUser((long)listCoaches.indexOf(coach));
+		
+		Coach coachAux = getCoachById(coach.getIdUser());
+		if(coachAux == null){
+			//add team to list
+			listCoaches.add(coach);
+					
+			//set id 
+			coach.setIdUser((long)listCoaches.indexOf(coach));
+		}else{
+			Long idUser = coach.getIdUser();
+			
+			listCoaches.set(idUser.intValue(), coach);
+		}
 		
 	}
 
@@ -114,13 +120,17 @@ public class UserDaoMockImpl implements UserDao{
 		
 		
 		
-		if (getCoachById(team.getCoach().getIdUser()) != null){			
-		
-			//add athlete to list
-			listTeams.add(team);
-					
-			//set id 
-			team.setIdTeam((long)listTeams.indexOf(team));	
+		if (getCoachById(team.getCoach().getIdUser()) != null){	
+			
+			if (getTeamById(team.getIdTeam()) == null){			
+				//add athlete to list
+				listTeams.add(team);
+						
+				//set id 
+				team.setIdTeam((long)listTeams.indexOf(team));	
+			}else{
+				listTeams.set(team.getIdTeam().intValue(),team);
+			}
 			
 			
 		
@@ -174,6 +184,27 @@ public class UserDaoMockImpl implements UserDao{
 		return listTeams;		
 	}
 	
+
+	@Override
+	public List<Team> getTeamsByCoach(Coach coach) {
+		
+		List<Team> resListTeam = new ArrayList<Team>();
+		for(Team team : listTeams){
+			if(team.getCoach().getIdUser() == coach.getIdUser()){
+				resListTeam.add(team);
+			}
+		}
+		
+		return resListTeam;
+	}
+
+
+
+
+
+
+	
+	
 	
 	/**********************************************************************************************************************/
 	/********************************************       ATHLETE       *****************************************************/
@@ -183,11 +214,16 @@ public class UserDaoMockImpl implements UserDao{
 	public void persistAthlete(Athlete athlete) {
 		// check team
 		if (listTeams.contains(athlete.getTeam())) {
-			// add athlete to list
-			listAthletes.add(athlete);
-
-			// set id
-			athlete.setIdUser((long) listAthletes.indexOf(athlete));
+			
+			if(getAthleteById(athlete.getIdUser()) == null){
+				// add athlete to list
+				listAthletes.add(athlete);
+	
+				// set id
+				athlete.setIdUser((long) listAthletes.indexOf(athlete));
+			}else{
+				listAthletes.set(athlete.getIdUser().intValue(), athlete);
+			}
 		}
 	}
 	
@@ -257,9 +293,5 @@ public class UserDaoMockImpl implements UserDao{
 
 
 
-
-
-
-	
 
 }

@@ -89,6 +89,12 @@ public interface UserDao {
 	 */
 	public List<Team> getAllTeams();
 	
+	/**
+	 * Return a list with teams belong to coach given by paramenter
+	 * @return
+	 */
+	public List<Team> getTeamsByCoach(Coach coach);
+	
 	
 	
 	

@@ -29,7 +29,8 @@ public class AthleteModelEntityTest {
 		//Create coach
 		String name = "Pepe";
 		String userName = "Garcia";
-		coach = createCoach(name, userName);
+		String dni ="88990077Y";
+		coach = createCoach(name, userName, dni);
 		
 		//Create team		
 		String nameTeam = "Equipo";
@@ -70,9 +71,10 @@ public class AthleteModelEntityTest {
 		String surname = "Coe";
 		String userName = "sebas";
 		String email = "coe@coe.es";
+		String dni = "31722334y";
 
 		// Create athlete
-		Long idAthlete = createAthlete(name, surname,userName, email);
+		Long idAthlete = createAthlete(name, surname,userName, email,dni);
 
 		// Make assert
 		assertNotNull(idAthlete);
@@ -104,8 +106,42 @@ public class AthleteModelEntityTest {
 		assertNull(athlete);
 
 	}
+	
+	@Test
+	public void testAttributes(){
+		// Definition Athlete
+				String name = "Sebastian";
+				String surname = "Coe";
+				String userName = "sebas";
+				String email = "coe@coe.es";
+				String dni="11223344";
+				String type="type";
+				String comments = "Coments";
+				String telephone = "6666666666";
+				String address = "Calle de la casa de al lado";
+				Date dateBirth = new Date();
+				
+						
+				
+				// Create athlete
+				Long idAthlete = createCompleteAthlete(name, surname,userName, email,dni,type,comments,telephone,address,dateBirth);
+				
+				Athlete athlete = readAthlete(idAthlete);
+				assertEquals(type, athlete.getType());
+				assertEquals(comments, athlete.getComments());
+				assertEquals(telephone, athlete.getTelephone());
+				assertEquals(address, athlete.getAddress());
+				assertEquals(dateBirth.getDay(), athlete.getDateBirth().getDay());
+				assertEquals(dateBirth.getMonth(), athlete.getDateBirth().getMonth());
+				assertEquals(dateBirth.getYear(), athlete.getDateBirth().getYear());
+				
+				deleteAthlete(idAthlete);
+				
+	}
 
-	private Long createAthlete(String name, String surname, String userName, String email) {
+	private Long createCompleteAthlete(String name, String surname,
+			String userName, String email, String dni, String type,
+			String comments, String telephone, String address, Date dateBirth) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		//Create athlete
@@ -114,6 +150,33 @@ public class AthleteModelEntityTest {
 		athlete.setSurname(surname);
 		athlete.setUserName(userName);
 		athlete.setEmail(email);
+		athlete.setDni(dni);
+		athlete.setType(type);
+		athlete.setComments(comments);
+		athlete.setTelephone(telephone);
+		athlete.setAddress(address);
+		athlete.setDateBirth(dateBirth);
+		athlete.setTeam(team);
+		
+		//Persist entity
+		entityManager.getTransaction().begin();
+		entityManager.persist(athlete);
+		entityManager.getTransaction().commit();
+		
+		//return idAthlete
+		return Long.valueOf(athlete.getIdUser());
+	}
+
+	private Long createAthlete(String name, String surname, String userName, String email, String dni) {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		
+		//Create athlete
+		Athlete athlete = new Athlete();
+		athlete.setName(name);
+		athlete.setSurname(surname);
+		athlete.setUserName(userName);
+		athlete.setEmail(email);
+		athlete.setDni(dni);
 		athlete.setTeam(team);
 		
 		//Persist entity
@@ -168,13 +231,14 @@ public class AthleteModelEntityTest {
 	
 	//BEFORE & AFTER CLASS data
 	
-	private static  Coach createCoach(String name, String userName) {
+	private static  Coach createCoach(String name, String userName, String dni) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		//Create coach
 		Coach coach = new Coach();
 		coach.setName(name);
 		coach.setUserName(userName);
+		coach.setDni(dni);
 		
 		//Persist entity
 		entityManager.getTransaction().begin();

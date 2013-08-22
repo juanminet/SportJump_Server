@@ -139,32 +139,50 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 	width:78%
 }
 
+.subcaja{
+	border: 1px solid #DDDDDD;
+    display: inline-block;
+    height: auto;
+    margin-bottom: 2em;
+    padding-bottom: 1ex;
+    padding-top: 1ex;
+    width: 100%;
+}
+
+.caja .subcaja:last-child{
+	
+    margin-bottom: 0em;
+}
+
+.caja .subcaja > h1 {
+    float: left;
+    padding: 1ex;
+}
+.caja .subcaja fieldset{
+	margin: 0 0.5em 0.3em 1em;
+}
+
 /*----------------------------------------------------------- */
 /*------------------------- BUTTONS ------------------------- */
 /*----------------------------------------------------------- */
 
-.button{
-	height: 3ex;
-    min-width: 6em;
-	background-color: #FCFCFC;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    float: right;    
-    padding-top: 0.4ex; 
-    margin-left: 0.5em;   	
-    margin-right: 0.5em; 
-    text-align : center;
-    z-index: 100000000;
-    position: relative;
-}
 
-.button a{
-	color: #444466 !important;
+.button{
+	background-color: #FCFCFC;
+	color: #646464;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    float: right;
     font-size: 10px;
+    font-weight: bold;
+    height: 3ex;
     margin-left: 0.5em;
     margin-right: 0.5em;
+    min-width: 6em;
+    padding-left: 1ex;
+    padding-right: 1ex;
+    padding-top: 1ex;
+    text-align: center;
     text-decoration: none;
-    vertical-align: text-bottom;
-    font-weight: bold;
 }
 
 .button:hover{
@@ -173,18 +191,20 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 	cursor:pointer;
 }
 
-
 .button_submit{
-	height: 4ex;
-    min-width: 6em;
 	background-color: #FCFCFC;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    float: right; 
-    margin-left: 0.5em;   	
-    margin-right: 0.5em; 
-    text-align : center;
-    z-index: 100000000;
-    position: relative;
+    color: #646464;
+    float: right;
+    font-family: arial;
+    font-size: 10px;
+    font-weight: bold;
+    height: 4ex;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    padding-bottom: 0.5ex;
+    min-width: 7em;
+    text-align: center;
 }
 .button_submit:hover{
 	border-color: #D19290;

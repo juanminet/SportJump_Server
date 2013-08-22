@@ -27,14 +27,24 @@ public class UserServiceImpl  implements UserService{
 	/**********************************************************************************************************************/
 	/*******************************************        COACH        ******************************************************/
 	/**********************************************************************************************************************/
-	public Long setNewCoach(String name, String userName,String surname, String email) {
+
+	@Override
+	public Long setNewCoach(String name, String userName,
+			String surname, String dni, String email, String type, String address,
+			String comments, String telephone, Date dateBirth) {	
 		
 		//Create coach
 		Coach coach = new Coach();
 		coach.setName(name);
 		coach.setUserName(userName);
 		coach.setSurname(surname);
+		coach.setDni(dni);
 		coach.setEmail(email);
+		coach.setType(type);
+		coach.setAddress(address);
+		coach.setComments(comments);
+		coach.setTelephone(telephone);
+		coach.setDateBirth(dateBirth);
 		
 		//persist coach
 		userDao.persistCoach(coach);
@@ -116,15 +126,23 @@ public class UserServiceImpl  implements UserService{
 	/******************************************        ATHLETES        ****************************************************/
 	/**********************************************************************************************************************/	
 
-	
-	public Long setNewAthlete(String name, String userName,String surname, String email, Team team) {
-		
+	@Override
+	public Long setNewAthlete(String name, String userName,
+			String surname, String dni, String email, String type, String address,
+			String comments, String telephone, Date dateBirth, Team team) {
+				
 		//Crate object athlete
 		Athlete athlete = new Athlete();
 		athlete.setName(name);
 		athlete.setUserName(userName);
 		athlete.setSurname(surname);
+		athlete.setDni(dni);
 		athlete.setEmail(email);
+		athlete.setType(type);
+		athlete.setAddress(address);
+		athlete.setComments(comments);
+		athlete.setTelephone(telephone);
+		athlete.setDateBirth(dateBirth);
 		athlete.setTeam(team);
 		
 		//Persist athlete
@@ -154,6 +172,13 @@ public class UserServiceImpl  implements UserService{
 	public void removeAthlete(Athlete athlete) {		
 		userDao.deleteAthlete(athlete.getIdUser());			
 	}
+
+
+
+
+
+
+
 
 	
 

@@ -12,6 +12,11 @@ $(document).ready( function() {
 			"table_athletes",
 			5);
 });
+
+function show_modify(){
+	$("#caja_form").show();
+	$("#caja_data").hide();
+}
 </script>
 
 
@@ -20,109 +25,124 @@ $(document).ready( function() {
 	<div id = "body_home_container">
 
 
-		<h1><fmt:message key="admin.groups.group.data" /></h1>
-		<br/>
-		<div <c:if test="${empty newTeam}">style="display: none;"</c:if>>		
-			<form:form commandName="groupCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/admin/groups/save" method="POST" >
-				<fieldset>
-					<form:errors path="*" cssClass="errorblock" element="div" />
-			        <div class="form-row">
-			            <label for="name">Nombre:</label>
-			            <span class="input"><form:input path="name" size="40"/>   <form:errors path="name" cssClass="error" /></span>
-			        </div>   
-			        <div class="form-row">
-			            <label for="type">tipo:</label>
-			            <span class="input"><form:input path="type" size="20"/>   <form:errors path="type" cssClass="error" /></span>
-			        </div>  
-			        <div class="form-row">
-			            <label for="coachName">Entrenador:</label>
-			            <span class="input"><form:label path="coachName" cssClass="second-col">${groupCommand.coachName}</form:label></span><br>
-			        </div>         
-			        <div class="form-row">
-			            <label for="createDate">Fecha creacion:</label>
-			           <span class="input"> <form:label path="createDate" size="40"><fmt:formatDate value="${groupCommand.createDate}" pattern="dd/MM/yyyy"/></form:label></span>
-			        </div>           
-			        <div class="form-row">
-			            <label for="name">Descripcion:</label>
-			            <span class="input"><form:textarea path="description" cols="73" /></span>
-			            <form:errors path="description" cssClass="error" />
-			        </div> 
-			        <input type="submit" value="Guardar" class="button_submit">
-			     </fieldset>		
+		
+		
+		<div id="caja_form" <c:if test="${empty newTeam}">style="display: none;"</c:if>>	
+		 	<form:form commandName="groupCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/admin/groups/save" method="POST" >
+				<div class="subcaja">
+			 		<h1><fmt:message key="admin.groups.group.data" /></h1>
+			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/groups"><fmt:message key="admin.button.return"/></a>
+			    </div> 
+			    <div class="subcaja">
+					<fieldset>
+						<form:errors path="*" cssClass="errorblock" element="div" />
+				        <div class="form-row">
+				            <label for="name"><fmt:message key="admin.groups.group.name"/>:</label>
+				            <span class="input"><form:input path="name" size="40"/>   <form:errors path="name" cssClass="error" /></span>
+				        </div>   
+				        <div class="form-row">
+				            <label for="type"><fmt:message key="admin.groups.group.type"/>:</label>
+				            <span class="input"><form:input path="type" size="20"/>   <form:errors path="type" cssClass="error" /></span>
+				        </div>  
+				        <div class="form-row">
+				            <label for="coachName"><fmt:message key="admin.groups.group.coach"/>:</label>
+				            <span class="input"><form:label path="coachName" cssClass="second-col">${groupCommand.coachName}</form:label></span><br>
+				        </div>         
+				        <div class="form-row">
+				            <label for="createDate"><fmt:message key="admin.groups.group.date.create"/>:</label>
+				           <span class="input"> <form:label path="createDate" size="40"><fmt:formatDate value="${groupCommand.createDate}" pattern="dd/MM/yyyy"/></form:label></span>
+				        </div>           
+				        <div class="form-row">
+				            <label for="name"><fmt:message key="admin.groups.group.description"/>:</label>
+				            <span class="input"><form:textarea path="description" cols="73" /></span>				            
+				        </div> 
+				        <input type="submit" value="<fmt:message key='admin.button.save'/>" class="button_submit">
+				     </fieldset>
+			     </div>		
 			</form:form>
 		</div>
 		 
 		 <div>
-		 <div class="caja" <c:if test="${not empty newTeam}">style="display: none;"</c:if>>
-		 	<div class="button"><a>Eliminar</a></div>
-		 	<div class="button"><a>Modificar</a></div>
-		 	<div class="button"><a>Volver</a></div>
+		 <div id="caja_data" class="caja" <c:if test="${not empty newTeam}">style="display: none;"</c:if>>
+		
+		 	<div class="subcaja">
+		 		<h1><fmt:message key="admin.groups.group.data" /></h1>
+		        <a class="button" href="${pageContext.request.contextPath}/action/admin/groups/remove/${groupCommand.idTeam}"><fmt:message key="admin.button.remove"/></a>
+		 		<div class="button" onclick="javascript:show_modify();"><a><fmt:message key="admin.button.modify"/></a></div>
+		 		<a class="button" href="${pageContext.request.contextPath}/action/admin/groups"><fmt:message key="admin.button.return"/></a>
+		    </div> 	
+		 
 		 	
-		 	<br/>
-			<fieldset>				
-		        <div class="form-row">
-		            <label for="name">Nombre:</label>
-		           <span class="input"><label>${groupCommand.name}</label></span>
-		        </div>   
-		        <div class="form-row">
-		            <label for="type">tipo:</label>
-		            <span class="input"><label>${groupCommand.type}</label></span>
-		        </div>  
-		        <div class="form-row">
-		            <label for="coachName">Entrenador:</label>
-		            <span class="input"><label class="second-col">${groupCommand.coachName}</label></span>
-		        </div>         
-		        <div class="form-row">
-		            <label for="createDate">Fecha creacion:</label>
-		           <span class="input"> <label><fmt:formatDate value="${groupCommand.createDate}" pattern="dd/MM/yyyy"/></label></span>
-		        </div>           
-		        <div class="form-row">
-		            <label for="name">Descripcion:</label>
-		            <span class="input"><textarea path="description" cols="73"  disabled="disabled"/>${groupCommand.description}</textarea></span>		            
-		        </div> 		        
-		     </fieldset>		
-		</div>
+		  	<div class="subcaja">		 	
+				<fieldset>				 			
+			        <div class="form-row">
+			            <label for="name"><fmt:message key="admin.groups.group.name"/>:</label>
+			           <span class="input"><label>${groupCommand.name}</label></span>
+			        </div>   
+			        <div class="form-row">
+			            <label for="type"><fmt:message key="admin.groups.group.type"/>:</label>
+			            <span class="input"><label>${groupCommand.type}</label></span>
+			        </div>  
+			        <div class="form-row">
+			            <label for="coachName"><fmt:message key="admin.groups.group.coach"/>:</label>
+			            <span class="input"><label class="second-col">${groupCommand.coachName}</label></span>
+			        </div>         
+			        <div class="form-row">
+			            <label for="createDate"><fmt:message key="admin.groups.group.date.create"/>:</label>
+			           <span class="input"> <label><fmt:formatDate value="${groupCommand.createDate}" pattern="dd/MM/yyyy"/></label></span>
+			        </div>           
+			        <div class="form-row">
+			            <label for="name"><fmt:message key="admin.groups.group.description"/>:</label>
+			            <span class="input"><textarea path="description" cols="73"  disabled="disabled">${groupCommand.description}</textarea></span>		            
+			        </div> 		        
+			     </fieldset>
+		     </div>		
+		 </div> 
 		</div> 
 				
 	
-		<h1><fmt:message key="admin.groups.athletes.list" /></h1>
-		<br/>
-	    <div class="caja">
-			<table class="display" id="table_athletes">
-		        <thead>
-		          <tr>
-		            <th><fmt:message key="admin.athletes.table.name" /> </th>
-		            <th><fmt:message key="admin.athletes.table.type" /></th>	           
-		          </tr>
-		        </thead>
-		        <tbody>
-		          <tr class="odd gradeU">
-		            <td>Juan Miguel Muñoz Rondán</td>            
-		            <td>Velocista</td>
-		          </tr>
-		          <tr class="even gradeU">
-		            <td>Antonio Lopez Canterano</td>
-		            <td>Velocista</td>
-		          </tr>
-		          <tr class="odd gradeU">
-		            <td>Bernabe Martinez Soriano</td>
-		            <td>Saltador</td>
-		          </tr>
-		          <tr class="even gradeU">
-		            <td>Mariano Gutierre Olimpo</td>
-		            <td>Velocista</td>
-		          </tr>
-		          <tr class="odd gradeU">
-		            <td>Sonia Moreno Antunez</td>
-		            <td>Saltador</td>
-		          </tr>
-		          <tr class="even gradeU">
-		            <td>Gonzalo Amar Serrano</td>
-		            <td>Velocista</td>
-		          </tr>
-		        
-		        </tbody>
-		      </table>  
+		<div class="caja">
+	   		<div class="subcaja">
+		 		<h1><fmt:message key="admin.groups.athletes.list" /></h1>
+		    </div> 	
+		    
+		    
+				<table class="display" id="table_athletes">
+			        <thead>
+			          <tr>
+			            <th><fmt:message key="admin.athletes.table.name" /> </th>
+			            <th><fmt:message key="admin.athletes.table.type" /></th>	           
+			          </tr>
+			        </thead>
+			        <tbody>
+			          <tr class="odd gradeU">
+			            <td>Juan Miguel Muñoz Rondán</td>            
+			            <td>Velocista</td>
+			          </tr>
+			          <tr class="even gradeU">
+			            <td>Antonio Lopez Canterano</td>
+			            <td>Velocista</td>
+			          </tr>
+			          <tr class="odd gradeU">
+			            <td>Bernabe Martinez Soriano</td>
+			            <td>Saltador</td>
+			          </tr>
+			          <tr class="even gradeU">
+			            <td>Mariano Gutierre Olimpo</td>
+			            <td>Velocista</td>
+			          </tr>
+			          <tr class="odd gradeU">
+			            <td>Sonia Moreno Antunez</td>
+			            <td>Saltador</td>
+			          </tr>
+			          <tr class="even gradeU">
+			            <td>Gonzalo Amar Serrano</td>
+			            <td>Velocista</td>
+			          </tr>
+			        
+			        </tbody>
+			      </table> 
+		       
 	      </div>   
       </div>
 </div>

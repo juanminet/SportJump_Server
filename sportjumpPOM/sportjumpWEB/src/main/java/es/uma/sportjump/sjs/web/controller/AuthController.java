@@ -47,6 +47,7 @@ public class AuthController {
 								@RequestParam("password") String password,
 								@RequestParam("name")String name, 
 								@RequestParam("surname") String surname,
+								@RequestParam("dni") String dni,
 								@RequestParam("email") String email ) {
 		
 		
@@ -54,7 +55,7 @@ public class AuthController {
 			
 			addUserToAuthSystem(username,password);
 			
-			addUserToSportJump(username,name,surname,email);
+			addUserToSportJump(username,name,surname,dni,email);
 			
 		}
 		return "login";
@@ -74,8 +75,8 @@ public class AuthController {
 	}
 	
 	
-	private void addUserToSportJump(String userName, String name, String surname, String email) {
-		userService.setNewCoach(name, userName, surname, email);		
+	private void addUserToSportJump(String userName, String name, String surname, String dni, String email) {
+		userService.setNewCoach(name, userName, surname, dni, email, null, null, null, null, null);		
 	}
 
 }

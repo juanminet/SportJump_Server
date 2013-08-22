@@ -28,9 +28,10 @@ public class TeamModelEntityTest {
 		//Init static objects
 		
 		//Create coach
-		String name = "Pepe";
+		String name = "Pepe";	
 		String userName = "Garcia";
-		coach = createCoach(name, userName);		
+		String dni= "34567898p";
+		coach = createCoach(name, userName, dni);		
 		
 
 		
@@ -239,13 +240,14 @@ public class TeamModelEntityTest {
 	
 	//BEFORE & AFTER CLASS data
 	
-	private static  Coach createCoach(String name, String userName) {
+	private static  Coach createCoach(String name, String userName, String dni) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		//Create coach
 		Coach coach = new Coach();
 		coach.setName(name);
 		coach.setUserName(userName);
+		coach.setDni(dni);
 		
 		//Persist entity
 		entityManager.getTransaction().begin();

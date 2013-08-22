@@ -1,5 +1,7 @@
 package es.uma.sportjump.sjs.model.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.Check;
 
 
 @Entity
@@ -35,6 +39,24 @@ public abstract class User {
 	
 	@Column(name="EMAIL")
 	private String email;
+	
+	@Column(name="DNI", unique= true , nullable = false)
+	private String dni;
+	
+	@Column(name="TYPE")
+	private String type;
+	
+	@Column(name="DATE_BIRTH")
+	private Date dateBirth;
+	
+	@Column(name="ADDRESS")
+	private String address;
+	
+	@Column(name="TELEPHONE")
+	private String telephone;
+	
+	@Column(name="COMMENTS")
+	private String comments;
 	
 	public User() {
 		super();		
@@ -81,7 +103,56 @@ public abstract class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+		
 	
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Date getDateBirth() {
+		return dateBirth;
+	}
+
+	public void setDateBirth(Date dateBirth) {
+		this.dateBirth = dateBirth;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
 	public String getCompleteName(){
 		return (this.name + " " + this.surname);
 	}

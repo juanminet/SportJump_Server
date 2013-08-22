@@ -46,9 +46,10 @@ public class CoachModelEntityTest {
 		String surname = "Garcia";
 		String userName = "Jose";
 		String email = "asdf@asdf.es";
+		String dni = "88779988R";
 
 		// Create Coach
-		Long idCoach = createCoach(name,surname, userName, email);
+		Long idCoach = createCoach(name,surname, userName, email,dni);
 
 		// Make assert
 		assertNotNull(idCoach);
@@ -81,7 +82,7 @@ public class CoachModelEntityTest {
 
 	}
 
-	private Long createCoach(String name, String surname, String userName, String email) {
+	private Long createCoach(String name, String surname, String userName, String email, String dni) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		//Create coach
@@ -90,6 +91,7 @@ public class CoachModelEntityTest {
 		coach.setUserName(userName);
 		coach.setSurname(surname);
 		coach.setEmail(email);
+		coach.setDni(dni);
 	
 		
 		//Persist entity

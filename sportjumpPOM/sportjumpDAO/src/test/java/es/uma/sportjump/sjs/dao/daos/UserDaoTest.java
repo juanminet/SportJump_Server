@@ -27,6 +27,7 @@ public class UserDaoTest {
 	
 	private String nameCoachAux = "Vicente";
 	private String userNameCoachAux = "Del Bosque";	
+	private String dniAux="44444444Y";
 	
 	private String nameTeamAux = "Auxiliar Team";
 
@@ -100,10 +101,11 @@ public class UserDaoTest {
 		//Initialize variables
 		String name = "Jose";
 		String userName ="Mourinho";
+		String dni = "98789878P";
 	
 		
 		//Create coach
-		Long idCoach = createCoach(name,userName);
+		Long idCoach = createCoach(name,userName,dni);
 		
 		//Make assert
 		assertNotNull(idCoach);
@@ -161,15 +163,18 @@ public class UserDaoTest {
 		//Initialize variables
 		String name1 = "Sebastian";
 		String userName1 ="Coe";
+		String dni1="11111111P";
 		String name2 = "Fermin";
 		String userName2 ="Cacho";
+		String dni2="22222222P";
 		String name3 = "Carl";
 		String userName3 ="Lewis";
+		String dni3="33333333P";
 		
 		//Create coaches
-		Long idCoach1 = createCoach(name1,userName1);
-		Long idCoach2 = createCoach(name2,userName2);
-		Long idCoach3 = createCoach(name3,userName3);
+		Long idCoach1 = createCoach(name1,userName1,dni1);
+		Long idCoach2 = createCoach(name2,userName2,dni2);
+		Long idCoach3 = createCoach(name3,userName3,dni3);
 		
 		//Make assert
 		assertNotNull(idCoach1);
@@ -240,15 +245,18 @@ public class UserDaoTest {
 		//Initialize variables
 		String name1 = "Sebastian";
 		String userName1 ="Coe";
+		String dni1="11111111P";
 		String name2 = "Fermin";
 		String userName2 ="Cacho";
+		String dni2="22222222P";
 		String name3 = "Carl";
 		String userName3 ="Lewis";
+		String dni3="33333333P";
 		
 		//Create coaches
-		Long idCoach1 = createCoach(name1,userName1);
-		Long idCoach2 = createCoach(name2,userName2);
-		Long idCoach3 = createCoach(name3,userName3);
+		Long idCoach1 = createCoach(name1,userName1,dni1);
+		Long idCoach2 = createCoach(name2,userName2,dni2);
+		Long idCoach3 = createCoach(name3,userName3,dni3);
 		
 		//Make assert
 		assertNotNull(idCoach1);
@@ -350,7 +358,7 @@ public class UserDaoTest {
 		String name = "Team Athletics";
 				
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux,dniAux);
 		
 		
 		//Create team
@@ -417,7 +425,7 @@ public class UserDaoTest {
 	private void testGetAllTeams() {
 		
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux,dniAux);
 		
 		//Initialize variables
 		String name1 = "England";		
@@ -528,15 +536,16 @@ public class UserDaoTest {
 		//Initialize variables
 		String name = "Sebastian";
 		String userName ="Coe";
+		String dni = "66666666O";
 
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux,dniAux);
 		
 		//Create team
 		Long idTeam = createTeam(nameTeamAux,idCoach);
 		
 		//Create athlete
-		Long idAthlete = createAthlete(name,userName, idTeam);
+		Long idAthlete = createAthlete(name,userName, idTeam,dni);
 		
 		//Make assert
 		assertNotNull(idAthlete);
@@ -604,23 +613,26 @@ public class UserDaoTest {
 		//Initialize variables
 		String name1 = "Sebastian";
 		String userName1 ="Coe";
+		String dni1 = "55555555O";
 		String name2 = "Usain";
 		String userName2 ="Bolt";
+		String dni2 = "66666666O";
 		String name3 = "Carl";
 		String userName3 ="Lewis";
+		String dni3 = "77777777O";
 		
 		
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux,dniAux);
 		
 		//Create team
 		Long idTeam = createTeam(nameTeamAux,idCoach);
 		
 				
 		//Create athletes
-		Long idAthlete1 = createAthlete(name1,userName1,idTeam);
-		Long idAthlete2 = createAthlete(name2,userName2,idTeam);
-		Long idAthlete3 = createAthlete(name3,userName3,idTeam);
+		Long idAthlete1 = createAthlete(name1,userName1,idTeam,dni1);
+		Long idAthlete2 = createAthlete(name2,userName2,idTeam,dni2);
+		Long idAthlete3 = createAthlete(name3,userName3,idTeam,dni3);
 		
 		//Make assert
 		assertNotNull(idAthlete1);
@@ -694,7 +706,7 @@ public class UserDaoTest {
 	private void testGetAllAthletes() {
 		
 		//Create Coach
-		Long idCoach = createCoach(nameCoachAux,userNameCoachAux);
+		Long idCoach = createCoach(nameCoachAux,userNameCoachAux,dniAux);
 		
 		//Create team
 		Long idTeam = createTeam(nameTeamAux,idCoach);
@@ -702,16 +714,19 @@ public class UserDaoTest {
 		//Initialize variables
 		String name1 = "Sebastian";
 		String userName1 ="Coe";
+		String dni1 = "55555555O";
 		String name2 = "Usain";
 		String userName2 ="Bolt";
+		String dni2 = "66666666O";
 		String name3 = "Carl";
 		String userName3 ="Lewis";
+		String dni3 = "77777777O";
 		
 		
 		//Create athletes
-		Long idAthlete1 = createAthlete(name1,userName1,idTeam);
-		Long idAthlete2 = createAthlete(name2,userName2,idTeam);
-		Long idAthlete3 = createAthlete(name3,userName3,idTeam);
+		Long idAthlete1 = createAthlete(name1,userName1,idTeam,dni1);
+		Long idAthlete2 = createAthlete(name2,userName2,idTeam,dni2);
+		Long idAthlete3 = createAthlete(name3,userName3,idTeam,dni3);
 		
 		//Make assert
 		assertNotNull(idAthlete1);
@@ -779,7 +794,7 @@ public class UserDaoTest {
 	//------------------------------------------------   CREATE  --------------------------------------------------------
 	
 	
-	private Long createCoach(String name, String userName) {
+	private Long createCoach(String name, String userName, String dni) {
 		//Get bean 
 		UserDao userDao = applicationContext.getBean(UserDao.class);
 		
@@ -787,6 +802,7 @@ public class UserDaoTest {
 		Coach coach = new Coach();
 		coach.setName(name);
 		coach.setUserName(userName);
+		coach.setDni(dni);
 		
 		//Persist coach		
 		userDao.persistCoach(coach);
@@ -827,7 +843,7 @@ public class UserDaoTest {
 	}
 	
 	
-	private Long createAthlete(String name, String userName, Long idTeam) {
+	private Long createAthlete(String name, String userName, Long idTeam, String dni) {
 		//Get bean 
 		UserDao userDao = applicationContext.getBean(UserDao.class);
 		
@@ -838,6 +854,7 @@ public class UserDaoTest {
 		Athlete athlete = new Athlete();
 		athlete.setName(name);
 		athlete.setUserName(userName);
+		athlete.setDni(dni);
 		athlete.setTeam(team);
 		
 		//Persist athlete		

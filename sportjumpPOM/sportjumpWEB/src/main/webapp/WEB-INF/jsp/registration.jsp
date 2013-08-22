@@ -60,6 +60,14 @@
 				</tr>
 				<tr>
 					<td>
+						<label for="dni">Dni:</label>
+					</td>
+					<td>
+						<input style="width:250px" type="text" name="dni" id="dni" >
+					</td>
+				</tr>
+				<tr>
+					<td>
 						<label for="email">Email:</label>
 					</td>
 					<td>

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.dnd.DnDConstants;
 import java.util.Date;
 import java.util.List;
 
@@ -27,31 +28,37 @@ public class UserServiceTest {
 	String coachUserName1 =  "Mourinho";
 	String coachSurname1 =  "Fernandez";
 	String coachEmail1 ="asdf@asdf.com";
+	String coachDni1 = "11111111P";
 	
 	String coachName2 = "Pep";
 	String coachUserName2 = "Guardiola";
 	String coachSurname2 =  "Fernandez2";
 	String coachEmail2 ="asdf2@asdf.com";
+	String coachDni2 = "22222222P";
 	
 	String coachName3 = "Vicente";
 	String coachUserName3 = "Del Bosque";
 	String coachSurname3 =  "Fernandez3";
 	String coachEmail3 ="asdf3@asdf.com";
+	String coachDni3 = "33333333P";
 	
 	String athleteName1 = "Sebastian";
 	String athleteUserName1 = "Coe";
 	String athleteSurname1 =  "Fernandez";
 	String athleteEmail1 ="asdf@asdf.com";
+	String athleteDni1 = "44444444P";
 	
 	String athleteName2 = "Fermin";
 	String athleteUserName2 = "Cacho";
 	String athleteSurname2 =  "Fernandez2";
 	String athleteEmail2 ="asdf2@asdf.com";
+	String athleteDni2 = "55555555P";
 	
 	String athleteName3 = "El";
 	String athleteUserName3 = "Guerrouj";
 	String athleteSurname3 =  "Fernandez3";
 	String athleteEmail3 ="asdf3@asdf.com";
+	String athleteDni3 = "66666666P";
 	
 	
 	
@@ -86,8 +93,9 @@ public class UserServiceTest {
 		//Get UserService
 		UserService userService = (UserService) applicationContext.getBean("userService");
 		
+		Date date;
 		//Create coach 1
-		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);
+		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);
 		
 		assertEquals(new Long(0), idCoach1);
 		
@@ -116,9 +124,9 @@ public class UserServiceTest {
 		UserService userService = applicationContext.getBean(UserService.class);
 		
 		//Create coaches
-		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);	
-		Long idCoach2 = userService.setNewCoach(coachName2, coachUserName2,coachSurname2,coachEmail2);
-		Long idCoach3 = userService.setNewCoach(coachName3, coachUserName3,coachSurname3,coachEmail3);
+		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);	
+		Long idCoach2 = userService.setNewCoach(coachName2, coachUserName2,coachSurname2, coachDni2, coachEmail2,null,null,null,null,null);
+		Long idCoach3 = userService.setNewCoach(coachName3, coachUserName3,coachSurname3, coachDni3, coachEmail3,null,null,null,null,null);
 		
 		//Get coaches
 		Coach coach = userService.findCoach(idCoach1);
@@ -148,9 +156,9 @@ public class UserServiceTest {
 		UserService userService = applicationContext.getBean(UserService.class);
 		
 		//Create coaches
-		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);	
-		Long idCoach2 = userService.setNewCoach(coachName2, coachUserName2,coachSurname2,coachEmail2);
-		Long idCoach3 = userService.setNewCoach(coachName3, coachUserName3,coachSurname3,coachEmail3);
+		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);	
+		Long idCoach2 = userService.setNewCoach(coachName2, coachUserName2,coachSurname2, coachDni2, coachEmail2,null,null,null,null,null);
+		Long idCoach3 = userService.setNewCoach(coachName3, coachUserName3,coachSurname3, coachDni3, coachEmail3,null,null,null,null,null);
 		
 		//Get coaches
 		Coach coach = userService.findCoach(idCoach1);
@@ -184,7 +192,7 @@ public class UserServiceTest {
 		
 		
 		//Create coach 
-		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);
+		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);	
 		
 		//Get coach 
 		Coach coach = userService.findCoach(idCoach);
@@ -223,7 +231,8 @@ public class UserServiceTest {
 		UserService userService = applicationContext.getBean(UserService.class);
 		
 		//Create coach
-		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);
+		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);	
+	
 		//Get coach 
 		Coach coach = userService.findCoach(idCoach);
 		
@@ -264,7 +273,8 @@ public class UserServiceTest {
 		UserService userService = applicationContext.getBean(UserService.class);
 		
 		//Create coach 
-		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);
+		Long idCoach1 = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);	
+		
 		
 		//Get coach 
 		Coach coach = userService.findCoach(idCoach1);
@@ -276,7 +286,7 @@ public class UserServiceTest {
 		Team team = userService.findTeam(idTeam);
 		
 		//Create athlete 
-		Long idAthlete1 = userService.setNewAthlete(athleteName1, athleteUserName1,athleteSurname1, athleteEmail1, team);
+		Long idAthlete1 = userService.setNewAthlete(athleteName1, athleteUserName1,athleteSurname1,athleteDni1, athleteEmail1, null,null,null,null,null,team);
 		
 		assertEquals(new Long(0), idAthlete1);
 		
@@ -311,7 +321,7 @@ public class UserServiceTest {
 		UserService userService = applicationContext.getBean(UserService.class);
 		
 		//Create coach
-		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);
+		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);	
 		//Get coach 
 		Coach coach = userService.findCoach(idCoach);
 		//Create team 
@@ -320,9 +330,11 @@ public class UserServiceTest {
 		Team team = userService.findTeam(idTeam);
 		
 		//Create athletes
-		Long idAthlete1 = userService.setNewAthlete(athleteName1, athleteUserName1,athleteSurname1, athleteEmail1, team);	
-		Long idAthlete2 = userService.setNewAthlete(athleteName2, athleteUserName2,athleteSurname2, athleteEmail2, team);
-		Long idAthlete3 = userService.setNewAthlete(athleteName3, athleteUserName3,athleteSurname3, athleteEmail3, team);
+		Long idAthlete1 = userService.setNewAthlete(athleteName1, athleteUserName1,athleteSurname1, athleteDni1, athleteEmail1,null,null,null,null,null, team);	
+		Long idAthlete2 = userService.setNewAthlete(athleteName2, athleteUserName2,athleteSurname2, athleteDni2, athleteEmail2,null,null,null,null,null, team);
+		Long idAthlete3 = userService.setNewAthlete(athleteName3, athleteUserName3,athleteSurname3, athleteDni3, athleteEmail3,null,null,null,null,null, team);
+		
+
 		
 		//Get athletes 
 		Athlete athlete = userService.findAthlete(idAthlete1);
@@ -360,7 +372,7 @@ public class UserServiceTest {
 		UserService userService = applicationContext.getBean(UserService.class);
 		
 		//Create coach
-		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1,coachEmail1);
+		Long idCoach = userService.setNewCoach(coachName1, coachUserName1,coachSurname1, coachDni1,coachEmail1,null,null,null,null,null);	
 		//Get coach 
 		Coach coach = userService.findCoach(idCoach);
 		//Create team 
@@ -369,9 +381,9 @@ public class UserServiceTest {
 		Team team = userService.findTeam(idTeam);
 		
 		//Create athletes
-		Long idAthlete1 = userService.setNewAthlete(athleteName1, athleteUserName1,athleteSurname1, athleteEmail1, team);	
-		Long idAthlete2 = userService.setNewAthlete(athleteName2, athleteUserName2,athleteSurname2, athleteEmail2, team);
-		Long idAthlete3 = userService.setNewAthlete(athleteName3, athleteUserName3,athleteSurname3, athleteEmail3, team);
+		Long idAthlete1 = userService.setNewAthlete(athleteName1, athleteUserName1,athleteSurname1, athleteDni1, athleteEmail1,null,null,null,null,null, team);	
+		Long idAthlete2 = userService.setNewAthlete(athleteName2, athleteUserName2,athleteSurname2, athleteDni2, athleteEmail2,null,null,null,null,null, team);
+		Long idAthlete3 = userService.setNewAthlete(athleteName3, athleteUserName3,athleteSurname3, athleteDni3, athleteEmail3,null,null,null,null,null, team);
 		
 		//Get athletes 
 		Athlete athlete = userService.findAthlete(idAthlete1);

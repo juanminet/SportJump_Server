@@ -20,7 +20,8 @@ public interface UserService {
 	 * @param surname
 	 * @return
 	 */
-	public Long setNewCoach(String name, String userName, String surname, String email);
+	public Long setNewCoach(String name, String userName,String surname, String dni, String email,
+			String type, String address, String comments, String telephone,	Date dateBirth);
 	
 	
 	/**
@@ -102,7 +103,9 @@ public interface UserService {
 	 * @param surname
 	 * @return
 	 */
-	public Long setNewAthlete(String name, String userName, String surname, String email, Team team);
+	public Long setNewAthlete(String name, String userName,String surname,String dni,
+			String email,String type, String address, String comments, String telephone,
+			Date dateBirth, Team team);
 	
 	
 	/**

@@ -6,15 +6,25 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class GroupCommand {
 
+	private Long idTeam;
 	@NotEmpty
 	private String name;
 	@NotEmpty
 	private String type;
-	@NotEmpty
 	private String description;
 	private Date createDate;
 
 	private String coachName;
+
+	
+	
+	public Long getIdTeam() {
+		return idTeam;
+	}
+
+	public void setIdTeam(Long idTeam) {
+		this.idTeam = idTeam;
+	}
 
 	public String getName() {
 		return name;

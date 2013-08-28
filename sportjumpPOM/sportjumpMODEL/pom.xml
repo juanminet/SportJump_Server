@@ -50,7 +50,7 @@
 					<componentProperties>
 						<persistenceunit>sportjumpJpaPU</persistenceunit>
 						<outputfilename>schema.ddl</outputfilename>
-						<drop>true</drop>
+						<drop>false</drop>
 						<create>true</create>
 						<export>true</export>
 						<format>true</format>

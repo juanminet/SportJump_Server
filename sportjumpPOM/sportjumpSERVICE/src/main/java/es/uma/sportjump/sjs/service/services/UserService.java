@@ -52,6 +52,13 @@ public interface UserService {
 	 */
 	public Coach findCoachesByUserName(String userName);
 	
+	/**
+	 * 
+	 * @param dni
+	 * @return
+	 */
+	public Coach findCoachByDni(String dni);
+	
 	
 	/**
 	 * 
@@ -142,6 +149,18 @@ public interface UserService {
 	 */
 	public List<Athlete> findAllAthletes();
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Athlete> findAthletesFromTeam(Team team);
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Athlete> findAthletesFromCoach(Coach coach);
 	
 	/**
 	 * 
@@ -151,12 +170,39 @@ public interface UserService {
 	 */
 	public Athlete findAthletesByUserName(String userName);
 	
+	/**
+	 * 
+	 * @param dni
+	 * @return
+	 */
+	public Athlete findAthleteByDni(String dni);
+	
 	
 	/**
 	 * 
 	 * @param idAthlete
 	 */
 	public void removeAthlete(Athlete athlete);
-
+	
+	
+	
+	/**********************************************************************************************************************/
+	/******************************************          USERS         ****************************************************/
+	/**********************************************************************************************************************/
+	
+	/**
+	 * Method to know if exist one user with dni given by parameter
+	 * @param dni
+	 * @return true if exist user, false otherwise
+	 */
+	public boolean existUserByDni(String dni);
+	
+	/**
+	 * Method to kno if exist one user with username given by paramenter
+	 * @param userName
+	 * @return true if exist user, false otherwise
+	 */
+	public  boolean existUserByUSerName(String userName);
+	
 
 }

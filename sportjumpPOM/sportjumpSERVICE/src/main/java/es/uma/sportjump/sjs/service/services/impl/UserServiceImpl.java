@@ -71,8 +71,10 @@ public class UserServiceImpl  implements UserService{
 	public Coach findCoachesByUserName(String userName) {
 		return userDao.getCoachByUserName(userName);
 	}
-
-
+	
+	public Coach findCoachByDni(String dni) {
+		return userDao.getCoachByDni(dni);
+	}
 
 	public void removeCoach(Coach coach) {
 		userDao.deleteCoach(coach.getIdUser());
@@ -142,7 +144,6 @@ public class UserServiceImpl  implements UserService{
 	/******************************************        ATHLETES        ****************************************************/
 	/**********************************************************************************************************************/	
 
-	@Override
 	public Long setNewAthlete(String name, String userName,
 			String surname, String dni, String email, String type, String address,
 			String comments, String telephone, Date dateBirth, Team team) {
@@ -168,8 +169,6 @@ public class UserServiceImpl  implements UserService{
 		return athlete.getIdUser();
 	}
 
-
-	@Override
 	public void updateAthlete(Athlete athlete) {
 		userDao.persistAthlete(athlete);
 	}
@@ -179,38 +178,75 @@ public class UserServiceImpl  implements UserService{
 		return userDao.getAthleteById(idAthlete);
 	}
 	
-	
 	public List<Athlete> findAllAthletes() {
 		return userDao.getAllAthletes();
+	}
+	
+	public List<Athlete> findAthletesFromTeam(Team team) {
+		return userDao.getAthletesByTeam(team);
+	}
+	
+	public List<Athlete> findAthletesFromCoach(Coach coach) {
+		return userDao.getAthletesByCoach(coach);
+	}
+	
+	public Athlete findAthleteByDni(String dni) {
+		return userDao.getAthleteByDni(dni);
 	}
 	
 	public Athlete findAthletesByUserName(String userName) {
 		return userDao.getAthleteByUserName(userName);
 	}
-
-
 	
 	public void removeAthlete(Athlete athlete) {		
 		userDao.deleteAthlete(athlete.getIdUser());			
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	/**********************************************************************************************************************/
+	/******************************************        USERS        ****************************************************/
+	/**********************************************************************************************************************/
 	
 
+	@Override
+	public boolean existUserByDni(String dni) {
+		boolean res = true;
+		
+		Coach coach = findCoachByDni(dni);
+		  
+		if (coach == null){
+			Athlete athlete = findAthleteByDni(dni);
+			
+			if(athlete == null){
+				res = false;
+			}
+		}
+		
+		return res;
+	}
+
+
+
+
+	@Override
+	public boolean existUserByUSerName(String userName) {
+boolean res = true;
+		
+		Coach coach = findCoachesByUserName(userName);
+		  
+		if (coach == null){
+			Athlete athlete = findAthletesByUserName(userName);
+			
+			if(athlete == null){
+				res = false;
+			}
+		}
+		
+		return res;
+	}
+
+	
+	
 
 }

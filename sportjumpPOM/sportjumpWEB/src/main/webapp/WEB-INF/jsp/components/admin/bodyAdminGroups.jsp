@@ -68,7 +68,7 @@ $(document).ready( function() {
 			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/admin/groups/${team.idTeam}';">
 				            <td>${team.name}</td>            
 				            <td>${team.type}</td>
-				            <td class="center">0</td>
+				            <td class="center">${team.size}</td>
 			        	</tr>
 		        	</c:forEach>	         
 		        </tbody>

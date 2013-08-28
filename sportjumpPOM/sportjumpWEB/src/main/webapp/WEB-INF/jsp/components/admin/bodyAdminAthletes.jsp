@@ -45,44 +45,8 @@ $(document).ready( function() {
 		 		<h1><fmt:message key="admin.athletes.list.athletes" /></h1>
 		 		<a class="button" href="${pageContext.request.contextPath}/action/admin/athletes/new"><fmt:message key="admin.button.new.athlete" /></a>
 		    </div> 
-		    
-		    <table class="display" id="table_athletes">
-			        <thead>
-			          <tr>
-			            <th><fmt:message key="admin.athletes.table.name" /> </th>
-			            <th><fmt:message key="admin.athletes.table.type" /></th>	           
-			          </tr>
-			        </thead>
-			        <tbody>
-			          <tr class="odd gradeU">
-			            <td>Juan Miguel Muñoz Rondán</td>            
-			            <td>Velocista</td>
-			          </tr>
-			          <tr class="even gradeU">
-			            <td>Antonio Lopez Canterano</td>
-			            <td>Velocista</td>
-			          </tr>
-			          <tr class="odd gradeU">
-			            <td>Bernabe Martinez Soriano</td>
-			            <td>Saltador</td>
-			          </tr>
-			          <tr class="even gradeU">
-			            <td>Mariano Gutierre Olimpo</td>
-			            <td>Velocista</td>
-			          </tr>
-			          <tr class="odd gradeU">
-			            <td>Sonia Moreno Antunez</td>
-			            <td>Saltador</td>
-			          </tr>
-			          <tr class="even gradeU">
-			            <td>Gonzalo Amar Serrano</td>
-			            <td>Velocista</td>
-			          </tr>
-			        
-			        </tbody>
-			      </table> 
-		    
-			<%-- <table class="display" id="table_atletes">
+			    
+			 <table class="display" id="table_athletes">
 		    	<thead>
 		        	<tr>
 		            	<th><fmt:message key="admin.athletes.table.name" /> </th>
@@ -101,16 +65,15 @@ $(document).ready( function() {
 			           			<c:set var="rowStyle" scope="page" value="even"/>
 			          		</c:otherwise>
 			        	</c:choose>
-			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/admin/groups/${athlete.idUser}';">
-				            <td>${athlete.completeName}</td>            
+			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/admin/athletes/${athlete.idUser}';"> 
+				             <td>${athlete.completeName}</td>            
 				            <td>${athlete.dni}</td>
-				            <td>juanmi</td>
-				            <td>${athlete.age}</td>
-				            <td class="center">0</td>
+				            <td>${athlete.team.name}</td>
+				            <td class="center">${athlete.age}</td> 				         
 			        	</tr>
 		        	</c:forEach>	         
 		        </tbody>
-		      </table> --%>
+		      </table>   
 	      </div>      
       </div>
 </div>

@@ -66,6 +66,26 @@ public class UserDaoJpaImpl  implements UserDao{
 		return resListCoach;
 	}
 	
+
+
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Coach getCoachByDni(String dni) {
+		Query query = em.createNamedQuery("findCoachByDni")
+				.setParameter("dni", dni);
+		Coach resCoach = null;
+		
+		try{
+			resCoach = (Coach) query.getSingleResult();
+		}catch(NoResultException noResultException){
+			resCoach = null;
+		}
+		
+		return resCoach;
+	}
+
+
+	
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Coach> getAllCoaches() {
 		
@@ -173,6 +193,24 @@ public class UserDaoJpaImpl  implements UserDao{
 		
 		return resAthlete;
 	}
+	
+
+	
+	@Transactional(propagation = Propagation.REQUIRED)
+	public Athlete getAthleteByDni(String dni) {
+		Query query = em.createNamedQuery("findAthleteByDni")
+				.setParameter("dni", dni);
+		
+		Athlete resAthlete =  null;
+		
+		try{
+			resAthlete = (Athlete) query.getSingleResult();	
+		}catch(NoResultException noResultException){
+			resAthlete = null;
+		}
+		
+		return resAthlete;
+	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Athlete> getAllAthletes() {
@@ -183,6 +221,26 @@ public class UserDaoJpaImpl  implements UserDao{
 		
 		return resListAthletes;
 	}
-	
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public List<Athlete> getAthletesByCoach(Coach coach) {
+		Query query  = em.createNamedQuery("findAthleteFromCoach")
+				.setParameter("idCoach", coach.getIdUser());
+		
+		List<Athlete> resListAthletes = query.getResultList();
+		
+		return resListAthletes;
+	}
+
+
+	@Override
+	public List<Athlete> getAthletesByTeam(Team team) {
+		Query query  = em.createNamedQuery("findAthleteFromTeam")
+				.setParameter("idTeam", team.getIdTeam());
+		
+		List<Athlete> resListAthletes = query.getResultList();
+		
+		return resListAthletes;
+	}
 
 }

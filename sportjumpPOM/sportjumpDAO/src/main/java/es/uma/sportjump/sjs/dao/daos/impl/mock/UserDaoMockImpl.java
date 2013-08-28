@@ -100,6 +100,24 @@ public class UserDaoMockImpl implements UserDao{
 		return resListCoaches;		
 	}
 	
+
+
+	@Override
+	public Coach getCoachByDni(String dni) {
+		Coach resCoach = null;
+		
+		//find coach		
+		for(Coach coach : listCoaches){
+			if(coach.getDni().equals(dni)){
+				resCoach = coach;
+				break;
+			}
+		}
+		
+		return resCoach;	
+	}
+
+	
 	
 	@Override
 	public List<Coach> getAllCoaches() {
@@ -283,6 +301,24 @@ public class UserDaoMockImpl implements UserDao{
 				
 		return resListAthletes;		
 	}
+	
+
+
+
+	@Override
+	public Athlete getAthleteByDni(String dni) {
+		 Athlete resAthlete = null;
+			
+			//find athlete
+			for(Athlete athlete : listAthletes){
+				if(athlete.getDni().equals(dni)){
+					resAthlete = athlete;
+				}
+			}
+					
+			return resAthlete;	
+	}
+
 
 
 
@@ -290,6 +326,39 @@ public class UserDaoMockImpl implements UserDao{
 	public List<Athlete> getAllAthletes() {
 		return listAthletes;		
 	}
+
+
+
+	@Override
+	public List<Athlete> getAthletesByCoach(Coach coach) {
+		List<Athlete> resListAthletes = new ArrayList<Athlete>();
+			
+		//find athlete
+		for(Athlete athlete : listAthletes){
+			if(athlete.getTeam().getCoach().getIdUser().equals(coach.getIdUser())){
+				resListAthletes.add(athlete);
+			}
+		}
+				
+		return resListAthletes;		
+	}
+
+
+
+	@Override
+	public List<Athlete> getAthletesByTeam(Team team) {
+		List<Athlete> resListAthletes = new ArrayList<Athlete>();
+		
+		//find athlete
+		for(Athlete athlete : listAthletes){
+			if(athlete.getTeam().getIdTeam().equals(team.getIdTeam())){
+				resListAthletes.add(athlete);
+			}
+		}
+				
+		return resListAthletes;		
+	}
+
 
 
 

@@ -67,14 +67,14 @@ function show_modify(){
 								    <form:option value="0" label="Select One" />
 								    <form:options items="${listTeams}" itemValue="idTeam" itemLabel="name" />
 								</form:select>
-								<form:errors path="type" cssClass="error" />
+								<form:errors path="idTeam" cssClass="error" />
 							</span><br>
 				        </div>
 				        <div class="form-row">
 				            <label for="dateBirth"><fmt:message key="admin.athletes.birth.date"/>:</label>
-				            <span class="input"><form:input path="dateBirthDay" size="2" maxlength="2" placeholder="dd" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/> /
-				            					<form:input path="dateBirthMonth" size="2" maxlength="2" placeholder="mm" onkeypress='return event.charCode >= 48 && event.charCode <= 57'/> /
-				            					<form:input path="dateBirthYear" size="4" maxlength="4" placeholder="yyyy" onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
+				            <span class="input"><form:input path="dateBirthDay" size="2" maxlength="2" placeholder="dd"/> /
+				            					<form:input path="dateBirthMonth" size="2" maxlength="2" placeholder="mm" /> /
+				            					<form:input path="dateBirthYear" size="4" maxlength="4" placeholder="yyyy" />
 				            					<form:errors path="dateBirth*" cssClass="error" delimiter=" | " />
 				        </div>
 				        <div class="form-row">

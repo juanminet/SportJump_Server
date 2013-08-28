@@ -1,35 +1,26 @@
 package es.uma.sportjump.sjs.web.controller.commands;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 
 public class AthleteCommand {
-	@NotEmpty
+	
 	private String userName;
-	@NotEmpty
+	
 	private String password;
-	@NotEmpty
+	
 	private String repeatPassword;
 	
-	@NotEmpty
+	
 	private String name;
 	private String surname;
-	@NotEmpty
-	@Pattern(regexp="\\d{8}([A-Z]|[a-z])")
+	
+	//@Pattern(regexp="\\d{8}([A-Z]|[a-z])")
 	private String dni;
 	private String type;
-	@NotEmpty
-	@Max(31)
-	private String dateBirthDay;
-	@NotEmpty
-	@Max(12)
+	
+	private String dateBirthDay;	
 	private String dateBirthMonth;
-	@NotEmpty
-	@Min(1900)
 	private String dateBirthYear;
 	
 	private String address;

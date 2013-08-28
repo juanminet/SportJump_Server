@@ -36,12 +36,20 @@ public interface UserDao {
 	public void deleteCoach(Long id);
 
 	/**
-	 * Return a list with all Coaches with name and surname given by parameter
+	 * Return Coach by username given by parameter, username is unique
 	 * @param name
 	 * @param surname
 	 * @return
 	 */
 	public Coach getCoachByUserName(String userName);
+	
+	
+	/**
+	 * Return Coach with dni given by parameter, dni is unique
+	 * @param dni
+	 * @return
+	 */
+	public Coach getCoachByDni(String dni);
 	
 	
 	/**
@@ -124,19 +132,37 @@ public interface UserDao {
 	public void deleteAthlete(Long id);
 
 	/**
-	 * Return a list with all Coaches with name and surname given by parameter
+	 * Return Athlete with username given by parameter. username is unique.
 	 * @param name
 	 * @param surname
 	 * @return
 	 */
-	public Athlete getAthleteByUserName(String UserName);
+	public Athlete getAthleteByUserName(String UserName);	
 	
-
+	/**
+	 * Return Athlete with dni given by parameter, dni is unique
+	 * @param dni
+	 * @return
+	 */
+	public Athlete getAthleteByDni(String dni);
+	
 	/**
 	 * Return a list with all Athletes 
 	 * @return
 	 */
 	public List<Athlete> getAllAthletes();
+	
+	/**
+	 * Return a list with all athletes trained by coach given by parameter
+	 * @return
+	 */
+	public List<Athlete> getAthletesByCoach(Coach coach);
+	
+	/**
+	 * Return a list with all athletes from the team given by parameter
+	 * @return
+	 */
+	public List<Athlete> getAthletesByTeam(Team team);
 	
 	
 

@@ -101,48 +101,39 @@ function show_modify(){
 		</div> 
 				
 	
-		<div class="caja">
+		<div class="caja" <c:if test="${not empty newTeam}">style="display: none;"</c:if>>
 	   		<div class="subcaja">
 		 		<h1><fmt:message key="admin.groups.athletes.list" /></h1>
 		    </div> 	
 		    
-		    
-				<table class="display" id="table_athletes">
-			        <thead>
-			          <tr>
-			            <th><fmt:message key="admin.athletes.table.name" /> </th>
-			            <th><fmt:message key="admin.athletes.table.type" /></th>	           
-			          </tr>
-			        </thead>
-			        <tbody>
-			          <tr class="odd gradeU">
-			            <td>Juan Miguel Muñoz Rondán</td>            
-			            <td>Velocista</td>
-			          </tr>
-			          <tr class="even gradeU">
-			            <td>Antonio Lopez Canterano</td>
-			            <td>Velocista</td>
-			          </tr>
-			          <tr class="odd gradeU">
-			            <td>Bernabe Martinez Soriano</td>
-			            <td>Saltador</td>
-			          </tr>
-			          <tr class="even gradeU">
-			            <td>Mariano Gutierre Olimpo</td>
-			            <td>Velocista</td>
-			          </tr>
-			          <tr class="odd gradeU">
-			            <td>Sonia Moreno Antunez</td>
-			            <td>Saltador</td>
-			          </tr>
-			          <tr class="even gradeU">
-			            <td>Gonzalo Amar Serrano</td>
-			            <td>Velocista</td>
-			          </tr>
-			        
-			        </tbody>
-			      </table> 
-		       
-	      </div>   
-      </div>
+		    <table class="display" id="table_athletes">
+		    	<thead>
+		        	<tr>
+		            	<th><fmt:message key="admin.athletes.table.name" /> </th>
+		            	<th><fmt:message key="admin.athletes.table.dni" /></th>
+		            	<th><fmt:message key="admin.athletes.table.group" /></th>
+		            	<th><fmt:message key="admin.athletes.table.age" /></th>
+		          	</tr>
+		        </thead>
+		        <tbody>
+		        	<c:forEach var="athlete" items="${listAthletes}" >
+				    	<c:choose>
+			          		<c:when test="${rowCounter.count % 2 == 0}">
+			            		<c:set var="rowStyle" scope="page" value="odd"/>
+			          		</c:when>
+			          		<c:otherwise>
+			           			<c:set var="rowStyle" scope="page" value="even"/>
+			          		</c:otherwise>
+			        	</c:choose>
+			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/admin/athletes/${athlete.idUser}';"> 
+				             <td>${athlete.completeName}</td>            
+				            <td>${athlete.dni}</td>
+				            <td>${athlete.team.name}</td>
+				            <td class="center">${athlete.age}</td> 				         
+			        	</tr>
+		        	</c:forEach>	         
+		    	</tbody>
+			</table>
+		</div>   
+	</div>
 </div>

@@ -9,6 +9,9 @@
 	<named-query name="findCoachByUserName">
 		<query>from Coach c where c.userName = :userName</query>
 	</named-query> 
+	<named-query name="findCoachByDni">
+		<query>from Coach c where c.dni = :dni</query>
+	</named-query>
 		
 	
 	<!-- Team -->
@@ -31,12 +34,15 @@
 	<named-query name="findAthleteByUserName">
 		<query>from Athlete a where a.userName = :userName</query>
 	</named-query>
-	<!-- <named-query name="findAthleteFromTeam">
-		<query>from Athlete a join a.team t where t.idTeam = :idTeam</query>
+	<named-query name="findAthleteByDni">
+		<query>from Athlete a where a.dni = :dni</query>
+	</named-query>
+	<named-query name="findAthleteFromTeam">
+		<query>from Athlete a where a.team.idTeam = :idTeam</query>
 	</named-query>
 	<named-query name="findAthleteFromCoach">
-		<query>from Athlete a join a.team t join t.coach c where c.idCoach = :idCoach</query>
-	</named-query> -->
+		<query>from Athlete a where a.team.coach.idUser = :idCoach</query>
+	</named-query>
 	
 	
 	

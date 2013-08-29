@@ -77,8 +77,12 @@ public class UserServiceImpl  implements UserService{
 	}
 
 	public void removeCoach(Coach coach) {
-		userDao.deleteCoach(coach.getIdUser());
+		List<Team> teams = findTeamsByCoach(coach);
 		
+		for(Team team : teams){
+			removeTeam(team);
+		}
+		userDao.deleteCoach(coach.getIdUser());		
 	}
 	
 	
@@ -128,6 +132,12 @@ public class UserServiceImpl  implements UserService{
 	
 	
 	public void removeTeam(Team team) {
+		List<Athlete> athletes = findAthletesFromTeam(team);
+		
+		for(Athlete athlete : athletes){
+			removeAthlete(athlete);
+		}
+		
 		userDao.deleteTeam(team.getIdTeam());
 		
 	}
@@ -231,7 +241,7 @@ public class UserServiceImpl  implements UserService{
 
 	@Override
 	public boolean existUserByUSerName(String userName) {
-boolean res = true;
+		boolean res = true;
 		
 		Coach coach = findCoachesByUserName(userName);
 		  

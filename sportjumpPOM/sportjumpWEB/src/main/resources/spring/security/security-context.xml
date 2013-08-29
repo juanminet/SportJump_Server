@@ -79,6 +79,7 @@
 		
 		<security:intercept-url pattern="/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 	 	<security:intercept-url pattern="/action/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+	 	<security:intercept-url pattern="/rest/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER', 'ROLE_EXTERN')"/>
 	 	<security:intercept-url pattern="/login/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 		<security:intercept-url pattern="/**/*" access="hasRole('ROLE_ADMIN')"/> 
 		

@@ -1,38 +1,23 @@
 package es.uma.sportjump.sjs.web.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.dao.SaltSource;
-import org.springframework.security.authentication.encoding.PasswordEncoder;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.uma.sportjump.sjs.service.services.AuthService;
 import es.uma.sportjump.sjs.service.services.UserService;
+import es.uma.sportjump.sjs.web.constants.AuthConstants;
 
 
 
 @Controller
 public class AuthController {
 
-	private static final String ROLE_USER = "ROLE_USER";
-
-	@Autowired
-	private UserDetailsManager userDetailsManager;
 	
 	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private SaltSource saltSource;
+	private AuthService authService;
 	
 	@Autowired
 	private UserService userService;
@@ -51,29 +36,15 @@ public class AuthController {
 								@RequestParam("email") String email ) {
 		
 		
-		if (!userDetailsManager.userExists(username)) {
+		if (!authService.existUser(username)) {
 			
-			addUserToAuthSystem(username,password);
+			authService.addUser(username, password, AuthConstants.ROLE_COACH);
 			
 			addUserToSportJump(username,name,surname,dni,email);
 			
 		}
 		return "login";
-	}
-
-
-	private void addUserToAuthSystem(String username, String password) {
-		List<GrantedAuthority> authorites = new ArrayList<GrantedAuthority>();
-		authorites.add(new SimpleGrantedAuthority(ROLE_USER));
-		
-		
-		User user = new User(username, password, true, false, false, false, authorites);
-		User saltedUser = new User(username, passwordEncoder.encodePassword(password, saltSource.getSalt(user)), 
-				true, false, false, false, authorites);
-		
-		userDetailsManager.createUser(saltedUser);		
-	}
-	
+	}	
 	
 	private void addUserToSportJump(String userName, String name, String surname, String dni, String email) {
 		userService.setNewCoach(name, userName, surname, dni, email, null, null, null, null, null);		

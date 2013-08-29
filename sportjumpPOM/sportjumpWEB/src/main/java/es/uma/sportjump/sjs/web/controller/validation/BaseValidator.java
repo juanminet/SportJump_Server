@@ -22,7 +22,7 @@ public class BaseValidator {
 	}
 	
 	protected void checkDate(String date, String path, String messageKey, BindingResult errors) {
-		if (ValidationUtils.validateDateFormat(date)){
+		if (date == null || ValidationUtils.validateDateFormat(date)){
 			errors.rejectValue(path, messageKey);
 		}	
 	}
@@ -33,7 +33,12 @@ public class BaseValidator {
 		}		
 	}
 	
-	
+
+	protected void checkPassword(String password, String repeatPassword,BindingResult errors) {
+		if(!password.equals(repeatPassword)){
+			errors.rejectValue("repeatPassword", "Different.athleteCommand.repeatPassword");
+		}
+	}
 
 
 	

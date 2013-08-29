@@ -329,7 +329,7 @@ public class UserServiceTest {
 	}
 	
 	private void finishUSerServiceTeams(){
-		finishTeams();
+		//finishTeams();
 		finishCoaches();
 	}
 	
@@ -545,8 +545,8 @@ public class UserServiceTest {
 	
 
 	private void finishUserServiceAthletes(){		
-		finishAthletes();
-		finishTeams();
+		//finishAthletes();
+		//finishTeams();
 		finishCoaches();
 	}
 	

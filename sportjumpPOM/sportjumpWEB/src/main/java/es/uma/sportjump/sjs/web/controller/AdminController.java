@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import es.uma.sportjump.sjs.model.entities.Athlete;
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Team;
+import es.uma.sportjump.sjs.service.services.AuthService;
 import es.uma.sportjump.sjs.service.services.UserService;
+import es.uma.sportjump.sjs.web.constants.AuthConstants;
 import es.uma.sportjump.sjs.web.controller.beans.RowAdminTeam;
 import es.uma.sportjump.sjs.web.controller.commands.AthleteCommand;
 import es.uma.sportjump.sjs.web.controller.commands.GroupCommand;
-import es.uma.sportjump.sjs.web.controller.validation.AdminValidator;
+import es.uma.sportjump.sjs.web.controller.commands.ProfileCommand;
+import es.uma.sportjump.sjs.web.controller.validation.AthleteValidator;
+import es.uma.sportjump.sjs.web.controller.validation.ProfileValidator;
 
 
 @Controller
@@ -33,18 +38,31 @@ import es.uma.sportjump.sjs.web.controller.validation.AdminValidator;
 @RequestMapping("/action/admin")
 public class AdminController {
 	
+	
+
 	@Autowired
 	UserService userService;
 	
 	@Autowired
-	AdminValidator  adminValidator;
+	AuthService authService;
 	
-	protected static String LIST_GROUPS = "admin_groups";	
-	protected static String LIST_ATHLETES = "admin_athletes";
-	protected static String NEW_GROUP_FORM = "admin_groups_new";
-	protected static String NEW_ATHLETE_FORM = "admin_athletes_new";
-	protected static String GROUPS_REDIRECT = "redirect:/action/admin/groups";	
-	protected static String ATHLETES_REDIRECT = "redirect:/action/admin/athletes";	
+	@Autowired
+	AthleteValidator athleteValidator;
+	
+	@Autowired
+	ProfileValidator profileValidator;
+	
+	
+	
+	protected static final String LIST_GROUPS = "admin_groups";	
+	protected static final String LIST_ATHLETES = "admin_athletes";
+	protected static final String NEW_GROUP_FORM = "admin_groups_new";
+	protected static final String NEW_ATHLETE_FORM = "admin_athletes_new";
+	protected static final String ADMIN_PROFILE = "admin_profile";
+	protected static final String GROUPS_REDIRECT = "redirect:/action/admin/groups";	
+	protected static final String ATHLETES_REDIRECT = "redirect:/action/admin/athletes";	
+	protected static final String ADMIN_PROFILE_REDIRECT = "redirect:/action/admin/profile";
+	
 	
 	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
 	public String home(Model model,HttpSession session) {
@@ -62,22 +80,8 @@ public class AdminController {
 		model.addAttribute("listTeams", listTeams);
 	
 		return "admin_groups";		
-	}	
+	}		
 	
-	private List<RowAdminTeam> fillAdminTeams(Coach coach) {
-		List<RowAdminTeam> listAdminTeams = new ArrayList<RowAdminTeam>();
-		List<Team> listTeams = userService.findTeamsByCoach(coach);
-		
-		for(Team team : listTeams){
-			RowAdminTeam row = new RowAdminTeam();
-			row.setIdTeam(team.getIdTeam());
-			row.setName(team.getName());
-			row.setType(team.getType());
-			row.setSize(userService.findAthletesFromTeam(team).size());
-			listAdminTeams.add(row);
-		}
-		return listAdminTeams;
-	}
 
 	@RequestMapping(value={"/groups/new"})
 	public String newGroup(Model model, HttpSession session) {		
@@ -127,7 +131,32 @@ public class AdminController {
 		return GROUPS_REDIRECT;		
 	}
 	
+	@RequestMapping(value={"/groups/remove/{idTeam}"}, method=RequestMethod.GET)
+	public String removeGroup(@PathVariable("idTeam") Long idTeam, Model model, HttpSession session) {		
+			
+		Team team = userService.findTeam(idTeam);
+		
+		if (userService != null){
+			userService.removeTeam(team);
+		}
+		
+		return GROUPS_REDIRECT;		
+	}
 	
+	private List<RowAdminTeam> fillAdminTeams(Coach coach) {
+		List<RowAdminTeam> listAdminTeams = new ArrayList<RowAdminTeam>();
+		List<Team> listTeams = userService.findTeamsByCoach(coach);
+		
+		for(Team team : listTeams){
+			RowAdminTeam row = new RowAdminTeam();
+			row.setIdTeam(team.getIdTeam());
+			row.setName(team.getName());
+			row.setType(team.getType());
+			row.setSize(userService.findAthletesFromTeam(team).size());
+			listAdminTeams.add(row);
+		}
+		return listAdminTeams;
+	}
 
 	private Team fillTeam(Team team, GroupCommand groupCommand) {
 		team.setName(groupCommand.getName());
@@ -137,18 +166,7 @@ public class AdminController {
 		return team;
 	}
 
-	@RequestMapping(value={"/groups/remove/{idTeam}"}, method=RequestMethod.GET)
-	public String removeGroup(@PathVariable("idTeam") Long idTeam, Model model, HttpSession session) {		
-			
-		Team team = userService.findTeam(idTeam);
 		
-		userService.removeTeam(team);
-		
-		return GROUPS_REDIRECT;		
-	}
-	
-
-	
 	private void initGroupModel(Model model, HttpSession session) {
 		GroupCommand groupCommand = new GroupCommand();
 		groupCommand.setCreateDate(new Date(System.currentTimeMillis()));		
@@ -205,8 +223,8 @@ public class AdminController {
 				
 		AthleteCommand athleteCommand = createAthleteCommand(athlete);
 		
-		model.addAttribute("athleteCommand", athleteCommand);		
-		model.addAttribute("newAthlete", true);	
+		model.addAttribute("athleteCommand", athleteCommand);
+		
 		return NEW_ATHLETE_FORM;		
 	}
 	
@@ -215,30 +233,59 @@ public class AdminController {
 	@RequestMapping(value={"/athletes/save"}, method=RequestMethod.POST)
 	public String saveAthlete(@Valid AthleteCommand athleteCommand, BindingResult errors, Model model, HttpSession session) {	
 					
+		Long idUser = athleteCommand.getIdUser();
+		boolean isNew = (idUser == null);
 		
 		
-		adminValidator.checkUserPassword(athleteCommand,model, errors);
+		if(isNew){
+			athleteValidator.checkAthleteNew(athleteCommand, model, errors);
+			if (errors.hasErrors()) {
+				model.addAttribute("newAthlete", true);	
+				return NEW_ATHLETE_FORM;
+			}		
+		}else{
+			Athlete athlete = userService.findAthlete(idUser);
+			athleteValidator.checkAthleteModified(athleteCommand,athlete, model, errors);
+			if (errors.hasErrors()) {
+				model.addAttribute("newAthlete", true);	
+				return NEW_ATHLETE_FORM;
+			} 
+		}		
 		
-		if (errors.hasErrors()) {
-			model.addAttribute("newAthlete", true);	
-			model.addAttribute("passwordError", true);	
-			return NEW_ATHLETE_FORM;
-		} 
 		
-		adminValidator.checkAthlete(athleteCommand,errors);	
-
-		if (errors.hasErrors()) {
-			model.addAttribute("newAthlete", true);	
-			return NEW_ATHLETE_FORM;
-		} 
-				
-		 saveNewAtlete(athleteCommand);
+		
+		if (isNew){	//Create			
+			saveNewAtlete(athleteCommand);
+		}else{ //update	
+			Athlete athlete = userService.findAthlete(idUser);
+			updateAthlete(athleteCommand,athlete);			
+		}		 
 		
 		return ATHLETES_REDIRECT;		
 	}	
 
+	@RequestMapping(value={"/athletes/remove/{idUser}"}, method=RequestMethod.GET)
+	public String removeAthlete(@PathVariable("idUser") Long idUser, Model model, HttpSession session) {		
+			
+		Athlete  athlete = userService.findAthlete(idUser);
+		
+		removeAthlete(athlete);
+			
+		return ATHLETES_REDIRECT;		
+	}
+
 	
 	
+	private void removeAthlete(Athlete athlete) {
+		if(authService.existUser(athlete.getUserName())){
+			authService.removeUser(athlete.getUserName());
+		}
+		
+		if (athlete != null){
+			userService.removeAthlete(athlete);
+		}
+	}
+
 	private void initAthleteModel(Model model, HttpSession session) {
 		AthleteCommand athleteCommand = new AthleteCommand();
 		model.addAttribute("athleteCommand", athleteCommand);
@@ -252,6 +299,7 @@ public class AdminController {
 	private AthleteCommand createAthleteCommand(Athlete athlete) {
 		AthleteCommand athleteCommand = new AthleteCommand();
 		
+		athleteCommand.setIdUser(athlete.getIdUser());
 		athleteCommand.setUserName(athlete.getUserName());
 		athleteCommand.setName(athlete.getName());
 		athleteCommand.setSurname(athlete.getSurname());
@@ -261,10 +309,21 @@ public class AdminController {
 		athleteCommand.setAddress(athlete.getAddress());
 		athleteCommand.setComments(athlete.getComments());
 		athleteCommand.setTelephone(athlete.getTelephone());
-		athleteCommand.setDateBirthDay(String.valueOf(athlete.getDateBirth().getDay()));
-		athleteCommand.setDateBirthMonth(String.valueOf(athlete.getDateBirth().getMonth()));
-		athleteCommand.setDateBirthYear(String.valueOf(athlete.getDateBirth().getYear()));
+		
+		//Date
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(athlete.getDateBirth());
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		int day = cal.get(Calendar.DAY_OF_MONTH);	
+		athleteCommand.setDateBirthDay(String.valueOf(day));
+		athleteCommand.setDateBirthMonth(String.valueOf(month));
+		athleteCommand.setDateBirthYear(String.valueOf(year));
+		athleteCommand.setDateBirth(athlete.getDateBirth());
+		
+		//Team
 		athleteCommand.setIdTeam(athlete.getTeam().getIdTeam());
+		athleteCommand.setNameTeam(athlete.getTeam().getName());
 		
 		return athleteCommand;
 	}
@@ -293,17 +352,158 @@ public class AdminController {
 		
 		userService.setNewAthlete(name, userName, surname, dni, email, type, address, comments, telephone, dateBirth, team);
 		
+		//Auth
+		 authService.addUser(userName, athleteCommand.getPassword(), AuthConstants.ROLE_ATHLETE);
+	}
+	
+
+	
+	private void updateAthlete(AthleteCommand athleteCommand, Athlete athlete) {		
+		//update athlete authorization		
+		authService.updateUser(athlete.getUserName(), athleteCommand.getUserName(), athleteCommand.getPassword());
+		
+		//update athlete data		
+		userService.updateAthlete(fillAthlete(athlete,athleteCommand));
 	}
 
 	
 	
- /*----------------------------------------------------------------------------------------------------------------------------------------*/		
+	private Athlete fillAthlete(Athlete athlete, AthleteCommand athleteCommand) {
+		
+		
+		athlete.setUserName(athleteCommand.getUserName());
+		athlete.setName(athleteCommand.getName());
+		athlete.setSurname(athleteCommand.getSurname());
+		athlete.setDni(athleteCommand.getDni());
+		athlete.setEmail(athleteCommand.getEmail());
+		athlete.setType(athleteCommand.getType());
+		athlete.setAddress(athleteCommand.getAddress());
+		athlete.setComments(athleteCommand.getComments());
+		athlete.setTelephone(athleteCommand.getTelephone());
+		
+		//Date birth		
+		int day = Integer.valueOf(athleteCommand.getDateBirthDay());
+		int month = Integer.valueOf(athleteCommand.getDateBirthMonth());
+		int year = Integer.valueOf(athleteCommand.getDateBirthYear());
+		Calendar calendar = new GregorianCalendar(year, month, day);
+		athlete.setDateBirth(calendar.getTime());
+		
+		//Team
+		Team team = userService.findTeam(athleteCommand.getIdTeam());				
+		athlete.setTeam(team);
+		
+		return athlete;
+	}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------*/		
  /*----------------------------------------------------          PROFILE          --------------------------------------------------------*/		
  /*----------------------------------------------------------------------------------------------------------------------------------------*/	
 	
 	@RequestMapping(value={"/profile"})
-	public String AdminProfile(Model model) {			
-		return "admin_profile";		
+	public String AdminProfile(Model model, HttpSession session) {	
+		
+		initProfileModel(model,session);
+		
+		return ADMIN_PROFILE;		
+	}
+	
+	@RequestMapping(value={"/profile/save"}, method=RequestMethod.POST)
+	public String saveProfile(@Valid ProfileCommand profileCommand, BindingResult errors, Model model, HttpSession session) {	
+					
+		Long idUser = profileCommand.getIdUser();
+				
+		Coach  coach = (Coach) session.getAttribute("loggedUser");
+		profileValidator.checkUserProfile(profileCommand, coach, errors);
+		if (errors.hasErrors()) {
+			model.addAttribute("errorProfile", true);	
+			return ADMIN_PROFILE;
+		} 
+
+		updateProfile(profileCommand,coach);			
+				 
+		
+		return ADMIN_PROFILE_REDIRECT;		
 	}	
+
+
+	private void initProfileModel(Model model, HttpSession session) {
+		Coach  coach = (Coach) session.getAttribute("loggedUser");
+		
+		ProfileCommand profileCommand = createProfileCommand(coach);
+		
+		model.addAttribute("profileCommand", profileCommand);		
+	}	
+	
+	
+	private ProfileCommand createProfileCommand(Coach coach) {
+		
+		
+		ProfileCommand profileCommand = new AthleteCommand();
+		
+		profileCommand.setIdUser(coach.getIdUser());
+		profileCommand.setUserName(coach.getUserName());
+		profileCommand.setName(coach.getName());
+		profileCommand.setSurname(coach.getSurname());
+		profileCommand.setDni(coach.getDni());
+		profileCommand.setEmail(coach.getEmail());
+		profileCommand.setType(coach.getType());
+		profileCommand.setAddress(coach.getAddress());
+		profileCommand.setComments(coach.getComments());
+		profileCommand.setTelephone(coach.getTelephone());
+		profileCommand.setPassword("");
+		
+		//Date
+		Date dateBirthday = coach.getDateBirth();
+		
+		if (dateBirthday != null){
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(coach.getDateBirth());
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH);
+			int day = cal.get(Calendar.DAY_OF_MONTH);	
+			profileCommand.setDateBirthDay(String.valueOf(day));
+			profileCommand.setDateBirthMonth(String.valueOf(month));
+			profileCommand.setDateBirthYear(String.valueOf(year));
+			profileCommand.setDateBirth(coach.getDateBirth());
+		}
+		
+		return profileCommand;
+	}
+	
+	private void updateProfile(ProfileCommand profileCommand, Coach coach) {
+		
+		//update athlete authorization		
+		authService.updateUser(coach.getUserName(), profileCommand.getUserName(), profileCommand.getPassword());
+		
+		//update athlete data		
+		userService.updateCoach(fillCoach(coach, profileCommand));
+	}
+
+	private Coach fillCoach(Coach coach, ProfileCommand profileCommand) {
+
+		
+		coach.setUserName(profileCommand.getUserName());
+		coach.setName(profileCommand.getName());
+		coach.setSurname(profileCommand.getSurname());
+		coach.setDni(profileCommand.getDni());
+		coach.setEmail(profileCommand.getEmail());
+		coach.setType(profileCommand.getType());
+		coach.setAddress(profileCommand.getAddress());
+		coach.setComments(profileCommand.getComments());
+		coach.setTelephone(profileCommand.getTelephone());
+		
+		//Date birth	
+		if (!StringUtils.isEmpty(profileCommand.getDateBirthDay())  &&
+			!StringUtils.isEmpty(profileCommand.getDateBirthMonth()) &&
+			!StringUtils.isEmpty(profileCommand.getDateBirthDay())){
+			
+			int day = Integer.valueOf(profileCommand.getDateBirthYear());
+			int month = Integer.valueOf(profileCommand.getDateBirthMonth());
+			int year = Integer.valueOf(profileCommand.getDateBirthYear());
+			Calendar calendar = new GregorianCalendar(year, month, day);
+			coach.setDateBirth(calendar.getTime());
+		}
+		return coach;
+	}
 	
 }

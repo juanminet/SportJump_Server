@@ -62,7 +62,7 @@
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="profile"/>
-	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdmin.jsp" />
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminProfile.jsp" />
 	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	  
 	 </definition>
 	 

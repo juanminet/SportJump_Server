@@ -7,7 +7,7 @@ function initDataTable(id,size){
 		"bJQueryUI": true,
 	    "bFilter": true,
 	    "bPaginate": true,
-	    "bSort": false,
+	    "bSort": true,
 	    "bLengthChange": false,
 	    "iDisplayLength": size,
 		"sPaginationType": "full_numbers"	

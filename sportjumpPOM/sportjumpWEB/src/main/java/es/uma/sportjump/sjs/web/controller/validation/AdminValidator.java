@@ -2,84 +2,52 @@ package es.uma.sportjump.sjs.web.controller.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import es.uma.sportjump.sjs.model.entities.Athlete;
-import es.uma.sportjump.sjs.model.entities.Coach;
+import es.uma.sportjump.sjs.service.services.AuthService;
 import es.uma.sportjump.sjs.service.services.UserService;
-import es.uma.sportjump.sjs.web.controller.commands.AthleteCommand;
+import es.uma.sportjump.sjs.web.controller.commands.ProfileCommand;
 
 @Component
 public class AdminValidator extends BaseValidator {
 	
 	@Autowired
 	UserService userService;	
+	
+	@Autowired
+	AuthService authService;
 
 	
-	public void checkUserPassword(AthleteCommand athleteCommand,Model model, BindingResult errors) {
+	
+	
+	protected void checkUserPassword(ProfileCommand userCommand, String nameCommand,BindingResult errors) {
 		
-		checkMandatory("userName", athleteCommand.getUserName(), "athleteCommand", errors);
-		checkMandatory("password", athleteCommand.getPassword(),"athleteCommand",errors);	
+		checkMandatory("userName", userCommand.getUserName(), nameCommand, errors);
+		checkMandatory("password", userCommand.getPassword(),nameCommand,errors);	
 		
+		if(errors.hasErrors()){
+			return;
+		}		
+		
+		checkPassword(userCommand.getPassword(), userCommand.getRepeatPassword(), errors);
 		if(errors.hasErrors()){
 			return;
 		}
 		
-		//Service
-		checkUser( athleteCommand, errors);
 		
-		if(errors.hasErrors()){
-			return;
-		}
-		
-		checkPassword( athleteCommand, errors);
+	}
+	protected void checkExistDni(String dni, BindingResult errors){
+		if ( userService.existUserByDni(dni)){
+			errors.rejectValue("dni", "Exist.athleteCommand.dni");					
+		}	
 	}
 	
-	public void checkAthlete(AthleteCommand athleteCommand,BindingResult errors) {
-		checkMandatory("name", athleteCommand.getName(), "athleteCommand", errors);
-		checkMandatory("dni", athleteCommand.getDni(),"athleteCommand",errors);
-		checkMandatory("idTeam", athleteCommand.getIdTeam(),"athleteCommand",errors);
-		String date = ValidationUtils.createDateString(athleteCommand.getDateBirthDay(),athleteCommand.getDateBirthMonth(),athleteCommand.getDateBirthYear(), "/");	
-		
-		checkMandatory("dateBirthDay", date, "athleteCommand", errors);
-		
-		if(errors.hasErrors()){
-			return;
-		}
-		
-		checkDni(athleteCommand.getDni(),"dni", "Pattern.athleteCommand.dni",errors);
-		checkDate(date,"dateBirthDay", "Pattern.athleteCommand.dateBirthDay", errors);
-		
-		if(errors.hasErrors()){
-			return;
-		}
-		
-		//Service
-		checkExistDni(athleteCommand,errors);		
-	}
-	
-	private void checkUser(AthleteCommand athleteCommand, BindingResult errors) {
-		if ( userService.existUserByUSerName(athleteCommand.getUserName())){
+	protected void checkUser(String userName, BindingResult errors) {
+		if ( userService.existUserByUSerName(userName)){
 			errors.rejectValue("userName", "Exist.athleteCommand.userName");					
 		}			
 	}
 	
 	
-	private void checkPassword(AthleteCommand athleteCommand,BindingResult errors) {
-		if(!athleteCommand.getPassword().equals(athleteCommand.getRepeatPassword())){
-			errors.rejectValue("repeatPassword", "Different.athleteCommand.repeatPassword");
-		}
-	}
-	
-	private void checkExistDni(AthleteCommand athleteCommand, BindingResult errors){
-		if ( userService.existUserByDni(athleteCommand.getDni())){
-			errors.rejectValue("userName", "Exist.athleteCommand.dni");					
-		}	
-	}
-	
-	
-	
-
 
 }

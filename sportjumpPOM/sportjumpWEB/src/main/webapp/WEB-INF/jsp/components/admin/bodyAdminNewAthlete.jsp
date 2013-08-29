@@ -100,42 +100,74 @@ function show_modify(){
 			</form:form>
 		</div>
 		 
-		<%-- <div>
-			<div id="caja_data" class="caja" <c:if test="${not empty newTeam}">style="display: none;"</c:if>>
+		<div>
+			<div id="caja_data" class="caja" <c:if test="${not empty newAthlete}">style="display: none;"</c:if>>
 		
 			 	<div class="subcaja">
 			 		<h1><fmt:message key="admin.groups.group.data" /></h1>
-			        <a class="button" href="${pageContext.request.contextPath}/action/admin/groups/remove/${groupCommand.idTeam}"><fmt:message key="admin.button.remove"/></a>
+			        <a class="button" href="${pageContext.request.contextPath}/action/admin/athletes/remove/${athleteCommand.idUser}"><fmt:message key="admin.button.remove"/></a>
 			 		<div class="button" onclick="javascript:show_modify();"><a><fmt:message key="admin.button.modify"/></a></div>
-			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/groups"><fmt:message key="admin.button.return"/></a>
+			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/athletes"><fmt:message key="admin.button.return"/></a>
 			    </div> 	
 		 
-		 	
-	  			<div class="subcaja">		 	
-					<fieldset>				 			
+		 	  	<div class="subcaja">
+					<fieldset>						
 				        <div class="form-row">
-				            <label for="name"><fmt:message key="admin.groups.group.name"/>:</label>
-				           <span class="input"><label>${groupCommand.name}</label></span>
+				            <label for="userName"><fmt:message key="admin.athletes.user.name"/>:</label>
+				            <span class="input"><label>${athleteCommand.userName}</span>
 				        </div>   
 				        <div class="form-row">
-				            <label for="type"><fmt:message key="admin.groups.group.type"/>:</label>
-				            <span class="input"><label>${groupCommand.type}</label></span>
+				            <label for="password"><fmt:message key="admin.athletes.password"/>:</label>
+				            <span class="input"><label>**********</label></span>
+				        </div> 				       		        
+				     </fieldset>
+			    </div>	
+	  			<div class="subcaja">		 	
+					<fieldset>	
+					
+						<div class="form-row">
+				            <label for="name"><fmt:message key="admin.athletes.name"/>:</label>
+				            <span class="input"><label>${athleteCommand.name}</label></span>
+				        </div>   
+				        <div class="form-row">
+				            <label for="surname"><fmt:message key="admin.athletes.surname"/>:</label>
+				            <span class="input"><label>${athleteCommand.surname}</label></span>
 				        </div>  
 				        <div class="form-row">
-				            <label for="coachName"><fmt:message key="admin.groups.group.coach"/>:</label>
-				            <span class="input"><label class="second-col">${groupCommand.coachName}</label></span>
-				        </div>         
+				            <label for="dni"><fmt:message key="admin.athletes.dni"/>:</label>
+				            <span class="input"><label>${athleteCommand.dni}</label></span>
+				        </div>  
 				        <div class="form-row">
-				            <label for="createDate"><fmt:message key="admin.groups.group.date.create"/>:</label>
-				           <span class="input"> <label><fmt:formatDate value="${groupCommand.createDate}" pattern="dd/MM/yyyy"/></label></span>
-				        </div>           
+				            <label for="type"><fmt:message key="admin.athletes.type"/>:</label>
+				            <span class="input"><label>${athleteCommand.type}</label></span>
+				        </div> 		
 				        <div class="form-row">
-				            <label for="name"><fmt:message key="admin.groups.group.description"/>:</label>
-				            <span class="input"><textarea path="description" cols="73"  disabled="disabled"/>${groupCommand.description}</textarea></span>		            
-				        </div> 		        
-			     	</fieldset>
+				            <label for="address"><fmt:message key="admin.athletes.address"/>:</label>
+				            <span class="input"><label><fmt:formatDate value="${athleteCommand.dateBirth}" pattern="dd/MM/yyyy"/></label></span>
+				        </div>
+				        <div class="form-row">
+				            <label for="teamName"><fmt:message key="admin.athletes.team"/>:</label>
+				            <span class="input"><label>${athleteCommand.nameTeam}</label></span>
+				        </div> 
+		        	 	<div class="form-row">
+				            <label for="address"><fmt:message key="admin.athletes.birth.date"/>:</label>
+				            <span class="input"><label>${athleteCommand.address}</label></span>
+				        </div>
+				        <div class="form-row">
+				            <label for="telephone"><fmt:message key="admin.athletes.telephone"/>:</label>
+				            <span class="input"><label>${athleteCommand.telephone}</label></span><br>
+				        </div>
+				        <div class="form-row">
+				            <label for="email"><fmt:message key="admin.athletes.email"/>:</label>
+				            <span class="input"><label>${athleteCommand.email}</label></span><br>
+				        </div>
+				        <div class="form-row">
+				            <label for="comments"><fmt:message key="admin.athletes.comments"/>:</label>
+				            <span class="input"><textarea path="description" cols="73"  disabled="disabled"/>${athleteCommand.comments}</textarea></span>		            
+				        </div> 			
+					</fieldset>				
 		     	</div>		
 			</div> 
-		</div> 		 --%>
+		</div> 		
 	</div>
 </div>

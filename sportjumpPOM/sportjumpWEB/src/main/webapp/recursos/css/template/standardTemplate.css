@@ -111,6 +111,11 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 	width:82%;
 }
 
+#body_registration{
+	margin:auto;
+	width:82%;
+}
+
 #body_home_container{
 	margin: 2%;
     width: 95%;	

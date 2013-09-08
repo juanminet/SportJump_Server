@@ -4,50 +4,40 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="${pageContext.request.contextPath}/resources/css/reset.css"	type="text/css" rel="stylesheet" />	
+	<link href="${pageContext.request.contextPath}/resources/css/template/standardTemplate.css"	type="text/css" rel="stylesheet" />	
+	
 <link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/ico" />
 <title>Sport Jump</title>
 <style type="text/css">
-body {
-	font-family:Verdana, Arial, Helvetica, sans-serif;
-	font-size:11px;
-	color:#333333;
+
+ form {
+    margin: 100px auto auto;
+    width: 375px;
 }
-/* BOF formulario 1 */
-.form {
-	border:1px solid #990000;
-	width:450px;
-	margin:auto;
-}
-.form legend{
-	font-weight:bold;
-	font-size:12px;
-}
-.form ol{
+
+
+form ol{
 	list-style:none;
 }
-.form ol li{
+form ol li{
 	padding-bottom:5px;
 }
-.form ol li label{
+form ol li label{
 	width:120px;
 	float:left;
 	text-align:left;
 }
-.form input[type=text] {
-	border:1px solid #CCCCCC;
+fieldset{
+	padding:12px
 }
-.form input.boton {
-	padding:3px;
-	color:#FFFFFF;
-	background-color:#990000;
-	border:1px solid #000000;
-	cursor: pointer;
+.cajaCen{
+	background-color: #EEEEEE;
+    padding-left: 4ex;
+    padding-right: 4ex;
+    padding-top: 4ex;
 }
-
-.form  .form_error_txt{
-margin: 40px;
-}
-
 </style>
 </head>
 <body>
@@ -58,19 +48,23 @@ margin: 40px;
 		<div <c:if test="${not empty param.login_error}">style="display:none;"</c:if>>
 			<form action="j_spring_security_check" method="POST">
 				<div id="capaLogin" class="cajaCen">
-					<fieldset class="form">
-						<legend><fmt:message key="login.form.label.login"/></legend>						
+				<div class="subcaja">
+					<h1><fmt:message key="login.form.label.login"/></h1>
+				</div>
+				<div class="subcaja">		
+					<fieldset>										
 						<ol>
 							<li><label><fmt:message key="login.form.user"/></label><input class="user" id="usuario" name="j_username"  type="text" maxlength="23" size="25"></li>
 						   	<li><label><fmt:message key="login.form.password"/></label><input class="password" id="password" name="j_password" type="password" maxlength="23" size="25"></li>
 						</ol>						
 					
-						<p align="center">
-							<input class="boton" name="aceptar" id="loginButton" value="<fmt:message key="login.form.aceptar"/>" type="submit">
-							<input class="boton" name="Registro" id="loginButton" value="<fmt:message key="login.form.registro"/>" type="button" onclick="window.location='registration;'">
+						<p align="center" style="margin-top: 2ex;">
+							<input class="button_submit" name="aceptar" id="loginButton" value="<fmt:message key="login.form.aceptar"/>" type="submit">
+							<input class="button_submit" name="Registro" id="loginButton" value="<fmt:message key="login.form.registro"/>" type="button" onclick="window.location='registration;'">
 						</p>
 					
 					</fieldset>
+					</div>
 				</div>			
 	
 				

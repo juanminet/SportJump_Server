@@ -66,6 +66,7 @@ function show_modify(){
 				            					<form:input path="dateBirthMonth" size="2" maxlength="2" placeholder="mm" /> /
 				            					<form:input path="dateBirthYear" size="4" maxlength="4" placeholder="yyyy" />
 				            					<form:errors path="dateBirth*" cssClass="error" delimiter=" | " />
+				            </span>
 				        </div>
 				        <div class="form-row">
 				            <label for="address"><fmt:message key="admin.profile.address"/>:</label>
@@ -132,11 +133,11 @@ function show_modify(){
 				        </div> 		
 				        <div class="form-row">
 				            <label for="address"><fmt:message key="admin.profile.address"/>:</label>
-				            <span class="input"><label><fmt:formatDate value="${profileCommand.dateBirth}" pattern="dd/MM/yyyy"/></label></span>
+				             <span class="input"><label>${profileCommand.address}</label></span>
 				        </div>
 		        	 	<div class="form-row">
-				            <label for="address"><fmt:message key="admin.profile.birth.date"/>:</label>
-				            <span class="input"><label>${profileCommand.address}</label></span>
+				            <label for="address"><fmt:message key="admin.profile.birth.date"/>:</label>				           
+				            <span class="input"><label><fmt:formatDate value="${profileCommand.dateBirth}" pattern="dd/MM/yyyy"/></label></span>
 				        </div>
 				        <div class="form-row">
 				            <label for="telephone"><fmt:message key="admin.profile.telephone"/>:</label>

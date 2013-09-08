@@ -10,6 +10,10 @@ import es.uma.sportjump.sjs.web.controller.commands.ProfileCommand;
 @Component
 public class ProfileValidator extends AdminValidator {
 	
+	public void checkNewUser(ProfileCommand profileCommand, BindingResult errors){
+		checkUserProfile(profileCommand, null, errors);
+	}
+	
 	public void checkUserProfile(ProfileCommand profileCommand, Coach coach, BindingResult errors){
 		checkUserPassword(profileCommand,"profileCommand",errors);
 		if(errors.hasErrors()){
@@ -21,14 +25,14 @@ public class ProfileValidator extends AdminValidator {
 			return;
 		}
 		
-		if (!profileCommand.getUserName().equals(coach.getUserName())){
+		if (coach == null || ( (coach != null ) && !profileCommand.getUserName().equals(coach.getUserName()))){
 			checkUser(profileCommand.getUserName(), errors);
 			if(errors.hasErrors()){
 				return;
 			}
 		}	
 		
-		if(!profileCommand.getDni().equals(coach.getDni())){
+		if(coach == null || ((coach != null ) && !profileCommand.getDni().equals(coach.getDni()))){
 			checkExistDni(profileCommand.getDni(), errors);
 			if(errors.hasErrors()){
 				return;

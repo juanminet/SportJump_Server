@@ -1,8 +1,6 @@
 package es.uma.sportjump.sjs.web.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,10 +20,8 @@ import es.uma.sportjump.sjs.service.services.UserService;
 public class LoginController {
 
 	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private  HttpServletRequest request;
+	private UserService userService;	
+
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String login() {

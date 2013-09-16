@@ -30,7 +30,7 @@
 	 </definition>
 	 
 	 <definition name="admin_groups_new" extends="standardTemplate">
-		<put-attribute name="title" value="admin.groups.new.tittle" />
+		<put-attribute name="title" value="admin.groups.form.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="groups"/>
@@ -49,7 +49,7 @@
 	 </definition>
 	 
 	<definition name="admin_athletes_new" extends="standardTemplate">
-		<put-attribute name="title" value="admin.athletes.new.tittle" />
+		<put-attribute name="title" value="admin.athletes.form.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="athletes"/>

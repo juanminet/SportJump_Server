@@ -83,10 +83,12 @@
 	 	<security:intercept-url pattern="/login/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 		<security:intercept-url pattern="/**/*" access="hasRole('ROLE_ADMIN')"/> 
 		
-		<security:form-login login-page="/login" authentication-failure-url="/login?login_error=1" default-target-url="/login/success" always-use-default-target="true"/>
+		<security:form-login login-page="/login"  authentication-success-handler-ref="SecurityCustomHandler" authentication-failure-url="/login?login_error=1" default-target-url="/login/success" always-use-default-target="true"/>
 		<security:logout invalidate-session="true" logout-url="/logout"/>		
 	</security:http>
 
+	<bean id="SecurityCustomHandler" class="es.uma.sportjump.sjs.web.handler.SecurityCustomHandler " />
+	
 	<!-- <security:global-method-security secured-annotations="enabled" />  -->
 	<!--  SECURITY -->
  	<!-- <security:http auto-config='true' use-expressions="true">	 

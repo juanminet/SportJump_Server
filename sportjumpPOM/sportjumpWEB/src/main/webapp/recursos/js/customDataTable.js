@@ -7,25 +7,49 @@ function initDataTable(id,size){
 		"bJQueryUI": true,
 	    "bFilter": true,
 	    "bPaginate": true,
-	    "bSort": true,
+	    "bSort": false,
 	    "bLengthChange": false,
 	    "iDisplayLength": size,
 		"sPaginationType": "full_numbers"	
 	});
 }
 
+function initSimpleDataTable(id,size){
+	var tables = $.fn.dataTable.fnTables(true);
+
+	$('#'+id).dataTable( {
+		"bJQueryUI": true,
+	    "bFilter": false,
+	    "bPaginate": false,
+	    "bSort": false,
+	    "bLengthChange": false,
+	    "iDisplayLength": size,		
+	    'sDom': 't' 
+	});
+}
+
 /*
  * 
  */
+
+
+
+function initSimpleDataTableButton(id,urlButton, javascriptFunction , valueButton,size){
+	
+	initSimpleDataTable(id,size);
+	
+	   $('<a />')
+  		.addClass('button')
+        .css({'margin-left' : '1em'})
+  		.attr("href", urlButton)
+  		
+  		.html(valueButton)
+	    .appendTo($('#' + id + ' th'));
+}
+
 function initDataTableButton(id,urlButton,valueButton,size){
 	initDataTable(id,size);
-	     
-	 	   
-	   $('<a />')
-	   		.addClass('button')
-	        .css({'margin-left' : '1em'})
-	   		.attr("href", urlButton)
-	   		.html(valueButton)
-		    .appendTo($('.dataTables_filter'));
-	
+	initAddButtonToTable(urlButton, valueButton);	
 }
+
+

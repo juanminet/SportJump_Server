@@ -21,6 +21,8 @@
 	<common:common_javascript/> --%>	
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-ui-1.10.3.custom.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-multi-accordion-1.5.3.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/data-table-1.9.4/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources//js/customDataTable.js"></script>
 

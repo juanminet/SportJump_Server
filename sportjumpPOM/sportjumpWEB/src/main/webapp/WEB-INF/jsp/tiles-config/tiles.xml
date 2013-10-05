@@ -19,6 +19,8 @@
 		<put-attribute name="section" value="groups"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/bodyHome.jsp" />	  
 	 </definition> 
+	 
+ 	<!-- ADMIN -->
 	
 	<definition name="admin_groups" extends="standardTemplate">
 		<put-attribute name="title" value="admin.groups.list.tittle" />
@@ -58,7 +60,7 @@
 	 </definition>
 	 
 	<definition name="admin_profile" extends="standardTemplate">
-		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="title" value="admin.profile.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="profile"/>
@@ -66,54 +68,40 @@
 	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	  
 	 </definition>
 	 
-	 <definition name="training" extends="standardTemplate">
-		<put-attribute name="title" value="test.tittle" />
+	
+	
+		
+	<!-- TRAININGS -->
+	 
+	<definition name="training_working_day" extends="standardTemplate">
+		<put-attribute name="title" value="training.workingday.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>
-		<put-attribute name="section" value="groups"/>
-	    <put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTraining.jsp" />	
-	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
-	 </definition> 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	<!-- 
-	<definition name="login" extends="standardLayout">
-		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
-		<put-attribute name="dwrEngine" value="false"/>
-		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
-	</definition>
-		
-	<definition name="accessDenied" extends="standardLayout">
-		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/jsp/accessDenied.jsp" />
+		<put-attribute name="section" value="workingday"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingDay.jsp" />	
+	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
+	</definition> 
+	
+	<definition name="training_exercise" extends="standardTemplate">
+		<put-attribute name="title" value="training.exercise.block.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+		<put-attribute name="layer" value="training"/>
+		<put-attribute name="section" value="exercise"/>
+	   	<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingExerciseBlock.jsp" />	
+	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
 	</definition>
 	
-	<definition name="error" extends="standardLayout">
-		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/jsp/error.jsp" />
+	<definition name="training_new_block" extends="standardTemplate">
+		<put-attribute name="title" value="training.exercise.block.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+		<put-attribute name="layer" value="training"/>
+		<put-attribute name="section" value="exercise"/>
+	   	<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingExerciseNewBlock.jsp" />	
+	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
 	</definition>
-	
-	<definition name="index" template="/index.jsp" />
-	
+	 	  
+	  
 
-
-	<definition name="foo" extends="standardLayout">
-		<put-attribute name="menu" value="/WEB-INF/jsp/menu/intro.jsp"/>
-		<put-attribute name="dwrEngine" value="false"/>
-		<put-attribute name="body" value="/WEB-INF/jsp/helloWorld.jsp" />
-	</definition> -->
-	
-	
 	<!-- TEST -->
 	<definition name="test" extends="testTemplate">
 		<put-attribute name="title" value="test.tittle" />

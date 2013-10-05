@@ -8,12 +8,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/action/training")
-public class TrainingController {
+public class TrainingWorkingDayController {
 	
 	@RequestMapping(method = { RequestMethod.GET, RequestMethod.POST })
 	public String home(Model model) {			
-		return "training";
+		return "training_working_day";
 		
+	}	
+	
+	@RequestMapping( value="/workingday" ,method = RequestMethod.GET)
+	public String workingDay(Model model) {			
+		return "training_working_day";		
 	}	
 	
 }

@@ -97,11 +97,11 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 }
 
 
-.dataTables_filter {
+/* .dataTables_filter {
     float: left;
     text-align: left;
     width: 100%;
-}
+} */
 
 /*----------------------------------------------------------- */
 /*------------------------- MAIN BODY  ---------------------- */
@@ -119,6 +119,10 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 #body_home_container{
 	margin: 2%;
     width: 95%;	
+}
+
+.container_left{
+	width:30%;
 }
 
 .caja {
@@ -154,6 +158,37 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
     width: 100%;
 }
 
+.doble_row{
+	width: 48%;	
+	margin: auto;
+}
+
+
+.single_row{
+	width: 90%;	
+	margin: auto;
+}
+
+
+.caja .doble_row .form-row label {
+    display: inline-table;
+    width: 28%;
+    vertical-align: top;
+}
+
+.caja .doble_row .form-row label:last-child {
+    width: 40%
+}
+.caja .doble_row .form-row  textarea, .caja .doble_row .form-row input{
+	margin-top: 0.5em;
+	width:65%
+}
+
+
+.caja .doble_row:last-child{
+	float: right;
+}
+
 .caja .subcaja:last-child{
 	
     margin-bottom: 0em;
@@ -167,6 +202,18 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 	margin: 0 0.5em 0.3em 1em;
 }
 
+
+/*----------------------------------------------------------- */
+/*-------------------------- TABLES ------------------------- */
+/*----------------------------------------------------------- */
+
+  table.simple_button a{
+  	line-height: 1;  	
+  }
+  table.simple_button thead th div.DataTables_sort_wrapper {
+  	display: inline-block;  	
+  }
+
 /*----------------------------------------------------------- */
 /*------------------------- BUTTONS ------------------------- */
 /*----------------------------------------------------------- */
@@ -174,7 +221,7 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 
 .button{
 	background-color: #FCFCFC;
-	color: #646464;
+	color: #646464 !important;
     border: 1px solid rgba(0, 0, 0, 0.1);
     float: right;
     font-size: 10px;
@@ -199,7 +246,7 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 .button_submit{
 	background-color: #FCFCFC;
     border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #646464;
+    color: #646464 !important;
     float: right;
     font-family: arial;
     font-size: 10px;
@@ -216,6 +263,47 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 	box-shadow: 1px 1px 1px 0.1px #ccc;	
 	cursor:pointer;
 }
+
+.lbox-button{
+	background: transparent !important;
+	font-family: arial !important;
+    font-weight: bold !important;
+    color: #646464 !important;
+    font-size: 10px !important;
+	
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.lbox-button:hover{
+	border-color: #D19290 !important;
+}
+
+/*----------------------------------------------------------- */
+/*------------------------ LIGHT BOX ------------------------ */
+/*----------------------------------------------------------- */
+
+
+/* Resultados de formulario lightbox width--- */
+.lBox  {
+	 
+	padding-right:0; 
+	padding-left:0;
+	background: transparent !important;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #646464;
+	text-align: center;
+	}
+.lBox .results-form, .lBox .results-form2{padding:1em 0 1em 1em}
+.lBox .results-form li.linea-unica, .lBox .results-form2 li.linea-unica {width:100%}
+.lBox .results-form li.linea-unica strong, .lBox .results-form2 li.linea-unica strong {width:14%}
+.lBox .results-form li.linea-unica span, .lBox .results-form2 li.linea-unica span {width:84%}
+.lBox .results-form li span, .lBox .results-form2 li span {width:64%}
+
+
+.lBox .mensaje {line-height:1.3em;}
+
+.lBox .boxMensaje.boxMensajeCustom {margin:0 0 20px 0;}
 
 /*----------------------------------------------------------- */
 /*------------------------- ERRORS -------------------------- */

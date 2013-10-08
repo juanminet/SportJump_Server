@@ -1,6 +1,9 @@
 package es.uma.sportjump.sjs.model.entities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
@@ -9,7 +12,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
-import org.hibernate.PropertyValueException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

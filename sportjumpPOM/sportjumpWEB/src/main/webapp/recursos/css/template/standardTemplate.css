@@ -238,7 +238,7 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 }
 
 .button:hover{
-	border-color: #D19290;
+	border-color: #999999;
 	box-shadow: 1px 1px 1px 0.1px #ccc;	
 	cursor:pointer;
 }
@@ -259,7 +259,7 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
     text-align: center;
 }
 .button_submit:hover{
-	border-color: #D19290;
+	border-color: #FF7400;
 	box-shadow: 1px 1px 1px 0.1px #ccc;	
 	cursor:pointer;
 }
@@ -275,7 +275,7 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 }
 
 .lbox-button:hover{
-	border-color: #D19290 !important;
+	border-color: #FF7400 !important;
 }
 
 /*----------------------------------------------------------- */

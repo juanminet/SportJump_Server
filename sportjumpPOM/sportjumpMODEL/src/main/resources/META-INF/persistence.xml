@@ -12,6 +12,8 @@
 		 <class>es.uma.sportjump.sjs.model.entities.Athlete</class> 
 		 <class>es.uma.sportjump.sjs.model.entities.Coach</class> 
 		 <class>es.uma.sportjump.sjs.model.entities.Team</class> 
+		 <class>es.uma.sportjump.sjs.model.entities.Exercise</class>
+		 <class>es.uma.sportjump.sjs.model.entities.ExerciseBlock</class>
 	
 		
 		<properties>

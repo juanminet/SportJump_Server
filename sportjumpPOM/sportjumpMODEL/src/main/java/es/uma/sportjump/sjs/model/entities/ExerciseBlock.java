@@ -1,7 +1,5 @@
 package es.uma.sportjump.sjs.model.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,45 +10,37 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="TB_TEAM")
-public class Team {
-
+@Table(name="TB_EXERCISE_BLOCK")
+public class ExerciseBlock {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID_Team")
-	private Long idTeam;
+	@Column(name="ID_BLOCK")
+	private Long idExerciseBlock;
 	
-	@Column(name="NAME", nullable = false)
+	@Column(name="NAME" , nullable = false, unique= true)
 	private String name;
 	
-	@Column(name="TEAM_TYPE", nullable = false)
+	@Column(name="TYPE", nullable = false)
 	private String type;
 	
-	@Column(name="DESCRIPTION", nullable = false)
+	@Column(name="DESCRIPTION")
 	private String description;
 	
-	@Column(name="DATE_CREATE", nullable = false)
-	private Date dateCreate;
-	
-	@ManyToOne(fetch=FetchType.LAZY , targetEntity = es.uma.sportjump.sjs.model.entities.Coach.class) 
-	@JoinColumn(name = "ID_COACH", nullable = false)
-	private Coach coach;
-	
+	@ManyToOne(fetch=FetchType.LAZY, targetEntity=es.uma.sportjump.sjs.model.entities.Coach.class)
+	@JoinColumn(name="ID_USER", nullable=false)
+	private Coach coach;	
 	
 
 
-	public Team() {
-		super();		
+
+	public Long getIdExerciseBlock() {
+		return idExerciseBlock;
 	}
 
-	public Long getIdTeam() {
-		return idTeam;
-	}
-
-	public void setIdTeam(Long idTeam) {
-		this.idTeam = idTeam;
+	public void setIdExerciseBlock(Long idExerciseBlock) {
+		this.idExerciseBlock = idExerciseBlock;
 	}
 
 	public String getName() {
@@ -59,7 +49,7 @@ public class Team {
 
 	public void setName(String name) {
 		this.name = name;
-	}	
+	}
 
 	public String getType() {
 		return type;
@@ -76,15 +66,7 @@ public class Team {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public Date getDateCreate() {
-		return dateCreate;
-	}
-
-	public void setDateCreate(Date dateCreate) {
-		this.dateCreate = dateCreate;
-	}
-
+	
 	public Coach getCoach() {
 		return coach;
 	}
@@ -92,6 +74,4 @@ public class Team {
 	public void setCoach(Coach coach) {
 		this.coach = coach;
 	}
-	
-	
 }

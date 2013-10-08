@@ -64,7 +64,6 @@ function addButtonToTable(idTable, valueButton, jsFunction) {
 function convertSortableTable(idTable) {
 	$('#' + idTable + ' tbody').sortable({
 		axis : "y",
-		revert : true,
 		stop : function(event, ui) {			
 			ui.item.css("background", "");
 			refreshTable(idTable);
@@ -73,7 +72,7 @@ function convertSortableTable(idTable) {
 		sort : function(event, ui) {
 
 			// Set border colour of cell to red (this works)
-			ui.placeholder.css("border", "1px solid #D19290");
+			ui.placeholder.css("border", "1px solid #FF7400");
 			ui.item.css("background", "#F2E3E3");
 		}
 	});

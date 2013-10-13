@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!-- QUITAR -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 
 <script>
 	$(document).ready( function() {
@@ -30,19 +35,12 @@
 		          	</tr>
 		        </thead>
 		        <tbody>
-		        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/training/exercise/block/1';"> 
-			             <td>fuerza primavera</td>            
-			            <td>Fuerza</td>	            				         
-		        	</tr>
-		        		<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/training/exercise/block/1';"> 
-			             <td>Carreras puesta punto</td>            
-			            <td>Carreras</td>	            				         
-		        	</tr>
-		        		<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/training/exercise/block/1';"> 
-			             <td>Velocidad mantenida</td>            
-			            <td>Carreras</td>	            				         
-		        	</tr>
-		        		         
+		        	<c:forEach items="${exerciseBlockList}" var="block">
+			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/training/exercise/block/${block.idExerciseBlock}';"> 
+				            <td>${block.name}</td>            
+				            <td>${block.type}</td>	            				         
+			        	</tr>
+		        	</c:forEach>	
 		        </tbody>
 		      </table>   
 	      </div>      

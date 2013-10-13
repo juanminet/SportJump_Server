@@ -304,13 +304,18 @@ public class UserDaoTest {
 	}
 
 	private void testGetAllCoaches() {
+		
+		//Read coach by name and surname
+		List<Coach> listCoaches = readAllCoaches();		
+		int sizeOriginal = listCoaches.size();
+		
 		initCoaches();
 		
 		//Read coach by name and surname
-		List<Coach> listCoaches = readAllCoaches();
+		 listCoaches = readAllCoaches();
 		
 		//Make assert
-		assertEquals(3,listCoaches.size());
+		assertEquals(sizeOriginal + 3,listCoaches.size());
 		
 		finishCoaches();		
 	}
@@ -437,7 +442,9 @@ public class UserDaoTest {
 	}
 
 	private void testGetAllTeams() {
-		
+		//Read coach by name and surname
+		List<Team> listTeams = readAllTeams();
+		int sizeOriginal = listTeams.size();
 		//Create Coach
 		Long idCoach = createCoach(nameCoachAux1,userNameCoachAux1,dniAux1);
 		
@@ -458,10 +465,10 @@ public class UserDaoTest {
 		assertNotNull(idTeam3);
 		
 		//Read coach by name and surname
-		List<Team> listTeams = readAllTeams();
+		listTeams = readAllTeams();
 		
 		//Make assert
-		assertEquals(3,listTeams.size());
+		assertEquals(sizeOriginal +3,listTeams.size());
 		
 		//Delete coaches
 		deleteTeam(readTeam(idTeam2));
@@ -470,7 +477,7 @@ public class UserDaoTest {
 		listTeams = readAllTeams();
 		
 		//Make assert
-		assertEquals(2,listTeams.size());
+		assertEquals(sizeOriginal + 2,listTeams.size());
 				
 		
 		//Delete coaches
@@ -480,11 +487,8 @@ public class UserDaoTest {
 		listTeams = readAllTeams();
 		
 		//Make assert
-		assertEquals(1,listTeams.size());
+		assertEquals(sizeOriginal +1,listTeams.size());		
 		
-		
-		//Make assert
-		makeAssertTeam(name1,idCoach, listTeams.get(0));
 				
 				
 		//Delete coaches
@@ -498,7 +502,7 @@ public class UserDaoTest {
 		listTeams = readAllTeams();
 		
 		//Make assert
-		assertEquals(0, listTeams.size());
+		assertEquals(sizeOriginal + 0, listTeams.size());
 		
 		//Delete coach
 		deleteCoach(readCoach(idCoach));
@@ -806,14 +810,17 @@ public class UserDaoTest {
 	
 
 	private void testGetAllAthletes() {
+		//Read all athletes 
+		List<Athlete> listAthlete = readAllAthletes();
+		int sizeOriginal = listAthlete.size();
 		
 		initAthletes();	
 		
 		//Read all athletes 
-		List<Athlete> listAthlete = readAllAthletes();
+		listAthlete = readAllAthletes();
 		
 		//Make assert
-		assertEquals(4,listAthlete.size());
+		assertEquals(sizeOriginal + 4,listAthlete.size());
 		
 		
 		finishAthletes();

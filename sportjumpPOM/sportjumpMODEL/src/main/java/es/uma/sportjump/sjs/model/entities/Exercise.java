@@ -9,13 +9,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * The persistent class for the ATHLETE database table.
  * 
  */
 @Entity
-@Table(name="TB_EXERCISE")
+@Table(	name="TB_EXERCISE",
+		uniqueConstraints= @UniqueConstraint(columnNames={"POSITION", "ID_BLOCK"})
+)
 public class Exercise {
 	
 	@Id
@@ -25,6 +28,9 @@ public class Exercise {
 	
 	@Column(name="NAME", nullable=false)
 	private String name;
+	
+	@Column(name="POSITION", nullable=false)
+	private int pos;
 	
 	@ManyToOne(fetch=FetchType.LAZY , targetEntity = es.uma.sportjump.sjs.model.entities.ExerciseBlock.class) 
 	@JoinColumn(name = "ID_BLOCK", nullable = false)
@@ -44,6 +50,15 @@ public class Exercise {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	
+	public int getPos() {
+		return pos;
+	}
+
+	public void setPos(int pos) {
+		this.pos = pos;
 	}
 
 	public ExerciseBlock getExerciseBlock() {

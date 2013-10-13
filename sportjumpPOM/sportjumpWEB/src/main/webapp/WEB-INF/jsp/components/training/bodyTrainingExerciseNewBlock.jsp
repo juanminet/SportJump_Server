@@ -1,18 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+	
+	
+<!-- QUITAR -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <script>
 var currentExerciseTr;
 var jsNewExercise;
+
+var listExerciseTam;
 	
 	$(document).ready( function() {
 		
+		listExerciseTam = "${fn:length(blockCommand.exerciseList)}";
 		
+		alert(listExerciseTam);
 		jsNewExercise = function newExercise(){
 			var newTr= $('<tr>')
 				.addClass('gradeU')			
-				.append(
+				.append(						
 				$('<td>').text("<fmt:message key='training.execise.block.table.button.new'/>")
+				
+				
+				
+				
 			);
 			$('#table_exercises_block tbody').append(newTr);
 			refreshTable('table_exercises_block');
@@ -57,6 +69,7 @@ var jsNewExercise;
 					click : function() {						
 						currentExerciseTr.remove();
 						refreshTable('table_exercises_block');
+						listExerciseTam--;
 						$(this).dialog('close');
 					}
 				}, 
@@ -64,7 +77,11 @@ var jsNewExercise;
 					text : "<fmt:message key='training.exercise.block.lbox.button.save'/>",
 					class:"lbox-button",
 					click : function() {						
-						currentExerciseTr.find('td').text($('#exercise_name').val());
+					//	currentExerciseTr.find('td').text($('#exercise_name').val());
+						var value = $('#exercise_name').val();
+						currentExerciseTr.find('td').html("<input name='exerciseList["+ listExerciseTam +"]' value='"+ value + "'/>");
+						listExerciseTam++;
+						
 						$(this).dialog('close');
 					}
 				} 
@@ -123,16 +140,12 @@ var jsNewExercise;
 			            	<th><fmt:message key="training.exercise.block.exercises" /> </th>	            	
 			          	</tr>
 			        </thead>
-			        <tbody>
-			        	<tr class="${rowStyle}  gradeU"> 
-				             <td>2X 300 metros o mas</td>   
-			        	</tr>
-			        	<tr class="${rowStyle}  gradeU"> 
-				             <td>3X 50 metros</td>   
-			        	</tr>
-			        	<tr class="${rowStyle}  gradeU"> 
-				             <td>1x prograsivo</td>          
-			        	</tr>			        		         
+			        <tbody>	
+			        	<c:forEach items="${blockCommand.exerciseList}" var="exercise" varStatus="status">
+			        		<tr class="${rowStyle}  gradeU"> 
+				             	<td><input name="exerciseList[${status.index}]" value="${exercise.name}"/></td>   
+			        		</tr>
+			        	</c:forEach>        		         
 			    	</tbody>
 				</table>
 				 </div>		

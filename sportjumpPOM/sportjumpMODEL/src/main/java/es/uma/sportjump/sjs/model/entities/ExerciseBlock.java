@@ -1,5 +1,7 @@
 package es.uma.sportjump.sjs.model.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,9 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="TB_EXERCISE_BLOCK")
+@Table(	name="TB_EXERCISE_BLOCK", 
+		uniqueConstraints= @UniqueConstraint(columnNames={"NAME", "ID_USER"})
+)
+
 public class ExerciseBlock {
 	
 	@Id
@@ -19,7 +26,7 @@ public class ExerciseBlock {
 	@Column(name="ID_BLOCK")
 	private Long idExerciseBlock;
 	
-	@Column(name="NAME" , nullable = false, unique= true)
+	@Column(name="NAME" , nullable = false)
 	private String name;
 	
 	@Column(name="TYPE", nullable = false)
@@ -32,7 +39,8 @@ public class ExerciseBlock {
 	@JoinColumn(name="ID_USER", nullable=false)
 	private Coach coach;	
 	
-
+	@Transient
+	private List<Exercise> listExercises;
 
 
 	public Long getIdExerciseBlock() {
@@ -74,4 +82,14 @@ public class ExerciseBlock {
 	public void setCoach(Coach coach) {
 		this.coach = coach;
 	}
+
+	public List<Exercise> getListExercises() {
+		return listExercises;
+	}
+
+	public void setListExercises(List<Exercise> listExercises) {
+		this.listExercises = listExercises;
+	}
+	
+	
 }

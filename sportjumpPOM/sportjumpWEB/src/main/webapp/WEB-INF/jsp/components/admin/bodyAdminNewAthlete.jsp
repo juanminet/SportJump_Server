@@ -143,15 +143,15 @@ function show_modify(){
 				        </div> 		
 				        <div class="form-row">
 				            <label for="address"><fmt:message key="admin.athletes.address"/>:</label>
-				            <span class="input"><label><fmt:formatDate value="${athleteCommand.dateBirth}" pattern="dd/MM/yyyy"/></label></span>
+				            <span class="input"><label>${athleteCommand.address}</label></span>
 				        </div>
 				        <div class="form-row">
 				            <label for="teamName"><fmt:message key="admin.athletes.team"/>:</label>
 				            <span class="input"><label>${athleteCommand.nameTeam}</label></span>
 				        </div> 
 		        	 	<div class="form-row">
-				            <label for="address"><fmt:message key="admin.athletes.birth.date"/>:</label>
-				            <span class="input"><label>${athleteCommand.address}</label></span>
+				            <label for="dateBirth"><fmt:message key="admin.athletes.birth.date"/>:</label>
+				            <span class="input"><label><fmt:formatDate value="${athleteCommand.dateBirth}" pattern="dd/MM/yyyy"/></label></span>
 				        </div>
 				        <div class="form-row">
 				            <label for="telephone"><fmt:message key="admin.athletes.telephone"/>:</label>

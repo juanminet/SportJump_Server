@@ -22,19 +22,19 @@
 			<property name="hibernate.format_sql" value="true"/>
 			
 			<!-- Configure connection to data base -->
-			<property name="hibernate.connection.driver_class" value="${database.connection.driver.class.name}"/>
+	 		<property name="hibernate.connection.driver_class" value="${database.connection.driver.class.name}"/>
 			<property name="hibernate.connection.url" value="${database.connection.url}"/>
 			<property name="hibernate.connection.username" value="${database.connection.user}"/>
 			<property name="hibernate.connection.password" value="${database.connection.password}"/>
-			<property name="hibernate.dialect" value="${database.connection.dialect}"/>
+			<property name="hibernate.dialect" value="${database.connection.dialect}"/>   
 			
 			<!-- Configure C3p0 pool -->
-			<property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
+			 <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider"/>
 			<property name="hibernate.c3p0.min_size" value="5"/>
 			<property name="hibernate.c3p0.max_size" value="10"/>
 			<property name="hibernate.c3p0.timeout" value="300"/>
 			<property name="hibernate.c3p0.max_statements" value="50"/>
-			<property name="hibernate.c3p0.idle_test_period" value="3600"/>
+			<property name="hibernate.c3p0.idle_test_period" value="3600"/>  
 			
 			<!-- Configure boundary and type of tx --> 
 			<property name="hibernate.connection.release_mode" value="auto"/>
@@ -42,4 +42,10 @@
 			<property name="hibernate.current_session_context_class" value="thread"/>
 		</properties>
 	</persistence-unit>
+	
+	
+	<persistence-unit name="sportjumpJpaPUTest" transaction-type="RESOURCE_LOCAL">
+	</persistence-unit>
+	
+		
 </persistence>

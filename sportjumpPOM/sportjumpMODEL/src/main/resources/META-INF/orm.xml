@@ -45,7 +45,22 @@
 	</named-query>
 	
 	
+	<!-- Exercises -->
+ 	<named-query name="findAllExerciseBlock">
+	    <query>from ExerciseBlock</query>
+	</named-query>
 	
+	<named-query name="findAllExerciseBlockByCoach">
+	    <query>from ExerciseBlock e where e.coach.idUser = :idUser</query>
+	</named-query>
+	
+	<named-query name="findAllExercise">
+	    <query>from Exercise</query>
+	</named-query> 
+	
+	<named-query name="findAllExerciseByBlock">
+	    <query>from Exercise e where e.exerciseBlock.idExerciseBlock = :idBlock</query>
+	</named-query>
 	
 	
 	

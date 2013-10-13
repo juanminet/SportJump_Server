@@ -15,30 +15,30 @@ var listExerciseTam;
 		
 		listExerciseTam = "${fn:length(blockCommand.exerciseList)}";
 		
-		alert(listExerciseTam);
-		jsNewExercise = function newExercise(){
-			var newTr= $('<tr>')
-				.addClass('gradeU')			
-				.append(						
-				$('<td>').text("<fmt:message key='training.execise.block.table.button.new'/>")
-				
-				
-				
-				
-			);
-			$('#table_exercises_block tbody').append(newTr);
-			refreshTable('table_exercises_block');
-			
-			currentExerciseTr = newTr;			
-		  	$("#exercise_name").val(String.trim(currentExerciseTr.text()));
-			$('#exercise_lbox').dialog('open');	
+		jsNewExercise = function newExercise(){		
+			$("#create_exercise_name").val("<fmt:message key='training.execise.block.table.button.new'/>");
+			$('#create_exercise_lbox').dialog('open');	
 		};
 		
+		jsSortingStop = function(event, ui) {			
+			ui.item.css("background", "");
+			refreshTable("table_exercises_block");
+		}
+		
+		jsSortingStart = function(event, ui) {
+			// Set border colour of cell to red (this works)
+			ui.placeholder.css("border", "1px solid #FF7400");
+			ui.item.css("background", "#F2E3E3");
+		}
+		
+			
 		initSimpleSortableDataTableButton(
 				"table_exercises_block",				
 				"<fmt:message key='training.execise.block.table.button.new'/>",				
 				10,
-				jsNewExercise);			
+				jsNewExercise,
+				jsSortingStart,
+				jsSortingStop);			
 
 
 	 
@@ -49,7 +49,7 @@ var listExerciseTam;
 		});
 		
 		
-		$("#exercise_lbox").dialog({
+ 		$("#exercise_lbox").dialog({
 			autoOpen : false,
 			resizable : false,
 			draggable : false,
@@ -67,9 +67,7 @@ var listExerciseTam;
 					text :"<fmt:message key='training.exercise.block.lbox.button.remove'/>",
 					class:"lbox-button",
 					click : function() {						
-						currentExerciseTr.remove();
-						refreshTable('table_exercises_block');
-						listExerciseTam--;
+						removeExerciseTr();
 						$(this).dialog('close');
 					}
 				}, 
@@ -77,11 +75,7 @@ var listExerciseTam;
 					text : "<fmt:message key='training.exercise.block.lbox.button.save'/>",
 					class:"lbox-button",
 					click : function() {						
-					//	currentExerciseTr.find('td').text($('#exercise_name').val());
-						var value = $('#exercise_name').val();
-						currentExerciseTr.find('td').html("<input name='exerciseList["+ listExerciseTam +"]' value='"+ value + "'/>");
-						listExerciseTam++;
-						
+						modifyExerciseTr();						
 						$(this).dialog('close');
 					}
 				} 
@@ -89,10 +83,97 @@ var listExerciseTam;
 			open : function() {
 				$('.ui-dialog-buttonset button').blur();
 			}
-		});
+		}); 
+		
+		
+		$("#create_exercise_lbox").dialog({
+			autoOpen : false,
+			resizable : false,
+			draggable : false,
+			width : 400,
+			modal : true,
+			buttons : [ 
+				{					
+					text : "<fmt:message key='training.exercise.block.lbox.button.cancel'/>",
+					class:"lbox-button",
+					click : function() {
+						$(this).dialog('close');
+					}
+				}, 
+				{					
+					text : "<fmt:message key='training.exercise.block.lbox.button.save'/>",
+					class:"lbox-button",
+					click : function() {						
+						createNewExerciseTr();											
+						$(this).dialog('close');
+					}
+				} 
+			],
+			open : function() {
+				$('.ui-dialog-buttonset button').blur();
+			}
+		});		
+		
 
 	}); 
 	
+	function createNewExerciseTr(){
+		
+		var newTr= $('<tr>')
+			.addClass('gradeU')	
+			.append(			
+				$('<td>')	
+			);
+		
+		$('#table_exercises_block tbody').append(newTr);
+		refreshTable('table_exercises_block');
+		
+		currentExerciseTr = newTr;		
+		var value = $('#create_exercise_name').val();
+		currentExerciseTr.find('td').text(value);
+		
+	 	var newImput = $('<input>')
+			.attr('name', 'exerciseList['+ listExerciseTam +']')
+			.css("display", "none")
+			.val(value);
+		
+		currentExerciseTr.append(newImput); 	
+	
+		listExerciseTam++;	
+	}	
+	
+
+	function modifyExerciseTr(){
+		var value = $('#exercise_name').val();
+		currentExerciseTr.find('td').text(value);
+		currentExerciseTr.find('input').val(value);		
+	}
+	
+	function removeExerciseTr(){
+		currentExerciseTr.remove();
+		refreshTable('table_exercises_block');
+		listExerciseTam--;
+	}
+	
+	function refreshTable(idTabla){
+		$('#' + idTabla + " tbody tr").each(function (index) {
+			
+			var text = $(this).text();		
+			
+			if(text == "No data available in table"){
+				$(this).remove();
+			}else{		
+				$(this).removeClass( "even odd gradeU" );
+				if (index % 2 == 0){
+					$(this).addClass("gradeU odd");
+				}else{
+					$(this).addClass("gradeU even");
+				}
+				
+				$(this).find('input').attr('name', 'exerciseList['+ index +']');
+			}
+		});	
+	}
 
   </script>
   
@@ -114,7 +195,9 @@ var listExerciseTam;
 			    </div> 
 				    
 				<div class="subcaja doble_row">
-					<fieldset>						
+					<fieldset>		
+					<form:errors path="*"  element="div" />		
+						<form:hidden path="id" />		
 				        <div class="form-row">
 				            <label for="name"><fmt:message key="training.exercise.block.name"/>:</label>
 				           <span class="input"><form:input path="name" />   <form:errors path="name" cssClass="error" /></span> 
@@ -143,7 +226,8 @@ var listExerciseTam;
 			        <tbody>	
 			        	<c:forEach items="${blockCommand.exerciseList}" var="exercise" varStatus="status">
 			        		<tr class="${rowStyle}  gradeU"> 
-				             	<td><input name="exerciseList[${status.index}]" value="${exercise.name}"/></td>   
+			        			<td>${exercise}</td> 
+				             	<form:hidden path="exerciseList[${status.index}]" />
 			        		</tr>
 			        	</c:forEach>        		         
 			    	</tbody>
@@ -157,6 +241,27 @@ var listExerciseTam;
 <!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ LIGHTTBOXES /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
 <!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
 
+<!-- lightbox for create exercises -->
+<div id="create_exercise_lbox" class="lBox" title="Confirmación de alta de póliza">
+	<!-- Mensaje -->
+	<div class="cajaMensajeTop">
+		<div class="cajaMensajeTopLeft"></div>
+		<div class="cajaMensajeTopRight"></div>
+	</div>
+	<div class="mensaje dobleLinea fuenteFormLB">
+		<div class="single_row">
+			<label for="create_exercise_name"><fmt:message	key="training.exercise.block.name" />:</label> 
+			<span class="input"><input id="create_exercise_name" /> </span>
+		</div>
+	</div>
+	<!--mensaje-->
+	<div class="cajaMensajePie">
+		<div class="cajaMensajePieLeft"></div>
+		<div class="cajaMensajePieRight"></div>
+	</div>
+	<!-- Mensaje -->	
+	
+</div>
 
 
 <!-- lightbox for modify exercises -->

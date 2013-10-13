@@ -40,10 +40,10 @@ function initDataTableButton(id,urlButton,valueButton,size){
 	addButtonToTable(valueButton, function (){location.ref = urButton;});	
 }
 
-function initSimpleSortableDataTableButton(id, valueButton, size, jsFunction){	
+function initSimpleSortableDataTableButton(id, valueButton, size, jsFunction,jsFunctionSort,jsFunctionStop){	
 	initSimpleDataTable(id,size);
 	addButtonToTable(id, valueButton, jsFunction);
-	convertSortableTable(id) ;
+	convertSortableTable(id,jsFunctionSort,jsFunctionStop) ;
 }
 
 
@@ -61,32 +61,14 @@ function addButtonToTable(idTable, valueButton, jsFunction) {
 		.bind('click', jsFunction);
 }
 
-function convertSortableTable(idTable) {
+function convertSortableTable(idTable,jsFunctionSort,jsFunctionStop) {
 	$('#' + idTable + ' tbody').sortable({
 		axis : "y",
-		stop : function(event, ui) {			
-			ui.item.css("background", "");
-			refreshTable(idTable);
-
-		},
-		sort : function(event, ui) {
-
-			// Set border colour of cell to red (this works)
-			ui.placeholder.css("border", "1px solid #FF7400");
-			ui.item.css("background", "#F2E3E3");
-		}
+		sort : jsFunctionSort,
+		stop : jsFunctionStop					
 	});
 }
 
-function refreshTable(idTabla){
-	$('#' + idTabla + " tbody tr").each(function (index) {
-		$(this).removeClass( "even odd gradeU" );
-		 if (index % 2 == 0){
-			$(this).addClass("gradeU odd");
-		 }else{
-			$(this).addClass("gradeU even");
-		 }
-	});	
-}
+
 
 

@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Exercise;
@@ -22,12 +23,15 @@ import es.uma.sportjump.sjs.web.controller.commands.ExerciseBlockCommand;
 
 
 @Controller
+@SessionAttributes("blockCommand")
 @RequestMapping("/action/training")
 public class TrainingExerciseController {
 	
 	
 	protected static final String LIST_TRAINING_BLOCKS = "training_exercise";
 	protected static final String NEW_TRAINING_BLOCK = "training_new_block";
+
+	protected static final String LIST_TRAINING_BLOCKS_REDIRECT = "redirect:/action/training/exercise";	
 	
 	@Autowired
 	private ExerciseService exerciseService;
@@ -70,6 +74,7 @@ public class TrainingExerciseController {
 	private ExerciseBlockCommand fillExerciseBlockCommand(	ExerciseBlock exerciseBlock) {
 
 		ExerciseBlockCommand blockCommand = new ExerciseBlockCommand();
+		blockCommand.setId(exerciseBlock.getIdExerciseBlock());
 		blockCommand.setName(exerciseBlock.getName());
 		blockCommand.setType(exerciseBlock.getType());
 		blockCommand.setDescription(exerciseBlock.getDescription());
@@ -90,9 +95,43 @@ public class TrainingExerciseController {
 
 
 	@RequestMapping( value="/exercise/block/save" , method = RequestMethod.POST)
-	public String saveBlockExercise(@Valid ExerciseBlockCommand exerciseBlockCommand, BindingResult errors, Model model, HttpSession session) {		
+	public String saveBlockExercise(@Valid ExerciseBlockCommand blockCommand, BindingResult errors, Model model, HttpSession session) {		
 
-		return LIST_TRAINING_BLOCKS;		
+		if (errors.hasErrors()) {	
+			return NEW_TRAINING_BLOCK;
+		}	
+		
+		List<String> exerciseNameList = blockCommand.getExerciseList();
+		List<Exercise> exerciseList = new ArrayList<Exercise>();
+		
+		if (exerciseNameList != null){
+			int index = 0;
+			for (String exerciseName : exerciseNameList){
+				Exercise exercise = new Exercise();
+				exercise.setName(exerciseName);
+				exercise.setPos(index);
+				
+				exerciseList.add(exercise);
+				index++;
+			}
+		}
+		
+		Coach  coach = (Coach) session.getAttribute("loggedUser");
+		
+		if (blockCommand.getId() == null){
+			exerciseService.setNewExerciseBlock(blockCommand.getName(), blockCommand.getType(), blockCommand.getDescription(), exerciseList, coach);
+		}else{
+			ExerciseBlock exerciseBlock = exerciseService.findExerciseBlock(blockCommand.getId());
+			
+			exerciseBlock.setName(blockCommand.getName());
+			exerciseBlock.setType(blockCommand.getType());
+			exerciseBlock.setDescription(blockCommand.getDescription());
+			exerciseBlock.setListExercises(exerciseList);
+			
+			exerciseService.updateExerciseBlock(exerciseBlock);
+		}
+		
+		return LIST_TRAINING_BLOCKS_REDIRECT;		
 	}
 	
 	

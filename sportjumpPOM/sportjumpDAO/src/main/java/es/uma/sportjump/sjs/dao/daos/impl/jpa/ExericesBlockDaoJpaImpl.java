@@ -25,9 +25,16 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void persistExerciseBlock(ExerciseBlock exerciseBlock) {
-		em.persist(exerciseBlock);
-		
 		List<Exercise> listExercises = exerciseBlock.getListExercises();
+		
+		
+		ExerciseBlock exerciseBlockAux = getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
+		deleteAllExercises(exerciseBlockAux);
+		
+		em.persist(exerciseBlock);		
+	
+		
+		
 		if (listExercises != null){
 			for(Exercise exercise : listExercises){
 				exercise.setExerciseBlock(exerciseBlock);			
@@ -54,13 +61,18 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void deleteExerciseBlock(Long idBlock) {
 		ExerciseBlock exerciseBlock = getExerciseBlockById(idBlock);
+		deleteAllExercises(exerciseBlock);
+		
+		em.remove(exerciseBlock);
+	}
+	
+	private void deleteAllExercises(ExerciseBlock exerciseBlock){
 		List<Exercise> listExercises = exerciseBlock.getListExercises();
 		if (listExercises != null){
 			for(Exercise exercise : listExercises){
 				em.remove(exercise);
 			}
 		}
-		em.remove(exerciseBlock);
 	}
 
 	@SuppressWarnings("unchecked")

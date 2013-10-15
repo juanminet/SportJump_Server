@@ -13,22 +13,34 @@
 
 	<context:component-scan base-package="es.uma.sportjump.sjs.dao.daos.impl.jpa" />
 	
-  	<tx:annotation-driven  transaction-manager="transactionManager"/>
+ 	<tx:annotation-driven  transaction-manager="transactionManager"/> 
 	
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" />	
+<!-- 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
+		<property name="entityManagerFactory" ref="emf"/>
+	</bean>	
 
  	<bean id="emf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean"> 
 		<property name="persistenceUnitName" value="sportjumpJpaPU" />
-	</bean> 
+	</bean>  -->
+	
+
+
 
 	
-	<!-- <bean id="entityManagerFactory"
+	 <bean id="emf"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
         <property name="persistenceUnitName" value="sportjumpJpaPU" />
         <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
         <property name="jpaDialect" ref="jpaDialect" />
+        <property name="jpaProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+			</props>
+		</property>
     </bean>
  
     <bean id="jpaVendorAdapter"   class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -47,11 +59,9 @@
     </bean>
     
 	 <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="entityManagerFactory" ref="emf" />
         <property name="dataSource" ref="dataSource" />
         <property name="jpaDialect" ref="jpaDialect" />
     </bean>
  
-    <tx:annotation-driven transaction-manager="transactionManager" />  -->
-
 </beans>

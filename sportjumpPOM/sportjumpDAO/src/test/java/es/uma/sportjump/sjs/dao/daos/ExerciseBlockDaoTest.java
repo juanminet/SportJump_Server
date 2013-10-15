@@ -114,11 +114,11 @@ public class ExerciseBlockDaoTest{
 		
 		Exercise exercise1 = new Exercise();
 		exercise1.setName(exerciseName1);
-		exercise1.setPos(1);
+		exercise1.setPos(0);
 		
 		Exercise exercise2 = new Exercise();
 		exercise2.setName(exerciseName2);
-		exercise2.setPos(2);
+		exercise2.setPos(1);
 		
 		List<Exercise> exerciseList = new ArrayList<Exercise>();
 		exerciseList.add(exercise1);
@@ -137,7 +137,26 @@ public class ExerciseBlockDaoTest{
 		
 		//Make asserts
 		assertNotNull(exerciseListAux);
-		assertEquals(2, exerciseList.size());
+		assertEquals(2, exerciseListAux.size());
+		assertEquals (exerciseName1,exerciseListAux.get(0).getName());
+		assertEquals (exerciseName2,exerciseListAux.get(1).getName());
+		
+		//update
+		String newExerciseName1 = "35 X 50kg hombros";
+		
+		exerciseBlock.getListExercises().get(0).setName(newExerciseName1);
+		exerciseBlockDao.persistExerciseBlock(exerciseBlock);
+		
+		//Read exerciseBlock
+		exerciseBlock = readExerciseBlock(idExerciseBlock);
+		
+		exerciseListAux = exerciseBlock.getListExercises();
+		
+		//Make asserts
+		assertNotNull(exerciseListAux);
+		assertEquals(2, exerciseListAux.size());
+		assertEquals (newExerciseName1,exerciseListAux.get(0).getName());
+		assertEquals (exerciseName2,exerciseListAux.get(1).getName());
 		
 		//Delete exerciseBlock
 		deleteExerciseBlock(exerciseBlock);

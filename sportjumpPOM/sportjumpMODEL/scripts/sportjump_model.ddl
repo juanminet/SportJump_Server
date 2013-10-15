@@ -1,4 +1,40 @@
 
+    alter table TB_ATHLETE 
+        drop 
+        foreign key FKF033B8CE981F9C23;
+
+    alter table TB_ATHLETE 
+        drop 
+        foreign key FKF033B8CE9820EEFF;
+
+    alter table TB_COACH 
+        drop 
+        foreign key FK5F2F6F699820EEFF;
+
+    alter table TB_EXERCISE 
+        drop 
+        foreign key FK8495F4894B70C8D9;
+
+    alter table TB_EXERCISE_BLOCK 
+        drop 
+        foreign key FK6666D937DF747AE4;
+
+    alter table TB_TEAM 
+        drop 
+        foreign key FKD18D3D8E69FDDEEB;
+
+    drop table if exists TB_ATHLETE;
+
+    drop table if exists TB_COACH;
+
+    drop table if exists TB_EXERCISE;
+
+    drop table if exists TB_EXERCISE_BLOCK;
+
+    drop table if exists TB_TEAM;
+
+    drop table if exists TB_USER;
+
     create table TB_ATHLETE (
         ID_USER bigint not null,
         ID_TEAM bigint not null,

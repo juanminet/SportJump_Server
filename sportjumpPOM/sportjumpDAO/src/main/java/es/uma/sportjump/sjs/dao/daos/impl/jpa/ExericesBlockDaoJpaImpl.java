@@ -1,5 +1,6 @@
 package es.uma.sportjump.sjs.dao.daos.impl.jpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,24 +25,65 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	
 	
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void persistExerciseBlock(ExerciseBlock exerciseBlock) {
+	public void persistExerciseBlock(ExerciseBlock exerciseBlock) {	
+		
+		Long idExerciseBlock = exerciseBlock.getIdExerciseBlock();
+		
+		if(idExerciseBlock == null){
+			createExerciseBlock(exerciseBlock);
+		}else{
+			updateExerciseBlock(exerciseBlock);
+		}	
+	}
+
+	
+	private void updateExerciseBlock(ExerciseBlock exerciseBlock) {
 		List<Exercise> listExercises = exerciseBlock.getListExercises();
 		
+		ExerciseBlock exerciseBlockNew = getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
 		
-		ExerciseBlock exerciseBlockAux = getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
-		deleteAllExercises(exerciseBlockAux);
+		exerciseBlockNew.setName(exerciseBlock.getName());
+		exerciseBlockNew.setType(exerciseBlock.getType());
+		exerciseBlockNew.setDescription(exerciseBlock.getDescription());			
 		
-		em.persist(exerciseBlock);		
-	
+		deleteAllExercises(exerciseBlockNew);		
+		exerciseBlockNew.setListExercises(new ArrayList<Exercise>());
+			
 		
-		
-		if (listExercises != null){
+		if(listExercises != null){	
+			
 			for(Exercise exercise : listExercises){
-				exercise.setExerciseBlock(exerciseBlock);			
+				exercise.setExerciseBlock(exerciseBlockNew);
+				exerciseBlockNew.getListExercises().add(exercise);
 				em.persist(exercise);
-			}
+			}			
+			
+		}
+		
+		em.persist(exerciseBlockNew);				
+	}
+
+
+	private void createExerciseBlock(ExerciseBlock exerciseBlock) {
+		
+		List<Exercise> listExercises = exerciseBlock.getListExercises();
+	
+		em.persist(exerciseBlock);		
+		
+
+		ExerciseBlock exerciseBlockNew = getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
+		
+		if(listExercises != null){	
+			
+			for(Exercise exercise : listExercises){
+				exercise.setExerciseBlock(exerciseBlockNew);
+				exerciseBlockNew.getListExercises().add(exercise);
+				em.persist(exercise);
+			}			
+			
 		}
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -66,6 +108,7 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 		em.remove(exerciseBlock);
 	}
 	
+
 	private void deleteAllExercises(ExerciseBlock exerciseBlock){
 		List<Exercise> listExercises = exerciseBlock.getListExercises();
 		if (listExercises != null){
@@ -74,6 +117,7 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 			}
 		}
 	}
+	
 
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)

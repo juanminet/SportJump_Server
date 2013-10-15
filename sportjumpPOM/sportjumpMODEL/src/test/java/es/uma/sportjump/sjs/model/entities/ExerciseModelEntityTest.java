@@ -116,7 +116,7 @@ public class ExerciseModelEntityTest {
 		//Create Exercise
 		Exercise exercise = new Exercise();
 		exercise.setName(name);
-		exercise.setExerciseBlock(exerciseBlock);
+		//exercise.setExerciseBlock(exerciseBlock);
 		
 		//Persist entity
 		entityManager.getTransaction().begin();

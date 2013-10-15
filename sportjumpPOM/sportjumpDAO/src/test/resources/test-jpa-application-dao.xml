@@ -36,7 +36,7 @@
 	            <property name="showSql" value="true" />	           
 	        </bean>
 	    </property>
-     	<property name="jpaProperties">
+     	 <property name="jpaProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>

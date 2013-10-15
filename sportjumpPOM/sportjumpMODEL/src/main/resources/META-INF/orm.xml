@@ -59,7 +59,7 @@
 	</named-query> 
 	
 	<named-query name="findAllExerciseByBlock">
-	    <query>from Exercise e where e.exerciseBlock.idExerciseBlock = :idBlock</query>
+	    <query>from Exercise e where e.exerciseBlock.idExerciseBlock = :idBlock order by e.pos ASC</query>
 	</named-query>
 	
 	

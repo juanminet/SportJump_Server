@@ -2,6 +2,7 @@ package es.uma.sportjump.sjs.model.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -39,7 +40,12 @@ public class ExerciseBlock {
 	@JoinColumn(name="ID_USER", nullable=false)
 	private Coach coach;	
 	
-	@Transient
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="exerciseBlock" )
+//	@JoinTable
+//	  (
+//	      name="TB_EXERCISE",
+//	      joinColumns={ @JoinColumn(name="ID_BLOCK", referencedColumnName="ID_BLOCK") }
+//	  )
 	private List<Exercise> listExercises;
 
 

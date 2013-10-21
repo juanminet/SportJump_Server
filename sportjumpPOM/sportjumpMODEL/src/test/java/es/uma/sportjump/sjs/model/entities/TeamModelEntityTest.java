@@ -1,16 +1,12 @@
 package es.uma.sportjump.sjs.model.entities;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,46 +14,40 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.uma.sportjump.sjs.model.entities.test.util.CoachTestUtil;
+import es.uma.sportjump.sjs.model.entities.test.util.TeamTestUtil;
+
 public class TeamModelEntityTest {
 
 	private static EntityManagerFactory entityManagerFactory = null;
 	private static Coach coach;
+	private static CoachTestUtil coachUtil;
+	private static TeamTestUtil teamUtil;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		entityManagerFactory = Persistence.createEntityManagerFactory("sportjumpJpaPU");
-		
-		//Init static objects
-		
-		//Create coach
-		String name = "Pepe";	
-		String userName = "Garcia";
-		String dni= "34567898p";
-		coach = createCoach(name, userName, dni);		
-		
-
-		
+		coachUtil = CoachTestUtil.getInstance(entityManagerFactory);
+		teamUtil = TeamTestUtil.getInstance(entityManagerFactory);
 	}
 
 	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		
-			
-		//delete static coach
-		deleteCoach(coach);
-		
-		
+	public static void tearDownAfterClass() throws Exception {			
+	
+		teamUtil = null;
+		coachUtil = null;
 		entityManagerFactory = null;
 	}
 
 	@Before
 	public void setUp() throws Exception {
-
+		coach = coachUtil.createCompleteCoach();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-
+		//delete static coach
+		coachUtil.deleteCoach(coach.getIdUser());
 	}
 
 	@Test
@@ -70,34 +60,34 @@ public class TeamModelEntityTest {
 		Date createDate = new Date();
 
 		// Create Team
-		Long idTeam = createTeam(name,type, description,createDate);
+		Long idTeam = teamUtil.createTeam(name,type, description,createDate,coach);
 
 		// Make assert
 		assertNotNull(idTeam);
 
 		// Read Team
-		Team team = readTeam(idTeam);		
+		Team team = teamUtil.readTeam(idTeam);		
 	
 
 		// Make assert
-		makeAssertTeam(name, team);
+		teamUtil.makeAssertTeam(name, team);
 
 		// Update Team
 		String newName = "Equipazo";
 
-		updateTeam(idTeam, newName);
+		teamUtil.updateTeam(idTeam, newName);
 
 		// Read team
-		team = readTeam(idTeam);
+		team = teamUtil.readTeam(idTeam);
 
 		// Make assert
-		makeAssertTeam(newName,team);
+		teamUtil.makeAssertTeam(newName,team);
 
 		// Delete Team
-		deleteTeam(idTeam);
+		teamUtil.deleteTeam(idTeam);
 
 		// Read Team
-		team = readTeam(idTeam);
+		team = teamUtil.readTeam(idTeam);
 
 		// Make assert
 		assertNull(team);
@@ -108,170 +98,34 @@ public class TeamModelEntityTest {
 	public void testNullables() {
 		//Create team
 		Team team = new Team();
-		checkNullableTeam(team);
+		teamUtil.checkNullableTeam(team);
 		
 		//check name
-		team= createCompleteTeam();
+		team= teamUtil.createCompleteTeamNoPersist(coach);
 		team.setName(null);
-		checkNullableTeam(team);
+		teamUtil.checkNullableTeam(team);
 		
 		//check name
-		team= createCompleteTeam();
+		team= teamUtil.createCompleteTeamNoPersist(coach);
 		team.setType(null);
-		checkNullableTeam(team);
+		teamUtil.checkNullableTeam(team);
 		
 		
 		//check name
-		team= createCompleteTeam();
+		team= teamUtil.createCompleteTeamNoPersist(coach);
 		team.setDescription(null);
-		checkNullableTeam(team);
+		teamUtil.checkNullableTeam(team);
 		
 		
 		//check name
-		team= createCompleteTeam();
+		team= teamUtil.createCompleteTeamNoPersist(coach);
 		team.setDateCreate(null);
-		checkNullableTeam(team);
+		teamUtil.checkNullableTeam(team);
 		
 		
 		//check name
-		team= createCompleteTeam();
+		team= teamUtil.createCompleteTeamNoPersist(coach);
 		team.setCoach(null);
-		checkNullableTeam(team);
+		teamUtil.checkNullableTeam(team);
 	}
-	
-	private Team createCompleteTeam(){
-		// Definition Team
-		String name = "Equipo";
-		String type = "Velocidad";
-		String description = "Grupo de la velocidad";
-		Date dateCreate = new Date();
-				
-		//Create team
-		Team team = new Team();
-				
-		team.setName(name);
-		team.setType(type);
-		team.setDescription(description);
-		team.setDateCreate(dateCreate);
-		team.setCoach(coach);
-		
-		return team;
-	}
-
-	private void checkNullableTeam(Team team) {
-		
-		boolean check = false;
-		
-		try{
-			persistTeam(team);
-		}catch (PersistenceException persistenceException) {
-			check=true;
-		}
-		
-		assertTrue(check);
-	}
-
-	private Long createTeam(String name, String type, String description, Date dateCreate) {		
-		//Create team
-		Team team = new Team();
-		team.setName(name);
-		team.setType(type);
-		team.setDescription(description);
-		team.setDateCreate(dateCreate);
-		team.setCoach(coach);
-		
-		//Persist entity
-		Long res = persistTeam(team);
-		
-		//return idTeam
-		return res;
-	}
-	
-	private Long persistTeam(Team team){
-		
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//Persist entity
-		entityManager.getTransaction().begin();
-		entityManager.persist(team);
-		entityManager.getTransaction().commit();
-		
-		//return idTeam
-		return Long.valueOf(team.getIdTeam());
-	}
-
-	private Team readTeam(Long idTeam) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//read Team
-		Team team = entityManager.find(Team.class, idTeam);	
-		
-		return team;
-	}
-
-	private void updateTeam(Long idTeam, String newName) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-	
-		//read team
-		Team team = entityManager.find(Team.class, idTeam);
-		
-		//update team
-		team.setName(newName);
-		
-		entityManager.getTransaction().begin();
-		entityManager.persist(team);
-		entityManager.getTransaction().commit();		
-	}
-
-	private void deleteTeam(Long idTeam) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//remove team
-		Team team = entityManager.find(Team.class, idTeam);
-		
-		entityManager.getTransaction().begin();
-		entityManager.remove(team);
-		entityManager.getTransaction().commit();
-		
-	}
-
-	private void makeAssertTeam(String name, Team team) {
-		assertEquals(name, team.getName());		
-	}
-	
-	
-	//BEFORE & AFTER CLASS data
-	
-	private static  Coach createCoach(String name, String userName, String dni) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//Create coach
-		Coach coach = new Coach();
-		coach.setName(name);
-		coach.setUserName(userName);
-		coach.setDni(dni);
-		
-		//Persist entity
-		entityManager.getTransaction().begin();
-		entityManager.persist(coach);
-		entityManager.getTransaction().commit();
-		
-		//return coach
-		return coach;
-	}
-	
-	private static void deleteCoach(Coach coachToRemove) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//remove team
-		Coach coach = entityManager.find(Coach.class, coachToRemove.getIdUser());
-						
-		entityManager.getTransaction().begin();
-		entityManager.remove(coach);
-		entityManager.getTransaction().commit();
-		
-	}
-	
-	
-
 }

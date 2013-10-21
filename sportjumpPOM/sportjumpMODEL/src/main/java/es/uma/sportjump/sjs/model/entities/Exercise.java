@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -30,10 +28,6 @@ public class Exercise {
 	@Column(name="POSITION", nullable=false)
 	private int pos;
 	
-	
-	@ManyToOne
-    @JoinColumn(name="ID_BLOCK")
-	private ExerciseBlock exerciseBlock;
 	
 	public Long getIdExercise() {
 		return idExercise;
@@ -60,13 +54,13 @@ public class Exercise {
 		this.pos = pos;
 	}
 
-	public ExerciseBlock getExerciseBlock() {
-		return exerciseBlock;
-	}
-
-	public void setExerciseBlock(ExerciseBlock exerciseBlock) {
-		this.exerciseBlock = exerciseBlock;
-	}
+//	public ExerciseBlock getExerciseBlock() {
+//		return exerciseBlock;
+//	}
+//
+//	public void setExerciseBlock(ExerciseBlock exerciseBlock) {
+//		this.exerciseBlock = exerciseBlock;
+//	}
 
 
 }

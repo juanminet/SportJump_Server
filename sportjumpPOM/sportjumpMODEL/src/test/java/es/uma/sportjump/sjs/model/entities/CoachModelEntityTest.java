@@ -1,8 +1,8 @@
 package es.uma.sportjump.sjs.model.entities;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -12,20 +12,25 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import es.uma.sportjump.sjs.model.entities.test.util.CoachTestUtil;
+
 public class CoachModelEntityTest {
 
 	private static EntityManagerFactory entityManagerFactory = null;
 	
+	private static CoachTestUtil coachUtil;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		entityManagerFactory = Persistence.createEntityManagerFactory("sportjumpJpaPU");
-		
+		entityManagerFactory = Persistence.createEntityManagerFactory("sportjumpJpaPU");		
+		coachUtil = CoachTestUtil.getInstance(entityManagerFactory);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		
 		entityManagerFactory = null;
+		coachUtil = null;
 	}
 
 	@Before
@@ -49,99 +54,35 @@ public class CoachModelEntityTest {
 		String dni = "88779988R";
 
 		// Create Coach
-		Long idCoach = createCoach(name,surname, userName, email,dni);
+		Long idCoach = coachUtil.createCoach(name,surname, userName, email,dni);
 
 		// Make assert
 		assertNotNull(idCoach);
 
 		// Read Coach
-		Coach coach = readCoach(idCoach);
+		Coach coach = coachUtil.readCoach(idCoach);
 
 		// Make assert
-		makeAssertCoach(name, coach);
+		coachUtil.makeAssertCoach(name, coach);
 
 		// Update Coach
 		String newName = "Guardiola";
 
-		updateCoach(idCoach, newName);
+		coachUtil.updateCoach(idCoach, newName);
 
 		// Read coach
-		coach = readCoach(idCoach);
+		coach = coachUtil.readCoach(idCoach);
 
 		// Make assert
-		makeAssertCoach(newName,coach);
+		coachUtil.makeAssertCoach(newName,coach);
 
 		// Delete Coach
-		deleteCoach(idCoach);
+		coachUtil.deleteCoach(idCoach);
 
 		// Read Coach
-		coach = readCoach(idCoach);
+		coach = coachUtil.readCoach(idCoach);
 
 		// Make assert
 		assertNull(coach);
-
 	}
-
-	private Long createCoach(String name, String surname, String userName, String email, String dni) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//Create coach
-		Coach coach = new Coach();
-		coach.setName(name);
-		coach.setUserName(userName);
-		coach.setSurname(surname);
-		coach.setEmail(email);
-		coach.setDni(dni);
-	
-		
-		//Persist entity
-		entityManager.getTransaction().begin();
-		entityManager.persist(coach);
-		entityManager.getTransaction().commit();
-		
-		//return idCoach
-		return Long.valueOf(coach.getIdUser());
-	}
-
-	private Coach readCoach(Long idCoach) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//read Coach
-		Coach coach = entityManager.find(Coach.class, idCoach);
-		return coach;
-	}
-
-	private void updateCoach(Long idCoach, String newName) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-	
-		//read coach
-		Coach coach = entityManager.find(Coach.class, idCoach);
-		
-		//update coach
-		coach.setName(newName);
-		
-		entityManager.getTransaction().begin();
-		entityManager.persist(coach);
-		entityManager.getTransaction().commit();		
-	}
-
-	private void deleteCoach(Long idCoach) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
-		//remove coach
-		Coach coach = entityManager.find(Coach.class, idCoach);
-		
-		entityManager.getTransaction().begin();
-		entityManager.remove(coach);
-		entityManager.getTransaction().commit();
-		
-	}
-
-	private void makeAssertCoach(String name, Coach coach) {
-		assertEquals(name, coach.getName());		
-	}	
-	
-	
-	
-
 }

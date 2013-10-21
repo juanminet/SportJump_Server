@@ -73,7 +73,7 @@
 		
 	<!-- TRAININGS -->
 	 
-	<definition name="training_working_day" extends="standardTemplate">
+	<definition name="training_day" extends="standardTemplate">
 		<put-attribute name="title" value="training.workingday.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>

@@ -35,7 +35,7 @@
 			<ul>		
 					
 				<li><a <c:if test="${layer == 'home'}">class="active"</c:if> href="${pageContext.request.contextPath}/action/home"><fmt:message key="header.bar.home"/></a></li>
-				<li><a <c:if test="${layer == 'training'}">class="active"</c:if>href="${pageContext.request.contextPath}/action/training"><fmt:message key="header.bar.trainings"/></a></li>
+				<li><a <c:if test="${layer == 'training'}">class="active"</c:if>href="${pageContext.request.contextPath}/action/training/day/list"><fmt:message key="header.bar.trainings"/></a></li>
 				<li><a <c:if test="${layer == 'admin'}">class="active"</c:if> href="${pageContext.request.contextPath}/action/admin"><fmt:message key="header.bar.admin"/></a></li>	
 				<li class="logout"><a href="${pageContext.request.contextPath}/logout"><fmt:message key="header.boton.close_session"/></a></li>
 				<li class="logout"><a <c:if test="${layer == 'profile'}">class="active"</c:if> href="${pageContext.request.contextPath}/action/admin/profile"><fmt:message key="header.boton.profile"/></a></li>		

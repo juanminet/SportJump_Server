@@ -1,76 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-  <style>
-  #sortable1 { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-  #sortable1 li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-  #sortable1 li span { position: absolute; margin-left: -1.3em; }
-  </style>
+<!-- QUITAR -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 <script>
-  $(function() {
-	  
-    $( "#accordion" ).accordion({
-    	collapsible : true,
-    	heightStyle: "content"
-    });
-    
-    $( "#sortable1" ).sortable({
-        connectWith: ".connectedSortable"
-      }).disableSelection();
-    
-  });
+	$(document).ready( function() {
+		
+		initDataTable(
+				"table_exercises_block",
+				10);
+		  	
+	}); 
   </script>
 
 
-
-
-
-
 <div id="body_home">
-	<div class="container_left">
-		<div id="accordion">
-			<h3>Section 1</h3>
-			<div>
-				<ul id="sortable1" class="connectedSortable">
-				  <li class="ui-state-default" onclick="javascript:alert('illo');">Item 1</li>
-				  <li class="jh9">Item 2</li>
-				  <li class="ui-state-default">Item 3</li>
-				  <li class="ui-state-default">Item 4</li>
-				  <li class="ui-state-default">Item 5</li>
-				  <li class="ui-state-default">Item 6</li>
-				  <li class="ui-state-default">Item 7</li>
-				</ul>
-			</div>
-			<h3>Section 2</h3>
-			<div>
-				<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum
-					sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris
-					turpis porttitor velit, faucibus interdum tellus libero ac justo.
-					Vivamus non quam. In suscipit faucibus urna.</p>
-			</div>
-			<h3>Section 3</h3>
-			<div>
-				<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.
-					Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in
-					pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac
-					felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam
-					nisi, eu iaculis leo purus venenatis dui.</p>
-				<ul>
-					<li>List item one</li>
-					<li>List item two</li>
-					<li>List item three</li>
-				</ul>
-			</div>
-			<h3>Section 4</h3>
-			<div>
-				<p>Cras dictum. Pellentesque habitant morbi tristique senectus et
-					netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum
-					primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-					Aenean lacinia mauris vel est.</p>
-				<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim
-					consequat lectus. Class aptent taciti sociosqu ad litora torquent
-					per conubia nostra, per inceptos himenaeos.</p>
-			</div>
-		</div>
-	</div>
+	<div id = "body_home_container" >			
+	    <div class="caja">
+	    
+	   		<div class="subcaja">
+		 		<h1><fmt:message key="training.exercise.block.tittle" /></h1>
+		 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/new"><fmt:message key="training.exercise.block.button.new" /></a>
+		    </div> 
+		    
+		  			    
+			<table class="display" id="table_exercises_block">
+		    	<thead>
+		        	<tr>
+		            	<th><fmt:message key="training.exercise.block.name" /> </th>
+		            	<th><fmt:message key="training.exercise.block.type" /></th>		            	
+		          	</tr>
+		        </thead>
+		        <tbody>
+		        	<c:forEach items="${trainingDayList}" var="day">
+			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/training/day/${day.idExerciseBlock}';"> 
+				            <td>${day.name}</td>            
+				            <td>${day.type}</td>	            				         
+			        	</tr>
+		        	</c:forEach>	
+		        </tbody>
+		      </table>   
+	      </div>      
+      </div>
 </div>

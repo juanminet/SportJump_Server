@@ -27,75 +27,27 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void persistExerciseBlock(ExerciseBlock exerciseBlock) {	
 		
-		Long idExerciseBlock = exerciseBlock.getIdExerciseBlock();
-		
-		if(idExerciseBlock == null){
-			createExerciseBlock(exerciseBlock);
-		}else{
-			updateExerciseBlock(exerciseBlock);
-		}	
+		em.persist(exerciseBlock);
 	}
 
 	
-	private void updateExerciseBlock(ExerciseBlock exerciseBlock) {
-		List<Exercise> listExercises = exerciseBlock.getListExercises();
-		
-		ExerciseBlock exerciseBlockNew = getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
-		
-		exerciseBlockNew.setName(exerciseBlock.getName());
-		exerciseBlockNew.setType(exerciseBlock.getType());
-		exerciseBlockNew.setDescription(exerciseBlock.getDescription());			
-		
-		deleteAllExercises(exerciseBlockNew);		
-		exerciseBlockNew.setListExercises(new ArrayList<Exercise>());
-			
-		
-		if(listExercises != null){	
-			
-			for(Exercise exercise : listExercises){
-				exercise.setExerciseBlock(exerciseBlockNew);
-				exerciseBlockNew.getListExercises().add(exercise);
-				em.persist(exercise);
-			}			
-			
-		}
-		
-		em.persist(exerciseBlockNew);				
-	}
-
-
-	private void createExerciseBlock(ExerciseBlock exerciseBlock) {
-		
-		List<Exercise> listExercises = exerciseBlock.getListExercises();
 	
-		em.persist(exerciseBlock);		
-		
 
-		ExerciseBlock exerciseBlockNew = getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
-		
-		if(listExercises != null){	
-			
-			for(Exercise exercise : listExercises){
-				exercise.setExerciseBlock(exerciseBlockNew);
-				exerciseBlockNew.getListExercises().add(exercise);
-				em.persist(exercise);
-			}			
-			
-		}
-	}
+
+	
 
 
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ExerciseBlock getExerciseBlockById(Long idBlock) {
 		ExerciseBlock exerciseBlock =  em.find(ExerciseBlock.class, idBlock);
-		if (exerciseBlock != null){			
-			Query query = em.createNamedQuery("findAllExerciseByBlock")
-					.setParameter("idBlock", Long.valueOf(exerciseBlock.getIdExerciseBlock()));	
-			List<Exercise> listExercises = query.getResultList();
-			
-			exerciseBlock.setListExercises(listExercises);
-		}
+//		if (exerciseBlock != null){			
+//			Query query = em.createNamedQuery("findAllExerciseByBlock")
+//					.setParameter("idBlock", Long.valueOf(exerciseBlock.getIdExerciseBlock()));	
+//			List<Exercise> listExercises = query.getResultList();
+//			
+//			exerciseBlock.setListExercises(listExercises);
+//		}
 		
 		return exerciseBlock;
 	}

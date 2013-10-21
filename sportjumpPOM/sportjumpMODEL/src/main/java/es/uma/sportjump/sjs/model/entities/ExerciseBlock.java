@@ -40,12 +40,8 @@ public class ExerciseBlock {
 	@JoinColumn(name="ID_USER", nullable=false)
 	private Coach coach;	
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy="exerciseBlock" )
-//	@JoinTable
-//	  (
-//	      name="TB_EXERCISE",
-//	      joinColumns={ @JoinColumn(name="ID_BLOCK", referencedColumnName="ID_BLOCK") }
-//	  )
+	@OneToMany(cascade = CascadeType.ALL )
+	@JoinColumn(name="ID_BLOCK_FK", nullable=false)
 	private List<Exercise> listExercises;
 
 

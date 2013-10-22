@@ -1,4 +1,4 @@
-package es.uma.sportjump.sjs.dao.test.impl.jpa;
+package es.uma.sportjump.sjs.dao.test.impl.mock;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,12 +9,12 @@ import es.uma.sportjump.sjs.dao.test.TrainingDaoTest;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:test-jpa-application-dao.xml")  
+@ContextConfiguration(locations = "classpath:test-mock-application-dao.xml")  
 public class TrainingDaoJpaTest  extends TrainingDaoTest{
 	
 	
 	@Test
-	public void testTrainingCRUD(){
+	public void testExerciseBlockCRUD(){
 		super.testTrainingCRUD();
 	}
 	
@@ -22,10 +22,6 @@ public class TrainingDaoJpaTest  extends TrainingDaoTest{
 	public void testTrainingWithExerciseBlock(){
 		super.testTrainingWithExerciseBlock();
 	}
-	
-	@Test
-	public void testAllTrainings(){
-		super.testAllTrainings();
-	}
+
 
 }

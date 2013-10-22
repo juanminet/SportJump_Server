@@ -31,7 +31,7 @@ public class TrainingDaoTestUtil {
 		//Persist
 		trainingDao.persistTraining(training);
 		
-		return Long.valueOf(training. getIdTraining());
+		return Long.valueOf(training.getIdTraining());
 	}
 	
 	public Training readTraining(Long idTraining) {				
@@ -44,10 +44,11 @@ public class TrainingDaoTestUtil {
 		trainingDao.deleteTraining(training);
 	}
 
-	public void updateTraining(String name2, String type2,Training training) {
+	public void updateTraining(String name2, String type2, List<ExerciseBlock> exerciseBlockList, Training training) {
 		//set attributes
 		training.setName(name2);
 		training.setType(type2);
+		training.setListExerciseBlock(exerciseBlockList);
 		
 		trainingDao.persistTraining(training);		
 	}

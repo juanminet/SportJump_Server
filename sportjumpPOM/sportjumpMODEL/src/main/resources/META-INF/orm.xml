@@ -57,10 +57,17 @@
 	<named-query name="findAllExercise">
 	    <query>from Exercise</query>
 	</named-query> 
+
 	
-<!-- 	<named-query name="findAllExerciseByBlock">
-	    <query>from Exercise e where e.exerciseBlock.idExerciseBlock = :idBlock order by e.pos ASC</query>
-	</named-query> -->
+	<!-- Trainings -->
+	<named-query name="findAllTrainings">
+	    <query>from Training</query>
+	</named-query>
+	
+	<named-query name="findAllTrainingsByCoach">
+	    <query>from Training t where t.coach.idUser = :idUser</query>
+	</named-query>
+	
 	
 	
 	

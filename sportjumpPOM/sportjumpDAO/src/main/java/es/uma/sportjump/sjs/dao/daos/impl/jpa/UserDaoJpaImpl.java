@@ -86,6 +86,7 @@ public class UserDaoJpaImpl  implements UserDao{
 
 
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Coach> getAllCoaches() {
 		
@@ -130,6 +131,7 @@ public class UserDaoJpaImpl  implements UserDao{
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Team> getAllTeams() {
 		
@@ -140,6 +142,7 @@ public class UserDaoJpaImpl  implements UserDao{
 		return resListTeams;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Team> getTeamsByCoach(Coach coach) {
 		
@@ -212,6 +215,7 @@ public class UserDaoJpaImpl  implements UserDao{
 		return resAthlete;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Athlete> getAllAthletes() {
 		
@@ -222,6 +226,7 @@ public class UserDaoJpaImpl  implements UserDao{
 		return resListAthletes;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Athlete> getAthletesByCoach(Coach coach) {
 		Query query  = em.createNamedQuery("findAthleteFromCoach")
@@ -233,6 +238,7 @@ public class UserDaoJpaImpl  implements UserDao{
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Athlete> getAthletesByTeam(Team team) {
 		Query query  = em.createNamedQuery("findAthleteFromTeam")

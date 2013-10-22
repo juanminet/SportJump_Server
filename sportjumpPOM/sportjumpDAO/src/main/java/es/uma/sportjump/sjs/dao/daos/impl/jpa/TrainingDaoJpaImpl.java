@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -41,11 +42,16 @@ public class TrainingDaoJpaImpl implements TrainingDao{
 		em.remove(getTrainingById(training.getIdTraining()));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Training> getAllTrainingByCoach(Coach coach) {
-		// TODO Auto-generated method stub
-		return null;
+
+
+		Query query = em.createNamedQuery("findAllTrainingsByCoach")
+				.setParameter("idUser", coach.getIdUser());
+		
+		List<Training> listTraining = query.getResultList();		
+		
+		return listTraining;		
 	}
-
-
 }

@@ -19,6 +19,28 @@ public class ExerciseBlockDaoTestUtil {
 	@Autowired
 	ExerciseBlockDao exerciseBlockDao;
 	
+	
+	public ExerciseBlock createCompleteExerciseBlockNum(Coach coach, int num){
+		// Definition ExerciseBlock
+		String name = "Bloque rapidez" + num;
+		String type = "Velocidad"+ num;
+		String description = "Bloque donde se trabaja la velocidad inmediata y la fuerza explosiva"+ num;
+
+		
+		//Create ExerciseBlock
+		ExerciseBlock block = new ExerciseBlock();
+		block.setName(name);
+		block.setDescription(description);
+		block.setType(type);
+		block.setCoach(coach);
+		
+		//Persist entity
+		exerciseBlockDao.persistExerciseBlock(block);
+		
+		return block;
+	}
+	
+	
 	public Long createExerciseBlock(String name, String type,	String description, List<Exercise> exerciseList, Coach coach) {				
 		//create object
 		ExerciseBlock exerciseBlock = new ExerciseBlock();

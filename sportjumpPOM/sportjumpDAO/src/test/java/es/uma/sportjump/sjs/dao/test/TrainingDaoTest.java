@@ -14,24 +14,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import es.uma.sportjump.sjs.dao.daos.ExerciseBlockDao;
-import es.uma.sportjump.sjs.dao.daos.UserDao;
+import es.uma.sportjump.sjs.dao.daos.TrainingDao;
 import es.uma.sportjump.sjs.dao.test.util.CoachDaoTestUtil;
 import es.uma.sportjump.sjs.dao.test.util.ExerciseBlockDaoTestUtil;
 import es.uma.sportjump.sjs.dao.test.util.TrainingDaoTestUtil;
 import es.uma.sportjump.sjs.model.entities.Coach;
-import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 import es.uma.sportjump.sjs.model.entities.Training;
 
-//@ContextConfiguration(locations = "classpath:test-jpa-application-dao.xml")  
 public class TrainingDaoTest{
 	
-	@Autowired
-	protected ExerciseBlockDao exerciseBlockDao;
 	
 	@Autowired
-	protected UserDao userDao;
+	private TrainingDao trainingDao;
 	
 	@Autowired
 	private CoachDaoTestUtil coachUtil;
@@ -44,6 +39,10 @@ public class TrainingDaoTest{
 	
 	
 	protected Coach coach;
+	
+	private ExerciseBlock exerciseBlock1;
+	private ExerciseBlock exerciseBlock2;
+	private ExerciseBlock exerciseBlock3;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -58,10 +57,18 @@ public class TrainingDaoTest{
 	@Before
 	public void setUp() throws Exception {	
 		coach = coachUtil.createNewCoach();
+		
+		exerciseBlock1 = exerciseBlockUtil.createCompleteExerciseBlockNum(coach, 1);
+		exerciseBlock2 = exerciseBlockUtil.createCompleteExerciseBlockNum(coach, 2);
+		exerciseBlock3 = exerciseBlockUtil.createCompleteExerciseBlockNum(coach, 3);
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock1);
+		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock2);
+		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock3);
+		
 		coachUtil.deleteCoach(coach);
 	}
 	
@@ -89,7 +96,7 @@ public class TrainingDaoTest{
 		//Update
 		String name2 = "Calentamiento";
 		String type2 = "Calentamientos";
-		trainingUtil.updateTraining(name2,type2,training);
+		trainingUtil.updateTraining(name2,type2,null, training);
 		
 		//Read training
 		training = trainingUtil.readTraining(idTraining);		
@@ -108,73 +115,57 @@ public class TrainingDaoTest{
 
 	}
 	
-	public void testExercises(){
-		//Initialize variables
-		String name = "Bloque brutal";
-		String type ="Brutality";
-		String description = "Es un bloque donde se busca la brutalidad en el entrenamiento";
-	
-		String exerciseName1 = "15 X 50kg hombros";
-		String exerciseName2 = "10 X 40kg dorsales";
+	public void testTrainingWithExerciseBlock(){
+		// Definition training
+		String name = "Rapidez 1";
+		String type = "Velocidad";
+		String description = "Entrenamos fuerza, y rapidez para coger musculatura";
 		
-		Exercise exercise1 = new Exercise();
-		exercise1.setName(exerciseName1);
-		exercise1.setPos(0);
+		List<ExerciseBlock> exerciseBlockList = new ArrayList<ExerciseBlock>();
+		exerciseBlockList.add(exerciseBlock1);
+		exerciseBlockList.add(exerciseBlock2);
 		
-		Exercise exercise2 = new Exercise();
-		exercise2.setName(exerciseName2);
-		exercise2.setPos(1);
 		
-		List<Exercise> exerciseList = new ArrayList<Exercise>();
-		exerciseList.add(exercise1);
-		exerciseList.add(exercise2);
+		// Create training
+		Long idTraining = trainingUtil.createTraining(name,type, description, exerciseBlockList, coach);
 		
-		//Create exerciseBlock
-		Long idExerciseBlock = exerciseBlockUtil.createExerciseBlock(name,type,description, exerciseList, coach);
+		// Read training
+		Training training = trainingUtil.readTraining(idTraining);
 		
-		//Make assert
-		assertNotNull(idExerciseBlock);
 		
-		//Read exerciseBlock
-		ExerciseBlock exerciseBlock = exerciseBlockUtil.readExerciseBlock(idExerciseBlock);
+		assertEquals(exerciseBlock1.getIdExerciseBlock(),training.getListExerciseBlock().get(0).getIdExerciseBlock());
+		assertEquals(exerciseBlock2.getIdExerciseBlock(),training.getListExerciseBlock().get(1).getIdExerciseBlock());
 		
-		List<Exercise> exerciseListAux = exerciseBlock.getListExercises();
+		//Update
+		exerciseBlockList.remove(exerciseBlock1);		
+		trainingUtil.updateTraining(name,type, exerciseBlockList,training);
 		
-		//Make asserts
-		assertNotNull(exerciseListAux);
-		assertEquals(2, exerciseListAux.size());
-		assertEquals (exerciseName1,exerciseListAux.get(0).getName());
-		assertEquals (exerciseName2,exerciseListAux.get(1).getName());
+		// Read training
+		training = trainingUtil.readTraining(idTraining);
 		
-		//update
-		String newExerciseName1 = "35 X 50kg hombros";
+		assertEquals(1,training.getListExerciseBlock().size());	
 		
-		exerciseBlock.getListExercises().get(0).setName(newExerciseName1);
-		exerciseBlockDao.persistExerciseBlock(exerciseBlock);
 		
-		//Read exerciseBlock
-		exerciseBlock = exerciseBlockUtil.readExerciseBlock(idExerciseBlock);
+		exerciseBlockList.add(exerciseBlock3);
+		trainingUtil.updateTraining(name,type, exerciseBlockList,training);
 		
-		exerciseListAux = exerciseBlock.getListExercises();
+		// Read training
+		training = trainingUtil.readTraining(idTraining);
 		
-		//Make asserts
-		assertNotNull(exerciseListAux);
-		assertEquals(2, exerciseListAux.size());
-		assertEquals (newExerciseName1,exerciseListAux.get(0).getName());
-		assertEquals (exerciseName2,exerciseListAux.get(1).getName());
+		assertEquals(2,training.getListExerciseBlock().size());	
 		
-		//Delete exerciseBlock
-		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock);
 		
-		//Read exerciseBlock
-		exerciseBlock = exerciseBlockUtil.readExerciseBlock(idExerciseBlock);
-		
-		//Make assert
-		assertNull(exerciseBlock);
-		
+		// Delete training
+		trainingUtil.deleteTraining(training);
+
+		// Read training
+		training = trainingUtil.readTraining(idTraining);
+
+		// Make assert
+		assertNull(training);
 	}
 	
-	public void testAllExerciseBlocks(){
+	public void testAllTrainings(){
 		//Initialize variables
 		String name1 = "Bloque brutal1";
 		String type1 ="Brutality1";
@@ -190,51 +181,55 @@ public class TrainingDaoTest{
 		String type3 ="Brutality3";
 		String description3 = "Es un bloque donde se busca la brutalidad en el entrenamiento3";
 		
-		//Read List exercises
-		List<ExerciseBlock> exerciseBlockList = exerciseBlockDao.getAllExerciseBlockByCoach(coach);
+		List<ExerciseBlock> exerciseBlockList = new ArrayList<ExerciseBlock>();
+		exerciseBlockList.add(exerciseBlock1);
+		exerciseBlockList.add(exerciseBlock2);
+		
+		//Read trainings
+		List<Training> trainingList =  trainingDao.getAllTrainingByCoach(coach);
 		int initSize= 0;
-		if(exerciseBlockList != null){
-			initSize = exerciseBlockList.size();
+		if(trainingList != null){
+			initSize = trainingList.size();
 		}
 				
 
-		//Create exerciseBlock
-		Long idExerciseBlock1 = exerciseBlockUtil.createExerciseBlock(name1,type1,description1, null, coach);
-		Long idExerciseBlock2 = exerciseBlockUtil.createExerciseBlock(name2,type2,description2, null, coach);
-		Long idExerciseBlock3 = exerciseBlockUtil.createExerciseBlock(name3,type3,description3, null, coach);
+		//Create training
+		Long idTraining1 = trainingUtil.createTraining(name1,type1,description1, null, coach);
+		Long idTraining2 = trainingUtil.createTraining(name2,type2,description2, exerciseBlockList, coach);
+		Long idTraining3 = trainingUtil.createTraining(name3,type3,description3, null, coach);
 		
 		//make asserts
-		assertNotNull(idExerciseBlock1);
-		assertNotNull(idExerciseBlock2);
-		assertNotNull(idExerciseBlock3);
+		assertNotNull(idTraining1);
+		assertNotNull(idTraining2);
+		assertNotNull(idTraining3);
 		
-		//Read exerciseBlock
-		ExerciseBlock exerciseBlock1 = exerciseBlockUtil.readExerciseBlock(idExerciseBlock1);
-		ExerciseBlock exerciseBlock2 = exerciseBlockUtil.readExerciseBlock(idExerciseBlock2);
-		ExerciseBlock exerciseBlock3 = exerciseBlockUtil.readExerciseBlock(idExerciseBlock3);
+		//Read training
+		Training training1 = trainingUtil.readTraining(idTraining1);
+		Training training2 = trainingUtil.readTraining(idTraining2);
+		Training training3 = trainingUtil.readTraining(idTraining3);
 		
-		//Read List exercises
-		exerciseBlockList = exerciseBlockDao.getAllExerciseBlockByCoach(coach);
-		
-		//asserts
-		assertNotNull (exerciseBlockList);
-		assertEquals(initSize + 3, exerciseBlockList.size());
-		assertTrue(exerciseBlockList.contains(exerciseBlock1));
-		assertTrue(exerciseBlockList.contains(exerciseBlock2));
-		assertTrue(exerciseBlockList.contains(exerciseBlock3));
-		
-		//Delete exerciseBlock
-		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock1);
-		
-		//Read List exercises
-		exerciseBlockList = exerciseBlockDao.getAllExerciseBlockByCoach(coach);
+		//Read List trainings
+		trainingList = trainingDao.getAllTrainingByCoach(coach);
 		
 		//asserts
-		assertNotNull (exerciseBlockList);
-		assertEquals(initSize + 2, exerciseBlockList.size());
+		assertNotNull (trainingList);
+		assertEquals(initSize + 3, trainingList.size());
+		assertTrue(trainingList.contains(training1));
+		assertTrue(trainingList.contains(training2));
+		assertTrue(trainingList.contains(training3));
+		
+		//Delete training
+		trainingUtil.deleteTraining(training1);
+		
+		//Read List exercises
+		trainingList = trainingDao.getAllTrainingByCoach(coach);
+		
+		//asserts
+		assertNotNull (trainingList);
+		assertEquals(initSize + 2, trainingList.size());
 		
 		//Delete exerciseBlock
-		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock2);
-		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock3);
+		trainingUtil.deleteTraining(training2);
+		trainingUtil.deleteTraining(training3);
 	}
 }

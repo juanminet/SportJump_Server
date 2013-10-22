@@ -1,4 +1,4 @@
-package es.uma.sportjump.sjs.dao.daos;
+package es.uma.sportjump.sjs.dao.test;
 
 
 import static org.junit.Assert.assertNotNull;
@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import es.uma.sportjump.sjs.dao.daos.UserDao;
 import es.uma.sportjump.sjs.model.entities.Athlete;
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Team;

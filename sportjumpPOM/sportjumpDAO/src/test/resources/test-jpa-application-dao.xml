@@ -45,4 +45,9 @@
 		</property>
 		<property name="persistenceUnitName" value="sportjumpJpaPUTest" />
 	</bean> 
+	
+    
+
+    <!-- Inject bean utilities for tests -->
+    <context:component-scan base-package="es.uma.sportjump.sjs.dao.test.util" />
 </beans>

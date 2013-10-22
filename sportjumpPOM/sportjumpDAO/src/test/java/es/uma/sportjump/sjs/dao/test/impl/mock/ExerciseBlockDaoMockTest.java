@@ -1,11 +1,11 @@
-package es.uma.sportjump.sjs.dao.impl.mock;
+package es.uma.sportjump.sjs.dao.test.impl.mock;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import es.uma.sportjump.sjs.dao.daos.ExerciseBlockDaoTest;
+import es.uma.sportjump.sjs.dao.test.ExerciseBlockDaoTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:test-mock-application-dao.xml")  

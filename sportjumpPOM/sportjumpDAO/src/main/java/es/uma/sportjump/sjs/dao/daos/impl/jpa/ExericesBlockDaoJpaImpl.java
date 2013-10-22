@@ -1,6 +1,5 @@
 package es.uma.sportjump.sjs.dao.daos.impl.jpa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,7 +16,7 @@ import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 
-@Repository("ExerciseBlockDao")
+@Repository("exerciseBlockDao")
 public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 
 	@PersistenceContext( type = PersistenceContextType.EXTENDED)
@@ -29,15 +28,8 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 		
 		em.persist(exerciseBlock);
 	}
-
 	
 	
-
-
-	
-
-
-	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED)
 	public ExerciseBlock getExerciseBlockById(Long idBlock) {
 		ExerciseBlock exerciseBlock =  em.find(ExerciseBlock.class, idBlock);

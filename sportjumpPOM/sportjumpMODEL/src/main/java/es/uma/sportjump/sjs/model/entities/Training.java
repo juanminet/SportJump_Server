@@ -2,7 +2,6 @@ package es.uma.sportjump.sjs.model.entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -37,7 +36,7 @@ public class Training {
 	@JoinColumn(name="ID_USER", nullable=false)
 	private Coach coach;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinColumn(name="ID_TRAINING_FK", nullable=false)
 	private List<ExerciseBlock> listExerciseBlock;
 

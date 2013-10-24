@@ -3,6 +3,7 @@ package es.uma.sportjump.sjs.service.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 import es.uma.sportjump.sjs.model.entities.Training;
 import es.uma.sportjump.sjs.service.services.TrainingService;
 
+@Service("trainingService")
 public class TrainingServiceImpl implements TrainingService{
 	
 	@Autowired

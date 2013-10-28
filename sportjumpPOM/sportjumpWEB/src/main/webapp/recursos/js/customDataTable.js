@@ -3,7 +3,7 @@
  * 
  */
 function initDataTable(id,size){
-	$('#'+id).dataTable( {
+	var oTable = $('#'+id).dataTable( {
 		"bJQueryUI": true,
 	    "bFilter": true,
 	    "bPaginate": true,
@@ -12,12 +12,14 @@ function initDataTable(id,size){
 	    "iDisplayLength": size,
 		"sPaginationType": "full_numbers"	
 	});
+	
+	return oTable;
 }
 
 function initSimpleDataTable(id,size){
 	var tables = $.fn.dataTable.fnTables(true);
 
-	$('#'+id).dataTable( {
+	var oTable = $('#'+id).dataTable( {
 		"bJQueryUI": true,
 	    "bFilter": false,
 	    "bPaginate": false,
@@ -26,7 +28,27 @@ function initSimpleDataTable(id,size){
 	    "iDisplayLength": size,		
 	    'sDom': 't' 
 	});
+	
+	return oTable;
 }
+
+
+function initSimplePaginationDataTable(id,size){
+	var oTable = $('#'+id).dataTable( {
+		"bJQueryUI": true,
+	    "bFilter": true,
+	    "bPaginate": true,
+	    "bSort": false,
+	    "bLengthChange": false,
+	    "iDisplayLength": size,
+		"sPaginationType": "two_button"	
+	});
+	
+	return oTable;
+}
+
+
+
 
 
 
@@ -44,6 +66,13 @@ function initSimpleSortableDataTableButton(id, valueButton, size, jsFunction,jsF
 	initSimpleDataTable(id,size);
 	addButtonToTable(id, valueButton, jsFunction);
 	convertSortableTable(id,jsFunctionSort,jsFunctionStop) ;
+}
+
+function initSelectableDataTable(idTable, size){
+	var oTable = initSimplePaginationDataTable(idTable);
+	setSelectRow(idTable, oTable);
+	
+	return oTable;
 }
 
 
@@ -68,6 +97,41 @@ function convertSortableTable(idTable,jsFunctionSort,jsFunctionStop) {
 		stop : jsFunctionStop					
 	});
 }
+
+
+
+function setSelectRow(idTable, oTable){
+	$("#" + idTable +" tbody").click(function(event) {
+		var anSelected = fnGetSelected( oTable );
+		var selected = event.target.parentNode;
+		
+		$(oTable.fnSettings().aoData).each(function (){				
+			$(this.nTr).removeClass('row_selected');
+		});
+		
+		if (anSelected[0] != selected){					
+			$(event.target.parentNode).addClass('row_selected');
+		}			
+	});	
+}
+
+function fnGetSelected( oTableLocal )
+{
+	var aReturn = new Array();
+	var aTrs = oTableLocal.fnGetNodes();
+	
+	for ( var i=0 ; i<aTrs.length ; i++ )
+	{
+		if ( $(aTrs[i]).hasClass('row_selected') )
+		{
+			aReturn.push( aTrs[i] );
+		}
+	}
+	return aReturn;
+}
+
+
+
 
 
 

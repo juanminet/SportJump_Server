@@ -28,8 +28,8 @@ import es.uma.sportjump.sjs.web.controller.commands.ExerciseBlockCommand;
 public class TrainingExerciseController {
 	
 	
-	protected static final String LIST_TRAINING_BLOCKS = "training_exercise";
-	protected static final String NEW_TRAINING_BLOCK = "training_new_block";
+	protected static final String LIST_TRAINING_BLOCKS = "training_exercise_list";
+	protected static final String NEW_TRAINING_BLOCK = "training_exercise_new";
 
 	protected static final String LIST_TRAINING_BLOCKS_REDIRECT = "redirect:/action/training/exercise";	
 	

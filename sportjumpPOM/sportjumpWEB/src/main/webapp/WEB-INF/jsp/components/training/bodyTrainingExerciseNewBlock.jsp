@@ -190,7 +190,7 @@ var listExerciseTam;
 	   		<form:form commandName="blockCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/training/exercise/block/save" method="POST" >
 		   		<div class="subcaja">
 			 		<h1><fmt:message key="training.exercise.block.tittle" /></h1>
-			 		<a class="button" href="${pageContext.request.contextPath}/action/training/exercise/block/new"><fmt:message key="training.exercise.block.button.back" /></a>
+			 		<a class="button" href="${pageContext.request.contextPath}/action/training/exercise"><fmt:message key="training.exercise.block.button.back" /></a>
 			 		<input type="submit" value="<fmt:message key='training.exercise.block.button.save'/>" class="button_submit">
 			    </div> 
 				    

@@ -19,33 +19,25 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import es.uma.sportjump.sjs.model.entities.Coach;
+import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
-import es.uma.sportjump.sjs.model.entities.Training;
 import es.uma.sportjump.sjs.service.services.test.util.CoachServiceTestUtil;
-import es.uma.sportjump.sjs.service.services.test.util.ExerciseServiceTestUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-service-application-service.xml", "classpath:test-service-application-dao.xml"})  
 public class ExerciseServiceTest {
 	
 	@Autowired
-	private TrainingService trainingService;
+	private ExerciseService exerciseService;
 	
 	@Autowired
 	private CoachServiceTestUtil coachTestUtil;
 	
-	@Autowired
-	private ExerciseServiceTestUtil exerciseTestUtil;
-	
 	private Coach coach;
-	
-	private  ExerciseBlock exerciseBlock1;
-	private  ExerciseBlock exerciseBlock2;
-	private  ExerciseBlock exerciseBlock3;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	
+		
 	}
 
 	@AfterClass
@@ -56,84 +48,83 @@ public class ExerciseServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		coach = coachTestUtil.createNewCoach();
-		
-		exerciseBlock1 = exerciseTestUtil.createExerciseBlock(1, coach);
-		exerciseBlock2 = exerciseTestUtil.createExerciseBlock(2, coach);
-		exerciseBlock3 = exerciseTestUtil.createExerciseBlock(3, coach);
-		
-		
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		
-		exerciseTestUtil.removeExerciseBlock(exerciseBlock1);
-		exerciseTestUtil.removeExerciseBlock(exerciseBlock2);
-		exerciseTestUtil.removeExerciseBlock(exerciseBlock3);
 		coachTestUtil.removeCoach(coach);
 	}
 	
 	@Test
-	public void testTrainingCRUD(){
+	public void testExerciseCRUD(){
 				
-		//Create training
-		Training training =  createTraining();
+		//Create exercise block
+		ExerciseBlock exerciseBlock =  createExerciseBlock();
  
-		assertNotNull(training);
-		assertNotNull(training.getIdTraining());
+		assertNotNull(exerciseBlock);
+		assertNotNull(exerciseBlock.getIdExerciseBlock());
 		
-		//Get Training
-		Training trainingAux = trainingService.findExerciseTraining(training.getIdTraining());
+		//Get exerciseBock
+		ExerciseBlock exerciseBlockAux = exerciseService.findExerciseBlock(exerciseBlock.getIdExerciseBlock());
 		
-		
-		assertEquals(training.getName(),trainingAux.getName());
-		assertEquals(training.getType(), trainingAux.getType());
-		assertEquals(training.getDescription(),trainingAux.getDescription());
-		List<ExerciseBlock> exerciseBlockList = training.getListExerciseBlock();
-		List<ExerciseBlock> exerciseBlockListAux = trainingAux.getListExerciseBlock();
-		if(exerciseBlockList == null){
-			assertNull(exerciseBlockListAux);
+		assertEquals(exerciseBlock.getName(),exerciseBlockAux.getName());
+		assertEquals(exerciseBlock.getType(), exerciseBlockAux.getType());
+		assertEquals(exerciseBlock.getDescription(),exerciseBlockAux.getDescription());
+		List<Exercise> exerciseList = exerciseBlock.getListExercises();
+		List<Exercise> exerciseListAux = exerciseBlockAux.getListExercises();
+		if(exerciseList == null){
+			assertNull(exerciseListAux);
 		}else{
-			assertEquals(exerciseBlockList.size(), exerciseBlockListAux.size());
-			for(ExerciseBlock exercise : exerciseBlockList){
-				assertTrue(exerciseBlockListAux.contains(exercise));
+			assertEquals(exerciseList.size(), exerciseListAux.size());
+			for(Exercise exercise : exerciseList){
+				assertTrue(exerciseListAux.contains(exercise));
 			}
 		}
 	
 		
-		//update training
-		String trainingName2 = "Fuerza progresiva";
-		training.setName(trainingName2);
-		trainingService.updateTraining(training);
+		//update exercise block
+		String exerciseBlockName2 = "Fuera progresiva";
+		exerciseBlock.setName(exerciseBlockName2);
+		exerciseService.updateExerciseBlock(exerciseBlock);
 		
-		//Get training
-		trainingAux = trainingService.findExerciseTraining(training.getIdTraining());
+		//Get exercise block
+		exerciseBlockAux = exerciseService.findExerciseBlock(exerciseBlock.getIdExerciseBlock());
 		
-		assertEquals(trainingName2,trainingAux.getName());
+		assertEquals(exerciseBlockName2,exerciseBlockAux.getName());
 		
-		//Remove training
-		trainingService.removeTraining(trainingAux);
+		//Remove exercise block
+		exerciseService.removeExerciseBlock(exerciseBlock);
 		
-		//Get training
-		trainingAux = trainingService.findExerciseTraining(training.getIdTraining());
+		//Get coach 1
+		exerciseBlockAux = exerciseService.findExerciseBlock(exerciseBlock.getIdExerciseBlock());
 		
-		assertNull(trainingAux);
+		assertNull(exerciseBlockAux);
 	}
 
-	private Training createTraining() {
+	private ExerciseBlock createExerciseBlock() {
+		//Variables
+		String name = "bloque fuerza";
+		String type = "Fuerza";
+		String description = "Haremos hincapie en la fuerza de hombros";
 		
-		String name = "Dia de rapidez";
-		String type = "Velocidad";
-		String description = "Es un dia de entrenamiento de ejercicios de fuerza explosiva para ganar velocida";
+		String exerciseName1 = "15 X 50kg hombros";
+		String exerciseName2 = "10 X 40kg dorsales";
 		
-		List<ExerciseBlock> exerciseBlockList = new ArrayList<ExerciseBlock>();
-		exerciseBlockList.add(exerciseBlock1);
-		exerciseBlockList.add(exerciseBlock2);
-		exerciseBlockList.add(exerciseBlock3);		
+		Exercise exercise1 = new Exercise();
+		exercise1.setName(exerciseName1);
+		exercise1.setPos(1);
 		
-		return trainingService.setNewTraining(name, type, description, exerciseBlockList, coach);
+		Exercise exercise2 = new Exercise();
+		exercise2.setName(exerciseName2);
+		exercise2.setPos(2);
 		
+		List<Exercise> exerciseList = new ArrayList<Exercise>();
+		exerciseList.add(exercise1);
+		exerciseList.add(exercise2);
+		
+		
+		
+		return exerciseService.setNewExerciseBlock(name, type, description, exerciseList, coach);
 	}
-	
-		
+
 }

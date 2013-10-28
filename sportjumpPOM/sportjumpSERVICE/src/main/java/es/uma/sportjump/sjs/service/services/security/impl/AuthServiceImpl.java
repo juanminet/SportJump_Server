@@ -56,7 +56,7 @@ public class AuthServiceImpl implements AuthService{
 	public void updateUser(String userNameOld, String userNameNew, String password) {
 		UserDetails userDetails = userDetailsManager.loadUserByUsername(userNameOld);
 		
-		Collection authorites =userDetails.getAuthorities();
+		Collection<? extends GrantedAuthority> authorites =userDetails.getAuthorities();
 		GrantedAuthority authority = (GrantedAuthority) authorites.toArray()[0];
 		String role = authority.getAuthority();
 		

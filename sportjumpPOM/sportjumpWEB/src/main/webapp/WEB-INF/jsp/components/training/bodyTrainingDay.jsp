@@ -22,16 +22,16 @@
 	    <div class="caja">
 	    
 	   		<div class="subcaja">
-		 		<h1><fmt:message key="training.exercise.block.tittle" /></h1>
-		 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/new"><fmt:message key="training.exercise.block.button.new" /></a>
+		 		<h1><fmt:message key="training.day.tittle" /></h1>
+		 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/new"><fmt:message key="training.day.button.new" /></a>
 		    </div> 
 		    
 		  			    
 			<table class="display" id="table_exercises_block">
 		    	<thead>
 		        	<tr>
-		            	<th><fmt:message key="training.exercise.block.name" /> </th>
-		            	<th><fmt:message key="training.exercise.block.type" /></th>		            	
+		            	<th><fmt:message key="training.day.name" /> </th>
+		            	<th><fmt:message key="training.day.type" /></th>		            	
 		          	</tr>
 		        </thead>
 		        <tbody>

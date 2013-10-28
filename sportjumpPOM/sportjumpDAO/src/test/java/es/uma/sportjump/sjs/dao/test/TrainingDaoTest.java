@@ -187,10 +187,8 @@ public class TrainingDaoTest{
 		
 		//Read trainings
 		List<Training> trainingList =  trainingDao.getAllTrainingByCoach(coach);
-		int initSize= 0;
-		if(trainingList != null){
-			initSize = trainingList.size();
-		}
+		int initSize = trainingList.size();
+		
 				
 
 		//Create training

@@ -10,7 +10,7 @@ import es.uma.sportjump.sjs.dao.test.TrainingDaoTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:test-mock-application-dao.xml")  
-public class TrainingDaoJpaTest  extends TrainingDaoTest{
+public class TrainingDaoMockTest  extends TrainingDaoTest{
 	
 	
 	@Test
@@ -21,6 +21,11 @@ public class TrainingDaoJpaTest  extends TrainingDaoTest{
 	@Test
 	public void testTrainingWithExerciseBlock(){
 		super.testTrainingWithExerciseBlock();
+	}
+	
+	@Test
+	public void testAllTrainings(){
+		super.testAllTrainings();
 	}
 
 

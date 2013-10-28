@@ -54,14 +54,11 @@ public class TrainingDaoMockImpl implements TrainingDao{
 
 	@Override
 	public List<Training> getAllTrainingByCoach(Coach coach) {
-		List<Training> resList = null;
+		List<Training> resList = new ArrayList<Training>();
 		
 		
 		for(Training training : listTrainings){
-			if (training.getCoach().getIdUser() == coach.getIdUser()){				
-				if (resList == null){
-					resList = new ArrayList<Training>();
-				}
+			if (training.getCoach().getIdUser() == coach.getIdUser()){					
 				resList.add(training);
 			}
 		}

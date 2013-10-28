@@ -23,7 +23,7 @@ public class ExerciseServiceTestUtil {
 		//Variables
 		String name = "bloque fuerza" + num;
 		String type = "Fuerza" + num;
-		String description = "Haremos hincapié en la fuerza de hombros" + num;
+		String description = "Haremos hincapie en la fuerza de hombros" + num;
 		
 		String exerciseName1 = "15 X 50kg hombros" + num;
 		String exerciseName2 = "10 X 40kg dorsales" + num;

@@ -73,7 +73,7 @@
 		
 	<!-- TRAININGS -->
 	 
-	<definition name="training_day" extends="standardTemplate">
+	<definition name="training_day_list" extends="standardTemplate">
 		<put-attribute name="title" value="training.workingday.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>
@@ -82,7 +82,16 @@
 	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
 	</definition> 
 	
-	<definition name="training_exercise" extends="standardTemplate">
+	<definition name="training_day_new" extends="standardTemplate">
+		<put-attribute name="title" value="training.workingday.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+		<put-attribute name="layer" value="training"/>
+		<put-attribute name="section" value="workingday"/>
+		<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingDayNew.jsp" />	
+	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
+	</definition> 
+	
+	<definition name="training_exercise_list" extends="standardTemplate">
 		<put-attribute name="title" value="training.exercise.block.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>
@@ -91,7 +100,7 @@
 	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
 	</definition>
 	
-	<definition name="training_new_block" extends="standardTemplate">
+	<definition name="training_exercise_new" extends="standardTemplate">
 		<put-attribute name="title" value="training.exercise.block.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>

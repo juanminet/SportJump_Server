@@ -59,7 +59,7 @@ public class ExerciseServiceTest {
 	public void testExerciseCRUD(){
 				
 		//Create exercise block
-		ExerciseBlock exerciseBlock =  createExerciseBlock();
+		ExerciseBlock exerciseBlock =  createExerciseBlock(1);
  
 		assertNotNull(exerciseBlock);
 		assertNotNull(exerciseBlock.getIdExerciseBlock());
@@ -101,14 +101,14 @@ public class ExerciseServiceTest {
 		assertNull(exerciseBlockAux);
 	}
 
-	private ExerciseBlock createExerciseBlock() {
+	private ExerciseBlock createExerciseBlock(int num) {
 		//Variables
-		String name = "bloque fuerza";
-		String type = "Fuerza";
-		String description = "Haremos hincapie en la fuerza de hombros";
+		String name = "bloque fuerza" + num;
+		String type = "Fuerza" + num;
+		String description = "Haremos hincapie en la fuerza de hombros" + num;
 		
-		String exerciseName1 = "15 X 50kg hombros";
-		String exerciseName2 = "10 X 40kg dorsales";
+		String exerciseName1 = "15 X 50kg hombros" + num;
+		String exerciseName2 = "10 X 40kg dorsales" + num;
 		
 		Exercise exercise1 = new Exercise();
 		exercise1.setName(exerciseName1);
@@ -125,6 +125,25 @@ public class ExerciseServiceTest {
 		
 		
 		return exerciseService.setNewExerciseBlock(name, type, description, exerciseList, coach);
+	}
+	
+	
+	@Test
+	public void testExerciseByNameCoach(){
+		//Create exercise block
+		ExerciseBlock exerciseBlock1 =  createExerciseBlock(1);				
+		ExerciseBlock exerciseBlock2 =  createExerciseBlock(2);			
+		ExerciseBlock exerciseBlock3 =  createExerciseBlock(3);
+		
+		
+		assertEquals(exerciseBlock1.getIdExerciseBlock(), exerciseService.findExerciseBlockByNameAndCoach(exerciseBlock1.getName(), coach).getIdExerciseBlock());
+		assertEquals(exerciseBlock2.getIdExerciseBlock(), exerciseService.findExerciseBlockByNameAndCoach(exerciseBlock2.getName(), coach).getIdExerciseBlock());
+		assertEquals(exerciseBlock3.getIdExerciseBlock(), exerciseService.findExerciseBlockByNameAndCoach(exerciseBlock3.getName(), coach).getIdExerciseBlock());
+		
+		//Remove exercise block
+		exerciseService.removeExerciseBlock(exerciseBlock1);
+		exerciseService.removeExerciseBlock(exerciseBlock2);
+		exerciseService.removeExerciseBlock(exerciseBlock3);
 	}
 
 }

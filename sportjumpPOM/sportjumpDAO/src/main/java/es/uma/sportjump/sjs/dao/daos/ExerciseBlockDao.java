@@ -20,6 +20,15 @@ public interface ExerciseBlockDao {
 	 */
 	public ExerciseBlock getExerciseBlockById(Long idBlock);
 	
+	
+	/**
+	 * Return a complete ExerciseBlock with name and coach given by parameter
+	 * @param name
+	 * @param coach
+	 * @return
+	 */
+	public ExerciseBlock getExerciseBlockByNameAndCoach(String name, Coach coach);
+	
 	/**
 	 * Delete an ExerciseBlock 
 	 * @param idBlock

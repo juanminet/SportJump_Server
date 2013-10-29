@@ -233,4 +233,48 @@ public class ExerciseBlockDaoTest{
 		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock2);
 		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock3);
 	}
+
+	public void testExerciseBlockByNameAndCoach() {
+		//Initialize variables
+		String name1 = "Bloque brutal1";
+		String type1 ="Brutality1";
+		String description1 = "Es un bloque donde se busca la brutalidad en el entrenamiento1";
+		
+
+		String name2 = "Bloque brutal2";
+		String type2 ="Brutality2";
+		String description2 = "Es un bloque donde se busca la brutalidad en el entrenamiento2";
+		
+
+		String name3 = "Bloque brutal3";
+		String type3 ="Brutality3";
+		String description3 = "Es un bloque donde se busca la brutalidad en el entrenamiento3";
+		
+
+		//Create exerciseBlock
+		Long idExerciseBlock1 = exerciseBlockUtil.createExerciseBlock(name1,type1,description1, null, coach);
+		Long idExerciseBlock2 = exerciseBlockUtil.createExerciseBlock(name2,type2,description2, null, coach);
+		Long idExerciseBlock3 = exerciseBlockUtil.createExerciseBlock(name3,type3,description3, null, coach);
+		
+		//make asserts
+		assertNotNull(idExerciseBlock1);
+		assertNotNull(idExerciseBlock2);
+		assertNotNull(idExerciseBlock3);
+		
+		ExerciseBlock exerciseBlock1 = exerciseBlockUtil.readExerciseBlockByNameAndCoach(name1, coach);
+		ExerciseBlock exerciseBlock2 = exerciseBlockUtil.readExerciseBlockByNameAndCoach(name2, coach);
+		ExerciseBlock exerciseBlock3 = exerciseBlockUtil.readExerciseBlockByNameAndCoach(name3, coach);
+		
+		//make asserts
+		assertEquals(idExerciseBlock1, exerciseBlock1.getIdExerciseBlock());
+		assertEquals(idExerciseBlock2, exerciseBlock2.getIdExerciseBlock());
+		assertEquals(idExerciseBlock3, exerciseBlock3.getIdExerciseBlock());
+		
+		
+		//Delete exerciseBlock
+		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock1);
+		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock2);
+		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock3);
+		
+	}
 }

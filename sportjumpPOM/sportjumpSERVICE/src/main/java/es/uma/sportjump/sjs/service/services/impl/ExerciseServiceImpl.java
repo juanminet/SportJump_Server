@@ -44,6 +44,11 @@ public class ExerciseServiceImpl implements ExerciseService {
 	public ExerciseBlock findExerciseBlock(Long idExerciseBlock) {
 		return exerciseBlockDao.getExerciseBlockById(idExerciseBlock);
 	}
+	
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public ExerciseBlock findExerciseBlockByNameAndCoach(String name,Coach coach) {
+		return exerciseBlockDao.getExerciseBlockByNameAndCoach(name, coach);
+	}
 
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void removeExerciseBlock(ExerciseBlock exerciseBlock) {
@@ -54,5 +59,4 @@ public class ExerciseServiceImpl implements ExerciseService {
 	public List<ExerciseBlock> findAllExerciseBlockByCoach(Coach coach) {
 		return exerciseBlockDao.getAllExerciseBlockByCoach(coach);				
 	}
-
 }

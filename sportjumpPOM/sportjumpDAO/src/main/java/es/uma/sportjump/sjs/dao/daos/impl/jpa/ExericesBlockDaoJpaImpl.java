@@ -80,4 +80,15 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 		return getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
 	}
 
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	public ExerciseBlock getExerciseBlockByNameAndCoach(String name, Coach coach) {
+		Query query = em.createNamedQuery("findExerciseBlockByNameAndCoach")
+				.setParameter("idUser", coach.getIdUser())
+				.setParameter("name", name);
+		
+		ExerciseBlock exerciseBlock = (ExerciseBlock) query.getSingleResult();
+		return exerciseBlock;
+	}
+
 }

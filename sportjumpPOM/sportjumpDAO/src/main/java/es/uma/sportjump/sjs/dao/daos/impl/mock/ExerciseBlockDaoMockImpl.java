@@ -68,4 +68,18 @@ public class ExerciseBlockDaoMockImpl implements ExerciseBlockDao{
 		return getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
 	}
 
+	@Override
+	public ExerciseBlock getExerciseBlockByNameAndCoach(String name, Coach coach) {
+		ExerciseBlock res = null;
+		
+		for (ExerciseBlock block : listExerciseBlocks){
+			if (name.equals(block.getName()) && block.getCoach().getIdUser() == coach.getIdUser()){
+				res = block;
+				break;
+			}
+		}
+		
+		return res;
+	}
+
 }

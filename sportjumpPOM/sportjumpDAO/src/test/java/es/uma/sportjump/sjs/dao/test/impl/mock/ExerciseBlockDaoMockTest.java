@@ -25,4 +25,9 @@ public class ExerciseBlockDaoMockTest  extends ExerciseBlockDaoTest{
 	public void testAllExerciseBlocks(){
 		super.testAllExerciseBlocks();
 	}
+	
+	@Test
+	public void testExerciseBlockByNameAndCoach(){
+		super.testExerciseBlockByNameAndCoach();
+	}
 }

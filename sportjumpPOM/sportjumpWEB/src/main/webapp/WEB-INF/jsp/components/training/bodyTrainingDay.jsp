@@ -36,7 +36,7 @@
 		        </thead>
 		        <tbody>
 		        	<c:forEach items="${trainingDayList}" var="day">
-			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/training/day/${day.idExerciseBlock}';"> 
+			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/training/day/${day.idTraining}';"> 
 				            <td>${day.name}</td>            
 				            <td>${day.type}</td>	            				         
 			        	</tr>

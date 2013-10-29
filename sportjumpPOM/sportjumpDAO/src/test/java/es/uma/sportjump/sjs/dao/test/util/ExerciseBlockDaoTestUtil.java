@@ -59,6 +59,10 @@ public class ExerciseBlockDaoTestUtil {
 	public ExerciseBlock readExerciseBlock(Long idExerciseBlock) {				
 		return exerciseBlockDao.getExerciseBlockById(idExerciseBlock);
 	}
+	
+	public ExerciseBlock readExerciseBlockByNameAndCoach(String name, Coach coach) {				
+		return exerciseBlockDao.getExerciseBlockByNameAndCoach(name, coach);
+	}
 
 	
 	public void deleteExerciseBlock(ExerciseBlock exerciseBlock) {		

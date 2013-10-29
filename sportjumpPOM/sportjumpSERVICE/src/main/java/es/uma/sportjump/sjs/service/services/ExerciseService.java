@@ -38,6 +38,14 @@ public interface ExerciseService {
 	
 	
 	/**
+	 * find an exerciseblock by name and coach given by parameter
+	 * @param name
+	 * @param coach
+	 * @return the execiseBlock
+	 */
+	public ExerciseBlock findExerciseBlockByNameAndCoach(String name, Coach coach);
+	
+	/**
 	 * Deletes the exercise block given by parameter from database
 	 * @param exerciseBlock the exercise block to delete
 	 */

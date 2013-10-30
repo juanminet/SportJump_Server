@@ -66,4 +66,18 @@ public class TrainingDaoMockImpl implements TrainingDao{
 		return resList;
 	}
 
+	@Override
+	public Training getTrainingByNameAndCoach(String name, Coach coach) {
+		Training res = null;
+		
+		for(Training training : listTrainings){
+			if (name.equals(training.getName()) && training.getCoach().getIdUser() == coach.getIdUser()){					
+				res = training;
+				break;
+			}
+		}
+		
+		return res;
+	}
+
 }

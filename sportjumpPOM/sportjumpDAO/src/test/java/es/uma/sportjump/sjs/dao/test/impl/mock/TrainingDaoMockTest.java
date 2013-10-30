@@ -28,5 +28,8 @@ public class TrainingDaoMockTest  extends TrainingDaoTest{
 		super.testAllTrainings();
 	}
 
-
+	@Test
+	public void testGetTrainingByNameAndCoach(){
+		super.testGetTrainingByNameAndCoach();
+	}
 }

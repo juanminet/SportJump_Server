@@ -57,4 +57,8 @@ public class TrainingDaoTestUtil {
 		assertEquals(name, training.getName());
 		assertEquals(type, training.getType());
 	}
+
+	public Training getTrainingByNameAndCoach(String name, Coach coach) {
+		return trainingDao.getTrainingByNameAndCoach(name, coach);
+	}
 }

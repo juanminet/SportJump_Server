@@ -12,10 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(	name="TB_TRAINING")
+@Table(	name="TB_TRAINING", 
+	uniqueConstraints= @UniqueConstraint(columnNames={"NAME", "ID_USER"})
+)
 public class Training {
 	
 	@Id

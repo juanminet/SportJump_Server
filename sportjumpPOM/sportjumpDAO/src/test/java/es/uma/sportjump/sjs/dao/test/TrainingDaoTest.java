@@ -230,4 +230,49 @@ public class TrainingDaoTest{
 		trainingUtil.deleteTraining(training2);
 		trainingUtil.deleteTraining(training3);
 	}
+	
+	
+	public void testGetTrainingByNameAndCoach(){
+		//Initialize variables
+		String name1 = "Bloque brutal1";
+		String type1 ="Brutality1";
+		String description1 = "Es un bloque donde se busca la brutalidad en el entrenamiento1";
+		
+
+		String name2 = "Bloque brutal2";
+		String type2 ="Brutality2";
+		String description2 = "Es un bloque donde se busca la brutalidad en el entrenamiento2";
+		
+
+		String name3 = "Bloque brutal3";
+		String type3 ="Brutality3";
+		String description3 = "Es un bloque donde se busca la brutalidad en el entrenamiento3";
+		
+		List<ExerciseBlock> exerciseBlockList = new ArrayList<ExerciseBlock>();
+		exerciseBlockList.add(exerciseBlock1);
+		exerciseBlockList.add(exerciseBlock2);
+
+				
+
+		//Create training
+		Long idTraining1 = trainingUtil.createTraining(name1,type1,description1, null, coach);
+		Long idTraining2 = trainingUtil.createTraining(name2,type2,description2, exerciseBlockList, coach);
+		Long idTraining3 = trainingUtil.createTraining(name3,type3,description3, null, coach);
+		
+		
+		//Read trainings		
+		Training training1 = trainingUtil.getTrainingByNameAndCoach(name1,coach);
+		Training training2 = trainingUtil.getTrainingByNameAndCoach(name2,coach);
+		Training training3 = trainingUtil.getTrainingByNameAndCoach(name3,coach);
+		
+		//Make asserts
+		assertEquals(idTraining1, training1.getIdTraining());
+		assertEquals(idTraining2, training2.getIdTraining());
+		assertEquals(idTraining3, training3.getIdTraining());
+		
+		//Delete exerciseBlock
+		trainingUtil.deleteTraining(training1);
+		trainingUtil.deleteTraining(training2);
+		trainingUtil.deleteTraining(training3);
+	}
 }

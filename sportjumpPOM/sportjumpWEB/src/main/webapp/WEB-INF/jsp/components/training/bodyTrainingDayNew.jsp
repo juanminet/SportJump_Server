@@ -205,15 +205,18 @@ var listExerciseTam;
 				    
 				<div class="subcaja doble_row">
 					<fieldset>		
-					<form:errors path="*"  element="div" />		
+					<!-- <form:errors path="*"  element="div" /> -->		
 						<form:hidden path="id" />		
+						<form:errors path="name" cssClass="error" />
 				        <div class="form-row">
+				        	
 				            <label for="name"><fmt:message key="training.day.name"/>:</label>
-				           <span class="input"><form:input path="name" />   <form:errors path="name" cssClass="error" /></span> 
-				        </div>   
+				           	<span class="input"><form:input path="name" />   </span> 
+				        </div> 
+				        <form:errors path="type" cssClass="error" />  
 				        <div class="form-row">
 				            <label for="type"><fmt:message key="training.day.type"/>:</label>
-				            <span class="input"><form:input path="type"/>   <form:errors path="type" cssClass="error" /></span> 
+				            <span class="input"><form:input path="type"/>   </span> 
 				        </div>  				       
 				        <div class="form-row">
 				            <label for="description"><fmt:message key="training.day.description"/>:</label>

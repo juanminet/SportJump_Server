@@ -32,6 +32,13 @@ public interface TrainingDao {
 	public Training getCompleteTrainingById(Long id);
 	
 	/**
+	 * Get training by name and Coach given by parameter 
+	 * @param id
+	 * @return the training or null when doesn't exist training
+	 */
+	public Training getTrainingByNameAndCoach(String name, Coach coach);
+	
+	/**
 	 * Remove coach
 	 * @param id
 	 */

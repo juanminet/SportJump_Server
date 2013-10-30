@@ -36,6 +36,13 @@ public interface TrainingService {
 	 */
 	public Training findExerciseTraining(Long idTraining);
 	
+	/**
+	 * find an training by its name and the coach in charge  given by parameter
+	 * @param idTraining 
+	 * @return the training with the id.
+	 */
+	public Training findTrainingByNameAndCoach(String name, Coach coach);
+	
 	
 	/**
 	 * Deletes the training given by parameter from database

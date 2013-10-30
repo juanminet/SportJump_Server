@@ -175,6 +175,32 @@ public class TrainingServiceTest {
 		
 		assertEquals(initSize, trainingList.size());
 	}
+	
+	
+	@Test
+	public void testFindTrainingByNameAndCoach(){
+		Training trainingExpected1 = createTraining(1);
+		Training trainingExpected2 = createTraining(2);
+		Training trainingExpected3 = createTraining(3);
+		
+		
+		//Get training
+		Training training1 = trainingService.findTrainingByNameAndCoach(trainingExpected1.getName(), coach);
+		Training training2 = trainingService.findTrainingByNameAndCoach(trainingExpected2.getName(), coach);
+		Training training3 = trainingService.findTrainingByNameAndCoach(trainingExpected3.getName(), coach);
+		
+		
+		//Make asserts
+		assertEquals(trainingExpected1.getIdTraining(),training1.getIdTraining());
+		assertEquals(trainingExpected2.getIdTraining(),training2.getIdTraining());
+		assertEquals(trainingExpected3.getIdTraining(),training3.getIdTraining());
+		
+		//Remove trainings
+		trainingService.removeTraining(training1);
+		trainingService.removeTraining(training2);
+		trainingService.removeTraining(training3);		
+	}
+		
 
 
 	private Training createTraining(int num) {

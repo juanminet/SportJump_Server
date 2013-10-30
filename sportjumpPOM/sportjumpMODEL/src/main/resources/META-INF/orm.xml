@@ -72,6 +72,10 @@
 	    <query>from Training t where t.coach.idUser = :idUser</query>
 	</named-query>
 	
+	<named-query name="findTrainingByNameAndCoach">
+	    <query>from Training t where t.coach.idUser = :idUser and t.name = :name</query>
+	</named-query>
+	
 	
 	
 	

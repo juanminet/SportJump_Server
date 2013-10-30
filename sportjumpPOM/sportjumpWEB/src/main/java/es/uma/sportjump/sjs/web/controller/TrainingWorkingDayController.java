@@ -53,23 +53,76 @@ public class TrainingWorkingDayController {
 	}	
 	
 	
+
+
+	@RequestMapping( value="/day/{idDay}" ,method = RequestMethod.GET)
+	public String getTrainingDay(@PathVariable("idDay") Long idDay, Model model, HttpSession session) {		
+		Training training = trainingService.findExerciseTraining(idDay);
+		
+		initTrainingDayModify(training,model,session);
+		
+		return NEW_TRAINING_DAY;		
+	}	
+
+
+	@RequestMapping( value="/day/save" , method = RequestMethod.POST)
+	public String saveBlockExercise(@Valid TrainingDayCommand trainingCommand, BindingResult errors, Model model, HttpSession session) {		
+
+		if (errors.hasErrors()) {	
+			return NEW_TRAINING_DAY;
+		}
+		
+		Coach  coach = (Coach) session.getAttribute("loggedUser");		
+		List<ExerciseBlock> exerciseBlockList = getExerciseBlocks(trainingCommand,coach);	
+		
+		
+		//New training
+		if (trainingCommand.getId() == null){
+			
+			//Validations for a new training
+			trainingExtraValidations(trainingCommand,coach, errors);		
+			
+			if (errors.hasErrors()) {	
+				return NEW_TRAINING_DAY;
+			}
+			
+			trainingService.setNewTraining(trainingCommand.getName(), trainingCommand.getType(), trainingCommand.getDescription(), exerciseBlockList, coach);
+		//Update training
+		}else{
+			Training training = trainingService.findExerciseTraining(trainingCommand.getId());
+			
+			training.setName(trainingCommand.getName());
+			training.setType(trainingCommand.getType());
+			training.setDescription(trainingCommand.getDescription());
+			training.setListExerciseBlock(exerciseBlockList);
+			
+			trainingService.updateTraining(training);
+		}
+		
+		return LIST_TRAINING_DAY_REDIRECT;		
+	}
+	
+	private void initListTrainingDay(Model model, HttpSession session) {		
+		Coach  coach = (Coach) session.getAttribute("loggedUser");	
+		
+		model.addAttribute("trainingDayList", trainingService.findAllTraining(coach));
+	}
+	
 	private void initTrainingNewDay(Model model, HttpSession session) {
 		Coach  coach = (Coach) session.getAttribute("loggedUser");			
 		
 		model.addAttribute("trainingDayCommand", new TrainingDayCommand());
 		model.addAttribute("exerciseBlockList", exerciseService.findAllExerciseBlockByCoach(coach));
 	}
-
-	@RequestMapping( value="/day/{idDay}" ,method = RequestMethod.GET)
-	public String getTrainingDay(@PathVariable("idDay") Long idDay, Model model, HttpSession session) {		
-		Training training = trainingService.findExerciseTraining(idDay);
+	
+	private void initTrainingDayModify(Training training, Model model,	HttpSession session) {
+		Coach  coach = (Coach) session.getAttribute("loggedUser");
 		
 		TrainingDayCommand trainingCommand = fillTrainingCommand(training);
+		
 		model.addAttribute("trainingDayCommand",trainingCommand);
-		return NEW_TRAINING_DAY;		
-	}	
-	
-	
+		model.addAttribute("exerciseBlockList", exerciseService.findAllExerciseBlockByCoach(coach));		
+	}
 	
 	private TrainingDayCommand fillTrainingCommand(Training training) {
 		TrainingDayCommand trainingCommand = new TrainingDayCommand();
@@ -94,51 +147,30 @@ public class TrainingWorkingDayController {
 		return trainingCommand;
 	}
 
-	@RequestMapping( value="/day/save" , method = RequestMethod.POST)
-	public String saveBlockExercise(@Valid TrainingDayCommand trainingCommand, BindingResult errors, Model model, HttpSession session) {		
-
-		if (errors.hasErrors()) {	
-			return NEW_TRAINING_DAY;
-		}	
-		
+	private List<ExerciseBlock> getExerciseBlocks(TrainingDayCommand trainingCommand, Coach coach) {
 		List<String> trainingNameList = trainingCommand.getTrainingDayList();
-		List<ExerciseBlock> exerciseBlockList = new ArrayList<ExerciseBlock>();
+		List<ExerciseBlock> exerciseBlockList = null;	
 		
-		Coach  coach = (Coach) session.getAttribute("loggedUser");	
-		
-		for (String name: trainingNameList){
-			ExerciseBlock exerciseBlock = exerciseService.findExerciseBlockByNameAndCoach(name, coach);
-			
-			if (exerciseBlock != null){
-				exerciseBlockList.add(exerciseBlock);
-			}			
+		if (trainingNameList != null){			
+			exerciseBlockList = new ArrayList<ExerciseBlock>();	
+			for (String name: trainingNameList){
+				ExerciseBlock exerciseBlock = exerciseService.findExerciseBlockByNameAndCoach(name, coach);
+				
+				if (exerciseBlock != null){
+					exerciseBlockList.add(exerciseBlock);
+				}			
+			}
 		}
-		
-		
-		if (trainingCommand.getId() == null){
-			trainingService.setNewTraining(trainingCommand.getName(), trainingCommand.getType(), trainingCommand.getDescription(), exerciseBlockList, coach);
-		}else{
-			Training training = trainingService.findExerciseTraining(trainingCommand.getId());
-			
-			training.setName(trainingCommand.getName());
-			training.setType(trainingCommand.getType());
-			training.setDescription(trainingCommand.getDescription());
-			training.setListExerciseBlock(exerciseBlockList);
-			
-			trainingService.updateTraining(training);
-		}
-		
-		return LIST_TRAINING_DAY_REDIRECT;		
+		return exerciseBlockList;
 	}
-	
-	
-	
 
-	private void initListTrainingDay(Model model, HttpSession session) {		
-		Coach  coach = (Coach) session.getAttribute("loggedUser");	
-		
-		model.addAttribute("trainingDayList", trainingService.findAllTraining(coach));
+	private void trainingExtraValidations(TrainingDayCommand trainingCommand, Coach coach, BindingResult errors) {		
+		if ( trainingService.findTrainingByNameAndCoach(trainingCommand.getName(), coach) != null){
+			errors.rejectValue("name", "Exist.trainingDayCommand.userName");					
+		}	
 	}
+
+
 
 	
 }

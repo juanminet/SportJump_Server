@@ -27,5 +27,10 @@ public class TrainingDaoJpaTest  extends TrainingDaoTest{
 	public void testAllTrainings(){
 		super.testAllTrainings();
 	}
+	
+	@Test
+	public void testGetTrainingByNameAndCoach(){
+		super.testGetTrainingByNameAndCoach();
+	}
 
 }

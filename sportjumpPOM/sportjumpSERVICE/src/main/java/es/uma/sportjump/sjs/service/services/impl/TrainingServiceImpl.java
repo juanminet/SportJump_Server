@@ -53,4 +53,9 @@ public class TrainingServiceImpl implements TrainingService{
 		return trainingDao.getAllTrainingByCoach(coach);
 	}
 
+	@Override
+	public Training findTrainingByNameAndCoach(String name, Coach coach) {
+		return trainingDao.getTrainingByNameAndCoach(name, coach);
+	}
+
 }

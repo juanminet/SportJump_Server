@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -40,9 +42,12 @@ public class ExerciseBlock {
 	@JoinColumn(name="ID_USER", nullable=false)
 	private Coach coach;	
 	
-	@OneToMany(cascade = CascadeType.ALL )
+	@OneToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL )
 	@JoinColumn(name="ID_BLOCK_FK", nullable=false)
 	private List<Exercise> listExercises;
+	
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="listExerciseBlock")
+	private List<Training> listTraining;
 
 
 	public Long getIdExerciseBlock() {
@@ -92,6 +97,15 @@ public class ExerciseBlock {
 	public void setListExercises(List<Exercise> listExercises) {
 		this.listExercises = listExercises;
 	}
+
+	public List<Training> getListTraining() {
+		return listTraining;
+	}
+
+	public void setListTraining(List<Training> listTraining) {
+		this.listTraining = listTraining;
+	}
+	
 	
 	
 }

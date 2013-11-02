@@ -66,7 +66,7 @@ public class TrainingWorkingDayController {
 
 
 	@RequestMapping( value="/day/save" , method = RequestMethod.POST)
-	public String saveBlockExercise(@Valid TrainingDayCommand trainingCommand, BindingResult errors, Model model, HttpSession session) {		
+	public String saveTrainingDay(@Valid TrainingDayCommand trainingCommand, BindingResult errors, Model model, HttpSession session) {		
 
 		if (errors.hasErrors()) {	
 			return NEW_TRAINING_DAY;
@@ -98,6 +98,19 @@ public class TrainingWorkingDayController {
 			
 			trainingService.updateTraining(training);
 		}
+		
+		return LIST_TRAINING_DAY_REDIRECT;		
+	}
+	
+	
+	@RequestMapping( value="/day/remove/{idDayTraining}" , method = RequestMethod.GET)
+	public String removeTrainingDay(@PathVariable("idDayTraining") Long idDayTraining, HttpSession session) {		
+
+		Training training = trainingService.findExerciseTraining(idDayTraining);
+		
+		if (training != null){		
+			trainingService.removeTraining(training);
+		}	
 		
 		return LIST_TRAINING_DAY_REDIRECT;		
 	}

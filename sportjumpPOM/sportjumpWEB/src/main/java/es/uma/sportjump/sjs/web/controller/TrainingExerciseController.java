@@ -134,5 +134,18 @@ public class TrainingExerciseController {
 		return LIST_TRAINING_BLOCKS_REDIRECT;		
 	}
 	
+	@RequestMapping( value="/exercise/remove/{idExerciseBlock}" , method = RequestMethod.GET)
+	public String removExerciseBlock(@PathVariable("idExerciseBlock") Long idExerciseBlock, HttpSession session) {		
+
+		ExerciseBlock exerciseBlock = exerciseService.findExerciseBlock(idExerciseBlock);
+		
+		if (exerciseBlock != null){		
+			exerciseService.removeExerciseBlock(exerciseBlock);
+		}	
+		
+		return LIST_TRAINING_BLOCKS_REDIRECT;		
+	}
+	
+	
 	
 }

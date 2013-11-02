@@ -200,6 +200,9 @@ var listExerciseTam;
 		   		<div class="subcaja">
 			 		<h1><fmt:message key="training.day.tittle" /></h1>
 			 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/list"><fmt:message key="training.day.button.back" /></a>
+			 		<c:if test="${not empty trainingDayCommand.id}">
+			 			<a class="button" href="${pageContext.request.contextPath}/action/training/day/remove/${trainingDayCommand.id}"><fmt:message key="training.day.button.remove" /></a>
+			 		</c:if>
 			 		<input type="submit" value="<fmt:message key='training.day.button.save'/>" class="button_submit">
 			    </div> 
 				    

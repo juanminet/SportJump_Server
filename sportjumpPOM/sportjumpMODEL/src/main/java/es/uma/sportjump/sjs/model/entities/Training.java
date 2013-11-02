@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -40,7 +41,8 @@ public class Training {
 	private Coach coach;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinColumn(name="ID_TRAINING_FK", nullable=false)
+	@JoinTable(name="TB_TRAINING_EXERCISE_BLOCK", joinColumns= @JoinColumn(name="ID_TRAINING"), inverseJoinColumns= @JoinColumn(name="ID_BLOCK") )	
+	//@JoinColumn(name="ID_TRAINING_FK", nullable=false)
 	private List<ExerciseBlock> listExerciseBlock;
 
 

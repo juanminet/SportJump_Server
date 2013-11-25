@@ -1,6 +1,5 @@
 package es.uma.sportjump.sjs.service.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +8,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.ExerciseBlockDao;
-import es.uma.sportjump.sjs.dao.daos.TrainingDao;
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
-import es.uma.sportjump.sjs.model.entities.Training;
 import es.uma.sportjump.sjs.service.services.ExerciseService;
 
 @Service("exerciseService")
@@ -21,8 +18,8 @@ public class ExerciseServiceImpl implements ExerciseService {
 	@Autowired
 	private ExerciseBlockDao exerciseBlockDao;
 	
-	@Autowired
-	private TrainingDao trainingDao;
+//	@Autowired
+//	private TrainingDao trainingDao;
 
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public ExerciseBlock setNewExerciseBlock(String name, String type,
@@ -58,12 +55,12 @@ public class ExerciseServiceImpl implements ExerciseService {
 
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void removeExerciseBlock(ExerciseBlock exerciseBlock) {
-//		
+		//TODO	 REMOVE IS NOT WORKING WELL
 //		exerciseBlock = exerciseBlockDao.getExerciseBlockById(exerciseBlock.getIdExerciseBlock());			
 //		deleteReferencias(exerciseBlock);
 //		
-//		
-//		
+		
+		
 		exerciseBlockDao.deleteExerciseBlock(exerciseBlock.getIdExerciseBlock());
 	}
 	

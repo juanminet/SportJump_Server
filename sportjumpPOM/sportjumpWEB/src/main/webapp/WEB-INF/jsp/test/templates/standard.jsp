@@ -8,7 +8,7 @@
 <common:common_stylesheets/>
 <link rel="stylesheet" href="<c:url value="/recursos/css/custom.css" />" type="text/css"/>
 
-<common:common_javascript/>
+<!-- <common:common_javascript/> -->
 
 <tiles:importAttribute name="dwrEngine" toName="dwr" ignore="true"/>
 <c:choose>

@@ -71,14 +71,15 @@
 	
 	<security:http auto-config="true" use-expressions="true">		
 		
-				
-		<security:intercept-url pattern="/test" access="permitAll" />	 
+		<security:intercept-url pattern="/test" access="permitAll" />			
+		<security:intercept-url pattern="/test/**/*" access="permitAll" />	 
 		<security:intercept-url pattern="/login" access="permitAll"/>
 		<security:intercept-url pattern="/registration" access="permitAll"/>
 		<security:intercept-url pattern="/resources/**/*" access="permitAll"/>
 		
 		<security:intercept-url pattern="/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 	 	<security:intercept-url pattern="/action/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
+	 	<security:intercept-url pattern="/ajax/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 	 	<security:intercept-url pattern="/rest/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER', 'ROLE_EXTERN')"/>
 	 	<security:intercept-url pattern="/login/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 		<security:intercept-url pattern="/**/*" access="hasRole('ROLE_ADMIN')"/> 

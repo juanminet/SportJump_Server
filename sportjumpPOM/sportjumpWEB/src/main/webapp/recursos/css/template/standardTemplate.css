@@ -44,6 +44,10 @@ body {
 	background-color: black;
 }
 
+.label_bold{
+	font-weight: bold;
+}
+
 /*----------------------------------------------------------- */
 /*------------------------ MENU BAR ------------------------- */
 /*----------------------------------------------------------- */
@@ -69,7 +73,7 @@ body {
 
 .sidebar { border-right: 1px solid #DDDDDD; float: left; min-height: 500px; width: 17%;}
 
-.sidebar ul {width: 100%; }
+.sidebar ul {width: 100%;  list-style: none none none; }
 
 .sidebar ul li {border-bottom: 1px solid #ddd; width: 100%; }
 
@@ -254,7 +258,6 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
     height: 4ex;
     margin-left: 0.5em;
     margin-right: 0.5em;
-    padding-bottom: 0.5ex;
     min-width: 7em;
     text-align: center;
 }
@@ -304,6 +307,16 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 .lBox .mensaje {line-height:1.3em;}
 
 .lBox .boxMensaje.boxMensajeCustom {margin:0 0 20px 0;}
+
+
+
+#lbox_show_container { text-align: left}  	
+ .training_lbox_show >label:first-child {font-weight: bold;	text-decoration: underline;}
+ .exercise_block_lbox_show { margin: 1em;}
+ .exercise_block_lbox_show  ol, .exercise_block_lbox_show ul {list-style: square inside none; margin-left: 1em}	
+ .exercise_block_lbox_show  label:first-child {  font-weight: bold}	
+
+
 
 /*----------------------------------------------------------- */
 /*------------------------- ERRORS -------------------------- */

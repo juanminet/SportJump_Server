@@ -15,7 +15,7 @@
 	
  	<tx:annotation-driven  transaction-manager="transactionManager"/> 
 
-	<!--  <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="emf" />
         <property name="dataSource" ref="dataSource" />
         <property name="jpaDialect" ref="jpaDialect" />
@@ -32,7 +32,7 @@
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 			</props>
 		</property>
     </bean>
@@ -50,17 +50,17 @@
         <property name="url" value="jdbc:mysql://localhost:3306/sportjumpdb" />
         <property name="username" value="juanmi" />
         <property name="password" value="12345678" />
-    </bean> -->
+    </bean> 
     
 
     
 	 	
- 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
+<!--  	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager" >
 		<property name="entityManagerFactory" ref="emf"/>
 	</bean>	
 
  	<bean id="emf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean"> 
 		<property name="persistenceUnitName" value="sportjumpJpaPU" />
-	</bean> 
+	</bean>  -->
  
 </beans>

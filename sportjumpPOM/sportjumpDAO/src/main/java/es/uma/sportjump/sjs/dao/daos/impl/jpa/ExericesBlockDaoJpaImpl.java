@@ -1,6 +1,5 @@
 package es.uma.sportjump.sjs.dao.daos.impl.jpa;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,7 +17,6 @@ import es.uma.sportjump.sjs.dao.daos.TrainingDao;
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
-import es.uma.sportjump.sjs.model.entities.Training;
 
 @Repository("exerciseBlockDao")
 public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
@@ -53,12 +51,13 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public void deleteExerciseBlock(Long idBlock) {
+	public void deleteExerciseBlock(Long idBlock) {		
 //		ExerciseBlock exerciseBlock = getExerciseBlockById(idBlock);			
 //		deleteReferencias(exerciseBlock);
-//		
+		
+		
 		ExerciseBlock exerciseBlockUpdated = getExerciseBlockById(idBlock);
-		deleteAllExercises(exerciseBlockUpdated);		
+		deleteAllExercises(exerciseBlockUpdated);
 		em.remove(exerciseBlockUpdated);
 	}
 	

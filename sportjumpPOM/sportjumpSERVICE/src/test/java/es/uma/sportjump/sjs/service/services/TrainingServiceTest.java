@@ -84,7 +84,7 @@ public class TrainingServiceTest {
 		assertNotNull(training.getIdTraining());
 		
 		//Get Training
-		Training trainingAux = trainingService.findExerciseTraining(training.getIdTraining());
+		Training trainingAux = trainingService.findTraining(training.getIdTraining());
 		
 		
 		assertEquals(training.getName(),trainingAux.getName());
@@ -108,7 +108,7 @@ public class TrainingServiceTest {
 		trainingService.updateTraining(training);
 		
 		//Get training
-		trainingAux = trainingService.findExerciseTraining(training.getIdTraining());
+		trainingAux = trainingService.findTraining(training.getIdTraining());
 		
 		assertEquals(trainingName2,trainingAux.getName());
 		
@@ -116,7 +116,7 @@ public class TrainingServiceTest {
 		trainingService.removeTraining(trainingAux);
 		
 		//Get training
-		trainingAux = trainingService.findExerciseTraining(training.getIdTraining());
+		trainingAux = trainingService.findTraining(training.getIdTraining());
 		
 		assertNull(trainingAux);
 	}

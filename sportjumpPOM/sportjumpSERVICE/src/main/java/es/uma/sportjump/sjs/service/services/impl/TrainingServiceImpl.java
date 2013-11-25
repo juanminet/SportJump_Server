@@ -39,7 +39,7 @@ public class TrainingServiceImpl implements TrainingService{
 	}
 
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
-	public Training findExerciseTraining(Long idTraining) {
+	public Training findTraining(Long idTraining) {
 		return trainingDao.getTrainingById(idTraining);
 	}
 

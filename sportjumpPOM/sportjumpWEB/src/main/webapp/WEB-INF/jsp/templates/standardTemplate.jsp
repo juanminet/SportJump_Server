@@ -22,6 +22,7 @@
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-ui-1.10.3.custom.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery.balloon.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-multi-accordion-1.5.3.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/data-table-1.9.4/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources//js/customDataTable.js"></script>
@@ -36,14 +37,7 @@
 	<link href="${pageContext.request.contextPath}/resources/css/custom.css"	type="text/css" rel="stylesheet" />	
 	<link href="${pageContext.request.contextPath}/resources/css/template/standardTemplate.css"	type="text/css" rel="stylesheet" />	
 	
-	<!-- dwr -->
-	<tiles:importAttribute name="dwrEngine" toName="dwr" ignore="true"/>
-	<c:choose>
-		<c:when test="${empty pageScope.dwr || pageScope.dwr == 'false'}"><!-- NO DWR --></c:when>
-		<c:when test="${pageScope.dwr == 'true'}"><!-- DEFAULT DWR --><jsp:include page="/WEB-INF/includes/dwrEngine.jsp" /></c:when>
-		<c:otherwise><!-- CUSTOM DWR --><tiles:insertAttribute name="dwrEngine" ignore="true"/></c:otherwise>
-	</c:choose>
-	
+
 	
 	<!-- titulo -->	
 	

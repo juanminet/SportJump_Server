@@ -9,9 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -21,6 +21,11 @@ import javax.persistence.UniqueConstraint;
 	uniqueConstraints= @UniqueConstraint(columnNames={"NAME", "ID_USER"})
 )
 public class Training {
+	
+	@PreRemove
+	public void preRemove() {
+		setListExerciseBlock(null);
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -41,8 +46,8 @@ public class Training {
 	private Coach coach;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="TB_TRAINING_EXERCISE_BLOCK", joinColumns= @JoinColumn(name="ID_TRAINING"), inverseJoinColumns= @JoinColumn(name="ID_BLOCK") )	
-	//@JoinColumn(name="ID_TRAINING_FK", nullable=false)
+	//@JoinTable(name="TB_TRAINING_EXERCISE_BLOCK", joinColumns= @JoinColumn(name="ID_TRAINING"), inverseJoinColumns= @JoinColumn(name="ID_BLOCK") )	
+	@JoinColumn(name="listExerciseBlock")
 	private List<ExerciseBlock> listExerciseBlock;
 
 

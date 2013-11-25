@@ -10,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -23,6 +23,11 @@ import javax.persistence.UniqueConstraint;
 )
 
 public class ExerciseBlock {
+	
+	@PreRemove
+	public void preRemove() {
+		setListTraining(null);
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -46,7 +51,7 @@ public class ExerciseBlock {
 	@JoinColumn(name="ID_BLOCK_FK", nullable=false)
 	private List<Exercise> listExercises;
 	
-	@ManyToMany(fetch=FetchType.LAZY,mappedBy="listExerciseBlock")
+	@ManyToMany(mappedBy="listExerciseBlock")
 	private List<Training> listTraining;
 
 

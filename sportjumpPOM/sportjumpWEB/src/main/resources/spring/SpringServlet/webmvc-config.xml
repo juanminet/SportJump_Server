@@ -25,6 +25,7 @@
 	<!-- Busca controladores anotados con @Controller -->
 	<context:component-scan base-package="es.uma.sportjump.sjs.web.controller" />
 	<context:component-scan base-package="es.uma.sportjump.sjs.web.rest" />
+	<context:component-scan base-package="es.uma.sportjump.sjs.web.ajax" />
 	
 	
 	<!--

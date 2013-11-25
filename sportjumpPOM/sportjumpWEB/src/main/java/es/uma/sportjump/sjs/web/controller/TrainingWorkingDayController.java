@@ -57,7 +57,7 @@ public class TrainingWorkingDayController {
 
 	@RequestMapping( value="/day/{idDay}" ,method = RequestMethod.GET)
 	public String getTrainingDay(@PathVariable("idDay") Long idDay, Model model, HttpSession session) {		
-		Training training = trainingService.findExerciseTraining(idDay);
+		Training training = trainingService.findTraining(idDay);
 		
 		initTrainingDayModify(training,model,session);
 		
@@ -89,7 +89,7 @@ public class TrainingWorkingDayController {
 			trainingService.setNewTraining(trainingCommand.getName(), trainingCommand.getType(), trainingCommand.getDescription(), exerciseBlockList, coach);
 		//Update training
 		}else{
-			Training training = trainingService.findExerciseTraining(trainingCommand.getId());
+			Training training = trainingService.findTraining(trainingCommand.getId());
 			
 			training.setName(trainingCommand.getName());
 			training.setType(trainingCommand.getType());
@@ -106,7 +106,7 @@ public class TrainingWorkingDayController {
 	@RequestMapping( value="/day/remove/{idDayTraining}" , method = RequestMethod.GET)
 	public String removeTrainingDay(@PathVariable("idDayTraining") Long idDayTraining, HttpSession session) {		
 
-		Training training = trainingService.findExerciseTraining(idDayTraining);
+		Training training = trainingService.findTraining(idDayTraining);
 		
 		if (training != null){		
 			trainingService.removeTraining(training);

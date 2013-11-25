@@ -117,10 +117,115 @@ var listExerciseTam;
 			open : function() {
 				$('.ui-dialog-buttonset button').blur();
 			}
-		});		
+		});	
+		
+		
+		$("#show_exercise_block_lbox").dialog({
+			autoOpen : false,
+			resizable : false,
+			draggable : false,
+			width : 640,
+			height: 480,
+			modal : true,
+			buttons : [ 
+				{					
+					text : "<fmt:message key='training.exercise.block.lbox.button.cancel'/>",
+					class:"lbox-button",
+					click : function() {						
+						$(this).dialog('close');
+						$('#lbox_show_container').empty();
+					}
+				}
+			],
+			open : function() {
+				$('.ui-dialog-buttonset button').blur();
+			}
+		});
 		
 
-	}); 
+		
+		$("#show_training_button").click(function(){			
+			var id = $("#id").val();
+			$.ajax({
+				  url: CONTEXT_PATH + "/ajax/training/day/" + id,
+				  type: 'GET',
+				  cache: false,				 
+				  success: function(data){
+					  var trainingDiv = $('<div/>', {class : 'training_lbox_show'});		
+
+						trainingDiv.append($('<label>').append(data.name));
+						trainingDiv.append($('<br/>'));
+						trainingDiv.append($('<label>').append(data.description));		
+						
+						$.each(data.listBlock, function(iBlock,block){				
+							var divExerciseBlock = createExerciseBlockDiv(block);				
+							trainingDiv.append(divExerciseBlock);
+						});
+						
+						$("#lbox_show_container").append(trainingDiv);
+						
+						$('#show_exercise_block_lbox').dialog('open');	
+				  },
+				  error: function(){
+					  alert("ajax error");
+				  }
+			});	
+		});
+		
+		
+		$("#new_exercise_block_lbox tbody tr").mouseenter( function(){
+			var element = $(this);
+			var exerciseId = $(this).find("td:first").text();
+	                
+				showTip(element, exerciseId);			
+	          
+			
+		} );
+		$("#new_exercise_block_lbox tbody tr").mouseout( function(){
+			$(this).hideBalloon();	
+		} ); 			
+		
+	});
+
+		
+	function showTip(element, exerciseId){
+		$.ajax({
+			url: CONTEXT_PATH + "/ajax/training/exercise/" + exerciseId,
+		  	type: 'GET',
+		  	cache: false,				 
+		  	success: function(data){
+				var exerciseBlockDiv = createExerciseBlockDiv(data);				  
+		  					   
+				$(element).showBalloon({						
+					position: 'right',
+			  		contents: exerciseBlockDiv,
+			  		minLifetime: 0, showDuration: 0, hideDuration: 0 
+				});				 
+		  	},
+		  	error: function(){
+		  		alert("ajax error");
+		  	}
+	 	}); 
+	}
+	
+	function createExerciseBlockDiv(block){
+		var blockDiv = $('<div/>', {class : 'exercise_block_lbox_show'});
+		
+		blockDiv.append($('<label>').append(block.name))
+				.append(" : ")
+				.append($('<label>').append(block.description));
+		
+		var exerciseList = $('<ul/>' );
+															
+		
+		$.each(block.listExercise, function(iExercise, exercise){			
+			exerciseList.append($('<li>').append(exercise));
+		});
+		
+		blockDiv.append(exerciseList);
+		
+		return blockDiv;
+	}
 	
 	function createNewExerciseTr(oTable){
 		var anSelected = fnGetSelected(oTable);
@@ -142,7 +247,9 @@ var listExerciseTam;
 			currentExerciseTr = newTr;		
 			
 			//valor seleccionado
-			var value = $(anSelected).find('td').html();
+			var value = $(anSelected).find('td:nth-child(2)').html();
+			
+			var id = $(anSelected).find('td:nth-child(1)').html();
 			
 			currentExerciseTr.find('td').text(value);
 			
@@ -150,7 +257,7 @@ var listExerciseTam;
 				.attr('name', 'trainingDayList['+ listExerciseTam +']')
 				.css("display", "none")
 				.val(value);
-			
+		 	
 			currentExerciseTr.append(newImput); 	
 		
 			listExerciseTam++;	
@@ -186,11 +293,11 @@ var listExerciseTam;
 
   </script>
   
-  <style>
+  
+  <script>
+ 	 var CONTEXT_PATH = "${pageContext.request.contextPath}";
+  </script>
 
-  
-  
-  </style>
 
 
 <div id="body_home">
@@ -199,11 +306,12 @@ var listExerciseTam;
 	   		<form:form commandName="trainingDayCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/training/day/save" method="POST" >
 		   		<div class="subcaja">
 			 		<h1><fmt:message key="training.day.tittle" /></h1>
-			 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/list"><fmt:message key="training.day.button.back" /></a>
+			 		<input type="submit" value="<fmt:message key='training.day.button.save'/>" class="button_submit">			 		
 			 		<c:if test="${not empty trainingDayCommand.id}">
 			 			<a class="button" href="${pageContext.request.contextPath}/action/training/day/remove/${trainingDayCommand.id}"><fmt:message key="training.day.button.remove" /></a>
+			 			<a id="show_training_button" class="button"><fmt:message key="training.day.button.show" /></a>
 			 		</c:if>
-			 		<input type="submit" value="<fmt:message key='training.day.button.save'/>" class="button_submit">
+			 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/list"><fmt:message key="training.day.button.back" /></a>
 			    </div> 
 				    
 				<div class="subcaja doble_row">
@@ -256,7 +364,7 @@ var listExerciseTam;
 <!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
 
 <!-- lightbox for create exercises -->
-<div id="new_exercise_block_lbox" class="lBox" title="Confirmación de alta de póliza">
+<div id="new_exercise_block_lbox" class="lBox" title="<fmt:message key='training.exercise.block.lbox.create.tittle'/>">
 	<!-- Mensaje -->
 	<div class="cajaMensajeTop">
 		<div class="cajaMensajeTopLeft"></div>
@@ -267,13 +375,15 @@ var listExerciseTam;
 			 <table class="display" id="table_blocks">
 		    	<thead>
 		        	<tr>
+		        		<th hidden="true">id</th>
 		            	<th><fmt:message key="training.exercise.block.name" /> </th>
 		            	<th><fmt:message key="training.exercise.block.type" /></th>		            	
 		          	</tr>
 		        </thead>
 		        <tbody>
 		        	<c:forEach items="${exerciseBlockList}" var="block">
-			        	<tr class="${rowStyle}  gradeU"> 
+			        	<tr class="${rowStyle}  gradeU">
+			        		<td hidden="true">${block.idExerciseBlock}</td> 
 				            <td>${block.name}</td>            
 				            <td>${block.type}</td>	            				         
 			        	</tr>
@@ -293,7 +403,7 @@ var listExerciseTam;
 
 
 <!-- lightbox for modify exercises -->
-<div id="modify_exercise_block_lbox" class="lBox" title="Confirmación de alta de póliza">
+<div id="modify_exercise_block_lbox" class="lBox" title="<fmt:message key='training.exercise.block.lbox.modify.tittle'/>">
 	<!-- Mensaje -->
 	<div class="cajaMensajeTop">
 		<div class="cajaMensajeTopLeft"></div>
@@ -303,6 +413,31 @@ var listExerciseTam;
 		<div class="single_row">
 			<label for="exercise_block_name"><fmt:message	key="training.exercise.block.name" />:</label> 
 			<span class="input"><input id="exercise_block_name" disabled="disabled"/> </span>
+		</div>
+	</div>
+	<!--mensaje-->
+	<div class="cajaMensajePie">
+		<div class="cajaMensajePieLeft"></div>
+		<div class="cajaMensajePieRight"></div>
+	</div>
+	<!-- Mensaje -->	
+	
+</div>
+
+
+
+<!-- lightbox for show exercises -->
+<div id="show_exercise_block_lbox" class="lBox" title="<fmt:message key='training.exercise.block.lbox.show.tittle'/>">
+	<!-- Mensaje -->
+	<div class="cajaMensajeTop">
+		<div class="cajaMensajeTopLeft"></div>
+		<div class="cajaMensajeTopRight"></div>
+	</div>
+	<div class="mensaje dobleLinea fuenteFormLB">
+		<div class="single_row">
+			<div id="lbox_show_container">
+				
+			</div>
 		</div>
 	</div>
 	<!--mensaje-->

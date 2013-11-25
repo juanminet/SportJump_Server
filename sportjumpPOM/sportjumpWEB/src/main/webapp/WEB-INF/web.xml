@@ -7,9 +7,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>	classpath:/spring/application/**/*.xml
-		    			classpath:/spring/dwr/**/*.xml
-		</param-value>
+		<param-value>classpath:/spring/application/**/*.xml</param-value>
 	</context-param> 
 
 
@@ -78,26 +76,6 @@
 -->
 
 	<!-- Servlets -->
-	<servlet>
-		<description>Dispatcher Servlet de Dwr con Spring</description>
-		<servlet-name>DwrSpringServlet</servlet-name>
-		<servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
-		<init-param>
-			<param-name>debug</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:/spring/dwr/**/*.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet> 
-	
-
- 	<servlet-mapping>
-		<servlet-name>DwrSpringServlet</servlet-name>
-		<url-pattern>/dwr/*</url-pattern>
-	</servlet-mapping> 
 	
 	<servlet>
 		<description>Dispatcher Servlet de Spring MVC</description>

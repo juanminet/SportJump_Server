@@ -34,7 +34,7 @@ public interface TrainingService {
 	 * @param idTraining 
 	 * @return the training with the id.
 	 */
-	public Training findExerciseTraining(Long idTraining);
+	public Training findTraining(Long idTraining);
 	
 	/**
 	 * find an training by its name and the coach in charge  given by parameter

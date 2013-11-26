@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ExerciseWebBean {
 	
+	private Long id;
 	private String name;
 	private String type;
 	private String description;
@@ -11,6 +12,14 @@ public class ExerciseWebBean {
 	private List<String> listExercise;
 
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}

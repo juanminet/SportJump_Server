@@ -55,8 +55,9 @@ var listExerciseTam;
 		
 	 
 	    $( document ).on( "click", "#table_exercises_block tbody tr", function() {
-	    	currentExerciseTr = $(this);    
-	    	$("#exercise_block_name").val(String.trim(currentExerciseTr.text()));
+	    	currentExerciseTr = $(this);
+	    	var name= String.trim($(currentExerciseTr).find("td:nth-child(2)").text())
+	    	$("#exercise_block_name").val(name);
 	    	$('#modify_exercise_block_lbox').dialog('open');			
 		});
 		
@@ -144,68 +145,89 @@ var listExerciseTam;
 		
 
 		
-		$("#show_training_button").click(function(){			
-			var id = $("#id").val();
-			$.ajax({
-				  url: CONTEXT_PATH + "/ajax/training/day/" + id,
-				  type: 'GET',
-				  cache: false,				 
-				  success: function(data){
-					  var trainingDiv = $('<div/>', {class : 'training_lbox_show'});		
+		$("#show_training_button").click(function(){		
+		   var trainingDiv = $('<div/>', {class : 'training_lbox_show'});		
 
-						trainingDiv.append($('<label>').append(data.name));
-						trainingDiv.append($('<br/>'));
-						trainingDiv.append($('<label>').append(data.description));		
-						
-						$.each(data.listBlock, function(iBlock,block){				
-							var divExerciseBlock = createExerciseBlockDiv(block);				
-							trainingDiv.append(divExerciseBlock);
-						});
-						
-						$("#lbox_show_container").append(trainingDiv);
-						
-						$('#show_exercise_block_lbox').dialog('open');	
-				  },
-				  error: function(){
-					  alert("ajax error");
-				  }
-			});	
+			trainingDiv.append($('<label>').append($('#training_name').val()));
+			trainingDiv.append($('<br/>'));
+			trainingDiv.append($('<label>').append($('#training_description').val()));	
+			
+			var names = "";
+			$('#table_exercises_block tbody tr').each(function(index, element){
+				names = names + $(element).find("td:nth-child(2)").text() + "-";					
+			});
+			
+			$.ajax({
+				url: CONTEXT_PATH + "/ajax/training/exercise/names/" + names,
+			  	type: 'GET',
+			  	cache: false,				 
+			  	success: function(data){
+			  		$.each(data.listBlock, function(iBlock,block){				
+						var divExerciseBlock = createExerciseBlockDiv(block);				
+						trainingDiv.append(divExerciseBlock);
+					});					  		
+			  	},
+			  	error: function(){alert("ajax error");}
+		 	}); 
+			
+			$("#lbox_show_container").append(trainingDiv);					
+			$('#show_exercise_block_lbox').dialog('open');					
 		});
 		
 		
-		$("#new_exercise_block_lbox tbody tr").mouseenter( function(){
-			var element = $(this);
-			var exerciseId = $(this).find("td:first").text();
-	                
-				showTip(element, exerciseId);			
-	          
-			
-		} );
-		$("#new_exercise_block_lbox tbody tr").mouseout( function(){
-			$(this).hideBalloon();	
-		} ); 			
+		
+		//ToolTips
+		setToolTip();	 
 		
 	});
 
+	function setToolTip(){
+		 $("#new_exercise_block_lbox tbody tr").mouseenter( function(){
+				var element = $(this);
+				var exerciseId = $(this).find("td:first").text();	                
+				showTipExerciseIdAjax(element, exerciseId);		
+			} );
+			 $("#new_exercise_block_lbox tbody tr").mouseout( function(){
+				$(this).hideBalloon();	
+			} );
+			
+			
+			$("#table_exercises_block tbody tr").mouseenter( function(){
+				var element = $(this);
+				var exerciseId = $(this).find("td:first").text();	                
+				showTipExerciseIdAjax(element, exerciseId);		
+			} );
+			$("#table_exercises_block tbody tr").mouseout( function(){
+				$(this).hideBalloon();	
+			} );  
+	}
 		
-	function showTip(element, exerciseId){
-		$.ajax({
-			url: CONTEXT_PATH + "/ajax/training/exercise/" + exerciseId,
-		  	type: 'GET',
-		  	cache: false,				 
-		  	success: function(data){
-				var exerciseBlockDiv = createExerciseBlockDiv(data);				  
-		  					   
-				$(element).showBalloon({						
-					position: 'right',
-			  		contents: exerciseBlockDiv,
-			  		minLifetime: 0, showDuration: 0, hideDuration: 0 
-				});				 
-		  	},
-		  	error: function(){
-		  		alert("ajax error");
-		  	}
-	 	}); 
+	function showTipExerciseIdAjax(element, exerciseId){	
+		if (!existExerciseBlock(exerciseId)){			
+			$.ajax({
+				url: CONTEXT_PATH + "/ajax/training/exercise/" + exerciseId,
+			  	type: 'GET',
+			  	cache: false,				 
+			  	success: function(data){
+			  		setExerciseBlock(data, exerciseId);
+			  		showTip(element,data);
+			  	},
+			  	error: function(){alert("ajax error");	}
+		 	}); 
+		}else{		
+			showTip(element, getExerciseBlock(exerciseId));
+		}
+	}	
+
+	
+	function showTip(element, exerciseBlock){
+		var exerciseBlockDiv = createExerciseBlockDiv(exerciseBlock);				  
+		   
+		$(element).showBalloon({						
+			position: 'right',
+	  		contents: exerciseBlockDiv,
+	  		minLifetime: 0, showDuration: 0, hideDuration: 0 
+		});				
 	}
 	
 	function createExerciseBlockDiv(block){
@@ -236,8 +258,10 @@ var listExerciseTam;
 			var newTr= $('<tr>')
 				.addClass('gradeU')	
 				.append(			
+					$('<td>').hide()	
+				).append(			
 					$('<td>')	
-				);
+				);;
 			
 			$('#table_exercises_block tbody').append(newTr);
 			
@@ -247,21 +271,35 @@ var listExerciseTam;
 			currentExerciseTr = newTr;		
 			
 			//valor seleccionado
-			var value = $(anSelected).find('td:nth-child(2)').html();
-			
 			var id = $(anSelected).find('td:nth-child(1)').html();
+			var name = $(anSelected).find('td:nth-child(2)').html();			
 			
-			currentExerciseTr.find('td').text(value);
+			currentExerciseTr.find('td:nth-child(1)').text(id);
+			currentExerciseTr.find('td:nth-child(2)').text(name);
 			
-		 	var newImput = $('<input>')
-				.attr('name', 'trainingDayList['+ listExerciseTam +']')
-				.css("display", "none")
-				.val(value);
+			
+	        
+	       
+			
+			var newImputId = $('<input>')
+				.attr('id', 'id')
+				.attr('name', 'trainingDayList['+ listExerciseTam +'].id')	
+				.attr('type', 'hidden')	
+				.attr('value', id);
+			
+			currentExerciseTr.append(newImputId);
+			
+			var newImputName = $('<input>')
+			.attr('id', 'name')
+			.attr('name', 'trainingDayList['+ listExerciseTam +'].name')
+			.attr('type', 'hidden')	
+			.attr('value', name);
 		 	
-			currentExerciseTr.append(newImput); 	
+			currentExerciseTr.append(newImputName); 	
 		
 			listExerciseTam++;	
 		}
+		setToolTip();
 	}	
 	
 	
@@ -286,10 +324,26 @@ var listExerciseTam;
 					$(this).addClass("gradeU even");
 				}
 				
-				$(this).find('input').attr('name', 'trainingDayList['+ index +']');
+				$(this).find('#name').attr('name', 'trainingDayList['+ index +'].name');
+				$(this).find('#id').attr('name', 'trainingDayList['+ index +'].id');
 			}
 		});	
 	}
+	
+	var exerciseBlockList = new Array();
+	
+	function setExerciseBlock(exerciseBlock, id){
+		exerciseBlockList[id] = exerciseBlock;
+	}
+	
+	function getExerciseBlock(id){
+		return exerciseBlockList[id];
+	}
+	
+	function existExerciseBlock(id){		
+		return(getExerciseBlock(id) != null)? true :  false;
+	}
+	
 
   </script>
   
@@ -322,7 +376,7 @@ var listExerciseTam;
 				        <div class="form-row">
 				        	
 				            <label for="name"><fmt:message key="training.day.name"/>:</label>
-				           	<span class="input"><form:input path="name" />   </span> 
+				           	<span class="input"><form:input path="name" id = "training_name"/>   </span> 
 				        </div> 
 				        <form:errors path="type" cssClass="error" />  
 				        <div class="form-row">
@@ -331,7 +385,7 @@ var listExerciseTam;
 				        </div>  				       
 				        <div class="form-row">
 				            <label for="description"><fmt:message key="training.day.description"/>:</label>
-				            <span class="input"><form:textarea path="description" cols="10"  disabled="disabled"/></span>		     
+				            <span class="input"><form:textarea path="description" cols="10"  disabled="disabled" id = "training_description"/></span>		     
 				        </div> 
 				     </fieldset>
 			     </div>
@@ -340,14 +394,17 @@ var listExerciseTam;
 					 <table class="display simple_button" id="table_exercises_block" >
 				    	<thead>
 				        	<tr>
+				        		<th hidden="true">id</th>
 				            	<th><fmt:message key="training.day.trainings" /> </th>	            	
 				          	</tr>
 				        </thead>
 				        <tbody>	
-				        	<c:forEach items="${trainingDayCommand.trainingDayList}" var="training" varStatus="status">
+				        	<c:forEach items="${trainingDayCommand.trainingDayList}" var="exerciseBlock" varStatus="status">
 				        		<tr class="${rowStyle}  gradeU"> 
-				        			<td>${training}</td> 
-					             	<form:hidden path="trainingDayList[${status.index}]" />
+				        			<td hidden="true">${exerciseBlock.id}</td> 
+				        			<td>${exerciseBlock.name}</td> 
+				        			<form:input path="trainingDayList[${status.index}].id" id="id" type="hidden"/>
+					             	<form:input path="trainingDayList[${status.index}].name" id="name" type="hidden" />
 				        		</tr>
 				        	</c:forEach>        		         
 				    	</tbody>

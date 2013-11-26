@@ -3,6 +3,8 @@ package es.uma.sportjump.sjs.web.ajax;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 import es.uma.sportjump.sjs.model.entities.Training;
@@ -61,6 +64,48 @@ public class TrainigAjax<E> {
 		ExerciseWebBean result = fillExerciseBlock(exererciseBlock);
 		return result;
 	}
+	
+	
+	@RequestMapping(value ="/exercise/name/{nameExerciseBlock}" ,  method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody ExerciseWebBean getExerciseBlockByName(@PathVariable("nameExerciseBlock") String nameExerciseBlock,  HttpSession session){	
+		
+		Coach  coach = (Coach) session.getAttribute("loggedUser");	
+	
+		ExerciseBlock exererciseBlock = exerciseService.findExerciseBlockByNameAndCoach(nameExerciseBlock, coach);
+		if (exererciseBlock == null){
+			throw new EmptyResultDataAccessException("Training element not found", 1);			
+		}
+		
+		
+		ExerciseWebBean result = fillExerciseBlock(exererciseBlock);
+		return result;
+	}
+	
+	
+	@RequestMapping(value ="/exercise/names/{namesExerciseBlock}" ,  method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody TrainingWebBean getTrainingDay(@PathVariable("namesExerciseBlock") String  names,  HttpSession session){					
+	
+		
+		
+		TrainingWebBean result = new TrainingWebBean();
+		
+		String[] nameArray = names.split("-");
+		Coach  coach = (Coach) session.getAttribute("loggedUser");		
+		List<ExerciseWebBean> listExerciseWebBean = new ArrayList<ExerciseWebBean>();
+		
+		for(String name : nameArray){
+			ExerciseBlock block = exerciseService.findExerciseBlockByNameAndCoach(name, coach);
+			
+			listExerciseWebBean.add(fillExerciseBlock(block));
+		}
+		
+		result.setListBlock(listExerciseWebBean);				
+	
+		return result;
+	}	
+	
 	
 	
 	private TrainingWebBean fillTrainingWebBean(Training training) {

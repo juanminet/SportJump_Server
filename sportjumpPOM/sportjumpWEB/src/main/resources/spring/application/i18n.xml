@@ -19,7 +19,8 @@
 	<util:list id="i18nResources" value-type="java.lang.String">
 	    <value>i18n.mensajes</value>
 	    <value>i18n.administration</value>
-	    <value>i18n.training</value>		    
+	    <value>i18n.training</value>	
+	    <value>i18n.planning</value>	    
 	</util:list>
 	
 

@@ -29,7 +29,8 @@ form ol li label{
 	text-align:left;
 }
 fieldset{
-	padding:12px
+	padding:12px;
+	margin-top:2ex;
 }
 .cajaCen{
 	background-color: #EEEEEE;
@@ -67,23 +68,25 @@ fieldset{
 		<div <c:if test="${not empty param.login_error}">style="display:none;"</c:if>>
 			<form action="j_spring_security_check" method="POST">
 				<div id="capaLogin" class="cajaCen">
-					<div class="subcaja">
-						<h1><fmt:message key="login.form.label.login"/></h1>
+					
+					<div id="logo">
+						<img src="${pageContext.request.contextPath}/resources/img/header/logo.png">
 					</div>
-					<div class="subcaja">		
-						<fieldset>										
-							<ol>
-								<li><label><fmt:message key="login.form.user"/></label><input class="user" id="usuario" name="j_username"  type="text" maxlength="23" size="25"></li>
-							   	<li><label><fmt:message key="login.form.password"/></label><input class="password" id="password" name="j_password" type="password" maxlength="23" size="25"></li>
-							</ol>						
-						
-							<p align="center" style="margin-top: 2ex;">
-								<input class="button_submit" name="aceptar" id="loginButton" value="<fmt:message key="login.form.aceptar"/>" type="submit">
-								<input class="button_submit" name="Registro" id="loginButton" value="<fmt:message key="login.form.registro"/>" type="button" onclick="window.location='registration;'">
-							</p>
-						
-						</fieldset>
-					</div>
+				
+					
+					<fieldset>										
+						<ol>
+							<li><label><fmt:message key="login.form.user"/></label><input class="user" id="usuario" name="j_username"  type="text" maxlength="23" size="25"></li>
+						   	<li><label><fmt:message key="login.form.password"/></label><input class="password" id="password" name="j_password" type="password" maxlength="23" size="25"></li>
+						</ol>						
+					
+						<p align="center" style="margin-top: 2ex;">
+							<input class="button_submit" name="aceptar" id="loginButton" value="<fmt:message key="login.form.aceptar"/>" type="submit">
+							<a class="button" href="${pageContext.request.contextPath}/registration"><span><fmt:message key="login.form.registro" /></span></a>							
+						</p>
+					
+					</fieldset>
+					
 				</div>			
 	
 				

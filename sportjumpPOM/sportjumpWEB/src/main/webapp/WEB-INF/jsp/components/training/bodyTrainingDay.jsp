@@ -23,7 +23,7 @@
 	    
 	   		<div class="subcaja">
 		 		<h1><fmt:message key="training.day.tittle" /></h1>
-		 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/new"><fmt:message key="training.day.button.new" /></a>
+		 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/new"><span><fmt:message key="training.day.button.new" /></span></a>
 		    </div> 
 		    
 		  			    

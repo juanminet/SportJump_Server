@@ -17,24 +17,13 @@
 	
 $(document).ready( function() {
 
-/* 	initDataTableButton(
-			"table_groups",
-			"${pageContext.request.contextPath}/action/admin/groups/new", 
-			'<fmt:message key="admin.groups.table.new.group" />', 
-			10); */
 	
 	initDataTable(
 			"table_groups",
 			10);
 	  	
-}); 
-	
-	function pulsado(idTeam){
-		alert(idTeam);
-		
-		 location.href='${pageContext.request.contextPath}/action/admin/groups/' + idTeam; 
-	}
-	
+}); 	
+
 </script>
     
 <div id ="body_home">
@@ -42,8 +31,7 @@ $(document).ready( function() {
 	    <div class="caja">
 	    
 	   		<div class="subcaja">
-		 		<h1><fmt:message key="admin.groups.list.groups" /></h1>
-		 		<a class="button" href="${pageContext.request.contextPath}/action/admin/groups/new"><span><fmt:message key="admin.button.new.group" /></span></a>
+		 		<h1><fmt:message key="planning.group.list.tittle" /></h1>		 		
 		    </div> 
 		    
 		    
@@ -65,7 +53,7 @@ $(document).ready( function() {
 			           			<c:set var="rowStyle" scope="page" value="even"/>
 			          		</c:otherwise>
 			        	</c:choose>
-			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/admin/groups/${team.idTeam}';">
+			        	<tr class="${rowStyle}  gradeU" onclick="location.href='${pageContext.request.contextPath}/action/planning/calendar/group/${team.idTeam}';">
 				            <td>${team.name}</td>            
 				            <td>${team.type}</td>
 				            <td class="center">${team.size}</td>

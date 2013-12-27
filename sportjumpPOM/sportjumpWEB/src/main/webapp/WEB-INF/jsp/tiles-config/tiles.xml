@@ -16,7 +16,7 @@
 		<put-attribute name="title" value="test.tittle" />
 		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="home"/>
-		<put-attribute name="section" value="groups"/>
+		<put-attribute name="section" value="no_section"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/bodyHome.jsp" />	  
 	 </definition> 
 	 
@@ -109,7 +109,25 @@
 	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
 	</definition>
 	 	  
+	
+	<!-- PLANNING -->
+	
+	<definition name="planning_group_list" extends="standardTemplate">
+		<put-attribute name="title" value="planning.group.list.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+		<put-attribute name="layer" value="planning"/>
+		<put-attribute name="section" value="no_section"/>
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningGroups.jsp" />	      
+	 </definition>
 	  
+	<definition name="planning_calendar" extends="standardTemplate">
+		<put-attribute name="title" value="planning.calendar.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+		<put-attribute name="layer" value="planning"/>
+		<put-attribute name="section" value="no_section"/>
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningCalendar.jsp" />	      
+	 </definition>
+	
 
 	<!-- TEST -->
 	<definition name="test" extends="testTemplate">

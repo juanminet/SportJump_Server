@@ -130,7 +130,7 @@ var listExerciseTam;
 			modal : true,
 			buttons : [ 
 				{					
-					text : "<fmt:message key='training.exercise.block.lbox.button.cancel'/>",
+					text : "<fmt:message key='training.exercise.block.lbox.button.close'/>",
 					class:"lbox-button",
 					click : function() {						
 						$(this).dialog('close');
@@ -362,10 +362,10 @@ var listExerciseTam;
 			 		<h1><fmt:message key="training.day.tittle" /></h1>
 			 		<input type="submit" value="<fmt:message key='training.day.button.save'/>" class="button_submit">			 		
 			 		<c:if test="${not empty trainingDayCommand.id}">
-			 			<a class="button" href="${pageContext.request.contextPath}/action/training/day/remove/${trainingDayCommand.id}"><fmt:message key="training.day.button.remove" /></a>
-			 			<a id="show_training_button" class="button"><fmt:message key="training.day.button.show" /></a>
+			 			<a class="button" href="${pageContext.request.contextPath}/action/training/day/remove/${trainingDayCommand.id}"><span><fmt:message key="training.day.button.remove" /></span></a>
+			 			<a id="show_training_button" class="button"><span><fmt:message key="training.day.button.show" /></span></a>
 			 		</c:if>
-			 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/list"><fmt:message key="training.day.button.back" /></a>
+			 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/list"><span><fmt:message key="training.day.button.back" /></span></a>
 			    </div> 
 				    
 				<div class="subcaja doble_row">
@@ -421,7 +421,7 @@ var listExerciseTam;
 <!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
 
 <!-- lightbox for create exercises -->
-<div id="new_exercise_block_lbox" class="lBox" title="<fmt:message key='training.exercise.block.lbox.create.tittle'/>">
+<div id="new_exercise_block_lbox" class="lBox" title="<fmt:message key='training.day.lbox.create.tittle'/>">
 	<!-- Mensaje -->
 	<div class="cajaMensajeTop">
 		<div class="cajaMensajeTopLeft"></div>
@@ -460,7 +460,7 @@ var listExerciseTam;
 
 
 <!-- lightbox for modify exercises -->
-<div id="modify_exercise_block_lbox" class="lBox" title="<fmt:message key='training.exercise.block.lbox.modify.tittle'/>">
+<div id="modify_exercise_block_lbox" class="lBox" title="<fmt:message key='training.day.lbox.modify.tittle'/>">
 	<!-- Mensaje -->
 	<div class="cajaMensajeTop">
 		<div class="cajaMensajeTopLeft"></div>
@@ -484,7 +484,7 @@ var listExerciseTam;
 
 
 <!-- lightbox for show exercises -->
-<div id="show_exercise_block_lbox" class="lBox" title="<fmt:message key='training.exercise.block.lbox.show.tittle'/>">
+<div id="show_exercise_block_lbox" class="lBox" title="<fmt:message key='training.day.lbox.show.tittle'/>">
 	<!-- Mensaje -->
 	<div class="cajaMensajeTop">
 		<div class="cajaMensajeTopLeft"></div>

@@ -26,7 +26,7 @@
 					 			<span style="color:#FF9300;"><fmt:message key="admin.profile.registration.message" /></span>				 		
 					 		</h1>		
 					 		 	
-					 		<a class="button" href="login"><fmt:message key="admin.button.return"/></a>	
+					 		<a class="button" href="login"><span></span><fmt:message key="admin.button.return"/></span></a>	
 					    </div> 
 					    <form:errors path="*" cssClass="errorblock" element="div" />
 					    

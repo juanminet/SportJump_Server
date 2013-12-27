@@ -193,9 +193,9 @@ var listExerciseTam;
 			 		
 			 		<input type="submit" value="<fmt:message key='training.exercise.block.button.save'/>" class="button_submit">
 			 		<c:if test="${not empty blockCommand.id}">
-			 			<a class="button" href="${pageContext.request.contextPath}/action/training/exercise/remove/${blockCommand.id}"><fmt:message key="training.exercise.block.button.remove" /></a>
+			 			<a class="button" href="${pageContext.request.contextPath}/action/training/exercise/remove/${blockCommand.id}"><span><fmt:message key="training.exercise.block.button.remove" /></span></a>
 			 		</c:if>
-			 		<a class="button" href="${pageContext.request.contextPath}/action/training/exercise"><fmt:message key="training.exercise.block.button.back" /></a>			 		
+			 		<a class="button" href="${pageContext.request.contextPath}/action/training/exercise"><span><fmt:message key="training.exercise.block.button.back" /></span></a>			 		
 			    </div> 
 				    
 				<div class="subcaja doble_row">
@@ -246,7 +246,7 @@ var listExerciseTam;
 <!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
 
 <!-- lightbox for create exercises -->
-<div id="create_exercise_lbox" class="lBox" title="Confirmación de alta de póliza">
+<div id="create_exercise_lbox" class="lBox" title="<fmt:message key='training.exercise.block.lbox.create.tittle'/>">
 	<!-- Mensaje -->
 	<div class="cajaMensajeTop">
 		<div class="cajaMensajeTopLeft"></div>
@@ -269,7 +269,7 @@ var listExerciseTam;
 
 
 <!-- lightbox for modify exercises -->
-<div id="exercise_lbox" class="lBox" title="Confirmación de alta de póliza">
+<div id="exercise_lbox" class="lBox" title="<fmt:message key='training.exercise.block.lbox.modify.tittle'/>">
 	<!-- Mensaje -->
 	<div class="cajaMensajeTop">
 		<div class="cajaMensajeTopLeft"></div>

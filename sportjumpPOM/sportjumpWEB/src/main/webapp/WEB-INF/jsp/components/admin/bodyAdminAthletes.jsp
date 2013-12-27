@@ -43,7 +43,7 @@ $(document).ready( function() {
 	    
 	   		<div class="subcaja">
 		 		<h1><fmt:message key="admin.athletes.list.athletes" /></h1>
-		 		<a class="button" href="${pageContext.request.contextPath}/action/admin/athletes/new"><fmt:message key="admin.button.new.athlete" /></a>
+		 		<a class="button" href="${pageContext.request.contextPath}/action/admin/athletes/new"><span><fmt:message key="admin.button.new.athlete" /></span></a>
 		    </div> 
 			    
 			 <table class="display" id="table_athletes">

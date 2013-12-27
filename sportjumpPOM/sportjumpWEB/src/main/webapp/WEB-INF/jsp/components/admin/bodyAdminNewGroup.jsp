@@ -31,7 +31,7 @@ function show_modify(){
 		 	<form:form commandName="groupCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/admin/groups/save" method="POST" >
 				<div class="subcaja">
 			 		<h1><fmt:message key="admin.groups.group.data" /></h1>
-			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/groups"><fmt:message key="admin.button.return"/></a>
+			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/groups"><span><fmt:message key="admin.button.return"/></span></a>
 			    </div> 
 			    <div class="subcaja">
 					<fieldset>
@@ -67,9 +67,9 @@ function show_modify(){
 		
 		 	<div class="subcaja">
 		 		<h1><fmt:message key="admin.groups.group.data" /></h1>
-		        <a class="button" href="${pageContext.request.contextPath}/action/admin/groups/remove/${groupCommand.idTeam}"><fmt:message key="admin.button.remove"/></a>
-		 		<div class="button" onclick="javascript:show_modify();"><a><fmt:message key="admin.button.modify"/></a></div>
-		 		<a class="button" href="${pageContext.request.contextPath}/action/admin/groups"><fmt:message key="admin.button.return"/></a>
+		        <a class="button" href="${pageContext.request.contextPath}/action/admin/groups/remove/${groupCommand.idTeam}"><span><fmt:message key="admin.button.remove"/></span></a>
+		 		<div onclick="javascript:show_modify();"><a class="button"><span><fmt:message key="admin.button.modify"/></span></a></div>
+		 		<a class="button" href="${pageContext.request.contextPath}/action/admin/groups"><span><fmt:message key="admin.button.return"/></span></a>
 		    </div> 	
 		 
 		 	

@@ -10,7 +10,7 @@
 
 .menu_bar li.logout {float: right;	border-left: 1px solid #ddd;	border-right: none;}
 
-.menu_bar li:hover {background-color:#F2E3E3;cursor: pointer;}
+.menu_bar li:hover {cursor: pointer;}
 
-.menu_bar li a.active, .menu_bar li a.active {background: #f0f0f0repeat-x left top;color: #454545;}
+.menu_bar li a.active, .menu_bar li a.active {background: #EF7900 repeat-x left top;color: #FCFCFC;}
 

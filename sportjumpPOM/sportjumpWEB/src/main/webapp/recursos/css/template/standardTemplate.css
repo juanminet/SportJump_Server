@@ -20,7 +20,7 @@ body {
 
 
 #header{
-	height:170px
+	height:140px
 }
 
 #holder_container{	
@@ -28,13 +28,31 @@ body {
 	padding: 6px;
 }
 
-#body_container{	
-	border: 1px solid #ddd;
-	min-height:500px;
-	width:100%;
-	display:inline-block;
+#left_container {
 	background-color: #FCFCFC;
-	
+    display: inline-block;
+    margin: 0.25em;
+    width: 17%;
+	float: left;
+}
+
+
+#body_container {
+     background-color: #FCFCFC;
+    border: 1px solid #DDDDDD;
+    display: inline-block;
+    margin: 0.25em;
+    min-height: 500px;
+    width: 81.3%;
+}
+
+#body_container_single {
+     background-color: #FCFCFC;
+    border: 1px solid #DDDDDD;
+    display: inline-block;
+    margin: 0.25em;
+    min-height: 500px;
+    width: 99.5%;
 }
 
 
@@ -51,27 +69,15 @@ body {
 /*----------------------------------------------------------- */
 /*------------------------ MENU BAR ------------------------- */
 /*----------------------------------------------------------- */
-
-.menu_bar {	width: auto; height: 6ex; padding: 6px;	margin: 0 0 30px 0; list-style: none outside none; background: #EEEEEE no-repeat left top;}
-
-.menu_bar ul { background: none no-repeat scroll left top #FCFCFC; border: 1px solid #ddd; height: inherit; list-style: none outside none;  width: auto;}
-
-.menu_bar li {float: left;	height: inherit; border-right: 1px solid #ddd;}
-
-.menu_bar li a {display: block;	float: left; font-weight:normal;  height: 37px;  line-height: 37px;	text-decoration: none;	color: #646464;	padding: 0 20px;}
-
-.menu_bar li.logout {float: right;	border-left: 1px solid #ddd;	border-right: none;}
-
-.menu_bar li:hover {background-color:#F2E3E3;cursor: pointer;}
-
-.menu_bar li a.active, .menu_bar li a.active {background: #f0f0f0 repeat-x left top; color: #454545; font-weight: bold;}
+/*---------------- recursos/css/menu_bar.css ---------------- */
+/*----------------------------------------------------------- */
 
 
 /*----------------------------------------------------------- */
 /*------------------------ SIDE BAR ------------------------- */
 /*----------------------------------------------------------- */
 
-.sidebar { border-right: 1px solid #DDDDDD; float: left; min-height: 500px; width: 17%;}
+.sidebar { border: 1px solid #DDDDDD; min-height: 500px; width: 100%;}
 
 .sidebar ul {width: 100%;  list-style: none none none; }
 
@@ -79,9 +85,7 @@ body {
 
 .sidebar ul li a {display: block;	color: #646464;	background: #f6f6f6; text-decoration: none;	height: 29px; line-height: 29px; padding: 0 10%; width: 80%;}
 
-.sidebar ul li a:hover {background: #F2E3E3; }
-
-.sidebar ul li a.active, #sidebar .sideNav li a.active:hover {background: #f0f0f0;	color: #454545; font-weight: bold}
+.sidebar ul li a.active, #sidebar .sideNav li a.active:hover {background: #eeeeee;	color: #454545; font-weight: bold}
 
 /*----------------------------------------------------------- */
 /*------------------------ TABLE2 ------------------------- */
@@ -91,12 +95,14 @@ table tr{
 }
 
 table  tr.even:hover td, table tr.even:hover td.sorting_1{
-    background: #F2E3E3;
+    background: #EF7900;
+    color: #FCFCFC;
     cursor: pointer;
 }
  
 table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
-    background: #F2E3E3;
+    background: #EF7900;
+    color: #FCFCFC;
     cursor: pointer;
 }
 
@@ -111,8 +117,8 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 /*------------------------- MAIN BODY  ---------------------- */
 /*----------------------------------------------------------- */
 #body_home{
-	float:right;
-	width:82%;
+	float:right;	
+	width:100%;
 }
 
 #body_registration{
@@ -121,8 +127,8 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 }
 
 #body_home_container{
-	margin: 2%;
-    width: 95%;	
+	margin: 1.5em;
+    width: 96%;	
 }
 
 .container_left{
@@ -131,7 +137,7 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 
 .caja {
     background-color: #EEEEEE;    
-    margin-bottom: 4em;
+    margin-bottom: 2em;
     padding: 2em;
 }
 .caja .form-row{
@@ -230,40 +236,48 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
     float: right;
     font-size: 10px;
     font-weight: bold;
-    height: 3ex;
+    height: 2.1em;
     margin-left: 0.5em;
     margin-right: 0.5em;
-    min-width: 6em;
-    padding-left: 1ex;
-    padding-right: 1ex;
-    padding-top: 1ex;
-    text-align: center;
-    text-decoration: none;
+    min-width: 7em;    
+    text-align: center;  
+    text-decoration: none;  
 }
 
 .button:hover{
-	border-color: #999999;
+	border-color: #EF7900;
 	box-shadow: 1px 1px 1px 0.1px #ccc;	
 	cursor:pointer;
 }
 
+.button span, .button_submit span{
+	display: inherit;
+    padding-top: 0.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+   
+}
+
 .button_submit{
-	background-color: #FCFCFC;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #646464 !important;
+	background-color: #EF7900;
+    border: 1px solid  #FCFCFC;
+    color: #FCFCFC !important;
     float: right;
-    font-family: arial;
     font-size: 10px;
     font-weight: bold;
-    height: 4ex;
+    font-family: arial;
+    height: 2.2em;
     margin-left: 0.5em;
     margin-right: 0.5em;
     min-width: 7em;
     text-align: center;
+    text-decoration: none;
 }
 .button_submit:hover{
-	border-color: #FF7400;
+	border-color:#EF7900;
 	box-shadow: 1px 1px 1px 0.1px #ccc;	
+	background-color: #FCFCFC;
+	color:#646464 !important;
 	cursor:pointer;
 }
 

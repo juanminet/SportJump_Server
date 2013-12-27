@@ -84,10 +84,12 @@ function initSelectableDataTable(idTable, size){
 function addButtonToTable(idTable, valueButton, jsFunction) {
 	$('<a />')
 		.addClass('button')
-		.css({	'margin-left' : '1em'})
-		.html(valueButton)
+		.css({	'margin-left' : '1em'})		
 		.appendTo($('#' + idTable + ' th'))
-		.bind('click', jsFunction);
+		.bind('click', jsFunction)
+		.append($('<span>')
+					.html(valueButton)
+		);
 }
 
 function convertSortableTable(idTable,jsFunctionSort,jsFunctionStop) {

@@ -96,8 +96,8 @@ function show_modify(){
 		
 			 	<div class="subcaja">
 			 		<h1><fmt:message key="admin.profile.data" /></h1>
-			        <a class="button" href="${pageContext.request.contextPath}/action/admin/profile/remove/${profileCommand.idUser}"><fmt:message key="admin.button.remove"/></a>
-			 		<div class="button" onclick="javascript:show_modify();"><a><fmt:message key="admin.button.modify"/></a></div>
+			        <a class="button" href="${pageContext.request.contextPath}/action/admin/profile/remove/${profileCommand.idUser}"><span><fmt:message key="admin.button.remove"/></span></a>
+			 		<div onclick="javascript:show_modify();"><a class="button"><span><fmt:message key="admin.button.modify"/></span></a></div>
 			    </div> 	
 		 
 		 	  	<div class="subcaja">

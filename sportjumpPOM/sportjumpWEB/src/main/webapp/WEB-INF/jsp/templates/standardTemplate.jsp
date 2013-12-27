@@ -23,9 +23,10 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-ui-1.10.3.custom.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery.balloon.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-multi-accordion-1.5.3.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/data-table-1.9.4/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources//js/customDataTable.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/customDataTable.js"></script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/fullcalendar/fullcalendar.js"></script>
 
 
 
@@ -37,6 +38,7 @@
 	<link href="${pageContext.request.contextPath}/resources/css/custom.css"	type="text/css" rel="stylesheet" />	
 	<link href="${pageContext.request.contextPath}/resources/css/template/standardTemplate.css"	type="text/css" rel="stylesheet" />	
 	
+	<link href="${pageContext.request.contextPath}/resources/components/fullcalendar/fullcalendar.css"	type="text/css" rel="stylesheet" />	
 
 	
 	<!-- titulo -->	
@@ -55,17 +57,27 @@
 	<div class="container">	
 		<tiles:useAttribute id="layer" name="layer" scope="session"/>
 		<tiles:useAttribute id="section" name="section" scope="session"/>
+					
 		
 		<div id="header">			
 			<tiles:insertAttribute name="header" />
 		</div>
-		<div id="holder_container" class="holder_container">
-				<div id="body_container">				
-				 <c:if test="${layer != 'home'}">
+		<div id="holder_container" class="holder_container">							
+			<c:if test="${section != 'no_section'}">
+				<div id="left_container">
 					 <tiles:insertAttribute name="left-panel" />
-				 </c:if>				 
-				<tiles:insertAttribute name="body" />				
+				</div>
+				<div id="body_container">				 
+					<tiles:insertAttribute name="body" />				
 				</div> 
+			</c:if>	
+			
+			<c:if test="${section == 'no_section'}">				
+				<div id="body_container_single">				 
+					<tiles:insertAttribute name="body" />				
+				</div> 
+			</c:if>	
+			
 				
 		</div>	
 		<div id="footer">

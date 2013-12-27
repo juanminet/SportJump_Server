@@ -21,7 +21,7 @@ function show_modify(){
 		 	<form:form commandName="athleteCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/admin/athletes/save" method="POST" >
 				<div class="subcaja">
 			 		<h1><fmt:message key="admin.athletes.athlete.data" /></h1>
-			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/athletes"><fmt:message key="admin.button.return"/></a>
+			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/athletes"><span><fmt:message key="admin.button.return"/></span></a>
 			    </div> 
 			    <form:errors path="*" cssClass="errorblock" element="div" />
 			    
@@ -105,9 +105,9 @@ function show_modify(){
 		
 			 	<div class="subcaja">
 			 		<h1><fmt:message key="admin.groups.group.data" /></h1>
-			        <a class="button" href="${pageContext.request.contextPath}/action/admin/athletes/remove/${athleteCommand.idUser}"><fmt:message key="admin.button.remove"/></a>
-			 		<div class="button" onclick="javascript:show_modify();"><a><fmt:message key="admin.button.modify"/></a></div>
-			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/athletes"><fmt:message key="admin.button.return"/></a>
+			        <a class="button" href="${pageContext.request.contextPath}/action/admin/athletes/remove/${athleteCommand.idUser}"><span><fmt:message key="admin.button.remove"/></span></a>
+			 		<div onclick="javascript:show_modify();"><a class="button" ><span><fmt:message key="admin.button.modify"/></span></a></div>
+			 		<a class="button" href="${pageContext.request.contextPath}/action/admin/athletes"><span><fmt:message key="admin.button.return"/></span></a>
 			    </div> 	
 		 
 		 	  	<div class="subcaja">

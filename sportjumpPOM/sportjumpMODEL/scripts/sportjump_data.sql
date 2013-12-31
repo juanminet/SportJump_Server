@@ -25,3 +25,21 @@ insert into tb_athlete values (6,1);
 insert into tb_athlete values (7,1);
 insert into tb_athlete values (8,1);
 insert into tb_athlete values (10,1);
+
+
+INSERT INTO tb_exercise_block (ID_BLOCK,DESCRIPTION,NAME,TYPE,ID_USER) VALUES (1,'','Fuerza explosiva','Fuerza',1);
+INSERT INTO tb_exercise_block (ID_BLOCK,DESCRIPTION,NAME,TYPE,ID_USER) VALUES (2,'','previo saltos','salto',1);
+INSERT INTO tb_exercise_block (ID_BLOCK,DESCRIPTION,NAME,TYPE,ID_USER) VALUES (3,'tanda saltos','saltos longitud','salto',1);
+
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (1,'10 X sentadilla 30kg',0,1);
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (2,'15 x semisentadilla 60kg',1,1);
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (3,'2 x progresivos 80m',2,1);
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (4,'5 x pies juntos',0,2);
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (5,'10 x triple 10m',1,2);
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (6,'3 x salto 40m',2,2);
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (7,'3 x saltos completo',0,3);
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (8,'10 min recuperacion',1,3);
+INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (9,'3 x saltos completo',2,3);
+
+INSERT INTO tb_training (ID_TRAINING,description,NAME,type,ID_USER) VALUES (1,'Entrenamiento saltos','Entreno saltos','salto',1);
+INSERT INTO tb_training (ID_TRAINING,description,NAME,type,ID_USER) VALUES (2,'','Musculación explosiva','Musculación',1);

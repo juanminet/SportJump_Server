@@ -78,6 +78,12 @@
 	
 	
 	
+	<!-- Calendar Events -->
+	
+	<named-query name="findAllCalendarEventsByTeam">
+	    <query>from CalendarEvent c where c.team.idTeam = :idTeam</query>
+	</named-query>
+	
 	
 	
 </entity-mappings>

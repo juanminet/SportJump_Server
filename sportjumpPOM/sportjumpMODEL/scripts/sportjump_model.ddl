@@ -13,7 +13,7 @@
 
     alter table TB_EXERCISE 
         drop 
-        foreign key FK8495F4894B70C8D9;
+        foreign key FK8495F489BAB80CCB;
 
     alter table TB_EXERCISE_BLOCK 
         drop 
@@ -22,6 +22,18 @@
     alter table TB_TEAM 
         drop 
         foreign key FKD18D3D8E69FDDEEB;
+
+    alter table TB_TRAINING 
+        drop 
+        foreign key FK5614FB8BDF747AE4;
+
+    alter table TB_TRAINING_EXERCISE_BLOCK 
+        drop 
+        foreign key FK8537EA7A4B70C8D9;
+
+    alter table TB_TRAINING_EXERCISE_BLOCK 
+        drop 
+        foreign key FK8537EA7A68374C9D;
 
     drop table if exists TB_ATHLETE;
 
@@ -32,6 +44,10 @@
     drop table if exists TB_EXERCISE_BLOCK;
 
     drop table if exists TB_TEAM;
+
+    drop table if exists TB_TRAINING;
+
+    drop table if exists TB_TRAINING_EXERCISE_BLOCK;
 
     drop table if exists TB_USER;
 
@@ -50,9 +66,8 @@
         ID_EXERCISE bigint not null auto_increment,
         NAME varchar(255) not null,
         POSITION integer not null,
-        ID_BLOCK bigint not null,
-        primary key (ID_EXERCISE),
-        unique (POSITION, ID_BLOCK)
+        ID_BLOCK_FK bigint not null,
+        primary key (ID_EXERCISE)
     ) ENGINE=InnoDB;
 
     create table TB_EXERCISE_BLOCK (
@@ -73,6 +88,21 @@
         TEAM_TYPE varchar(255) not null,
         ID_COACH bigint not null,
         primary key (ID_Team)
+    ) ENGINE=InnoDB;
+
+    create table TB_TRAINING (
+        ID_TRAINING bigint not null auto_increment,
+        description varchar(255),
+        NAME varchar(255) not null,
+        type varchar(255) not null,
+        ID_USER bigint not null,
+        primary key (ID_TRAINING),
+        unique (NAME, ID_USER)
+    ) ENGINE=InnoDB;
+
+    create table TB_TRAINING_EXERCISE_BLOCK (
+        ID_TRAINING bigint not null,
+        ID_BLOCK bigint not null
     ) ENGINE=InnoDB;
 
     create table TB_USER (
@@ -110,9 +140,9 @@
         references TB_USER (ID_USER);
 
     alter table TB_EXERCISE 
-        add index FK8495F4894B70C8D9 (ID_BLOCK), 
-        add constraint FK8495F4894B70C8D9 
-        foreign key (ID_BLOCK) 
+        add index FK8495F489BAB80CCB (ID_BLOCK_FK), 
+        add constraint FK8495F489BAB80CCB 
+        foreign key (ID_BLOCK_FK) 
         references TB_EXERCISE_BLOCK (ID_BLOCK);
 
     alter table TB_EXERCISE_BLOCK 
@@ -126,3 +156,21 @@
         add constraint FKD18D3D8E69FDDEEB 
         foreign key (ID_COACH) 
         references TB_COACH (ID_USER);
+
+    alter table TB_TRAINING 
+        add index FK5614FB8BDF747AE4 (ID_USER), 
+        add constraint FK5614FB8BDF747AE4 
+        foreign key (ID_USER) 
+        references TB_COACH (ID_USER);
+
+    alter table TB_TRAINING_EXERCISE_BLOCK 
+        add index FK8537EA7A4B70C8D9 (ID_BLOCK), 
+        add constraint FK8537EA7A4B70C8D9 
+        foreign key (ID_BLOCK) 
+        references TB_EXERCISE_BLOCK (ID_BLOCK);
+
+    alter table TB_TRAINING_EXERCISE_BLOCK 
+        add index FK8537EA7A68374C9D (ID_TRAINING), 
+        add constraint FK8537EA7A68374C9D 
+        foreign key (ID_TRAINING) 
+        references TB_TRAINING (ID_TRAINING);

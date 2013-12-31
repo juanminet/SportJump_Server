@@ -51,7 +51,7 @@ $(document).ready( function() {
 			right: 'prevYear,prev,next,nextYear'
 		},
 		editable: true,
-		events:  CONTEXT_PATH + "/ajax/planning/group/1",
+		events:  CONTEXT_PATH + "/ajax/planning/group/" + ID_GROUP,
 		droppable: true, // this allows things to be dropped onto the calendar !!!
 		drop: function(date, allDay) { // this function is called when something is dropped
 		
@@ -201,7 +201,7 @@ $(document).ready( function() {
 					</c:forEach>
 					<p>
 						<input type='checkbox' id='drop-remove' /> <label
-							for='drop-remove'>remove after drop</label>
+							for='drop-remove'><fmt:message key="planning.calendar.external.check.periodic" /></label>
 					</p>
 				</div>
 

@@ -96,15 +96,17 @@ table tr{
 
 table  tr.even:hover td, table tr.even:hover td.sorting_1{
     background: #EF7900;
-    color: #FCFCFC;
+    color: #FCFCFC; 
+   
     cursor: pointer;
 }
  
 table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
-    background: #EF7900;
-    color: #FCFCFC;
+     background: #EF7900;
+    color: #FCFCFC; 
     cursor: pointer;
 }
+
 
 
 /* .dataTables_filter {
@@ -223,6 +225,19 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
   table.simple_button thead th div.DataTables_sort_wrapper {
   	display: inline-block;  	
   }
+  
+  .ui-widget-header {
+   
+    border: 1px solid #D6D6D6;
+    color: #222222;
+    font-weight: bold;
+  }
+  
+  
+	table.display tr.odd.row_selected td {
+	    background-color: #FF9A21;
+	    color: #FCFCFC; 
+	}
 
 /*----------------------------------------------------------- */
 /*------------------------- BUTTONS ------------------------- */

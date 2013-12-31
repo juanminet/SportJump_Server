@@ -15,6 +15,7 @@
 		 <class>es.uma.sportjump.sjs.model.entities.Team</class> 
 		 <class>es.uma.sportjump.sjs.model.entities.Exercise</class>
 		 <class>es.uma.sportjump.sjs.model.entities.ExerciseBlock</class>
+		  <class>es.uma.sportjump.sjs.model.entities.CalendarEvent</class>
 	
 		
 		<properties>

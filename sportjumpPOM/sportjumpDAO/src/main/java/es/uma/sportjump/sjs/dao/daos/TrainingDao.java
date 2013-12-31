@@ -39,7 +39,7 @@ public interface TrainingDao {
 	public Training getTrainingByNameAndCoach(String name, Coach coach);
 	
 	/**
-	 * Remove coach
+	 * Remove training
 	 * @param id
 	 */
 	public void deleteTraining(Training training);

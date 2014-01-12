@@ -85,5 +85,12 @@
 	</named-query>
 	
 	
+	<named-query name="findCalendarEventByDateAndTeam">
+	    <query>from CalendarEvent c where c.team.idTeam = :idTeam and c.eventDate = :eventDate</query>
+	</named-query>
+	
+	
+	
+	
 	
 </entity-mappings>

@@ -583,33 +583,33 @@ public class UserServiceTest {
 	}	
 	
 	
-	private void finishAthletes(){
-		//Get athletes 
-		Athlete athlete1 = userService.findAthlete(idAthlete1);
-		Athlete athlete2 = userService.findAthlete(idAthlete2);
-		Athlete athlete3 = userService.findAthlete(idAthlete3);
-		Athlete athlete4 = userService.findAthlete(idAthlete4);
-		
-		
-		//Remove athletes
-		userService.removeAthlete(athlete1);	
-		userService.removeAthlete(athlete2);	
-		userService.removeAthlete(athlete3);
-		userService.removeAthlete(athlete4);
-	}
-	
-	
-	private void finishTeams(){
-		//Get teams 
-		Team team1 = userService.findTeam(idTeam1);
-		Team team2 = userService.findTeam(idTeam2);
-		Team team3 = userService.findTeam(idTeam3);
-		
-		//Remove team
-		userService.removeTeam(team1);			
-		userService.removeTeam(team2);		
-		userService.removeTeam(team3);		
-	}
+//	private void finishAthletes(){
+//		//Get athletes 
+//		Athlete athlete1 = userService.findAthlete(idAthlete1);
+//		Athlete athlete2 = userService.findAthlete(idAthlete2);
+//		Athlete athlete3 = userService.findAthlete(idAthlete3);
+//		Athlete athlete4 = userService.findAthlete(idAthlete4);
+//		
+//		
+//		//Remove athletes
+//		userService.removeAthlete(athlete1);	
+//		userService.removeAthlete(athlete2);	
+//		userService.removeAthlete(athlete3);
+//		userService.removeAthlete(athlete4);
+//	}
+//	
+//	
+//	private void finishTeams(){
+//		//Get teams 
+//		Team team1 = userService.findTeam(idTeam1);
+//		Team team2 = userService.findTeam(idTeam2);
+//		Team team3 = userService.findTeam(idTeam3);
+//		
+//		//Remove team
+//		userService.removeTeam(team1);			
+//		userService.removeTeam(team2);		
+//		userService.removeTeam(team3);		
+//	}
 	
 	private void finishCoaches(){
 		//Get coaches

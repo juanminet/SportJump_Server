@@ -184,8 +184,11 @@ var listExerciseTam;
 	function setToolTip(){
 		 $("#new_exercise_block_lbox tbody tr").mouseenter( function(){
 				var element = $(this);
-				var exerciseId = $(this).find("td:first").text();	                
-				showTipExerciseIdAjax(element, exerciseId);		
+				var exerciseId = $(this).find("td:first").text();	
+
+				if (!isNaN(exerciseId)){
+					showTipExerciseIdAjax(element, exerciseId);		
+				}
 			} );
 			 $("#new_exercise_block_lbox tbody tr").mouseout( function(){
 				$(this).hideBalloon();	
@@ -194,8 +197,11 @@ var listExerciseTam;
 			
 			$("#table_exercises_block tbody tr").mouseenter( function(){
 				var element = $(this);
-				var exerciseId = $(this).find("td:first").text();	                
-				showTipExerciseIdAjax(element, exerciseId);		
+				var exerciseId = $(this).find("td:first").text();	
+				
+				if (!isNaN(exerciseId)){
+					showTipExerciseIdAjax(element, exerciseId);		
+				}	
 			} );
 			$("#table_exercises_block tbody tr").mouseout( function(){
 				$(this).hideBalloon();	

@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import es.uma.sportjump.sjs.dao.daos.ExerciseBlockDao;
 import es.uma.sportjump.sjs.dao.daos.TrainingDao;
 import es.uma.sportjump.sjs.model.entities.Coach;
-import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 
 @Repository("exerciseBlockDao")
@@ -57,8 +56,9 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 		
 		
 		ExerciseBlock exerciseBlockUpdated = getExerciseBlockById(idBlock);
-		deleteAllExercises(exerciseBlockUpdated);
+	//	deleteAllExercises(exerciseBlockUpdated);
 		em.remove(exerciseBlockUpdated);
+	//	em.flush();
 	}
 	
 
@@ -82,14 +82,14 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 //	}
 
 
-	private void deleteAllExercises(ExerciseBlock exerciseBlock){
-		List<Exercise> listExercises = exerciseBlock.getListExercises();
-		if (listExercises != null){
-			for(Exercise exercise : listExercises){
-				em.remove(exercise);
-			}
-		}
-	}
+//	private void deleteAllExercises(ExerciseBlock exerciseBlock){
+//		List<Exercise> listExercises = exerciseBlock.getListExercises();
+//		if (listExercises != null){
+//			for(Exercise exercise : listExercises){
+//				em.remove(exercise);				
+//			}
+//		}
+//	}
 	
 
 	@SuppressWarnings("unchecked")

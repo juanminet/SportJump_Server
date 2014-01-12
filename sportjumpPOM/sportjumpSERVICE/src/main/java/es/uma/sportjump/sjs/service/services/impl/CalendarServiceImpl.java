@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.CalendarEventDao;
 import es.uma.sportjump.sjs.model.entities.CalendarEvent;
@@ -19,6 +21,7 @@ public class CalendarServiceImpl implements CalendarService {
 	CalendarEventDao calendarEventDao;
 
 	@Override
+	@Transactional
 	public CalendarEvent setNewEvent(Date eventDate, Training training, Team team,	boolean periodicEvent) {
 	
 		CalendarEvent event = new CalendarEvent();
@@ -32,24 +35,53 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public void updateEvent(CalendarEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public CalendarEvent findEvent(Long idEvent) {
 		return calendarEventDao.getEventgById(idEvent);
 	}
+	
+
 
 	@Override
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	public List<CalendarEvent> findAllEventByTeam(Team team) {
 		return calendarEventDao.getEventsByGroup(team.getIdTeam());
 	}
 
 	@Override
+	@Transactional
 	public void removeEvent(CalendarEvent event) {
 		calendarEventDao.deleteEvent(event);
+	}
+
+	@Override
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	public boolean existEvent(Date dateEvent, Team team) {
+		CalendarEvent calendarEvent = calendarEventDao.getEventByDateAndTeam(dateEvent, team);
+		
+		return (calendarEvent != null)? true:false;
+	}
+
+	@Override
+	@Transactional
+	public void modifyEventDate(Long eventId, Date date, Team team) {	
+		
+		CalendarEvent eventToRemove = calendarEventDao.getEventByDateAndTeam(date, team);
+		if (eventToRemove != null) {
+			removeEvent(eventToRemove);
+			//calendarEventDao.deleteEvent(eventToRemove);
+		}
+		
+		CalendarEvent calendarEventToModify = calendarEventDao.getEventgById(eventId);
+		calendarEventToModify.setEventDate(date);
+		//calendarEventDao.updateEvent(calendarEventToModify);
 	}
 
 }

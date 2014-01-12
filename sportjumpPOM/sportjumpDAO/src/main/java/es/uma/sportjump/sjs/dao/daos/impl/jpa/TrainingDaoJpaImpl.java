@@ -55,6 +55,7 @@ public class TrainingDaoJpaImpl implements TrainingDao{
 	@Transactional(propagation=Propagation.REQUIRED)
 	public void deleteTraining(Training training) {
 		em.remove(getTrainingById(training.getIdTraining()));
+		em.flush();
 	}
 
 	@SuppressWarnings("unchecked")

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PreRemove;
@@ -29,10 +30,10 @@ public class Training {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID_TRAINING")
+	@Column(name="id_training")
 	private Long idTraining;
 	
-	@Column(name="NAME", nullable=false)
+	@Column(name="name", nullable=false)
 	private String name;
 	
 	@Column(name="type", nullable=false)
@@ -42,12 +43,13 @@ public class Training {
 	private String description;
 	
 	@ManyToOne(fetch=FetchType.LAZY, targetEntity=es.uma.sportjump.sjs.model.entities.Coach.class)
-	@JoinColumn(name="ID_USER", nullable=false)
+	@JoinColumn(name="id_user", nullable=false)
 	private Coach coach;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	//@JoinTable(name="TB_TRAINING_EXERCISE_BLOCK", joinColumns= @JoinColumn(name="ID_TRAINING"), inverseJoinColumns= @JoinColumn(name="ID_BLOCK") )	
-	@JoinColumn(name="listExerciseBlock")
+	@ManyToMany	
+//	@JoinColumn(name="listExerciseBlock")	
+    @JoinTable(	joinColumns = @JoinColumn(name = "id_block"),
+            	inverseJoinColumns = @JoinColumn(name = "id_training"))
 	private List<ExerciseBlock> listExerciseBlock;
 
 

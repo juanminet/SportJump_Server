@@ -47,6 +47,7 @@ public class UserDaoJpaImpl  implements UserDao{
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void deleteCoach(Long id) {
 		em.remove(getCoachById(id));		
+		em.flush();
 	}
 
 
@@ -127,7 +128,8 @@ public class UserDaoJpaImpl  implements UserDao{
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void deleteTeam(Long id) {
-		em.remove(getTeamById(id));		
+		em.remove(getTeamById(id));	
+		em.flush();
 	}
 	
 	
@@ -176,7 +178,8 @@ public class UserDaoJpaImpl  implements UserDao{
 	
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void deleteAthlete(Long id) {
-		em.remove(getAthleteById(id));		
+		em.remove(getAthleteById(id));
+		em.flush();
 	}
 
 

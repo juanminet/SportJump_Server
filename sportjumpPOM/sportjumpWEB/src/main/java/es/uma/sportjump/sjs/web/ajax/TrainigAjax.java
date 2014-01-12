@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import es.uma.sportjum.sjs.web.ajax.util.ComonAjaxUtils;
 import es.uma.sportjump.sjs.model.entities.Coach;
-import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 import es.uma.sportjump.sjs.model.entities.Training;
 import es.uma.sportjump.sjs.service.services.ExerciseService;
@@ -45,7 +45,7 @@ public class TrainigAjax<E> {
 		if (training == null){
 			throw new EmptyResultDataAccessException("Training element not found", 1);			
 		}
-		TrainingWebBean result = fillTrainingWebBean(training);//TODO bean serialized for JSON
+		TrainingWebBean result = ComonAjaxUtils.fillTrainingWebBean(training);
 		return result;
 	}	
 	
@@ -61,7 +61,7 @@ public class TrainigAjax<E> {
 		}
 		
 		
-		ExerciseWebBean result = fillExerciseBlock(exererciseBlock);
+		ExerciseWebBean result = ComonAjaxUtils.fillExerciseBlock(exererciseBlock);
 		return result;
 	}
 	
@@ -78,7 +78,7 @@ public class TrainigAjax<E> {
 		}
 		
 		
-		ExerciseWebBean result = fillExerciseBlock(exererciseBlock);
+		ExerciseWebBean result = ComonAjaxUtils.fillExerciseBlock(exererciseBlock);
 		return result;
 	}
 	
@@ -98,58 +98,16 @@ public class TrainigAjax<E> {
 		for(String name : nameArray){
 			ExerciseBlock block = exerciseService.findExerciseBlockByNameAndCoach(name, coach);
 			
-			listExerciseWebBean.add(fillExerciseBlock(block));
+			listExerciseWebBean.add(ComonAjaxUtils.fillExerciseBlock(block));
 		}
 		
 		result.setListBlock(listExerciseWebBean);				
 	
 		return result;
-	}	
-	
-	
-	
-	private TrainingWebBean fillTrainingWebBean(Training training) {
-		TrainingWebBean result = new TrainingWebBean();
-		
-		result.setName(training.getName());
-		result.setType(training.getType());
-		result.setDescription(training.getDescription());
-	
-		List<ExerciseBlock> listBlock = training.getListExerciseBlock();
-		if (listBlock != null){
-			List<ExerciseWebBean> listblock  = new ArrayList<ExerciseWebBean>();
-			for(ExerciseBlock block : training.getListExerciseBlock()){
-				listblock.add(fillExerciseBlock(block));
-			}
-			result.setListBlock(listblock);
-		}
-		
-		return result;
-	}
+	}		
 
-	private ExerciseWebBean fillExerciseBlock(ExerciseBlock block) {
-		ExerciseWebBean result = new ExerciseWebBean();
-		result.setName(block.getName());
-		result.setType(block.getType());
-		result.setDescription(block.getDescription());
-		
-		List<Exercise> listExercises = block.getListExercises();
-		if (listExercises != null){
-			List<String> listExerciseName = new ArrayList<String>();
-			for(Exercise exercise : block.getListExercises()){
-				listExerciseName.add(exercise.getName());
-			}
-			result.setListExercise(listExerciseName);
-		}
-		
-		return result;
-	}
 	
-//	@RequestMapping(value = "rest/exception1")
-//	public String exception1()
-//	{
-//	    throw new NullPointerException("Exception1 as plain text with <strong>html</strong> tags");
-//	}
+
 //	 
 //	@ExceptionHandler(NullPointerException.class)
 //	@ResponseBody

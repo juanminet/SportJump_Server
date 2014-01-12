@@ -340,10 +340,10 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 
 
 #lbox_show_container { text-align: left}  	
- .training_lbox_show >label:first-child {font-weight: bold;	text-decoration: underline;}
- .exercise_block_lbox_show { margin: 1em;}
- .exercise_block_lbox_show  ol, .exercise_block_lbox_show ul {list-style: square inside none; margin-left: 1em}	
- .exercise_block_lbox_show  label:first-child {  font-weight: bold}	
+.lbox_text_principal{font-weight: bold;	text-decoration: underline;}
+.exercise_block_lbox_show { margin: 1em;}
+.exercise_block_lbox_show  ol, .exercise_block_lbox_show ul {list-style: square inside none; margin-left: 1em}	
+.exercise_block_lbox_show  label:first-child {  font-weight: bold}	
 
 
 

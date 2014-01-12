@@ -9,13 +9,29 @@
 		http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
+	
+	
+	
+	<!-- Property Configurator -->
+	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+   		<property name="locations">
+   			<list>
+   				<value>classpath:spring/security/auth_config.properties</value>
+   				<value>classpath:spring/application/dao/jdbc.properties</value>
+   			</list>
+   		</property>	   		
+	</bean> 
+	
+	
 	<!-- Librería propia del proyecto -->
 
-	 <import resource="classpath:spring/application/dao/application-dao.xml" />  
-	 <import resource="classpath:spring/application/service/application-service.xml"/> 
+ 	 <import resource="classpath:spring/application/dao/spring-dao-context.xml" />   
+	 <import resource="classpath:spring/application/service/spring-service-context.xml"/> 
+	 
+	<!-- Configuracion jdbc -->
+	<import resource="classpath:spring/application/dao/spring-jdbc-config.xml"/> 
 	
-	
-	
+	 <!-- configuracion Spring Security -->
 	<import resource="classpath:spring/security/security-context.xml"/>
 	
 

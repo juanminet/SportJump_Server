@@ -49,6 +49,22 @@ public interface CalendarService {
 	 * @param event
 	 */
 	public void removeEvent(CalendarEvent event);
+
+
+	/**
+	 * Return true if the team given by parameter has an event in the date given by parameter
+	 * @param dateEvent
+	 * @param team
+	 * @return
+	 */
+	public boolean existEvent(Date dateEvent, Team team);
+
+	/**
+	 * Update an event given by parameter
+	 * @param calendarEvent
+	 * @param date
+	 */
+	public void modifyEventDate(Long eventId, Date date, Team team);
 	
 
 }

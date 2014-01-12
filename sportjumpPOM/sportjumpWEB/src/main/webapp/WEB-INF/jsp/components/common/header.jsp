@@ -15,9 +15,10 @@
 		</div>
 		<div id = profile>	
 			<div class="header_flags">
-				<img src="${pageContext.request.contextPath}/resources/img/header/flag_es.gif">
-				<img src="${pageContext.request.contextPath}/resources/img/header/flag_en.gif">
+				 <a href="?lang=es_ES"><img src="${pageContext.request.contextPath}/resources/img/header/flag_es.gif"></a>
+				<a href="?lang=en"><img src="${pageContext.request.contextPath}/resources/img/header/flag_en.gif"></a>
 			</div>
+			
 			<h3 style="margin-top: 10px; margin-bottom: 10px"><fmt:message key="header.welcome"/> ${loggedUser.userName}</h3>	
 							
 		<%-- 	<div class="button" style="margin-right: 0em;">	

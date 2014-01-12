@@ -16,6 +16,11 @@
 
 	
 $(document).ready( function() {
+	
+	var revertEvent;
+	var calendar;
+	var eventSelected;
+	var eventToRemove;
 
 	/* initialize the external events
 	-----------------------------------------------------------------*/
@@ -44,7 +49,7 @@ $(document).ready( function() {
 	/* initialize the calendar
 	-----------------------------------------------------------------*/
 	
-	$('#calendar').fullCalendar({
+	calendar = $('#calendar').fullCalendar({
 		header: {
 			left: 'today',
 			center: 'title',
@@ -54,53 +59,95 @@ $(document).ready( function() {
 		events:  CONTEXT_PATH + "/ajax/planning/group/" + ID_GROUP,
 		droppable: true, // this allows things to be dropped onto the calendar !!!
 		drop: function(date, allDay) { // this function is called when something is dropped
-		
-			// retrieve the dropped element's stored Event Object
-			var originalEventObject = $(this).data('eventObject');
-			var id = $(this).find(".id").text();
-			var name = $(this).find(".name").text();
-			
-			// we need to copy it, so that multiple events don't have a reference to the same object
-			var copiedEventObject = $.extend({}, originalEventObject);
-			
-			// assign it the date that was reported
-			copiedEventObject.id = id;
-			copiedEventObject.title = name;
-			copiedEventObject.start = date;
-			copiedEventObject.allDay = allDay;
-			
-			//var data = {"id" : id , "name" : name , "date" : $.date(date) };
-			
-			var data = new Object();
-			data.idTraining = id;
-			data.idGroup = ID_GROUP;
-			data.name = name;
-			data.date = date;
-			
-			// render the event on the calendar
-			// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-			$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-			
-			// is the "remove after drop" checkbox checked?
-			if ($('#drop-remove').is(':checked')) {
-				// if so, remove the element from the "Draggable Events" list
-				$(this).remove();
-			}
-			
-			alert(data);
-			
-			$.ajax({
-				  type: "POST",
-				  url: CONTEXT_PATH + "/ajax/planning/save",
-				  data:data
-			});
-			
+			createEvent($(this),date, allDay);			
 		},
-		eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) {
-			alert($(this).text());
-			alert(event.id);
+		eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) {	
+			modifyEvent(event,revertFunc);
+		},
+		eventClick: function(calEvent, jsEvent, view) {				
+			showExercise(calEvent);
 		},
 	});
+	
+	function createEvent(element,date, allDay){
+		// retrieve the dropped element's stored Event Object
+		var originalEventObject = element.data('eventObject');
+		var id = element.find(".id").text();
+		var name = element.find(".name").text();
+		
+		// we need to copy it, so that multiple events don't have a reference to the same object
+		var copiedEventObject = $.extend({}, originalEventObject);
+		
+		// assign it the date that was reported
+		copiedEventObject.id = id;
+		copiedEventObject.title = name;
+		copiedEventObject.start = date;
+		copiedEventObject.allDay = allDay;
+		
+		//var data = {"id" : id , "name" : name , "date" : $.date(date) };
+		
+		var data = new Object();
+		data.idTraining = id;
+		data.idGroup = ID_GROUP;
+		data.name = name;
+		data.date = date;
+		
+		
+		if (isDateEventEmpty(date)){
+			createEventAjax(data,copiedEventObject);
+		}else{
+			alert("<fmt:message key='planning.calendar.event.error.duplicated' />");
+		}				 	
+	}
+	
+	function modifyEvent(calEvent,revertFunc){
+		eventSelected=calEvent;
+		revertEvent = revertFunc;
+		if (isEventDuplicated(calEvent)){
+			eventToRemove = getEventDuplicated(calEvent);
+			$('#modify_event_lbox').dialog('open');	
+		}else{
+			eventToRemove = null;
+			modifyEventAjax(calEvent,revertFunc,false);	
+		}	
+	}	
+	
+	function showExercise(calEvent){
+		eventSelected = calEvent;
+		
+		var trainingDiv = $('<div/>', {class : 'training_lbox_show'});
+			 
+		trainingDiv.append($('<label>').addClass("lbox_text_principal").append("<fmt:message key='planning.calendar.lbox.name'/>: "));	
+		trainingDiv.append( calEvent.title);	
+		trainingDiv.append($('<br/>'));
+		trainingDiv.append($('<label>').addClass("lbox_text_principal").append("<fmt:message key='planning.calendar.lbox.date'/>: "));	
+		trainingDiv.append(calEvent.start.toLocaleDateString());	
+		trainingDiv.append($('<br/>'));
+		trainingDiv.append($('<br/>'));
+		trainingDiv.append($('<label>').addClass("lbox_text_principal").append("<fmt:message key='planning.calendar.lbox.training'/>: "));		
+			
+		showTrainingAjax(calEvent.id, trainingDiv);	
+				
+	}
+
+	function createExerciseBlockDiv(block){
+		var blockDiv = $('<div/>', {class : 'exercise_block_lbox_show'});
+		
+		blockDiv.append($('<label>').append(block.name))
+				.append(" : ")
+				.append($('<label>').append(block.description));
+		
+		var exerciseList = $('<ul/>' );
+															
+		
+		$.each(block.listExercise, function(iExercise, exercise){			
+			exerciseList.append($('<li>').append(exercise));
+		});
+		
+		blockDiv.append(exerciseList);
+		
+		return blockDiv;
+	}
 
 	$.date = function (dateObject) {
 	       // alert(dateObject);
@@ -115,8 +162,197 @@ $(document).ready( function() {
 
 	        return date;
 	    }
-	  	
+	
+	function getEventDuplicated(calEvent){		
+		var result;
+		
+		var events = calendar.fullCalendar('clientEvents');	
+		
+		for (var i = 0; i < events.length; i++){
+			var event = events[i];
+			if ((calEvent.id  != event.id) && (calEvent.start.getTime() == event.start.getTime())){
+				result = event;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	function isEventDuplicated(calEvent){		
+		var result = false;
+		
+		var events = calendar.fullCalendar('clientEvents');	
+		
+		for (var i = 0; i < events.length; i++){
+			var event = events[i];
+			if ((calEvent.id  != event.id) && (calEvent.start.getTime() == event.start.getTime())){
+				result = true;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	function isDateEventEmpty(date){		
+		var result = true;
+		
+		var events = calendar.fullCalendar('clientEvents');	
+		
+		for (var i = 0; i < events.length; i++){
+			var event = events[i];
+			if ((date.getTime() == event.start.getTime())){
+				result = false;
+				break;
+			}
+		}
+		return result;
+	}
+	
+	/* Lightboxes */
+	
+	$("#show_training_lbox").dialog({
+		autoOpen : false,
+		resizable : false,
+		draggable : false,
+		width : 400,
+		height: 400,
+		modal : true,
+		buttons : [ 
+			{					
+				text : "<fmt:message key='planning.calendar.lbox.button.close'/>",
+				class:"lbox-button",
+				click : function() {						
+					$(this).dialog('close');
+					$('#lbox_show_container').empty();
+				}
+			},
+			{					
+				text :"<fmt:message key='planning.calendar.lbox.button.remove'/>",
+				class:"lbox-button",
+				click : function() {
+					removeEventAjax(eventSelected);					
+					$(this).dialog('close');
+				}
+			}
+		],
+		open : function() {
+			$('.ui-dialog-buttonset button').blur();
+		}
+	});
+	
+	
+	$("#modify_event_lbox").dialog({
+		autoOpen : false,
+		resizable : false,
+		draggable : false,
+		width : 400,
+		modal : true,
+		buttons : [ 
+			{					
+				text : "<fmt:message key='planning.calendar.lbox.button.cancel'/>",
+				class:"lbox-button",
+				click : function() {		
+					revertEvent();
+					$(this).dialog('close');
+				}
+			},
+			{					
+				text :"<fmt:message key='planning.calendar.lbox.button.continue'/>",
+				class:"lbox-button",
+				click : function() {					
+					modifyEventAjax(eventSelected,revertEvent,true);	
+					$(this).dialog('close');
+				}
+			}
+		],
+		open : function() {
+			$('.ui-dialog-buttonset button').blur();
+		}
+	}); 
+	
+	/* AJAX */
+	
+	function createEventAjax(data, copiedEventObject){
+		var request = $.ajax({
+			type: "POST",
+			cache:false,
+			url: CONTEXT_PATH + "/ajax/planning/save",
+			data:data				  
+		}); 
+	 	
+	 	request.done(function( idEvent ) {	
+	 		copiedEventObject.id = idEvent;
+	 		$('#calendar').fullCalendar('renderEvent', copiedEventObject, true); 	 		
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+			alert( "Request failed: " + textStatus );
+		});
+	}
+	
+	function showTrainingAjax(id, trainingDiv){
+		$.ajax({
+			url: CONTEXT_PATH + "/ajax/planning/" + id,
+		  	type: 'GET',
+		  	cache: false,				 
+		  	success: function(data){
+		  		$.each(data.listBlock, function(iBlock,block){				
+					var divExerciseBlock = createExerciseBlockDiv(block);				
+					trainingDiv.append(divExerciseBlock);
+				});	
+		  		
+		  		$("#lbox_show_container").empty();				  		
+		  		$("#lbox_show_container").append(trainingDiv);					
+				$('#show_training_lbox').dialog('open');		
+		  	},
+		  	error: function(){alert("ajax error");}
+	 	}); 
+	}
+	function modifyEventAjax(calEvent,revertFunc, removeEvent){		
+		
+		var data = new Object();
+		data.idEvent = calEvent.id;
+		data.idGroup = ID_GROUP;
+		data.name = calEvent.title;
+		data.date = calEvent.start;
+		
+		$.ajax({
+			type: 'PUT',			
+		  	cache: false,
+		  	url: CONTEXT_PATH + "/ajax/planning/" + calEvent.id,
+		  	contentType: "application/json",		  	
+		  	data:JSON.stringify(data),
+		  	 success: function(){
+		  		 if (removeEvent){
+		  			calendar.fullCalendar( 'removeEvents' , eventToRemove.id);	 
+		  		 }
+		  		  
+		  		calendar.fullCalendar( 'updateEvent' , calEvent);  		
+		  	},
+		  	error: function(){
+		  		revertFunc();
+		  	} 
+	 	});   
+	}
+	
+	function removeEventAjax(calEvent){		
+		$.ajax({
+			url: CONTEXT_PATH + "/ajax/planning/" + calEvent.id,
+		  	type: 'DELETE',
+		  	cache: false,				 
+		  	success: function(data){
+		  		calendar.fullCalendar( 'removeEvents' , calEvent.id);  		
+		  	},
+		  	error: function(){alert("ajax error");}
+	 	}); 
+	}
+	
 }); 	
+
+
+
+
+
 
 	
 </script>
@@ -198,11 +434,7 @@ $(document).ready( function() {
 							<div class="name">${training.name}</div>
 							<div class="id" hidden="true">${training.idTraining}</div>
 						</div>
-					</c:forEach>
-					<p>
-						<input type='checkbox' id='drop-remove' /> <label
-							for='drop-remove'><fmt:message key="planning.calendar.external.check.periodic" /></label>
-					</p>
+					</c:forEach>					
 				</div>
 
 				<div id='calendar'></div>
@@ -211,4 +443,59 @@ $(document).ready( function() {
 			</div>
 		</div>      
       </div>
+      
+      
+      <!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
+<!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ LIGHTTBOXES /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
+<!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
+
+
+<!-- lightbox for modify dialog -->
+<div id="modify_event_lbox" class="lBox" title="<fmt:message key='planning.calendar.lbox.modify.tittle'/>">
+	<!-- Mensaje -->
+	<div class="cajaMensajeTop">
+		<div class="cajaMensajeTopLeft"></div>
+		<div class="cajaMensajeTopRight"></div>
+	</div>
+	<div class="mensaje dobleLinea fuenteFormLB">
+		<fmt:message key="planning.calendar.lbox.modify.text" />
+	</div>
+	<!--mensaje-->
+	<div class="cajaMensajePie">
+		<div class="cajaMensajePieLeft"></div>
+		<div class="cajaMensajePieRight"></div>
+	</div>
+	<!-- Mensaje -->	
+	
+</div>
+
+
+
+<!-- lightbox for show exercises -->
+<div id="show_training_lbox" class="lBox" title="<fmt:message key='planning.calendar.lbox.show.tittle'/>">
+	<!-- Mensaje -->
+	<div class="cajaMensajeTop">
+		<div class="cajaMensajeTopLeft"></div>
+		<div class="cajaMensajeTopRight"></div>
+	</div>
+	<div class="mensaje dobleLinea fuenteFormLB">
+		<div class="single_row">
+			<div id="lbox_show_container">
+				
+			</div>
+		</div>
+	</div>
+	<!--mensaje-->
+	<div class="cajaMensajePie">
+		<div class="cajaMensajePieLeft"></div>
+		<div class="cajaMensajePieRight"></div>
+	</div>
+	<!-- Mensaje -->	
+	
+</div>
+
+
+<!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
+<!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ fin LIGHTTBOXES /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
+<!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
 </div>

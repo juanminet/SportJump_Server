@@ -19,18 +19,7 @@
 	</security:authentication-manager>
 	-->
 	
-	
-	
-	<!-- Property Configurator -->
-	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	   		<property name="locations">
-	   			<list>
-	   				<value>classpath:spring/security/auth_config.properties</value>
-	   			</list>
-	   		</property>
-	   		
-	</bean> 
-	<!-- Data -->	
+		<!-- Data -->	
 	
  	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 	    <property name="driverClassName" value="${database.auth.driver.class.name}"/>

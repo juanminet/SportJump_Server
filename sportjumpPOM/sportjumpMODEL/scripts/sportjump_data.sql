@@ -43,3 +43,8 @@ INSERT INTO tb_exercise (ID_EXERCISE,NAME,POSITION,ID_BLOCK_FK) VALUES (9,'3 x s
 
 INSERT INTO tb_training (ID_TRAINING,description,NAME,type,ID_USER) VALUES (1,'Entrenamiento saltos','Entreno saltos','salto',1);
 INSERT INTO tb_training (ID_TRAINING,description,NAME,type,ID_USER) VALUES (2,'','Musculación explosiva','Musculación',1);
+
+INSERT INTO tb_training_tb_exercise_block (ID_BLOCK, ID_TRAINING) VALUES (1,2);
+INSERT INTO tb_training_tb_exercise_block (ID_BLOCK, ID_TRAINING) VALUES (1,3);
+INSERT INTO tb_training_tb_exercise_block (ID_BLOCK, ID_TRAINING) VALUES (2,1);
+

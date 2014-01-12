@@ -1,8 +1,10 @@
 package es.uma.sportjump.sjs.dao.daos;
 
+import java.util.Date;
 import java.util.List;
 
 import es.uma.sportjump.sjs.model.entities.CalendarEvent;
+import es.uma.sportjump.sjs.model.entities.Team;
 
 
 
@@ -25,6 +27,15 @@ public interface CalendarEventDao {
 	
 	
 	/**
+	 * Find an event for date and team given by parameter
+	 * @param date
+	 * @param team
+	 * @return
+	 */
+	public CalendarEvent getEventByDateAndTeam(Date date, Team team);
+	
+	
+	/**
 	 * Get list of all events belong to a group given by parameter 
 	 * @param id
 	 * @return the list with all events
@@ -36,6 +47,12 @@ public interface CalendarEventDao {
 	 * @param id
 	 */
 	public void deleteEvent(CalendarEvent event);
+
+	/**
+	 * Update event given by parameter
+	 * @param calendarEventToUpdate
+	 */
+	public void updateEvent(CalendarEvent calendarEventToUpdate);
 
 	
 }

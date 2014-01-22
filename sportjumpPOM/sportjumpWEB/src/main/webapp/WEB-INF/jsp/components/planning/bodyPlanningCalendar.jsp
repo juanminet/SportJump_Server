@@ -391,6 +391,7 @@ $(document).ready( function() {
 		color: #fff;
 		font-size: .85em;
 		cursor: pointer;
+		background: none repeat scroll 0 0 #EF7900;
 		}
 		
 	#external-events p {

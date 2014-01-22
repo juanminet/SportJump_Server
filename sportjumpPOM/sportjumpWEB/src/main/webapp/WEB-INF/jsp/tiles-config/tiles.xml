@@ -57,18 +57,7 @@
 		<put-attribute name="section" value="athletes"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminNewAthlete.jsp" />
 	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	  
-	 </definition>
-	 
-	<definition name="admin_profile" extends="standardTemplate">
-		<put-attribute name="title" value="admin.profile.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
-		<put-attribute name="layer" value="admin"/>
-		<put-attribute name="section" value="profile"/>
-	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminProfile.jsp" />
-	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	  
-	 </definition>
-	 
-	
+	 </definition>	
 	
 		
 	<!-- TRAININGS -->
@@ -128,7 +117,17 @@
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningCalendar.jsp" />	      
 	 </definition>
 	
-
+	<!-- PROFILE -->
+	 
+	<definition name="admin_profile" extends="standardTemplate">
+		<put-attribute name="title" value="admin.profile.tittle" />
+		<put-attribute name="dwrEngine" value="true"/>
+		<put-attribute name="layer" value="profile"/>	
+		<put-attribute name="section" value="no_section"/>	
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminProfile.jsp" />	   
+	 </definition>
+	 
+	
 	<!-- TEST -->
 	<definition name="test" extends="testTemplate">
 		<put-attribute name="title" value="test.tittle" />

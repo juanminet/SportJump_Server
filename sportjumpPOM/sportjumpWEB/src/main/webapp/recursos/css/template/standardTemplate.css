@@ -54,17 +54,24 @@ body {
     min-height: 500px;
     width: 99.5%;
 }
-
-
-
 #footer{
 	height:50px;
-	background-color: black;
 }
-
 .label_bold{
 	font-weight: bold;
 }
+
+/*----------------------------------------------------------- */
+/*------------------------- FOOTER -------------------------- */
+/*----------------------------------------------------------- */
+
+.footer{height: inherit;}
+.footer_header{height: 20%;}
+.footer_container{text-align: center;	 line-height: 2em;}
+.footer_img{height: 4em;  margin-left: 2em; margin-right: 2em;}
+.footer_ico{height: 2em; }
+
+
 
 /*----------------------------------------------------------- */
 /*------------------------ MENU BAR ------------------------- */

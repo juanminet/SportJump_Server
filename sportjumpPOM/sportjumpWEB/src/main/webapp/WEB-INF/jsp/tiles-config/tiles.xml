@@ -125,14 +125,6 @@
 		<put-attribute name="layer" value="profile"/>	
 		<put-attribute name="section" value="no_section"/>	
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminProfile.jsp" />	   
-	 </definition>
-	 
-	
-	<!-- TEST -->
-	<definition name="test" extends="testTemplate">
-		<put-attribute name="title" value="test.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
-	    <put-attribute name="body" value="/WEB-INF/jsp/test/components/bodyTest.jsp" />	    
-	</definition>	
+	 </definition>	
 
 </tiles-definitions>

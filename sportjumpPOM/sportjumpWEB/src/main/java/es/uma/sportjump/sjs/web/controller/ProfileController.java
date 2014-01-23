@@ -25,7 +25,7 @@ import es.uma.sportjump.sjs.web.controller.validation.ProfileValidator;
 
 @Controller
 @RequestMapping("/action/admin")
-public class AdminProfileController {	
+public class ProfileController {	
 	
 
 	@Autowired

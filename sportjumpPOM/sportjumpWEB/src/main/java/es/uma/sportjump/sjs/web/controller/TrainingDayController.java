@@ -25,7 +25,7 @@ import es.uma.sportjump.sjs.web.controller.commands.TrainingDayCommand;
 
 @Controller
 @RequestMapping("/action/training")
-public class TrainingWorkingDayController {
+public class TrainingDayController {
 	@Autowired
 	private TrainingService trainingService;
 

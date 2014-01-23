@@ -67,11 +67,9 @@ body {
 
 .footer{height: inherit;}
 .footer_header{height: 20%;}
-.footer_container{text-align: center;	 line-height: 2em;}
-.footer_img{height: 4em;  margin-left: 2em; margin-right: 2em;}
+.footer_container{text-align: center;	 line-height: 1.3em; font-size: 0.8em}
+.footer_img{height: 5em;  margin-left: 2em; margin-right: 2em;}
 .footer_ico{height: 2em; }
-
-
 
 /*----------------------------------------------------------- */
 /*------------------------ MENU BAR ------------------------- */

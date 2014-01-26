@@ -1,0 +1,22 @@
+.cajaCenNotification {
+    background-color: #EEEEEE;
+    border: 1px solid #D19290;
+    margin-left: 25%;
+    margin-top: 8%;
+    padding: 5ex 5ex 2ex;
+    width: 400px;
+}
+
+.cajaNotification {
+    background-color: #EEEEEE;
+    height: 404px;
+    margin: 2em;
+    padding: 2em;
+}
+
+.form_error_txt{
+	float:left;  
+	margin-left: 5ex;     
+	margin-top: 5ex; 
+	width: 200px;
+}    

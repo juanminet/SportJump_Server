@@ -1,4 +1,4 @@
-package es.uma.sportjum.sjs.web.ajax.util;
+package es.uma.sportjump.sjs.web.ajax.util;
 
 import java.util.ArrayList;
 import java.util.List;

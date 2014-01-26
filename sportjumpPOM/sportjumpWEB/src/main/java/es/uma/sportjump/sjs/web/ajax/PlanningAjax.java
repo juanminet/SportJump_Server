@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import es.uma.sportjum.sjs.web.ajax.util.ComonAjaxUtils;
 import es.uma.sportjump.sjs.model.entities.CalendarEvent;
 import es.uma.sportjump.sjs.model.entities.Team;
 import es.uma.sportjump.sjs.model.entities.Training;
@@ -27,6 +26,7 @@ import es.uma.sportjump.sjs.service.services.ExerciseService;
 import es.uma.sportjump.sjs.service.services.TrainingService;
 import es.uma.sportjump.sjs.service.services.UserService;
 import es.uma.sportjump.sjs.web.ajax.exceptions.AjaxException;
+import es.uma.sportjump.sjs.web.ajax.util.ComonAjaxUtils;
 import es.uma.sportjump.sjs.web.controller.beans.EventBean;
 import es.uma.sportjump.sjs.web.controller.beans.EventCalendarJSON;
 import es.uma.sportjump.sjs.web.controller.beans.TrainingWebBean;

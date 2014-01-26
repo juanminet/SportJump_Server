@@ -14,7 +14,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<!-- icono de página -->	
-	<link rel="SHORTCUT ICON" href="favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/ico" />
 	
 	<!-- comunes -->
 <%-- <common:common_stylesheets/>	
@@ -41,9 +41,7 @@
 	<link href="${pageContext.request.contextPath}/resources/components/fullcalendar/fullcalendar.css"	type="text/css" rel="stylesheet" />	
 
 	
-	<!-- titulo -->	
-	
-			
+	<!-- titulo -->				
 	<tiles:useAttribute id="title" name="title"/>
 	
 	<title>

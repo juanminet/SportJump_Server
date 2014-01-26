@@ -9,6 +9,22 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:/spring/application/**/*.xml</param-value>
 	</context-param> 
+	
+	<context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:/log/log4j.xml</param-value>
+    </context-param>
+	
+	
+	<!-- Listeners -->
+	
+	<listener>
+	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
 
 
 	<!-- FILTERS -->
@@ -45,12 +61,6 @@
 	</filter-mapping> 
 
 	
-	
-	<!-- Listeners -->
-	
-	<listener>
-	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
 	<!-- <session-config>
 		<session-timeout>0</session-timeout>
 	</session-config> -->
@@ -59,21 +69,21 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list> 
 
-<!-- 	<error-page>
+ 	<error-page>
 		<error-code>500</error-code>
-		<location>/action/error</location>
+		<location>/error/error</location>
 	</error-page>
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/action/error</location>
+		<location>/error/denied/authorization</location>
 	</error-page>
 
 	<error-page>
 		<error-code>403</error-code>
-		<location>/action/accessDenied</location>
+		<location>/error/denied/authorization</location>
 	</error-page>
--->
+	
 
 	<!-- Servlets -->
 	
@@ -128,25 +138,6 @@
 		</web-resource-collection>
 		<auth-constraint>
 			<description>adminAuth</description>
-			<role-name>administrador</role-name>
-		</auth-constraint>
-	</security-constraint>
-	<security-constraint>
-		<display-name>dwrConst</display-name>
-		<web-resource-collection>
-			<web-resource-name>ajax</web-resource-name>
-			<url-pattern>/dwr/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>PUT</http-method>
-			<http-method>HEAD</http-method>
-			<http-method>TRACE</http-method>
-			<http-method>POST</http-method>
-			<http-method>DELETE</http-method>
-			<http-method>OPTIONS</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-			<description>
-			adminAuth</description>
 			<role-name>administrador</role-name>
 		</auth-constraint>
 	</security-constraint> -->

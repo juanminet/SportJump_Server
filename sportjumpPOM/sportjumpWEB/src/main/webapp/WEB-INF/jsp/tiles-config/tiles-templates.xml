@@ -10,4 +10,14 @@
 	    <put-attribute name="footer" value="/WEB-INF/jsp/components/common/footer.jsp" />	     
 	</definition>	
 	
+     <definition name="noSessionTemplate" template="/WEB-INF/jsp/templates/standardTemplate.jsp" >
+	    <put-attribute name="header" value="/WEB-INF/jsp/components/common/headerNoBar.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/jsp/components/common/footer.jsp" />	     
+	</definition>
+	
+     <definition name="notificationTemplate" template="/WEB-INF/jsp/templates/notificationTemplate.jsp" >
+	    <put-attribute name="header" value="/WEB-INF/jsp/components/common/headerNoBar.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/jsp/components/common/footer.jsp" />	     
+	</definition>
+	
 </tiles-definitions>

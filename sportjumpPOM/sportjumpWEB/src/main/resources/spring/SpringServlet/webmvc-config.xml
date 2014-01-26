@@ -25,8 +25,7 @@
 	<!-- Busca controladores anotados con @Controller -->
 	<context:component-scan base-package="es.uma.sportjump.sjs.web.controller" />
 	<context:component-scan base-package="es.uma.sportjump.sjs.web.rest" />
-	<context:component-scan base-package="es.uma.sportjump.sjs.web.ajax" />
-	
+	<context:component-scan base-package="es.uma.sportjump.sjs.web.ajax" />	
 	
 	<!--
 		- This bean resolves specific types of exceptions to corresponding logical 
@@ -41,12 +40,9 @@
 			<!-- 	<prop key="org.springframework.web.HttpSessionRequiredException">
 					index
 				</prop>
-				<prop key="es.mma.architecture.dao.DataAccessException">
+				<prop key="es.uma.sportjump.sjs.dao.exceptions.DataAccessException">
 					error
-				</prop>
-				<prop key="es.mma.architecture.service.ServiceException">
-					error
-				</prop> -->
+				</prop>-->
 			</props>
 		</property>
 	</bean>
@@ -90,7 +86,6 @@
 				<value>/WEB-INF/jsp/tiles-config/tiles.xml</value>								
 			</list>
 		</property>
-	</bean>
-
-
+	</bean>	
+	
 </beans>

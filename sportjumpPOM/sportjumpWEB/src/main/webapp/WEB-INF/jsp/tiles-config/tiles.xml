@@ -5,16 +5,20 @@
 
 
 	<definition name="login" template="/WEB-INF/jsp/login.jsp" />
-	<definition name="registration" template="/WEB-INF/jsp/registration.jsp" />
+	<definition name="registration" extends="noSessionTemplate">
+		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="layer" value="home"/>
+		<put-attribute name="section" value="no_section"/>
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/registration.jsp" />	  
+	 </definition> 
 	
-	<!-- <definition name="home" template="/WEB-INF/jsp/test/homeTest.jsp" />	   -->
+
 
 	
 	
 		
  	<definition name="home" extends="standardTemplate">
 		<put-attribute name="title" value="test.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="home"/>
 		<put-attribute name="section" value="no_section"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/bodyHome.jsp" />	  
@@ -24,7 +28,6 @@
 	
 	<definition name="admin_groups" extends="standardTemplate">
 		<put-attribute name="title" value="admin.groups.list.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="groups"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminGroups.jsp" />
@@ -33,7 +36,6 @@
 	 
 	 <definition name="admin_groups_new" extends="standardTemplate">
 		<put-attribute name="title" value="admin.groups.form.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="groups"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminNewGroup.jsp" />
@@ -43,7 +45,6 @@
 	 
 	<definition name="admin_athletes" extends="standardTemplate">
 		<put-attribute name="title" value="admin.athletes.list.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="athletes"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminAthletes.jsp" />
@@ -52,7 +53,6 @@
 	 
 	<definition name="admin_athletes_new" extends="standardTemplate">
 		<put-attribute name="title" value="admin.athletes.form.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="athletes"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminNewAthlete.jsp" />
@@ -64,7 +64,6 @@
 	 
 	<definition name="training_day_list" extends="standardTemplate">
 		<put-attribute name="title" value="training.workingday.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>
 		<put-attribute name="section" value="workingday"/>
 		<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingDay.jsp" />	
@@ -73,7 +72,6 @@
 	
 	<definition name="training_day_new" extends="standardTemplate">
 		<put-attribute name="title" value="training.workingday.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>
 		<put-attribute name="section" value="workingday"/>
 		<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingDayNew.jsp" />	
@@ -82,7 +80,6 @@
 	
 	<definition name="training_exercise_list" extends="standardTemplate">
 		<put-attribute name="title" value="training.exercise.block.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>
 		<put-attribute name="section" value="exercise"/>
 	   	<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingExerciseBlock.jsp" />	
@@ -91,7 +88,6 @@
 	
 	<definition name="training_exercise_new" extends="standardTemplate">
 		<put-attribute name="title" value="training.exercise.block.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="training"/>
 		<put-attribute name="section" value="exercise"/>
 	   	<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingExerciseNewBlock.jsp" />	
@@ -103,7 +99,6 @@
 	
 	<definition name="planning_group_list" extends="standardTemplate">
 		<put-attribute name="title" value="planning.group.list.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="planning"/>
 		<put-attribute name="section" value="no_section"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningGroups.jsp" />	      
@@ -111,7 +106,6 @@
 	  
 	<definition name="planning_calendar" extends="standardTemplate">
 		<put-attribute name="title" value="planning.calendar.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="planning"/>
 		<put-attribute name="section" value="no_section"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningCalendar.jsp" />	      
@@ -121,10 +115,37 @@
 	 
 	<definition name="admin_profile" extends="standardTemplate">
 		<put-attribute name="title" value="admin.profile.tittle" />
-		<put-attribute name="dwrEngine" value="true"/>
 		<put-attribute name="layer" value="profile"/>	
 		<put-attribute name="section" value="no_section"/>	
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminProfile.jsp" />	   
 	 </definition>	
+	 
+	
+	<!--  ERROR PAGES -->
+	
+	<definition name="error_page" extends="notificationTemplate">
+		<put-attribute name="title" value="error.title" />
+		<put-attribute name="notification_title" value="error.aplicacion.title"/>	
+		<put-attribute name="notification_description" value="error.aplicacion.description"/>
+		<put-attribute name="notification_info" value="error.aplicacion.info"/>		   
+	</definition>	
+	
+	
+	<definition name="access_denied_authentication_page" extends="notificationTemplate">
+		<put-attribute name="title" value="error.title" />
+		<put-attribute name="notification_title" value="login.error.denied"/>	
+		<put-attribute name="notification_description" value="login.error.session"/>
+		<put-attribute name="notification_info" value="login.error.message"/>		
+	</definition>   
+	
+		<definition name="access_denied_authorization_page" extends="notificationTemplate">
+		<put-attribute name="title" value="error.title" />
+		<put-attribute name="notification_title" value="login.error.denied"/>	
+		<put-attribute name="notification_description" value="login.error.authorization"/>
+		<put-attribute name="notification_info" value="login.error.message"/>		
+	</definition>   
+	
+	
+	
 
 </tiles-definitions>

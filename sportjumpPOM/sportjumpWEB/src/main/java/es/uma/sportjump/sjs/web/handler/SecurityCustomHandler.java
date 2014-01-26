@@ -20,7 +20,8 @@ public class SecurityCustomHandler extends SavedRequestAwareAuthenticationSucces
     	if(hasAuthorization(authentication)){
     		response.sendRedirect("login/success");
     	}    else{
-    		response.sendRedirect("login?login_error=2");
+    	//	response.sendRedirect("login?login_error=2");
+    		response.sendRedirect("error/denied/authorization");
     	}
      }
 

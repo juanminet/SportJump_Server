@@ -64,6 +64,8 @@
 		<security:intercept-url pattern="/test/**/*" access="permitAll" />	 
 		<security:intercept-url pattern="/login" access="permitAll"/>
 		<security:intercept-url pattern="/registration" access="permitAll"/>
+		<security:intercept-url pattern="/error" access="permitAll"/>
+		<security:intercept-url pattern="/error/**/*" access="permitAll"/>
 		<security:intercept-url pattern="/resources/**/*" access="permitAll"/>
 		
 		<security:intercept-url pattern="/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
@@ -73,7 +75,7 @@
 	 	<security:intercept-url pattern="/login/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
 		<security:intercept-url pattern="/**/*" access="hasRole('ROLE_ADMIN')"/> 
 		
-		<security:form-login login-page="/login"  authentication-success-handler-ref="SecurityCustomHandler" authentication-failure-url="/login?login_error=1" default-target-url="/login/success" always-use-default-target="true"/>
+		<security:form-login login-page="/login"  authentication-success-handler-ref="SecurityCustomHandler" authentication-failure-url="/error/denied/authentication" default-target-url="/login/success" always-use-default-target="true"/>
 		<security:logout invalidate-session="true" logout-url="/logout"/>		
 	</security:http>
 

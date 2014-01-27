@@ -1,4 +1,3 @@
-
 <div class="footer">
 	<div class="footer_header"></div>
 	<div class="footer_container">

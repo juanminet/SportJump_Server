@@ -1,32 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!-- QUITAR -->
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-<script>
-$(document).ready( function() {
-	initDataTable(
-			"table_athletes",
-			5);
-});
-
-function show_modify(){
-	$("#caja_form").show();
-	$("#caja_data").hide();
-}
-</script>
-
-
 <div id ="body_home">
-
-	<div id = "body_home_container">
-
-
-		
-		
+	<div id = "body_home_container">			
 		<div id="caja_form" <c:if test="${empty newTeam}">style="display: none;"</c:if>>	
 		 	<form:form commandName="groupCommand" cssClass="caja"  action="${pageContext.request.contextPath}/action/admin/groups/save" method="POST" >
 				<div class="subcaja">

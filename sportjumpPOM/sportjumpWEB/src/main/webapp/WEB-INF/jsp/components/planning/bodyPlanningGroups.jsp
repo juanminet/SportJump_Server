@@ -1,30 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<!-- QUITAR -->
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<style>
-
-
-
-
-</style>
-
-<script>
-
-
-	
-$(document).ready( function() {
-
-	
-	initDataTable(
-			"table_groups",
-			10);
-	  	
-}); 	
-
-</script>
     
 <div id ="body_home">
 	<div id = "body_home_container" >			

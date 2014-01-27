@@ -40,6 +40,12 @@
 	
 	<link href="${pageContext.request.contextPath}/resources/components/fullcalendar/fullcalendar.css"	type="text/css" rel="stylesheet" />	
 
+	<tiles:importAttribute name="jsAditional" ignore="true"/>
+	<c:if test="${not empty jsAditional}">
+		<c:forEach var="jsFile" items="${jsAditional}">
+	<script src="<c:url value="${jsFile}"/>" type="text/javascript" charset="UTF-8"></script>
+		</c:forEach>
+	</c:if>
 	
 	<!-- titulo -->				
 	<tiles:useAttribute id="title" name="title"/>
@@ -51,13 +57,12 @@
 
 </head>
 <body>
-	
+
 	<div class="container">	
 		<tiles:useAttribute id="layer" name="layer" scope="session"/>
-		<tiles:useAttribute id="section" name="section" scope="session"/>
-					
+		<tiles:useAttribute id="section" name="section" scope="session"/>					
 		
-		<div id="header">			
+		<div id="header">		
 			<tiles:insertAttribute name="header" />
 		</div>
 		<div id="holder_container" class="holder_container">							

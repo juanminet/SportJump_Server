@@ -12,10 +12,6 @@
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/registration.jsp" />	  
 	 </definition> 
 	
-
-
-	
-	
 		
  	<definition name="home" extends="standardTemplate">
 		<put-attribute name="title" value="test.tittle" />
@@ -31,7 +27,8 @@
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="groups"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminGroups.jsp" />
-	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	  
+	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	
+	    <put-attribute name="jsAditional" value="/resources/js/components/admin/bodyAdminGroups.js" />  
 	 </definition>
 	 
 	 <definition name="admin_groups_new" extends="standardTemplate">
@@ -39,7 +36,8 @@
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="groups"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminNewGroup.jsp" />
-	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	  
+	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />
+	    <put-attribute name="jsAditional" value="/resources/js/components/admin/bodyAdminNewGroup.js" />	  
 	 </definition>
 	 
 	 
@@ -48,7 +46,8 @@
 		<put-attribute name="layer" value="admin"/>
 		<put-attribute name="section" value="athletes"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminAthletes.jsp" />
-	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	  
+	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	 
+	    <put-attribute name="jsAditional" value="/resources/js/components/admin/bodyAdminAthletes.js" /> 
 	 </definition>
 	 
 	<definition name="admin_athletes_new" extends="standardTemplate">
@@ -57,6 +56,7 @@
 		<put-attribute name="section" value="athletes"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminNewAthlete.jsp" />
 	    <put-attribute name="left-panel" value="/WEB-INF/jsp/components/admin/left-panel-admin.jsp" />	  
+	    <put-attribute name="jsAditional" value="/resources/js/components/admin/bodyAdminNewAthlete.js" />
 	 </definition>	
 	
 		
@@ -66,32 +66,36 @@
 		<put-attribute name="title" value="training.workingday.tittle" />
 		<put-attribute name="layer" value="training"/>
 		<put-attribute name="section" value="workingday"/>
-		<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingDay.jsp" />	
-	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
+		<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" /> 
+		<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingDay.jsp" />		   
+	   	<put-attribute name="jsAditional" value="/resources/js/components/training/bodyTrainingDay.js" /> 
 	</definition> 
 	
 	<definition name="training_day_new" extends="standardTemplate">
 		<put-attribute name="title" value="training.workingday.tittle" />
 		<put-attribute name="layer" value="training"/>
 		<put-attribute name="section" value="workingday"/>
+		<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />
 		<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingDayNew.jsp" />	
-	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
+	   	<put-attribute name="jsAditional" value="/resources/js/components/training/bodyTrainingDayNew.js" />   
 	</definition> 
 	
 	<definition name="training_exercise_list" extends="standardTemplate">
 		<put-attribute name="title" value="training.exercise.block.tittle" />
 		<put-attribute name="layer" value="training"/>
-		<put-attribute name="section" value="exercise"/>
-	   	<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingExerciseBlock.jsp" />	
+		<put-attribute name="section" value="exercise"/>	   	
 	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
+	   	<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingExerciseBlock.jsp" />
+	   	<put-attribute name="jsAditional" value="/resources/js/components/training/bodyTrainingExerciseBlock.js" />
 	</definition>
 	
 	<definition name="training_exercise_new" extends="standardTemplate">
 		<put-attribute name="title" value="training.exercise.block.tittle" />
 		<put-attribute name="layer" value="training"/>
-		<put-attribute name="section" value="exercise"/>
-	   	<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingExerciseNewBlock.jsp" />	
-	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />  
+		<put-attribute name="section" value="exercise"/>	   		
+	   	<put-attribute name="left-panel" value="/WEB-INF/jsp/components/training/left-panel-training.jsp" />
+	   	<put-attribute name="body" value="/WEB-INF/jsp/components/training/bodyTrainingExerciseNewBlock.jsp" />  
+	   	<put-attribute name="jsAditional" value="/resources/js/components/training/bodyTrainingExerciseNewBlock.js" />
 	</definition>
 	 	  
 	
@@ -101,14 +105,16 @@
 		<put-attribute name="title" value="planning.group.list.tittle" />
 		<put-attribute name="layer" value="planning"/>
 		<put-attribute name="section" value="no_section"/>
-	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningGroups.jsp" />	      
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningGroups.jsp" />
+	    <put-attribute name="jsAditional" value="/resources/js/components/planning/bodyPlanningGroups.js" />	      
 	 </definition>
 	  
 	<definition name="planning_calendar" extends="standardTemplate">
 		<put-attribute name="title" value="planning.calendar.tittle" />
 		<put-attribute name="layer" value="planning"/>
 		<put-attribute name="section" value="no_section"/>
-	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningCalendar.jsp" />	      
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/planning/bodyPlanningCalendar.jsp" />
+	    <put-attribute name="jsAditional" value="/resources/js/components/planning/bodyPlanningCalendar.js" />	      
 	 </definition>
 	
 	<!-- PROFILE -->
@@ -117,7 +123,8 @@
 		<put-attribute name="title" value="admin.profile.tittle" />
 		<put-attribute name="layer" value="profile"/>	
 		<put-attribute name="section" value="no_section"/>	
-	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminProfile.jsp" />	   
+	    <put-attribute name="body" value="/WEB-INF/jsp/components/admin/bodyAdminProfile.jsp" />	  
+	    <put-attribute name="jsAditional" value="/resources/js/components/admin/bodyAdminProfile.js" />   
 	 </definition>	
 	 
 	

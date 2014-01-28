@@ -17,29 +17,10 @@
 	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/ico" />
 	
 	<!-- comunes -->
-<%-- <common:common_stylesheets/>	
-	<common:common_javascript/> --%>	
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-ui-1.10.3.custom.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery.balloon.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/data-table-1.9.4/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/customDataTable.js"></script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/fullcalendar/fullcalendar.js"></script>
+ 	<common:common_stylesheets/>	
+	<common:common_javascript/> 
 
-
-
-
-	<link href="${pageContext.request.contextPath}/resources/data-table-1.9.4/css/demo_table_jui.css"	type="text/css" rel="stylesheet" />	
-	<link href="${pageContext.request.contextPath}/resources/jquery-1.10.3/css/smoothness/jquery-ui-1.10.3.custom.css"	type="text/css" rel="stylesheet" />	
-
-	<link href="${pageContext.request.contextPath}/resources/css/reset.css"	type="text/css" rel="stylesheet" />	
-	<link href="${pageContext.request.contextPath}/resources/css/custom.css"	type="text/css" rel="stylesheet" />	
-	<link href="${pageContext.request.contextPath}/resources/css/template/standardTemplate.css"	type="text/css" rel="stylesheet" />	
-	
-	<link href="${pageContext.request.contextPath}/resources/components/fullcalendar/fullcalendar.css"	type="text/css" rel="stylesheet" />	
-
+	<!-- jsAditional -->
 	<tiles:importAttribute name="jsAditional" ignore="true"/>
 	<c:if test="${not empty jsAditional}">
 		<c:forEach var="jsFile" items="${jsAditional}">

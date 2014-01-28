@@ -10,12 +10,15 @@
 <c:choose>
 	<c:when test="${empty path}">
 		<%-- AQUI VAN LOS RECURSOS REQUERIDOS POR LA APLICACION --%>
-		<link href="${base}/css/reset.css" type="text/css" charset="UTF-8" rel="stylesheet"></link>
-		<link href="${base}/css/appestilos.css" type="text/css" charset="UTF-8" rel="stylesheet"></link>
-		<link href="${base}/css/jquery-timepicker/jquery.timepicker.css" rel="stylesheet" type="text/css" />
-		<!--[if lte IE 7]>		
-			<link rel="stylesheet" href="${base}/css/estilos-ie.css" type="text/css" media="screen, projection" />
-		<![endif]-->
+		<%-- <link href="${base}/css/reset.css" type="text/css" charset="UTF-8" rel="stylesheet"></link> --%>
+		<link href="${pageContext.request.contextPath}/resources/data-table-1.9.4/css/demo_table_jui.css"	type="text/css" rel="stylesheet" />	
+		<link href="${pageContext.request.contextPath}/resources/jquery-1.10.3/css/smoothness/jquery-ui-1.10.3.custom.css"	type="text/css" rel="stylesheet" />	
+	
+		<link href="${pageContext.request.contextPath}/resources/css/reset.css"	type="text/css" rel="stylesheet" />	
+		<link href="${pageContext.request.contextPath}/resources/css/custom.css"	type="text/css" rel="stylesheet" />	
+		<link href="${pageContext.request.contextPath}/resources/css/template/standardTemplate.css"	type="text/css" rel="stylesheet" />	
+		
+		<link href="${pageContext.request.contextPath}/resources/components/fullcalendar/fullcalendar.css"	type="text/css" rel="stylesheet" />	
 	</c:when>
 	<c:otherwise>
 		<link href="${base}/${path}" rel="stylesheet" type="text/css" />

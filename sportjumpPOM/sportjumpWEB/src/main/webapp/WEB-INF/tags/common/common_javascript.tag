@@ -6,20 +6,18 @@
 <c:set var="base" scope="page" value="${cfg[baseName]}"/>
 <c:if test="${fn:startsWith(base,'@')}"><c:set var="base" value="${pageContext.request.contextPath}/${fn:substring(base,1,-1)}"/></c:if>
 <c:choose>
-<c:when test="${empty path}">
-<%-- AQUI VAN LOS RECURSOS REQUERIDOS POR LA APLICACION --%>
-<script src="${base}/js/jquery.min.js" type="text/javascript" charset="UTF-8"></script>
-<script src="${base}/js/jquery-ui.min.js" type="text/javascript" charset="UTF-8"></script>
-<script src="${base}/js/jquery.ui.datepicker-es.js" type="text/javascript" charset="UTF-8"></script>
-<script src="${base}/js/jquery.dataTables.min.js" type="text/javascript"></script>
-
-
-<!--[if lte IE 6]>
-	<script src="${base}/js/DD_belatedPNG.js" type="text/javascript"></script>
-	<script src="${base}/js/form.js" type="text/javascript"></script>
-<![endif]-->
-</c:when>
-<c:otherwise>
-<script src="${base}/${path}" type="text/javascript" charset="UTF-8"></script>
-</c:otherwise>	
+	<c:when test="${empty path}">
+	<%-- AQUI VAN LOS RECURSOS REQUERIDOS POR LA APLICACION --%>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-ui-1.10.3.custom.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery.balloon.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/data-table-1.9.4/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/customDataTable.js"></script>
+		
+		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/components/fullcalendar/fullcalendar.js"></script>
+	
+	</c:when>
+	<c:otherwise>
+		<script src="${base}/${path}" type="text/javascript" charset="UTF-8"></script>
+	</c:otherwise>	
 </c:choose>

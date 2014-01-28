@@ -65,12 +65,44 @@ body {
 /*----------------------------------------------------------- */
 /*------------------------- FOOTER -------------------------- */
 /*----------------------------------------------------------- */
+.footer {
+	height: inherit;
+}
 
-.footer{height: inherit;}
-.footer_header{height: 20%;}
-.footer_container{text-align: center;	 line-height: 1.3em; font-size: 0.8em;  margin-bottom: 1em;}
-.footer_img{height: 5em;  margin-left: 2em; margin-right: 2em;}
-.footer_ico{height: 2em; }
+.footer_header {
+	height: 20%;
+}
+
+.footer_container {
+	text-align: center;
+	line-height: 1.3em;
+	font-size: 0.8em;
+	margin-bottom: 1em;
+}
+
+.footer_img {
+	height: 5em;
+}
+
+.footer_container_img_left {
+	float: left;
+}
+
+.footer_container_img_right {
+	float: right;
+	margin-right: 6em;
+	margin-top: 0.5em;
+}
+
+.footer_container_center {
+	float: left;
+	margin-top: 1em;
+	width: 60%;
+}
+
+.footer_ico {
+	height: 2em;
+}
 
 /*----------------------------------------------------------- */
 /*------------------------ MENU BAR ------------------------- */
@@ -78,11 +110,9 @@ body {
 /*---------------- recursos/css/menu_bar.css ---------------- */
 /*----------------------------------------------------------- */
 
-
 /*----------------------------------------------------------- */
 /*------------------------ SIDE BAR ------------------------- */
 /*----------------------------------------------------------- */
-
 .sidebar { border: 1px solid #DDDDDD; min-height: 500px; width: 100%;}
 
 .sidebar ul {width: 100%;  list-style: none none none; }

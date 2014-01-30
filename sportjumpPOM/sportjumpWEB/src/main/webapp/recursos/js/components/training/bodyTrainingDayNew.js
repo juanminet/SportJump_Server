@@ -5,7 +5,7 @@ var listExerciseTam;
 	
 $(document).ready( function() {
 	
-	listExerciseTam = "${fn:length(trainingDayCommand.trainingDayList)}";
+	listExerciseTam = LIST_EXERCISE_TAM;
 	
 	jsNewExerciseBlock = function newExerciseBlock(){					
 		$('#new_exercise_block_lbox').dialog('open');	

@@ -5,7 +5,7 @@ var listExerciseTam;
 	
 	$(document).ready( function() {
 		
-		listExerciseTam = "${fn:length(blockCommand.exerciseList)}";
+		listExerciseTam = LIST_EXERCISE_TAM;
 	
 	jsNewExercise = function newExercise(){		
 		$("#create_exercise_name").val(MSG_TABLE_BUTTON_NEW);

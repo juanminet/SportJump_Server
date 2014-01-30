@@ -5,6 +5,7 @@
 	var MSG_LBOX_BUTTON_CANCEL = "<fmt:message key='training.exercise.block.lbox.button.cancel'/>";
 	var MSG_LBOX_BUTTON_REMOVE = "<fmt:message key='training.exercise.block.lbox.button.remove'/>";
 	var MSG_LBOX_BUTTON_SAVE = "<fmt:message key='training.exercise.block.lbox.button.save'/>";
+	var LIST_EXERCISE_TAM = "${fn:length(blockCommand.exerciseList)}";
 </script>
 
 <div id="body_home">

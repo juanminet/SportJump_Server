@@ -100,11 +100,34 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.4.0.GA</version>
-			<scope>compile</scope>
+		  	<groupId>org.hibernate.javax.persistence</groupId>
+		  	<artifactId>hibernate-jpa-2.1-api</artifactId>
+		  	<version>1.0.0.Final</version>
 		</dependency>
+        
+ <!-- 	   	<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.3.0.Final</version>
+		</dependency>
+		
+	   	<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.0.Final</version>
+		</dependency>  -->
+       
+	  <dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>3.6.10.Final</version>
+			</dependency>
+			
+	  	<dependency>
+		   <groupId>org.hibernate</groupId>
+		   <artifactId>hibernate-entitymanager</artifactId>
+		   <version>3.6.10.Final</version>
+		</dependency> 
 
 
 		<dependency>

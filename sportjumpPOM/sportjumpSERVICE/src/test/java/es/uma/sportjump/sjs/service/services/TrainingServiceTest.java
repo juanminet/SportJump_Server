@@ -108,7 +108,7 @@ public class TrainingServiceTest {
 		trainingService.updateTraining(training);
 		
 		//Get training
-		trainingAux = trainingService.findTraining(training.getIdTraining());
+		trainingAux = trainingService.findTrainingLight(training.getIdTraining());
 		
 		assertEquals(trainingName2,trainingAux.getName());
 		
@@ -116,7 +116,7 @@ public class TrainingServiceTest {
 		trainingService.removeTraining(trainingAux);
 		
 		//Get training
-		trainingAux = trainingService.findTraining(training.getIdTraining());
+		trainingAux = trainingService.findTrainingLight(training.getIdTraining());
 		
 		assertNull(trainingAux);
 	}

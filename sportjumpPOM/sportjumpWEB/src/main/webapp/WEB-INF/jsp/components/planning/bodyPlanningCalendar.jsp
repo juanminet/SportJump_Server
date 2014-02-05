@@ -12,6 +12,8 @@
 	 var MSG_LBOX_BUTTON_REMOVE = "<fmt:message key='planning.calendar.lbox.button.remove'/>";
 	 var MSG_LBOX_BUTTON_CANCEL = "<fmt:message key='planning.calendar.lbox.button.cancel'/>";
 	 var MSG_LBOX_BUTTON_CONTINUE = "<fmt:message key='planning.calendar.lbox.button.continue'/>";
+	 var MSG_LBOX_BUTTON_YES = "<fmt:message key='planning.calendar.lbox.button.yes'/>";
+	 var MSG_LBOX_BUTTON_NO = "<fmt:message key='planning.calendar.lbox.button.no'/>";
  </script>
 
 <style>

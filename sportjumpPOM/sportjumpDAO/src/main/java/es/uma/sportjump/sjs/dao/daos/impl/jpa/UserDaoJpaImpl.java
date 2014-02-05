@@ -10,8 +10,6 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.UserDao;
 import es.uma.sportjump.sjs.model.entities.Athlete;
@@ -22,7 +20,7 @@ import es.uma.sportjump.sjs.model.entities.Team;
 public class UserDaoJpaImpl  implements UserDao{
 
  
-	@PersistenceContext( type = PersistenceContextType.EXTENDED)
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
  	protected EntityManager em;
 	
 	
@@ -32,26 +30,26 @@ public class UserDaoJpaImpl  implements UserDao{
 	/**********************************************************************************************************************/
 	
 	
-	@Transactional(propagation = Propagation.REQUIRED)
+
 	public void persistCoach(Coach coach) {
 		em.persist(coach);		
 	}
 
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public Coach getCoachById(Long id) {
 		return em.find(Coach.class, Long.valueOf(id));
 	}
 
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public void deleteCoach(Long id) {
 		em.remove(getCoachById(id));		
 		em.flush();
 	}
 
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public Coach getCoachByUserName(String userName) {
 		
 		Query query = em.createNamedQuery("findCoachByUserName")
@@ -70,7 +68,7 @@ public class UserDaoJpaImpl  implements UserDao{
 
 
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public Coach getCoachByDni(String dni) {
 		Query query = em.createNamedQuery("findCoachByDni")
 				.setParameter("dni", dni);
@@ -87,8 +85,7 @@ public class UserDaoJpaImpl  implements UserDao{
 
 
 	
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED)
+	@SuppressWarnings("unchecked")	
 	public List<Coach> getAllCoaches() {
 		
 		Query query = em.createNamedQuery("findAllCoaches");
@@ -111,30 +108,34 @@ public class UserDaoJpaImpl  implements UserDao{
 	/**********************************************************************************************************************/
 	
 	
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public void persistTeam(Team team) {
 		em.persist(team);		
 	}
 
 
-	@Transactional(propagation = Propagation.REQUIRED)
-	public Team getTeamById(Long id) {
+	
+	public Team getCompleteTeamById(Long id) {		
+		Query query = em.createNamedQuery("findfetchTeamById")
+				.setParameter("idTeam", id);
 		
+		return (Team) query.getSingleResult();	
+	}
+	
+	public Team getTeamById(Long id){
 		Team team = em.find(Team.class, Long.valueOf(id));		
 		return team;
-	
 	}
 
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public void deleteTeam(Long id) {
-		em.remove(getTeamById(id));	
+		em.remove(getCompleteTeamById(id));	
 		em.flush();
 	}
 	
 	
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED)
+	@SuppressWarnings("unchecked")	
 	public List<Team> getAllTeams() {
 		
 		Query query = em.createNamedQuery("findAllTeams");
@@ -144,8 +145,7 @@ public class UserDaoJpaImpl  implements UserDao{
 		return resListTeams;
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED)
+	@SuppressWarnings("unchecked")	
 	public List<Team> getTeamsByCoach(Coach coach) {
 		
 		Query query = em.createNamedQuery("findAllTeamsByCoach")
@@ -164,26 +164,26 @@ public class UserDaoJpaImpl  implements UserDao{
 
 	
 	
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public void persistAthlete(Athlete athlete) {		
 		em.persist(athlete);		
 	}
 
 	
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public Athlete getAthleteById(Long id) {
 		return em.find(Athlete.class, Long.valueOf(id));
 	}
 
 	
-	@Transactional(propagation = Propagation.REQUIRED)
+
 	public void deleteAthlete(Long id) {
 		em.remove(getAthleteById(id));
 		em.flush();
 	}
 
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public Athlete getAthleteByUserName(String userName) {		
 								
 		Query query = em.createNamedQuery("findAthleteByUserName")
@@ -202,7 +202,7 @@ public class UserDaoJpaImpl  implements UserDao{
 	
 
 	
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public Athlete getAthleteByDni(String dni) {
 		Query query = em.createNamedQuery("findAthleteByDni")
 				.setParameter("dni", dni);
@@ -218,8 +218,7 @@ public class UserDaoJpaImpl  implements UserDao{
 		return resAthlete;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED)
+	@SuppressWarnings("unchecked")	
 	public List<Athlete> getAllAthletes() {
 		
 		Query query = em.createNamedQuery("findAllAthletes");
@@ -230,7 +229,6 @@ public class UserDaoJpaImpl  implements UserDao{
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED)
 	public List<Athlete> getAthletesByCoach(Coach coach) {
 		Query query  = em.createNamedQuery("findAthleteFromCoach")
 				.setParameter("idCoach", coach.getIdUser());

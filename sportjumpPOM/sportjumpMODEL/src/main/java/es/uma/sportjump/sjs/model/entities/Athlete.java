@@ -10,6 +10,18 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="TB_ATHLETE")
+@NamedQueries({
+	@NamedQuery(name="findAllAthletes",
+				query="Select a from Athlete a"),
+	@NamedQuery(name="findAthleteByUserName",
+				query="Select a from Athlete a where a.userName = :userName"),
+	@NamedQuery(name="findAthleteByDni",
+				query="Select a from Athlete a where a.dni = :dni"),
+	@NamedQuery(name="findAthleteFromTeam",
+				query="Select a from Athlete a where a.team.idTeam = :idTeam"),
+	@NamedQuery(name="findAthleteFromCoach",
+				query="Select a from Athlete a where a.team.coach.idUser = :idCoach")
+})
 public class Athlete extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

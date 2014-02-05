@@ -1080,7 +1080,7 @@ public class UserDaoTest {
 		UserDao userDao = applicationContext.getBean(UserDao.class);
 		
 		//Get team
-		Team team = userDao.getTeamById(idTeam);
+		Team team = userDao.getCompleteTeamById(idTeam);
 		
 		//Create athlete
 		Athlete athlete = new Athlete();
@@ -1155,7 +1155,7 @@ public class UserDaoTest {
 		UserDao userDao = applicationContext.getBean(UserDao.class);
 		
 		//Read team
-		Team team = userDao.getTeamById(idTeam);
+		Team team = userDao.getCompleteTeamById(idTeam);
 		
 		return team;
 	}

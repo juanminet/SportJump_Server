@@ -11,46 +11,48 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-	<!-- <context:component-scan base-package="es.uma.sportjump.sjs.dao.daos.impl.jpa" /> -->
-	
- 	<!-- <tx:annotation-driven  transaction-manager="transactionManager"/>  -->
-<!-- 
+	<context:component-scan base-package="es.uma.sportjump.sjs.dao.daos.impl.jpa" />
+
+ 	<tx:annotation-driven  transaction-manager="transactionManager"/> 
+
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="emf" /> -->
-        <!-- <property name="dataSource" ref="dataSource" /> -->
-     <!--     <property name="jpaDialect" ref="jpaHibernateDialect" /> 
-    </bean> -->
-<!-- 	
+        <property name="entityManagerFactory" ref="emf" />
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaDialect" ref="jpaDialect" />
+    </bean>
+
 	 <bean id="emf"
         class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" /> 
-        <property name="persistenceUnitName" value="sportjumpJpaPU" /> -->
-       <!--  <property name="dataSource" ref="dataSource" /> -->
-        <!-- <property name="jpaVendorAdapter" ref="jpaVendorAdapter" /> -->
-        <!-- <property name="jpaDialect" ref="jpaDialect" /> -->
-        <!-- <property name="jpaProperties">
+      <!--   <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" /> -->
+        <property name="persistenceUnitName" value="sportjumpJpaPU" />
+        <property name="dataSource" ref="dataSource" />
+       <!--  <property name="jpaVendorAdapter" ref="jpaVendorAdapter" /> -->
+        <property name="jpaDialect" ref="jpaDialect" />
+        <property name="jpaProperties">
 			<props>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 			</props>
-		</property> -->
-    <!-- </bean> -->
+		</property>
+    </bean>
  
 <!--     <bean id="jpaVendorAdapter"   class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="database" value="MYSQL" />
         <property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
     </bean> -->
  
- <!--   <bean id="jpaHibernateDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" /> -->
-
+    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+ 
   	
-<!--    <bean id="dataSource"    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSource"    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/sportjumpdb" />
         <property name="username" value="juanmi" />
         <property name="password" value="12345678" />
-    </bean> --> 
+    </bean> 
+    
+
     
 
     <!-- <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />

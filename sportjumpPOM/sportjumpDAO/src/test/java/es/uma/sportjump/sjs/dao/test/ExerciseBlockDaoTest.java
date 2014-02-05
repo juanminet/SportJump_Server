@@ -3,7 +3,6 @@ package es.uma.sportjump.sjs.dao.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +20,7 @@ import es.uma.sportjump.sjs.dao.test.util.ExerciseBlockDaoTestUtil;
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
-
-//@ContextConfiguration(locations = "classpath:test-jpa-application-dao.xml")  
+ 
 public class ExerciseBlockDaoTest{
 	
 	@Autowired
@@ -145,7 +143,7 @@ public class ExerciseBlockDaoTest{
 		//update
 		String newExerciseName1 = "35 X 50kg hombros";
 		
-		exerciseBlock.getListExercises().get(0).setName(newExerciseName1);
+		exerciseBlock = updateExerciseBlock(newExerciseName1, exerciseBlock);
 		exerciseBlockDao.persistExerciseBlock(exerciseBlock);
 		
 		//Read exerciseBlock
@@ -170,6 +168,27 @@ public class ExerciseBlockDaoTest{
 		
 	}
 	
+	private ExerciseBlock updateExerciseBlock(String newExerciseName1,	ExerciseBlock exerciseBlock) {
+		ExerciseBlock res =  exerciseBlock.clone();	
+		
+		List<Exercise> listExercises = res.getListExercises();
+		if(listExercises  == null){
+			listExercises = new ArrayList<Exercise>();
+		}
+		
+		Exercise newExercise = new Exercise();
+		newExercise.setName(newExerciseName1);
+		newExercise.setPos(listExercises.size());
+		
+		
+		listExercises.remove(0);
+		listExercises.add(0, newExercise);
+		
+		res.setListExercises(listExercises);
+		
+		return res;
+	}
+
 	public void testAllExerciseBlocks(){
 		//Initialize variables
 		String name1 = "Bloque brutal1";
@@ -215,9 +234,6 @@ public class ExerciseBlockDaoTest{
 		//asserts
 		assertNotNull (exerciseBlockList);
 		assertEquals(initSize + 3, exerciseBlockList.size());
-		assertTrue(exerciseBlockList.contains(exerciseBlock1));
-		assertTrue(exerciseBlockList.contains(exerciseBlock2));
-		assertTrue(exerciseBlockList.contains(exerciseBlock3));
 		
 		//Delete exerciseBlock
 		exerciseBlockUtil.deleteExerciseBlock(exerciseBlock1);

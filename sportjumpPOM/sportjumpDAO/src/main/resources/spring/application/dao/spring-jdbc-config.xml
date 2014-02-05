@@ -34,6 +34,7 @@
      <!--	Para hibernate    -->     
  	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+			 <property name="persistenceUnitName" value="sportjumpJpaPU" />
 			  <property name="packagesToScan" value="es.uma.sportjump.sjs.model.entities" />
 			  <property name="dataSource" ref="mainDataSource" />
 		      <property name="jpaVendorAdapter">
@@ -43,19 +44,10 @@
 		         <props>
 		            <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 		            <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-		            <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+		            <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>   
 		         </props>
 		      </property>
-	</bean>
-   
+	</bean> 
     
 	 
-    <!-- Database initializer. If any of the script fails, the initialization stops. -->
-    <!-- As an alternative, for embedded databases see <jdbc:embedded-database/>.
-    Por si necesitaramos pasar scripts de arranque o de inicialización 
-
-    <jdbc:initialize-database data-source="mainDataSource" ignore-failures="ALL">
-    	<jdbc:script location="classpath:db/populateDB.sql"/>
-    </jdbc:initialize-database> 
-   -->
  </beans>

@@ -2,6 +2,7 @@ package es.uma.sportjump.sjs.model.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,19 +13,31 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
 
 @Entity
 @Table(	name="TB_TRAINING", 
 	uniqueConstraints= @UniqueConstraint(columnNames={"NAME", "ID_USER"})
 )
+@NamedQueries({
+	@NamedQuery(name="findAllTrainings",
+				query="Select t from Training t"),
+	@NamedQuery(name="findAllTrainingsByCoach",
+				query="Select t from Training t where t.coach.idUser = :idUser"),
+	@NamedQuery(name="findTrainingByNameAndCoach",
+				query="Select t from Training t where t.coach.idUser = :idUser and t.name = :name"),
+	@NamedQuery(name="findFetchTrainingById",
+				query="Select t from Training t LEFT JOIN FETCH t.listExerciseBlock where t.idTraining = :idTraining")
+})
 public class Training {
 	
 	@PreRemove
-	public void preRemove() {
+	protected void preRemove() {
 		setListExerciseBlock(null);
 	}
 	
@@ -42,15 +55,18 @@ public class Training {
 	@Column(name="description")
 	private String description;
 	
-	@ManyToOne(fetch=FetchType.LAZY, targetEntity=es.uma.sportjump.sjs.model.entities.Coach.class)
+	@ManyToOne(	fetch=FetchType.EAGER, 
+				targetEntity=es.uma.sportjump.sjs.model.entities.Coach.class)
 	@JoinColumn(name="id_user", nullable=false)
 	private Coach coach;
 	
-	@ManyToMany	
-//	@JoinColumn(name="listExerciseBlock")	
-    @JoinTable(	joinColumns = @JoinColumn(name = "id_block"),
-            	inverseJoinColumns = @JoinColumn(name = "id_training"))
+	@ManyToMany
+    @JoinTable(	joinColumns = @JoinColumn(name = "id_training"),
+            	inverseJoinColumns = @JoinColumn(name = "id_block"))
 	private List<ExerciseBlock> listExerciseBlock;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="training")
+	private List<CalendarEvent>listCalendarEvents;
 
 
 	public Long getIdTraining() {
@@ -111,5 +127,40 @@ public class Training {
 		this.listExerciseBlock = listExerciseBlock;
 	}	
 
+	
+	public List<CalendarEvent> getListCalendarEvents() {
+		return listCalendarEvents;
+	}
+
+
+	public void setListCalendarEvents(List<CalendarEvent> listCalendarEvents) {
+		this.listCalendarEvents = listCalendarEvents;
+	}
+
+
+	@Override
+	public int hashCode() {		
+		return this.idTraining.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj){
+			return true;
+		}
+		 
+		if (this.idTraining == null){
+			return false;
+		}
+		
+		boolean res = false;		
+		
+		if (obj instanceof Training){
+			if (this.idTraining.equals(((Training) obj).getIdTraining())){
+				res = true;
+			}
+		}
+		return res;
+	}
 
 }

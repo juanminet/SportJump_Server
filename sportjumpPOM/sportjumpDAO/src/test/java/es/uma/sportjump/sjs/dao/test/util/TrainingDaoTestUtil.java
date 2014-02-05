@@ -35,7 +35,7 @@ public class TrainingDaoTestUtil {
 	}
 	
 	public Training readTraining(Long idTraining) {				
-		return trainingDao.getTrainingById(idTraining);
+		return trainingDao.getCompleteTrainingById(idTraining);
 	}
 
 	

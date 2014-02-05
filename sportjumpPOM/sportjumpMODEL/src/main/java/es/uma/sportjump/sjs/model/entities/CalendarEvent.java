@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -17,7 +19,14 @@ import javax.persistence.UniqueConstraint;
 @Table(	name="TB_CALENDAR_EVENT",
 		uniqueConstraints= @UniqueConstraint(columnNames={"ID_TEAM", "EVENT_DATE"})
 )
-
+@NamedQueries({
+	@NamedQuery(name="findAllCalendarEventsByTeam",
+				query="Select c from CalendarEvent c left join fetch c.training where c.team.idTeam = :idTeam"),
+	@NamedQuery(name="findCalendarEventByDateAndTeam",
+				query="Select c from CalendarEvent c where c.team.idTeam = :idTeam and c.eventDate = :eventDate"),
+	@NamedQuery(name="findfetchCalendarEventById",
+				query="Select c from CalendarEvent c left join fetch c.training left join fetch c.team where c.idEvent = :idEvent")
+})
 public class CalendarEvent {
 
 	@Id

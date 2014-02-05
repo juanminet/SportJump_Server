@@ -38,22 +38,22 @@ public class ExerciseServiceImpl implements ExerciseService {
 		return exerciseBlock;
 	}
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
-	public void updateExerciseBlock(ExerciseBlock exerciseBlock) {
+	@Transactional
+	public void updateExerciseBlock(ExerciseBlock exerciseBlock) {		
 		exerciseBlockDao.persistExerciseBlock(exerciseBlock);
 	}
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional
 	public ExerciseBlock findExerciseBlock(Long idExerciseBlock) {
 		return exerciseBlockDao.getExerciseBlockById(idExerciseBlock);
 	}
 	
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional
 	public ExerciseBlock findExerciseBlockByNameAndCoach(String name,Coach coach) {
 		return exerciseBlockDao.getExerciseBlockByNameAndCoach(name, coach);
 	}
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional
 	public void removeExerciseBlock(ExerciseBlock exerciseBlock) {
 		//TODO	 REMOVE IS NOT WORKING WELL
 //		exerciseBlock = exerciseBlockDao.getExerciseBlockById(exerciseBlock.getIdExerciseBlock());			
@@ -83,7 +83,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 //		}		
 //	}
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional
 	public List<ExerciseBlock> findAllExerciseBlockByCoach(Coach coach) {
 		return exerciseBlockDao.getAllExerciseBlockByCoach(coach);				
 	}

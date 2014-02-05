@@ -78,7 +78,14 @@ public interface UserDao {
 	public void persistTeam(Team team);	
 	
 	/**
-	 * Get team by id given by parameter
+	 * Get  a complete team by id given by parameter
+	 * @param id
+	 * @return
+	 */
+	public Team getCompleteTeamById(Long id);
+	
+	/**
+	 * Get team by id given by paramenter
 	 * @param id
 	 * @return
 	 */

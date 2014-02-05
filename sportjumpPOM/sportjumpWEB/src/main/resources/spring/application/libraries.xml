@@ -26,16 +26,17 @@
 	
 	<!-- Librería propia del proyecto -->
 
- 	 <import resource="classpath:spring/application/dao/spring-dao-context.xml" />   
+  	 <import resource="classpath:spring/application/dao/spring-dao-context.xml" />  
+ 	<!--  <import resource="classpath:spring/application/dao/application-dao.xml" />  -->
 	 <import resource="classpath:spring/application/service/spring-service-context.xml"/> 
-	 
-	<!-- Configuracion jdbc -->
-	<import resource="classpath:spring/application/dao/spring-jdbc-config.xml"/> 
 	
-	 <!-- configuracion Spring Security -->
+	<!-- Configuracion jdbc -->
+	<import resource="classpath:spring/application/dao/spring-jdbc-config.xml"/>
+	
+	<!-- configuracion Spring Security -->
 	<import resource="classpath:spring/security/security-context.xml"/>
 	
-	 <!-- configuracion log -->
+	<!-- configuracion log -->
 	<import resource="classpath:log/log-aspect-config.xml"/>
 	
 

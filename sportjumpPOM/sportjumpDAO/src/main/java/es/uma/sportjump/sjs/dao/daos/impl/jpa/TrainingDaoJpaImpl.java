@@ -5,12 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.TrainingDao;
 import es.uma.sportjump.sjs.model.entities.Coach;
@@ -20,25 +17,36 @@ import es.uma.sportjump.sjs.model.entities.Training;
 public class TrainingDaoJpaImpl implements TrainingDao{
 
 	 
-	@PersistenceContext( type = PersistenceContextType.EXTENDED)
+	@PersistenceContext
  	protected EntityManager em;
 	
-	@Transactional(propagation=Propagation.REQUIRED)
+	
 	public void persistTraining(Training training) {
-		em.persist(training);
+		if (training.getIdTraining() != null){
+			em.merge(training);
+		}else{
+			em.persist(training);
+		}
+		
 	}
 
-	@Transactional(propagation=Propagation.REQUIRED)
-	public Training getTrainingById(Long id) {
+	
+	public Training getTrainingById(Long id) {			
 		return em.find(Training.class, id);
 	}
 
-	@Transactional(propagation=Propagation.REQUIRED)
+
 	public Training getCompleteTrainingById(Long id) {
-		return em.find(Training.class, id);
+		Training res = null;
+		Query query = em.createNamedQuery("findFetchTrainingById")
+				.setParameter("idTraining",id);
+		
+		res =  (Training) query.getSingleResult();
+	
+		return res;
 	}
 
-	@Transactional(propagation=Propagation.REQUIRED)
+	
 	public Training getTrainingByNameAndCoach(String name, Coach coach) {
 		Training training = null;
 		Query query = em.createNamedQuery("findTrainingByNameAndCoach")
@@ -52,14 +60,13 @@ public class TrainingDaoJpaImpl implements TrainingDao{
 		}
 		return training;
 	}
-	@Transactional(propagation=Propagation.REQUIRED)
+	
 	public void deleteTraining(Training training) {
 		em.remove(getTrainingById(training.getIdTraining()));
 		em.flush();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation=Propagation.REQUIRED)
+	@SuppressWarnings("unchecked")	
 	public List<Training> getAllTrainingByCoach(Coach coach) {
 
 

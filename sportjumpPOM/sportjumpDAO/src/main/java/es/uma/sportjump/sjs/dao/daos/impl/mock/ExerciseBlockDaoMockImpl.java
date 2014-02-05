@@ -81,5 +81,4 @@ public class ExerciseBlockDaoMockImpl implements ExerciseBlockDao{
 		
 		return res;
 	}
-
 }

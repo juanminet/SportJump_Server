@@ -25,6 +25,13 @@ public interface CalendarEventDao {
 	 */
 	public CalendarEvent getEventgById(Long id);
 	
+	/**
+	 * Get EAGER calendar event by id given by parameter 
+	 * @param id
+	 * @return
+	 */
+	public CalendarEvent getCompleteEventgById(Long id);
+	
 	
 	/**
 	 * Find an event for date and team given by parameter

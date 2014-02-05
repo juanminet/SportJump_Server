@@ -17,10 +17,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(uniqueConstraints=@UniqueConstraint(columnNames="USER_NAME"),   name="TB_USER" )
-
-
 public abstract class User {
-
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

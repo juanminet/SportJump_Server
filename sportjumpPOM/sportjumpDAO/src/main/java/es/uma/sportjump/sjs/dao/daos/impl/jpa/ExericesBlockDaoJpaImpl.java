@@ -4,17 +4,15 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.ExerciseBlockDao;
 import es.uma.sportjump.sjs.dao.daos.TrainingDao;
 import es.uma.sportjump.sjs.model.entities.Coach;
+import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 
 @Repository("exerciseBlockDao")
@@ -24,76 +22,72 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	TrainingDao trainingDao;
 	
 
-	@PersistenceContext( type = PersistenceContextType.EXTENDED)
+	@PersistenceContext
  	protected EntityManager em;
 	
 	
-	@Transactional(propagation = Propagation.REQUIRED)
+
 	public void persistExerciseBlock(ExerciseBlock exerciseBlock) {	
-		
-		em.persist(exerciseBlock);
+		if (exerciseBlock.getIdExerciseBlock() != null){
+			updateExerciseBlock(exerciseBlock);
+		}else{
+			em.persist(exerciseBlock);
+		}
 	}
 	
 	
-	@Transactional(propagation = Propagation.REQUIRED)
+	private void updateExerciseBlock(ExerciseBlock exerciseBlock) {		
+		
+		ExerciseBlock persistentExerciseBlock = em.find(ExerciseBlock.class, exerciseBlock.getIdExerciseBlock());		
+
+		// Remove old Exercise references
+		if (persistentExerciseBlock.getListExercises() != null){
+			persistentExerciseBlock.getListExercises().clear();			
+			em.merge(persistentExerciseBlock);	
+			em.flush();
+		}
+		
+		// Update the block
+		persistentExerciseBlock.setName(exerciseBlock.getName());
+		persistentExerciseBlock.setType(exerciseBlock.getType());
+		persistentExerciseBlock.setDescription(exerciseBlock.getDescription());
+		
+		List<Exercise> listExercises = exerciseBlock.getListExercises();
+		
+		if (listExercises != null){
+			List<Exercise> persistentListExercises = persistentExerciseBlock.getListExercises();
+			
+			for (Exercise exercise : listExercises){
+				persistentListExercises.add(exercise);
+			}
+		}
+		
+		em.merge(persistentExerciseBlock);	
+	}
+
+
+	
 	public ExerciseBlock getExerciseBlockById(Long idBlock) {
-		ExerciseBlock exerciseBlock =  em.find(ExerciseBlock.class, idBlock);
-//		if (exerciseBlock != null){			
-//			Query query = em.createNamedQuery("findAllExerciseByBlock")
-//					.setParameter("idBlock", Long.valueOf(exerciseBlock.getIdExerciseBlock()));	
-//			List<Exercise> listExercises = query.getResultList();
-//			
-//			exerciseBlock.setListExercises(listExercises);
-//		}
+		ExerciseBlock exerciseBlock =  em.find(ExerciseBlock.class, idBlock);		
+
+		if (exerciseBlock != null){
+			em.detach(exerciseBlock);
+		}
 		
 		return exerciseBlock;
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public void deleteExerciseBlock(Long idBlock) {		
-//		ExerciseBlock exerciseBlock = getExerciseBlockById(idBlock);			
-//		deleteReferencias(exerciseBlock);
 		
-		
-		ExerciseBlock exerciseBlockUpdated = getExerciseBlockById(idBlock);
-	//	deleteAllExercises(exerciseBlockUpdated);
-		em.remove(exerciseBlockUpdated);
-	//	em.flush();
+		ExerciseBlock persistentExerciseBlock =  em.find(ExerciseBlock.class, idBlock);
+
+		em.remove(persistentExerciseBlock);
+		em.flush();
 	}
 	
 
-//	private void deleteReferencias(ExerciseBlock exerciseBlock) {
-//		//Training references
-//		List<Training> trainingList = exerciseBlock.getListTraining();
-//		
-//		for(Training training: trainingList){
-//			Training trainingManaged = trainingDao.getCompleteTrainingById(training.getIdTraining());
-//			List<ExerciseBlock> exerciseBlockList = trainingManaged.getListExerciseBlock();
-//			List<ExerciseBlock> exerciseBlockListUpdated = new ArrayList<ExerciseBlock>();
-//			for(ExerciseBlock block : exerciseBlockList){
-//				if (!block.getIdExerciseBlock().equals(exerciseBlock.getIdExerciseBlock())){
-//					exerciseBlockListUpdated.add(block);
-//				}
-//			}
-//			trainingManaged.setListExerciseBlock(exerciseBlockListUpdated);
-//			
-//			trainingDao.persistTraining(trainingManaged);			
-//		}		
-//	}
-
-
-//	private void deleteAllExercises(ExerciseBlock exerciseBlock){
-//		List<Exercise> listExercises = exerciseBlock.getListExercises();
-//		if (listExercises != null){
-//			for(Exercise exercise : listExercises){
-//				em.remove(exercise);				
-//			}
-//		}
-//	}
-	
-
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED)
+	@SuppressWarnings("unchecked")	
 	public List<ExerciseBlock> getAllExerciseBlockByCoach(Coach coach) {
 		
 		Query query = em.createNamedQuery("findAllExerciseBlockByCoach")
@@ -104,13 +98,13 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 		return listExerciseBlock;
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED)
+
 	public ExerciseBlock getCompleteExerciseBlock(ExerciseBlock exerciseBlock) {
-		return getExerciseBlockById(exerciseBlock.getIdExerciseBlock());
+		return em.find(ExerciseBlock.class, exerciseBlock.getIdExerciseBlock());
 	}
 
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	
 	public ExerciseBlock getExerciseBlockByNameAndCoach(String name, Coach coach) {
 		Query query = em.createNamedQuery("findExerciseBlockByNameAndCoach")
 				.setParameter("idUser", coach.getIdUser())
@@ -119,5 +113,4 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 		ExerciseBlock exerciseBlock = (ExerciseBlock) query.getSingleResult();
 		return exerciseBlock;
 	}
-
 }

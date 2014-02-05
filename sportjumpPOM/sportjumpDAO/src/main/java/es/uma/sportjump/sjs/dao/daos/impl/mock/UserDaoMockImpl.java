@@ -140,7 +140,7 @@ public class UserDaoMockImpl implements UserDao{
 		
 		if (getCoachById(team.getCoach().getIdUser()) != null){	
 			
-			if (getTeamById(team.getIdTeam()) == null){			
+			if (getCompleteTeamById(team.getIdTeam()) == null){			
 				//add athlete to list
 				listTeams.add(team);
 						
@@ -158,7 +158,7 @@ public class UserDaoMockImpl implements UserDao{
 
 
 	@Override
-	public Team getTeamById(Long id) {
+	public Team getCompleteTeamById(Long id) {
 		Team resTeam = null;
 		//find coach
 		int index = -1;
@@ -175,6 +175,13 @@ public class UserDaoMockImpl implements UserDao{
 		}	
 		
 		return resTeam;
+	}
+
+
+
+	@Override
+	public Team getTeamById(Long id) {
+		return getCompleteTeamById(id);
 	}
 
 

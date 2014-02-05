@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.CalendarEventDao;
@@ -35,22 +34,27 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional
 	public void updateEvent(CalendarEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
-	public CalendarEvent findEvent(Long idEvent) {
+	@Transactional
+	public CalendarEvent findEventLight(Long idEvent) {
 		return calendarEventDao.getEventgById(idEvent);
+	}
+	
+	@Override
+	public CalendarEvent findEvent(Long idEvent) {
+		return calendarEventDao.getCompleteEventgById(idEvent);
 	}
 	
 
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional
 	public List<CalendarEvent> findAllEventByTeam(Team team) {
 		return calendarEventDao.getEventsByGroup(team.getIdTeam());
 	}
@@ -62,7 +66,7 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional
 	public boolean existEvent(Date dateEvent, Team team) {
 		CalendarEvent calendarEvent = calendarEventDao.getEventByDateAndTeam(dateEvent, team);
 		

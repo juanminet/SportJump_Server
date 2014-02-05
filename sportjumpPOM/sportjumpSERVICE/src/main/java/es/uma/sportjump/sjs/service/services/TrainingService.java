@@ -30,11 +30,19 @@ public interface TrainingService {
 	
 	
 	/**
-	 * find an training by its id given by parameter
+	 * find a training  without exercises blockby its id given by parameter
+	 * @param idTraining 
+	 * @return the training with the id.
+	 */
+	public Training findTrainingLight(Long idTraining);
+	
+	/**
+	 * find a complete training with exercises blocks by its id given by parameter
 	 * @param idTraining 
 	 * @return the training with the id.
 	 */
 	public Training findTraining(Long idTraining);
+	
 	
 	/**
 	 * find an training by its name and the coach in charge  given by parameter

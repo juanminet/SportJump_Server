@@ -89,7 +89,7 @@ public class PlanningAjax<E> {
 		String result = null;
 		
 		Date eventDate = eventBean.getDate();
-		Training training = trainingService.findTraining(Long.valueOf(eventBean.getIdTraining()));
+		Training training = trainingService.findTrainingLight(Long.valueOf(eventBean.getIdTraining()));
 		Team team = userService.findTeam(Long.valueOf(eventBean.getIdGroup()));	
 		
 		if (!calendarService.existEvent(eventDate, team)){
@@ -122,7 +122,7 @@ public class PlanningAjax<E> {
 	@RequestMapping(value="/{idEvent}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void removeEvent(@PathVariable("idEvent") Long idEvent) throws AjaxException{		
-		CalendarEvent calendarEvent = calendarService.findEvent(idEvent);
+		CalendarEvent calendarEvent = calendarService.findEventLight(idEvent);
 		if (calendarEvent != null){
 			calendarService.removeEvent(calendarEvent);			
 		}else{

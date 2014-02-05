@@ -35,6 +35,13 @@ public interface CalendarService {
 	 * @param idEvent
 	 * @return
 	 */
+	public CalendarEvent findEventLight(Long idEvent);
+	
+	/**
+	 * find a calendar event fetching training and Group with its id given by parameter
+	 * @param idEvent
+	 * @return
+	 */
 	public CalendarEvent findEvent(Long idEvent);
 	
 	/**

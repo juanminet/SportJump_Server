@@ -85,8 +85,16 @@ public interface UserService {
 	 * @param team
 	 */
 	public void updateTeam(Team team);
+	
 	/**
-	 * 
+	 * Find a team without any references
+	 * @param idTeam
+	 * @return
+	 */	
+	public Team findTeamLight(Long idTeam);
+	
+	/**
+	 * Find a complete team with all references
 	 * @param idTeam
 	 * @return
 	 */	

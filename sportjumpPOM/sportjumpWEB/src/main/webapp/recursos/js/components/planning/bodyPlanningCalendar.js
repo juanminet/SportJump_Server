@@ -225,7 +225,7 @@ $(document).ready( function() {
 		modal : true,
 		buttons : [ 
 			{					
-				text : MSG_LBOX_BUTTON_CANCEL,
+				text : MSG_LBOX_BUTTON_NO,
 				class:"lbox-button",
 				click : function() {		
 					revertEvent();
@@ -233,7 +233,7 @@ $(document).ready( function() {
 				}
 			},
 			{					
-				text : MSG_LBOX_BUTTON_CONTINUE,
+				text : MSG_LBOX_BUTTON_YES,
 				class:"lbox-button",
 				click : function() {					
 					modifyEventAjax(eventSelected,revertEvent,true);	

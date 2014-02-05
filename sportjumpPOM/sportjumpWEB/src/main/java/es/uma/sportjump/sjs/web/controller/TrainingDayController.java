@@ -90,7 +90,7 @@ public class TrainingDayController {
 			trainingService.setNewTraining(trainingCommand.getName(), trainingCommand.getType(), trainingCommand.getDescription(), exerciseBlockList, coach);
 		//Update training
 		}else{
-			Training training = trainingService.findTraining(trainingCommand.getId());
+			Training training = trainingService.findTrainingLight(trainingCommand.getId());
 			
 			training.setName(trainingCommand.getName());
 			training.setType(trainingCommand.getType());
@@ -107,7 +107,7 @@ public class TrainingDayController {
 	@RequestMapping( value="/day/remove/{idDayTraining}" , method = RequestMethod.GET)
 	public String removeTrainingDay(@PathVariable("idDayTraining") Long idDayTraining, HttpSession session) {		
 
-		Training training = trainingService.findTraining(idDayTraining);
+		Training training = trainingService.findTrainingLight(idDayTraining);
 		
 		if (training != null){		
 			trainingService.removeTraining(training);

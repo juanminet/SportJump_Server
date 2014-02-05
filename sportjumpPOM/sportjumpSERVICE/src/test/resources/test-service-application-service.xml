@@ -17,8 +17,4 @@
 	<context:component-scan base-package="es.uma.sportjump.sjs.service.services.impl" />
 	<context:component-scan base-package="es.uma.sportjump.sjs.service.services.test.util" />	
 	
-	<bean id="audience" 
-      class="es.uma.sportjump.sjs.service.services.LogProcessorAspect" />
-	
-	<aop:aspectj-autoproxy />
 </beans>

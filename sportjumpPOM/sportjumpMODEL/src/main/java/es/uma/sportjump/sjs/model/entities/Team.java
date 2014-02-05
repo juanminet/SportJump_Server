@@ -10,11 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
 @Entity
 @Table(name="TB_TEAM")
+@NamedQueries({
+	@NamedQuery(name="findAllTeams",
+				query="Select t from Team t"),
+	@NamedQuery(name="findAllTeamsByCoach",
+				query="Select t from Team t where t.coach.idUser = :idCoach"),
+	@NamedQuery(name="findfetchTeamById",
+				query="Select t from Team t LEFT JOIN FETCH t.coach where t.idTeam = :idTeam")
+})
 public class Team {
 
 	@Id

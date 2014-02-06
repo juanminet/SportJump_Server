@@ -7,12 +7,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.UserDao;
 import es.uma.sportjump.sjs.model.entities.Athlete;
 import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Team;
+import es.uma.sportjump.sjs.service.services.AuthService;
 import es.uma.sportjump.sjs.service.services.UserService;
 
 
@@ -23,13 +25,15 @@ public class UserServiceImpl  implements UserService{
 	@Autowired
 	UserDao userDao;
 
+	@Autowired
+	AuthService authService;
 
 	/**********************************************************************************************************************/
 	/*******************************************        COACH        ******************************************************/
 	/**********************************************************************************************************************/
 
 	
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Long setNewCoach(String name, String userName,
 			String surname, String dni, String email, String type, String address,
 			String comments, String telephone, Date dateBirth) {	
@@ -54,49 +58,50 @@ public class UserServiceImpl  implements UserService{
 	}
 
 
-
-
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void updateCoach(Coach coach) {
 		userDao.persistCoach(coach);	
 	}
 
-	@Transactional
+	
+	@Transactional(propagation=Propagation.REQUIRED)	
 	public Coach findCoach(Long idCoach) {
 		return userDao.getCoachById(idCoach);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Coach> findAllCoaches() {
 		return userDao.getAllCoaches();
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Coach findCoachesByUserName(String userName) {
 		return userDao.getCoachByUserName(userName);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Coach findCoachByDni(String dni) {
 		return userDao.getCoachByDni(dni);
 	}
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void removeCoach(Coach coach) {
 		List<Team> teams = findTeamsByCoach(coach);
 		
 		for(Team team : teams){
 			removeTeam(team);
 		}
+		
+		authService.removeUser(coach.getUserName());
+		
 		userDao.deleteCoach(coach.getIdUser());		
+		
+		
 	}
-	
-	
-
-	
-	
-	
-	
 	
 	
 	
@@ -104,7 +109,7 @@ public class UserServiceImpl  implements UserService{
 	/********************************************        TEAMS        *****************************************************/
 	/**********************************************************************************************************************/
 	
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Long setNewTeam(String name, String type, String description, Date dateCreate,  Coach coach) {
 		
 		//Create team
@@ -121,28 +126,33 @@ public class UserServiceImpl  implements UserService{
 		return team.getIdTeam();
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void updateTeam(Team team) {
 		userDao.persistTeam(team);
 		
 	}
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Team findTeamLight(Long idTeam) {
 		return userDao.getCompleteTeamById(idTeam);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Team findTeam(Long idTeam) {
 		return userDao.getCompleteTeamById(idTeam);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Team> findAllTeams() {
 		return userDao.getAllTeams();
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void removeTeam(Team team) {
 		List<Athlete> athletes = findAthletesFromTeam(team);
 		
@@ -155,7 +165,7 @@ public class UserServiceImpl  implements UserService{
 	}
 	
 
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Team> findTeamsByCoach(Coach coach) {
 		return userDao.getTeamsByCoach(coach);		
 	}
@@ -166,7 +176,7 @@ public class UserServiceImpl  implements UserService{
 	/******************************************        ATHLETES        ****************************************************/
 	/**********************************************************************************************************************/	
 
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Long setNewAthlete(String name, String userName,
 			String surname, String dni, String email, String type, String address,
 			String comments, String telephone, Date dateBirth, Team team) {
@@ -192,43 +202,50 @@ public class UserServiceImpl  implements UserService{
 		return athlete.getIdUser();
 	}
 
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void updateAthlete(Athlete athlete) {
 		userDao.persistAthlete(athlete);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Athlete findAthlete(Long idAthlete) {	
 		
 		return userDao.getAthleteById(idAthlete);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Athlete> findAllAthletes() {
 		return userDao.getAllAthletes();
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Athlete> findAthletesFromTeam(Team team) {
 		return userDao.getAthletesByTeam(team);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Athlete> findAthletesFromCoach(Coach coach) {
 		return userDao.getAthletesByCoach(coach);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Athlete findAthleteByDni(String dni) {
 		return userDao.getAthleteByDni(dni);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Athlete findAthletesByUserName(String userName) {
 		return userDao.getAthleteByUserName(userName);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void removeAthlete(Athlete athlete) {		
 		userDao.deleteAthlete(athlete.getIdUser());			
 	}
@@ -240,7 +257,7 @@ public class UserServiceImpl  implements UserService{
 	/**********************************************************************************************************************/
 	
 
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public boolean existUserByDni(String dni) {
 		boolean res = true;
 		
@@ -258,9 +275,7 @@ public class UserServiceImpl  implements UserService{
 	}
 
 
-
-
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public boolean existUserByUSerName(String userName) {
 		boolean res = true;
 		
@@ -276,8 +291,5 @@ public class UserServiceImpl  implements UserService{
 		
 		return res;
 	}
-
-	
-	
 
 }

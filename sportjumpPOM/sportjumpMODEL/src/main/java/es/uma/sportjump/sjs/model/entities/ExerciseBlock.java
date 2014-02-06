@@ -143,18 +143,8 @@ public class ExerciseBlock {
 				listExercises.add(newExercise);
 			}
 			res.setListExercises(listExercises);
-		}
-		
-		if ( this.listTraining != null){
-			List<Training> listTraining = new ArrayList<Training>();
-			for(Training training: this.listTraining){
-				Training newTraining = new Training();
-				newTraining.setIdTraining(training.getIdTraining());
-				listTraining.add(newTraining);
-			}
-			res.setListTraining(listTraining);
-		}
-		
+		}		
+	
 		return res;
 	}
 

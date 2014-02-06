@@ -8,6 +8,8 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.ExerciseBlockDao;
 import es.uma.sportjump.sjs.dao.daos.TrainingDao;
@@ -16,7 +18,7 @@ import es.uma.sportjump.sjs.model.entities.Exercise;
 import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 
 @Repository("exerciseBlockDao")
-public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
+public class ExercisesBlockDaoJpaImpl implements ExerciseBlockDao {
 	
 	@Autowired
 	TrainingDao trainingDao;
@@ -26,7 +28,7 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
  	protected EntityManager em;
 	
 	
-
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void persistExerciseBlock(ExerciseBlock exerciseBlock) {	
 		if (exerciseBlock.getIdExerciseBlock() != null){
 			updateExerciseBlock(exerciseBlock);
@@ -36,6 +38,7 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	}
 	
 	
+	@Transactional(propagation=Propagation.REQUIRED)
 	private void updateExerciseBlock(ExerciseBlock exerciseBlock) {		
 		
 		ExerciseBlock persistentExerciseBlock = em.find(ExerciseBlock.class, exerciseBlock.getIdExerciseBlock());		
@@ -66,18 +69,19 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	}
 
 
-	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public ExerciseBlock getExerciseBlockById(Long idBlock) {
 		ExerciseBlock exerciseBlock =  em.find(ExerciseBlock.class, idBlock);		
 
-		if (exerciseBlock != null){
-			em.detach(exerciseBlock);
-		}
+//		if (exerciseBlock != null){
+//			em.detach(exerciseBlock);
+//		}
 		
 		return exerciseBlock;
 	}
 
 	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void deleteExerciseBlock(Long idBlock) {		
 		
 		ExerciseBlock persistentExerciseBlock =  em.find(ExerciseBlock.class, idBlock);
@@ -88,6 +92,7 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	
 
 	@SuppressWarnings("unchecked")	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<ExerciseBlock> getAllExerciseBlockByCoach(Coach coach) {
 		
 		Query query = em.createNamedQuery("findAllExerciseBlockByCoach")
@@ -99,12 +104,13 @@ public class ExericesBlockDaoJpaImpl implements ExerciseBlockDao {
 	}
 
 
+	@Transactional(propagation=Propagation.REQUIRED)
 	public ExerciseBlock getCompleteExerciseBlock(ExerciseBlock exerciseBlock) {
 		return em.find(ExerciseBlock.class, exerciseBlock.getIdExerciseBlock());
 	}
 
 
-	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public ExerciseBlock getExerciseBlockByNameAndCoach(String name, Coach coach) {
 		Query query = em.createNamedQuery("findExerciseBlockByNameAndCoach")
 				.setParameter("idUser", coach.getIdUser())

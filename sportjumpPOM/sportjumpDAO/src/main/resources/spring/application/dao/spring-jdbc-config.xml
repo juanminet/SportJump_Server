@@ -34,7 +34,7 @@
      <!--	Para hibernate    -->     
  	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-			 <property name="persistenceUnitName" value="sportjumpJpaPU" />
+			  <property name="persistenceUnitName" value="sportjumpJpaPersistenceUnit" />
 			  <property name="packagesToScan" value="es.uma.sportjump.sjs.model.entities" />
 			  <property name="dataSource" ref="mainDataSource" />
 		      <property name="jpaVendorAdapter">

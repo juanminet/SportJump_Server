@@ -18,10 +18,8 @@ public class ExerciseServiceImpl implements ExerciseService {
 	@Autowired
 	private ExerciseBlockDao exerciseBlockDao;
 	
-//	@Autowired
-//	private TrainingDao trainingDao;
 
-	@Transactional(propagation=Propagation.REQUIRES_NEW)
+	@Transactional(propagation=Propagation.REQUIRED)
 	public ExerciseBlock setNewExerciseBlock(String name, String type,
 			String description, List<Exercise> exerciseList, Coach coach) {
 		
@@ -38,52 +36,32 @@ public class ExerciseServiceImpl implements ExerciseService {
 		return exerciseBlock;
 	}
 
-	@Transactional
+	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void updateExerciseBlock(ExerciseBlock exerciseBlock) {		
 		exerciseBlockDao.persistExerciseBlock(exerciseBlock);
 	}
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public ExerciseBlock findExerciseBlock(Long idExerciseBlock) {
 		return exerciseBlockDao.getExerciseBlockById(idExerciseBlock);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public ExerciseBlock findExerciseBlockByNameAndCoach(String name,Coach coach) {
 		return exerciseBlockDao.getExerciseBlockByNameAndCoach(name, coach);
 	}
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void removeExerciseBlock(ExerciseBlock exerciseBlock) {
-		//TODO	 REMOVE IS NOT WORKING WELL
-//		exerciseBlock = exerciseBlockDao.getExerciseBlockById(exerciseBlock.getIdExerciseBlock());			
-//		deleteReferencias(exerciseBlock);
-//		
-		
-		
 		exerciseBlockDao.deleteExerciseBlock(exerciseBlock.getIdExerciseBlock());
 	}
 	
-//	private void deleteReferencias(ExerciseBlock exerciseBlock) {
-//		//Training references
-//		List<Training> trainingList = exerciseBlock.getListTraining();
-//		
-//		for(Training training: trainingList){
-//			Training trainingManaged = trainingDao.getCompleteTrainingById(training.getIdTraining());
-//			List<ExerciseBlock> exerciseBlockList = trainingManaged.getListExerciseBlock();
-//			List<ExerciseBlock> exerciseBlockListUpdated = new ArrayList<ExerciseBlock>();
-//			for(ExerciseBlock block : exerciseBlockList){
-//				if (!block.getIdExerciseBlock().equals(exerciseBlock.getIdExerciseBlock())){
-//					exerciseBlockListUpdated.add(block);
-//				}
-//			}
-//			trainingManaged.setListExerciseBlock(exerciseBlockListUpdated);
-//			
-//			trainingDao.persistTraining(trainingManaged);			
-//		}		
-//	}
-
-	@Transactional
+	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<ExerciseBlock> findAllExerciseBlockByCoach(Coach coach) {
 		return exerciseBlockDao.getAllExerciseBlockByCoach(coach);				
 	}

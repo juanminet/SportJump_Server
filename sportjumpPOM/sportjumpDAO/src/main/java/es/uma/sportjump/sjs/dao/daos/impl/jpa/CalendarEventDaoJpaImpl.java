@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.CalendarEventDao;
@@ -22,17 +23,19 @@ public class CalendarEventDaoJpaImpl implements CalendarEventDao {
 	@PersistenceContext
  	protected EntityManager em;
 	
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void persistEvent(CalendarEvent event) {
 		em.persist(event);
 	}
 
-	@Transactional
+	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public CalendarEvent getEventgById(Long idEvent) {
 		return em.find(CalendarEvent.class, idEvent);
 	}
 	
-	@Transactional
+	
+	@Transactional(propagation=Propagation.REQUIRED)
 	public CalendarEvent getCompleteEventgById(Long id) {
 		CalendarEvent res = null;
 		Query query = em.createNamedQuery("findfetchCalendarEventById")
@@ -44,9 +47,8 @@ public class CalendarEventDaoJpaImpl implements CalendarEventDao {
 	}
 
 
-
 	@SuppressWarnings("unchecked")
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<CalendarEvent> getEventsByGroup(Long idTeam) {
 		Query query = em.createNamedQuery("findAllCalendarEventsByTeam")
 				.setParameter("idTeam", idTeam);
@@ -56,14 +58,16 @@ public class CalendarEventDaoJpaImpl implements CalendarEventDao {
 		return listCalendarEvent;
 	}
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void deleteEvent(CalendarEvent event) {
 		CalendarEvent eventPersistent = em.find(CalendarEvent.class, event.getIdEvent());
 		em.remove(eventPersistent);
 		em.flush();
 	}
 
-	@Transactional	
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public CalendarEvent getEventByDateAndTeam(Date date, Team team) {
 		Query query = em.createNamedQuery("findCalendarEventByDateAndTeam")
 				.setParameter("eventDate", date)
@@ -81,7 +85,7 @@ public class CalendarEventDaoJpaImpl implements CalendarEventDao {
 	}
 
 	
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void updateEvent(CalendarEvent calendarEvent) {
 		em.persist(calendarEvent);		
 	}

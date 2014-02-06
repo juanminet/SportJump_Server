@@ -1,7 +1,9 @@
 package es.uma.sportjump.sjs.model.entities;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -48,8 +51,9 @@ public class Team {
 	@JoinColumn(name = "ID_COACH", nullable = false)
 	private Coach coach;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "team", cascade = CascadeType.ALL)
+	private List<CalendarEvent> listCalendarEvents;
 	
-
 
 	public Team() {
 		super();		
@@ -102,6 +106,13 @@ public class Team {
 	public void setCoach(Coach coach) {
 		this.coach = coach;
 	}
-	
+
+	public List<CalendarEvent> getListCalendarEvents() {
+		return listCalendarEvents;
+	}
+
+	public void setListCalendarEvents(List<CalendarEvent> listCalendarEvents) {
+		this.listCalendarEvents = listCalendarEvents;
+	}
 	
 }

@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uma.sportjump.sjs.model.entities.Coach;
+import es.uma.sportjump.sjs.model.entities.Team;
 import es.uma.sportjump.sjs.service.services.AuthService;
 import es.uma.sportjump.sjs.service.services.UserService;
 import es.uma.sportjump.sjs.web.controller.commands.AthleteCommand;
@@ -24,7 +26,7 @@ import es.uma.sportjump.sjs.web.controller.validation.ProfileValidator;
 
 
 @Controller
-@RequestMapping("/action/admin")
+@RequestMapping("/action/admin/profile")
 public class ProfileController {	
 	
 
@@ -40,9 +42,10 @@ public class ProfileController {
 
 	protected static final String ADMIN_PROFILE = "admin_profile";	
 	protected static final String ADMIN_PROFILE_REDIRECT = "redirect:/action/admin/profile";
+	protected static final String LOGOUT = "redirect:/logout";
 	
 		
-	@RequestMapping(value={"/profile"})
+	@RequestMapping( method=RequestMethod.GET)
 	public String AdminProfile(Model model, HttpSession session) {	
 		
 		initProfileModel(model,session);
@@ -50,7 +53,7 @@ public class ProfileController {
 		return ADMIN_PROFILE;		
 	}
 	
-	@RequestMapping(value={"/profile/save"}, method=RequestMethod.POST)
+	@RequestMapping(value={"/save"}, method=RequestMethod.POST)
 	public String saveProfile(@Valid ProfileCommand profileCommand, BindingResult errors, Model model, HttpSession session) {	
 					
 		Coach  coach = (Coach) session.getAttribute("loggedUser");
@@ -155,5 +158,19 @@ public class ProfileController {
 		}
 		
 		return resDate;
+	}
+	
+	@RequestMapping(value={"/remove/{idCoach}"}, method=RequestMethod.GET)
+	public String removeGroup(@PathVariable("idCoach") Long idCoach, Model model, HttpSession session) {		
+			
+		Coach coach = userService.findCoach(idCoach);
+			
+		if (userService != null){
+			userService.removeCoach(coach);
+		}
+		
+		//TODO from authentication
+		
+		return LOGOUT;		
 	}
 }

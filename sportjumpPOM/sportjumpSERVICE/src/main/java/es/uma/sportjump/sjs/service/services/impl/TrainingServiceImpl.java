@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.ExerciseBlockDao;
@@ -23,7 +24,8 @@ public class TrainingServiceImpl implements TrainingService{
 	@Autowired
 	ExerciseBlockDao exerciseBlockDao;
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Training setNewTraining(String name, String type,String description, List<ExerciseBlock> exerciseBlockList,	Coach coach) {
 		Training training = new Training();
 		training.setName(name);
@@ -37,33 +39,38 @@ public class TrainingServiceImpl implements TrainingService{
 		return trainingDao.getTrainingById(training.getIdTraining());
 	}
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void updateTraining(Training training) {
 		trainingDao.persistTraining(training);
 	}
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Training findTrainingLight(Long idTraining) {
 		return trainingDao.getTrainingById(idTraining);
 	}
 	
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Training findTraining(Long idTraining) {
 		return trainingDao.getCompleteTrainingById(idTraining);
 	}
 
 
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED)
 	public void removeTraining(Training training) {
 		trainingDao.deleteTraining(training);
 	}
 
-	@Transactional
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public List<Training> findAllTraining(Coach coach) {
 		return trainingDao.getAllTrainingByCoach(coach);
 	}
 
-	@Override
+
+	@Transactional(propagation=Propagation.REQUIRED)
 	public Training findTrainingByNameAndCoach(String name, Coach coach) {
 		return trainingDao.getTrainingByNameAndCoach(name, coach);
 	}

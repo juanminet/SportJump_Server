@@ -45,17 +45,17 @@
 	</appender>
 	
 	<category name="org.hibernate" >
-		<priority value="trace"/>
+		<priority value="error"/>
 	</category>	
 	
 	<category name="org.hibernate.type" >
 	<!--Poner a trace para ver los parametros de las querys -->
-		<priority value="trace"/>
+		<priority value="error"/>
 	</category>	
 	
 	<category name="org.hibernate.SQL" >
 		<!-- poner a debug para ver las querys -->
-		<priority value="trace"/>
+		<priority value="error"/>
 	</category>	
 	
 	<category name="org.springframework" >

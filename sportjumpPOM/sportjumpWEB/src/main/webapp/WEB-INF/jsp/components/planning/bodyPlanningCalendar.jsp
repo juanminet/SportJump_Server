@@ -16,10 +16,6 @@
 	 var MSG_LBOX_BUTTON_NO = "<fmt:message key='planning.calendar.lbox.button.no'/>";
  </script>
 
-<style>
-		
-
-</style>
     
 <div id ="body_home">
 	<div id = "body_home_container" >			
@@ -30,8 +26,7 @@
 		 		<a class="button" href="${pageContext.request.contextPath}/action/planning/group/list"><span><fmt:message key="planning.calendar.button.back" /></span></a>
 		    </div>
 
-			<div id='wrap'>
-
+			<div id='wrap'>			
 				<div id='external-events'>
 					<h4><fmt:message key="planning.calendar.entrenamientos" /></h4>
 					<c:forEach items="${trainingDayList}" var="training">
@@ -40,8 +35,8 @@
 							<div class="id" hidden="true">${training.idTraining}</div>
 						</div>
 					</c:forEach>					
-				</div>
-
+				</div>	
+									
 				<div id='calendar'></div>
 
 				<div style='clear: both'></div>
@@ -54,6 +49,24 @@
 <!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ LIGHTTBOXES /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
 <!-- /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ *********** /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\ -->
 
+<!-- lightbox for create dialog -->
+<div id="create_event_lbox" class="lBox" title="<fmt:message key='planning.calendar.lbox.create.tittle'/>">
+	<!-- Mensaje -->
+	<div class="cajaMensajeTop">
+		<div class="cajaMensajeTopLeft"></div>
+		<div class="cajaMensajeTopRight"></div>
+	</div>
+	<div class="mensaje dobleLinea fuenteFormLB">
+		<fmt:message key="planning.calendar.lbox.create.text" />
+	</div>
+	<!--mensaje-->
+	<div class="cajaMensajePie">
+		<div class="cajaMensajePieLeft"></div>
+		<div class="cajaMensajePieRight"></div>
+	</div>
+	<!-- Mensaje -->	
+	
+</div>
 
 <!-- lightbox for modify dialog -->
 <div id="modify_event_lbox" class="lBox" title="<fmt:message key='planning.calendar.lbox.modify.tittle'/>">
@@ -89,6 +102,45 @@
 				
 			</div>
 		</div>
+	</div>
+	<!--mensaje-->
+	<div class="cajaMensajePie">
+		<div class="cajaMensajePieLeft"></div>
+		<div class="cajaMensajePieRight"></div>
+	</div>
+	<!-- Mensaje -->	
+	
+</div>
+
+
+<!-- lightbox for modify dialog -->
+<div id="remove_event_lbox" class="lBox" title="<fmt:message key='planning.calendar.lbox.remove.tittle'/>">
+	<!-- Mensaje -->
+	<div class="cajaMensajeTop">
+		<div class="cajaMensajeTopLeft"></div>
+		<div class="cajaMensajeTopRight"></div>
+	</div>
+	<div class="mensaje dobleLinea fuenteFormLB">
+		<fmt:message key="planning.calendar.lbox.remove.text" />
+	</div>
+	<!--mensaje-->
+	<div class="cajaMensajePie">
+		<div class="cajaMensajePieLeft"></div>
+		<div class="cajaMensajePieRight"></div>
+	</div>
+	<!-- Mensaje -->	
+	
+</div>
+
+<!-- lightbox for alert dialog -->
+<div id="alert_event_lbox" class="lBox" title="<fmt:message key='planning.calendar.lbox.modify.tittle'/>">
+	<!-- Mensaje -->
+	<div class="cajaMensajeTop">
+		<div class="cajaMensajeTopLeft"></div>
+		<div class="cajaMensajeTopRight"></div>
+	</div>
+	<div id="alert_event_lbox_message" class="mensaje dobleLinea fuenteFormLB">
+		
 	</div>
 	<!--mensaje-->
 	<div class="cajaMensajePie">

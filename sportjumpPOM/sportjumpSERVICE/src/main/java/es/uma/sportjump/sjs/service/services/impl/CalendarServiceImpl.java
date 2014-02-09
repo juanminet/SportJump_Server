@@ -23,6 +23,11 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	@Transactional
 	public CalendarEvent setNewEvent(Date eventDate, Training training, Team team,	boolean periodicEvent) {
+		CalendarEvent eventToRemove = calendarEventDao.getEventByDateAndTeam(eventDate, team);
+		if (eventToRemove != null) {
+			removeEvent(eventToRemove);
+		}
+
 	
 		CalendarEvent event = new CalendarEvent();
 		event.setTeam(team);

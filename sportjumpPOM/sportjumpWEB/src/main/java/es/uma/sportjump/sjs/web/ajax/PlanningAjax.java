@@ -92,12 +92,12 @@ public class PlanningAjax<E> {
 		Training training = trainingService.findTrainingLight(Long.valueOf(eventBean.getIdTraining()));
 		Team team = userService.findTeam(Long.valueOf(eventBean.getIdGroup()));	
 		
-		if (!calendarService.existEvent(eventDate, team)){
+		try{
 			CalendarEvent calendarEvent = calendarService.setNewEvent(eventDate, training, team, false);
 			result = String.valueOf(calendarEvent.getIdEvent());
-		}else{
+		}catch (Exception e) {
 			throw new AjaxException();
-		}		
+		}	
 		
 		return result;
 	}

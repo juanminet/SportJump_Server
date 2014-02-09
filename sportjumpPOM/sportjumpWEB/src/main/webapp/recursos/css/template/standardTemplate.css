@@ -284,56 +284,77 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 /*-------------------------- CALENDAR ----------------------- */
 /*----------------------------------------------------------- */
 
-	#wrap {
-		width: 100%;
-		margin: 0 auto;
-		}
-		
-	#external-events {
-		float: left;
-		width: 15%;
-		padding: 0 10px;
-		border: 1px solid #ccc;
-		background: #eee;
-		text-align: left;
-		}
-		
-	#external-events h4 {
-		font-size: 16px;
-		margin-top: 0;
-		padding-top: 1em;
-		}
-		
-	.external-event { /* try to mimick the look of a real event */
-		margin: 10px 0;
-		padding: 2px 4px;
-		background: #646464;
-		color: #fff;
-		font-size: .85em;
-		cursor: pointer;
-		background: none repeat scroll 0 0 #EF7900;
-		}
-		
-	#external-events p {
-		margin: 1.5em 0;
-		font-size: 11px;
-		color: #666;
-		}
-		
-	#external-events p input {
-		margin: 0;
-		vertical-align: middle;
-		}
+ #wrap {
+	width: 100%;
+	margin: 0 auto;
+	}
+	
+#external-events {
+	float: left;
+	width: 15%;
+	padding: 0 10px;
+	border: 1px solid #ccc;
+	background: #eee;
+	text-align: left;
+	}
+	
+#external-events h4 {
+	font-size: 16px;
+	margin-top: 0;
+	padding-top: 1em;
+	}
+	
+.external-event { 
+	margin: 1em 0;
+	padding: 2px 4px;
+	background: #646464;
+	color: #fff;
+	font-size: .85em;
+	cursor: pointer;
+	background: none repeat scroll 0 0 #EF7900;
+	}
+	
+#external-events p {
+	margin: 1.5em 0;
+	font-size: 11px;
+	color: #666;
+	}
+	
+#external-events p input {
+	margin: 0;
+	vertical-align: middle;
+	}
 
-	#calendar {
-		float: right;
-		width: 80%;
-		}
-		
-  	.fc-event{
-		background: #EF7900 !important; 
-		border: 1px solid #EF7900 !important;
-	} 
+#calendar {
+	float: right;
+	width: 80%;
+	}
+	
+.fc-event{
+	background: #EF7900 !important; 
+	border: 1px solid #EF7900 !important;
+}
+
+.fc-view{
+	overflow: visible !important;
+}
+	
+.calendar-trash {
+    cursor: pointer;
+    float: left;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.calendar-to-trash{
+  background-color:#EAEAEA;
+    -webkit-border-radius: 5em;
+    border-radius: 5em;
+}
+
+.calendar-trash-img {
+    width: 92%
+}
 
 /*----------------------------------------------------------- */
 /*------------------------- BUTTONS ------------------------- */

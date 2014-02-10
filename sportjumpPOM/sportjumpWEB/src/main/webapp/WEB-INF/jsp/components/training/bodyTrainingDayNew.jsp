@@ -22,7 +22,6 @@
 			 		<h1><fmt:message key="training.day.tittle" /></h1>
 			 		<input type="submit" value="<fmt:message key='training.day.button.save'/>" class="button_submit">			 		
 			 		<c:if test="${not empty trainingDayCommand.id}">
-			 			<a class="button" href="${pageContext.request.contextPath}/action/training/day/remove/${trainingDayCommand.id}"><span><fmt:message key="training.day.button.remove" /></span></a>
 			 			<a id="show_training_button" class="button"><span><fmt:message key="training.day.button.show" /></span></a>
 			 		</c:if>
 			 		<a class="button" href="${pageContext.request.contextPath}/action/training/day/list"><span><fmt:message key="training.day.button.back" /></span></a>

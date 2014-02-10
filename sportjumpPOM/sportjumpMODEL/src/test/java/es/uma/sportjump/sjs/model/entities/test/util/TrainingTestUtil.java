@@ -32,6 +32,26 @@ public class TrainingTestUtil {
 	public static TrainingTestUtil getInstance(EntityManagerFactory entityManagerFactory){
 		return getSynchronizedInstance(entityManagerFactory);
 	}
+	
+	public Training createCompleteTraining(Coach coach, int num) {
+		
+		String name = "Entrenamiento rapidez" + num;
+		String type = "Velocidad"+ num;
+		String description = "Entrenamiento donde se trabaja la velocidad inmediata y la fuerza explosiva"+ num;
+		
+		//Create training
+		Training training = new Training();
+		training.setName(name);
+		training.setDescription(description);
+		training.setType(type);
+		training.setCoach(coach);
+		
+		//Persist entity
+		Long idTraining = persistTraining(training);
+		
+		return readTraining(idTraining);
+	}
+	
 
 	public Long createTraining(String name, String type, String description,Coach coach) {
 		//Create training

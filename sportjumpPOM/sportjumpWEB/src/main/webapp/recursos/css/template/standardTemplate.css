@@ -257,28 +257,39 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 /*-------------------------- TABLES ------------------------- */
 /*----------------------------------------------------------- */
 
-  table.simple_button a{
-  	line-height: 1;  	
-  }
-  table.simple_button thead th div.DataTables_sort_wrapper {
-  	display: inline-block;  	
-  }
+ table.simple_button a{
+ 	line-height: 1;  	
+ }
+ table.simple_button thead th div.DataTables_sort_wrapper {
+ 	display: inline-block;  	
+ }
+ 
+ .ui-widget-header {
   
-  .ui-widget-header {
-   
-    border: 1px solid #D6D6D6;
-    color: #222222;
-    font-weight: bold;
-  }
-  
-  
-	table.display tr.odd.row_selected td {
-	    background-color: #FF9A21;
-	    color: #FCFCFC; 
-	}
+   border: 1px solid #D6D6D6;
+   color: #222222;
+   font-weight: bold;
+ }
+ 
+ 
+table.display tr.odd.row_selected td {
+    background-color: #FF9A21;
+    color: #FCFCFC; 
+}
 
+.table_cross_remove{
+	text-align: center;
+	vertical-align: sub;
+	cursor:alias;
+}
 
-
+.table_cross_remove img{
+	vertical-align: sub;
+	
+}
+.table_field_center{
+	text-align: center;
+}
 
 /*----------------------------------------------------------- */
 /*-------------------------- CALENDAR ----------------------- */

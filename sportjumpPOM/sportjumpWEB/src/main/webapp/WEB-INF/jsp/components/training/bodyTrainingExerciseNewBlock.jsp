@@ -16,9 +16,6 @@
 			 		<h1><fmt:message key="training.exercise.block.tittle" /></h1>
 			 		
 			 		<input type="submit" value="<fmt:message key='training.exercise.block.button.save'/>" class="button_submit">
-			 		<c:if test="${not empty blockCommand.id}">
-			 			<a class="button" href="${pageContext.request.contextPath}/action/training/exercise/remove/${blockCommand.id}"><span><fmt:message key="training.exercise.block.button.remove" /></span></a>
-			 		</c:if>
 			 		<a class="button" href="${pageContext.request.contextPath}/action/training/exercise"><span><fmt:message key="training.exercise.block.button.back" /></span></a>			 		
 			    </div> 
 				    

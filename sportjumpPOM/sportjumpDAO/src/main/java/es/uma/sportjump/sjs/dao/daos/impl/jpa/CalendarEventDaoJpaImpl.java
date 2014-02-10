@@ -25,7 +25,11 @@ public class CalendarEventDaoJpaImpl implements CalendarEventDao {
 	
 	@Transactional(propagation=Propagation.REQUIRED)
 	public void persistEvent(CalendarEvent event) {
-		em.persist(event);
+		if (event.getIdEvent() == null){
+			em.persist(event);
+		}else{
+			em.merge(event);
+		}
 	}
 
 	
@@ -41,7 +45,11 @@ public class CalendarEventDaoJpaImpl implements CalendarEventDao {
 		Query query = em.createNamedQuery("findfetchCalendarEventById")
 				.setParameter("idEvent", id);
 		
-		res = (CalendarEvent) query.getSingleResult();
+		try{
+			res = (CalendarEvent) query.getSingleResult();
+		}catch (NoResultException noResultException) {
+			res = null;
+		}
 		
 		return res;
 	}

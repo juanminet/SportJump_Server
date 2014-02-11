@@ -140,7 +140,7 @@ public class CalendarEventDaoTest{
 		calendar.setTimeInMillis(55000000);	
 		Long idEvent2 = calendarEventDaoTestUtil.createCalendarEvent(calendar.getTime(), team1, training2);
 		calendar.setTimeInMillis(65000000);
-		Long idEvent3 = calendarEventDaoTestUtil.createCalendarEvent(calendar.getTime(), team1, training2);
+		Long idEvent3 = calendarEventDaoTestUtil.createCalendarEvent(calendar.getTime(), team1, training3);
 		
 			
 		//Read List of calendarEvents

@@ -14,7 +14,10 @@
            http://www.springframework.org/schema/aop
     	   http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<context:component-scan base-package="es.uma.sportjump.sjs.service.services.impl" />
+	<context:component-scan base-package="es.uma.sportjump.sjs.service.services.impl" />	
+	
 	<context:component-scan base-package="es.uma.sportjump.sjs.service.services.test.util" />	
+	
+	<context:component-scan base-package="es.uma.sportjump.sjs.service.services.test.mock" />
 	
 </beans>

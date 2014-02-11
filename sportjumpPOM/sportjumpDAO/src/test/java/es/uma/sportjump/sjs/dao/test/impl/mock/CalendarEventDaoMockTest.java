@@ -1,4 +1,4 @@
-package es.uma.sportjump.sjs.dao.test.impl.jpa;
+package es.uma.sportjump.sjs.dao.test.impl.mock;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,8 +9,8 @@ import es.uma.sportjump.sjs.dao.test.CalendarEventDaoTest;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:test-jpa-application-dao.xml") 
-public class CalendarEventDaoJpaTest  extends CalendarEventDaoTest{
+@ContextConfiguration(locations = "classpath:test-mock-application-dao.xml")  
+public class CalendarEventDaoMockTest  extends CalendarEventDaoTest{
 	
 	
 	@Test

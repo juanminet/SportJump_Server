@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.uma.sportjump.sjs.model.entities.Coach;
-import es.uma.sportjump.sjs.model.entities.Team;
 import es.uma.sportjump.sjs.service.services.AuthService;
 import es.uma.sportjump.sjs.service.services.UserService;
 import es.uma.sportjump.sjs.web.controller.commands.AthleteCommand;

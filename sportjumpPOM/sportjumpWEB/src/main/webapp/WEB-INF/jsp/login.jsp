@@ -11,8 +11,8 @@
 	<link href="${pageContext.request.contextPath}/resources/css/template/standardTemplate.css"	type="text/css" rel="stylesheet" />	
 	
 	
-<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/ico" />
-<title>Sport Jump</title>
+<link rel="icon" href="${pageContext.request.contextPath}/resources/img/logo_uma_paloma.gif" type="image/ico" />
+<title><fmt:message key="login.tittle" /></title>
 <style type="text/css">
 
 
@@ -21,7 +21,8 @@ form ol{
 	list-style:none;
 }
 form ol li{
-	padding-bottom:5px;
+	padding-bottom:5px;	
+	display: flex;
 }
 form ol li label{
 	width:120px;

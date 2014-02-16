@@ -26,7 +26,7 @@ body {
 
 #holder_container{	
 	background-color: #EEEEEE;
-	padding: 6px;
+	padding: 0.7em;
 }
 
 #left_container {
@@ -44,7 +44,7 @@ body {
     display: inline-block;
     margin: 0.25em;
     min-height: 500px;
-    width: 81.3%;
+    width: 81.5%;
 }
 
 #body_container_single {
@@ -53,7 +53,7 @@ body {
     display: inline-block;
     margin: 0.25em;
     min-height: 500px;
-    width: 99.5%;
+    width: 99.1%;
 }
 #footer{
 	height:50px;
@@ -167,8 +167,7 @@ table  tr.odd:hover td, table tr.odd:hover td.sorting_1{
 }
 
 #body_home_container{
-	margin: 1.5em;
-    width: 96%;	
+	margin: 1.5em;   
 }
 
 .container_left{
@@ -284,7 +283,7 @@ table.display tr.odd.row_selected td {
 }
 
 .table_cross_remove img{
-	vertical-align: sub;
+	vertical-align: bottom;
 	
 }
 .table_field_center{
@@ -394,7 +393,7 @@ table.display tr.odd.row_selected td {
 }
 
 .button span, .button_submit span{
-	display: inherit;
+	display: block;
     padding-top: 0.5em;
     margin-left: 1em;
     margin-right: 1em;

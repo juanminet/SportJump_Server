@@ -109,8 +109,8 @@ $(document).ready( function() {
 		autoOpen : false,
 		resizable : false,
 		draggable : false,
-		width : 640,
-		height: 480,
+		width : 400,
+		height: 400,
 		modal : true,
 		buttons : [ 
 			{					

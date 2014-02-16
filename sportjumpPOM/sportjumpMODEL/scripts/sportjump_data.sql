@@ -1,8 +1,8 @@
-INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (1,'','',{ts '1981-12-11 00:00:00.'},'31722664y','juanminet@gmail.com','Juan Miguel','Ro','','','jumanji');
-INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (2,'Av Plutarco 69 3ºD','',{ts '1987-11-23 00:00:00.'},'22222222y','antonio@antonio.com','Antonio ','Lopez de Araujo','657879809','fondista','Antonio');
-INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (3,'Caller Reina 4 Madrid','',{ts '1981-04-09 00:00:00.'},'33221122O','soniar@soniar','Sonia','Hernandez Fernandes','987876765','Saltadores','Soniar');
-INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (4,'Calle el Jeranio 2ª puerta detrás del rosal','',{ts '1989-12-11 00:00:00.'},'48787483P','jacinto@jacinto','Jacinto','De las Jaces','980908732','corredores','Jacinto');
-INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (5,'Palacio real 7º Piso, Minas Tirith','',{ts '1009-03-01 00:00:00.'},'12345678P','aragorn@gondo.com','Aragorn','Hijo de Arathorn','956345675','lanzamiento','Aragorn');
+INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (1,'','',{ts '1981-12-11 00:00:00'},'31722664y','juanminet@gmail.com','Juan Miguel','Ro','','','jumanji');
+INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (2,'Av Plutarco 69 3ºD','',{ts '1987-11-23 00:00:00'},'22222222y','antonio@antonio.com','Antonio ','Lopez de Araujo','657879809','fondista','Antonio');
+INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (3,'Caller Reina 4 Madrid','',{ts '1981-04-09 00:00:00'},'33221122O','soniar@soniar','Sonia','Hernandez Fernandes','987876765','Saltadores','Soniar');
+INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (4,'Calle el Jeranio 2ª puerta detrás del rosal','',{ts '1989-12-11 00:00:00'},'48787483P','jacinto@jacinto','Jacinto','De las Jaces','980908732','corredores','Jacinto');
+INSERT INTO tb_user (ID_USER,ADDRESS,COMMENTS,DATE_BIRTH,DNI,EMAIL,NAME,SURNAME,TELEPHONE,TYPE,USER_NAME) VALUES (5,'Palacio real 7º Piso, Minas Tirith','',{ts '1009-03-01 00:00:00'},'12345678P','aragorn@gondo.com','Aragorn','Hijo de Arathorn','956345675','lanzamiento','Aragorn');
 
 insert into tb_coach values (1);
 

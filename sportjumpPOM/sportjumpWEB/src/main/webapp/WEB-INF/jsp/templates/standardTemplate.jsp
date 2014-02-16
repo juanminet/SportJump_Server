@@ -14,7 +14,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	
 	<!-- icono de página -->	
-	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/favicon.ico" type="image/ico" />
+	<link rel="icon" href="${pageContext.request.contextPath}/resources/img/logo_uma_paloma.gif" type="image/ico" />
 	
 	<!-- comunes -->
  	<common:common_stylesheets/>	

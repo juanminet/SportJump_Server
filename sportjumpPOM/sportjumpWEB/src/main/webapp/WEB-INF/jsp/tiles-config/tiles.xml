@@ -6,7 +6,7 @@
 
 	<definition name="login" template="/WEB-INF/jsp/login.jsp" />
 	<definition name="registration" extends="noSessionTemplate">
-		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="title" value="registration.tittle" />
 		<put-attribute name="layer" value="home"/>
 		<put-attribute name="section" value="no_section"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/registration.jsp" />	  
@@ -14,7 +14,7 @@
 	
 		
  	<definition name="home" extends="standardTemplate">
-		<put-attribute name="title" value="test.tittle" />
+		<put-attribute name="title" value="home.tittle" />
 		<put-attribute name="layer" value="home"/>
 		<put-attribute name="section" value="no_section"/>
 	    <put-attribute name="body" value="/WEB-INF/jsp/components/bodyHome.jsp" />	  

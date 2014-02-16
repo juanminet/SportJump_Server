@@ -6,7 +6,7 @@
 
 .menu_bar li {float: left;	height: inherit;	border-right: 1px solid #ddd;}
 
-.menu_bar li a {display: block;	float: left;	height: 37px;	font-weight: bold;	line-height: 37px;	text-decoration: none;	color: #646464;	padding: 0 20px;}
+.menu_bar li a {display: block;	float: left;	height: inherit;	font-weight: bold;	line-height: 37px;	text-decoration: none;	color: #646464;	padding: 0 20px;}
 
 .menu_bar li.logout {float: right;	border-left: 1px solid #ddd;	border-right: none;}
 

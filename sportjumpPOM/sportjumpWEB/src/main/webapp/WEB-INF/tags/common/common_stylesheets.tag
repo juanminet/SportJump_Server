@@ -9,8 +9,7 @@
 </c:if>
 <c:choose>
 	<c:when test="${empty path}">
-		<%-- AQUI VAN LOS RECURSOS REQUERIDOS POR LA APLICACION --%>
-		<%-- <link href="${base}/css/reset.css" type="text/css" charset="UTF-8" rel="stylesheet"></link> --%>
+		<%-- APPLICATION JAVASCRIPT RESOURCES --%>		
 		<link href="${pageContext.request.contextPath}/resources/data-table-1.9.4/css/demo_table_jui.css"	type="text/css" rel="stylesheet" />	
 		<link href="${pageContext.request.contextPath}/resources/jquery-1.10.3/css/smoothness/jquery-ui-1.10.3.custom.css"	type="text/css" rel="stylesheet" />	
 	

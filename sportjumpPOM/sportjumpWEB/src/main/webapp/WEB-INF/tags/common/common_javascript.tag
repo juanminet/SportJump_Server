@@ -7,7 +7,7 @@
 <c:if test="${fn:startsWith(base,'@')}"><c:set var="base" value="${pageContext.request.contextPath}/${fn:substring(base,1,-1)}"/></c:if>
 <c:choose>
 	<c:when test="${empty path}">
-	<%-- AQUI VAN LOS RECURSOS REQUERIDOS POR LA APLICACION --%>
+	<%-- APPLICATION JAVASCRIPT RESOURCES --%>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-1.9.1.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery-ui-1.10.3.custom.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/resources/jquery-1.10.3/js/jquery.balloon.min.js"></script>

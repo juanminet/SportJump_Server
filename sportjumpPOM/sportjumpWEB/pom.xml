@@ -74,7 +74,7 @@
 					</container>
 					<configuration>
 						<type>existing</type>
-						<home>/opt/tomcat-7.0.29</home>		
+						<home>C:\Desarrollo\Tools\Servidores\apache-tomcat-7.0.32</home>		
 						<!-- <properties>
 							<cargo.tomcat.manager.url>http://localhost:8080/manager/html</cargo.tomcat.manager.url>
 							<cargo.remote.username>manager</cargo.remote.username>
@@ -142,16 +142,15 @@
 		<!-- STANDARDS J2EE -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<scope>compile</scope>
+			<artifactId>jstl</artifactId>			
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
+	        <groupId>javax.servlet</groupId>
+	        <artifactId>javax.servlet-api</artifactId>	        
 		</dependency>
 		
 		<!--  Spring Security -->

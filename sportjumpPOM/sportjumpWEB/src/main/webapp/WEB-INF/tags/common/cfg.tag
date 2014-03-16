@@ -5,11 +5,9 @@
 %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"
 %><c:set scope="page" var="ignore">
 <%
-	// NO TOCAR NI FORMATEAR ESTE TAG.
-	// Los cierres de etiquetas a principio de linea son para evitar la aparicion de saltos de linea en el contenido 
-	// que pinta el tag
+
 	
-	// El siguiente codigo obtiene la configuracion de la aplicacion
+	// This code obtain application config
 	WebApplicationContext ctx = WebApplicationContextUtils
 			.getWebApplicationContext(application);
 	Properties cfg = (Properties)ctx.getBean("applicationConfig", Properties.class);

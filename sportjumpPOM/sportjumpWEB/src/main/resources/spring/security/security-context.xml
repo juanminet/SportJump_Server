@@ -2,24 +2,19 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:security="http://www.springframework.org/schema/security"
+    xmlns:context="http://www.springframework.org/schema/context"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.1.xsd
         http://www.springframework.org/schema/security 
         http://www.springframework.org/schema/security/spring-security-3.1.xsd">
         
+    <context:component-scan base-package="es.uma.sportjump.sjs.web.security" />
     
-  	<!-- 	<security:user-service id="security-user-service">
-		<security:user name="juanmi" password="juanmi" authorities="ROLE_USER"/>	
-		<security:user name="admin" password="admin" authorities="ROLE_ADMIN" />				
-	</security:user-service> 
 	
-	<security:authentication-manager alias="authenticationManager">	
-		<security:authentication-provider user-service-ref="security-user-service" />		
-	</security:authentication-manager>
-	-->
-	
-		<!-- Data -->	
+	<!-- Data -->	
 	
  	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 	    <property name="driverClassName" value="${database.auth.driver.class.name}"/>
@@ -28,9 +23,7 @@
 	    <property name="password" value="${database.auth.password}"/>
 	</bean>
 	
- 	
-	
-    <bean id="userDetailsManager" class="org.springframework.security.provisioning.JdbcUserDetailsManager">
+ 	<bean id="userDetailsManager" class="org.springframework.security.provisioning.JdbcUserDetailsManager">
    		<property name="dataSource" ref="dataSource"></property>
    		<property name="authenticationManager" ref="authenticationManager"></property>
     </bean> 
@@ -50,50 +43,8 @@
 		    <security:password-encoder ref="passwordEncoder">
 		        <security:salt-source ref="saltSource"/>
       		</security:password-encoder>
-      </security:authentication-provider>		
-	</security:authentication-manager>        
-        
+    	</security:authentication-provider>		
+	</security:authentication-manager>   
 	
-
-	
-	
-	
-	<security:http auto-config="true" use-expressions="true">		
-		
-		<security:intercept-url pattern="/test" access="permitAll" />			
-		<security:intercept-url pattern="/test/**/*" access="permitAll" />	 
-		<security:intercept-url pattern="/login" access="permitAll"/>
-		<security:intercept-url pattern="/registration" access="permitAll"/>
-		<security:intercept-url pattern="/error" access="permitAll"/>
-		<security:intercept-url pattern="/error/**/*" access="permitAll"/>
-		<security:intercept-url pattern="/resources/**/*" access="permitAll"/>
-		
-		<security:intercept-url pattern="/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
-	 	<security:intercept-url pattern="/action/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
-	 	<security:intercept-url pattern="/ajax/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
-	 	<security:intercept-url pattern="/rest/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER', 'ROLE_EXTERN')"/>
-	 	<security:intercept-url pattern="/login/**/*" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')"/>
-		<security:intercept-url pattern="/**/*" access="hasRole('ROLE_ADMIN')"/> 
-		
-		<security:form-login login-page="/login"  authentication-success-handler-ref="SecurityCustomHandler" authentication-failure-url="/error/denied/authentication" default-target-url="/login/success" always-use-default-target="true"/>
-		<security:logout invalidate-session="true" logout-url="/logout"/>		
-	</security:http>
-
-	<bean id="SecurityCustomHandler" class="es.uma.sportjump.sjs.web.handler.SecurityCustomHandler " />
-	
-	<!-- <security:global-method-security secured-annotations="enabled" />  -->
-	<!--  SECURITY -->
- 	<!-- <security:http auto-config='true' use-expressions="true">	 
-	 	<security:logout logout-url="/static/j_spring_security_logout"/>	 
- 		<security:intercept-url pattern="/action/test" access="hasRole('ROLE_USER')" /> 
- 		<security:intercept-url pattern="/action/rest/**" access="permitAll" requires-channel="https"/> 
- 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />  -->
-	<!-- <security:intercept-url pattern="/spring_security_login"  requires-channel="https"/> 
-  		 -->
-  		
-	<!--  </security:http> -->
-	
-
- 
 	
 </beans>

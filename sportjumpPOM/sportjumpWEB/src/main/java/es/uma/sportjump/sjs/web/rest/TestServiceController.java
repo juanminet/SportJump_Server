@@ -2,13 +2,12 @@ package es.uma.sportjump.sjs.web.rest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import es.uma.sportjump.sjs.model.entities.Athlete;
+import es.uma.sportjump.sjs.web.controller.beans.ExerciseWebBean;
 
 
 @Controller
@@ -18,18 +17,29 @@ public class TestServiceController {
 
 	
 	
-	@RequestMapping(value ="/{id}" ,  method = RequestMethod.DELETE)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteValue(@PathVariable("id") String id){		
-		
-		System.out.println("Test for DELETE Method. [id: " + id + "]");	
-	}
+//	@RequestMapping(value ="/{id}" ,  method = RequestMethod.DELETE)
+//	@ResponseStatus(HttpStatus.NO_CONTENT)
+//	public void deleteValue(@PathVariable("id") String id){		
+//		
+//		System.out.println("Test for DELETE Method. [id: " + id + "]");	
+//	}
+//	
+//	@RequestMapping(value ="/{id}" ,  method = RequestMethod.PUT)
+//	@ResponseStatus(HttpStatus.NO_CONTENT)
+//	public void updateValue(@PathVariable("id") String id, @RequestBody Athlete athlete){		
+//		
+//		System.out.println("Test for PUT Method with JSON request body. [id: " + id + "],[athlete: " + athlete + "]");	
+//	}
 	
-	@RequestMapping(value ="/{id}" ,  method = RequestMethod.PUT)
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void updateValue(@PathVariable("id") String id, @RequestBody Athlete athlete){		
+	@RequestMapping( method = RequestMethod.GET)
+	@ResponseStatus(HttpStatus.OK)
+	public  @ResponseBody ExerciseWebBean getValue(){			
 		
-		System.out.println("Test for PUT Method with JSON request body. [id: " + id + "],[athlete: " + athlete + "]");	
+		System.out.println("Test for GET Method with JSON request body. [id " + 3 + "]");	
+		
+		ExerciseWebBean res = new ExerciseWebBean();
+		res.setName("OK");
+		return res;
 	}
 	
 //	@RequestMapping(method = RequestMethod.POST)

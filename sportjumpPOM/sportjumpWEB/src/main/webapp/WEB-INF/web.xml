@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
  
-<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_3.0.xsd">
 
 	<display-name>Ejemplo arquetipo</display-name> 
 
@@ -93,49 +93,7 @@
  	<servlet-mapping>
 		<servlet-name>SpringServlet</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping> 
-
-	<!-- <security-constraint>
-		<display-name>actionConst</display-name>
-		<web-resource-collection>
-			<web-resource-name>action</web-resource-name>
-			<url-pattern>/action/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>PUT</http-method>
-			<http-method>HEAD</http-method>
-			<http-method>TRACE</http-method>
-			<http-method>POST</http-method>
-			<http-method>DELETE</http-method>
-			<http-method>OPTIONS</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-			<description>adminAuth</description>
-			<role-name>administrador</role-name>
-		</auth-constraint>
-	</security-constraint>
-
-	<security-constraint>
-		<display-name>jspConstraint</display-name>
-		<web-resource-collection>
-			<web-resource-name>jsps</web-resource-name>
-			<url-pattern>/WEB-INF/jsp/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>PUT</http-method>
-			<http-method>HEAD</http-method>
-			<http-method>TRACE</http-method>
-			<http-method>POST</http-method>
-			<http-method>DELETE</http-method>
-			<http-method>OPTIONS</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-			<description>adminAuth</description>
-			<role-name>administrador</role-name>
-		</auth-constraint>
-	</security-constraint> -->
-	
-<!-- 	<security-role>
-		<role-name>administrador</role-name>
-	</security-role> -->
+	</servlet-mapping> 	
 
  	<jsp-config>
 		<jsp-property-group>
@@ -145,18 +103,6 @@
 			<include-prelude>/WEB-INF/includes/prefix.jspf</include-prelude>
 		</jsp-property-group>
 	</jsp-config> 
-
-	<!-- <login-config>
-		<auth-method>FORM</auth-method>
-		<form-login-config>
-			<form-login-page>/action/login</form-login-page>
-			<form-error-page>/action/login?login_error=-1</form-error-page>
-		</form-login-config>
-	</login-config>
- -->
-
-
-
  
 </web-app> 
 

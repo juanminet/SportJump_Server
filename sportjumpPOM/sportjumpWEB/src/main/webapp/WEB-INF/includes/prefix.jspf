@@ -2,8 +2,7 @@
 <c:set scope="page" var="ignore">
 <%-- 
 
-Aqui se ponen los taglibs que queremos que tengan TODAS las paginas
-(encerrado en un c:set para que no se pongan los espacios en blanco de todas estas lineas)
+Every jsp import all the following taglibs
 
  --%>
 

@@ -35,6 +35,9 @@
 	
 	<!-- configuracion Spring Security -->
 	<import resource="classpath:spring/security/security-context.xml"/>
+	<import resource="classpath:spring/security/security-rules-api.xml"/>
+	<import resource="classpath:spring/security/security-rules-web.xml"/>
+	
 	
 	<!-- configuracion log -->
 	<import resource="classpath:log/log-aspect-config.xml"/>

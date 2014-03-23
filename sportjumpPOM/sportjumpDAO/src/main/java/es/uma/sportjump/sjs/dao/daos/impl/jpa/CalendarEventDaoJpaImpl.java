@@ -64,7 +64,8 @@ public class CalendarEventDaoJpaImpl implements CalendarEventDao {
 		List<CalendarEvent> listCalendarEvent = query.getResultList();		
 		
 		return listCalendarEvent;
-	}
+	}	
+	
 
 
 	@Transactional(propagation=Propagation.REQUIRED)
@@ -97,6 +98,5 @@ public class CalendarEventDaoJpaImpl implements CalendarEventDao {
 	public void updateEvent(CalendarEvent calendarEvent) {
 		em.persist(calendarEvent);		
 	}
-
 	
 }

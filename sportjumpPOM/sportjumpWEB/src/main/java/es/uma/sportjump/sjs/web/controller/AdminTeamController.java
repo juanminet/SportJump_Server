@@ -21,7 +21,7 @@ import es.uma.sportjump.sjs.model.entities.Coach;
 import es.uma.sportjump.sjs.model.entities.Team;
 import es.uma.sportjump.sjs.service.services.AuthService;
 import es.uma.sportjump.sjs.service.services.UserService;
-import es.uma.sportjump.sjs.web.controller.beans.RowAdminTeamWebBean;
+import es.uma.sportjump.sjs.web.beans.RowAdminTeamBean;
 import es.uma.sportjump.sjs.web.controller.commands.GroupCommand;
 
 
@@ -55,7 +55,7 @@ public class AdminTeamController {
 		
 		Coach  coach = (Coach) session.getAttribute("loggedUser");	
 		
-		List<RowAdminTeamWebBean> listTeams = fillAdminTeams(coach);		
+		List<RowAdminTeamBean> listTeams = fillAdminTeams(coach);		
 		
 		model.addAttribute("listTeams", listTeams);
 	
@@ -123,12 +123,12 @@ public class AdminTeamController {
 		return GROUPS_REDIRECT;		
 	}
 	
-	private List<RowAdminTeamWebBean> fillAdminTeams(Coach coach) {
-		List<RowAdminTeamWebBean> listAdminTeams = new ArrayList<RowAdminTeamWebBean>();
+	private List<RowAdminTeamBean> fillAdminTeams(Coach coach) {
+		List<RowAdminTeamBean> listAdminTeams = new ArrayList<RowAdminTeamBean>();
 		List<Team> listTeams = userService.findTeamsByCoach(coach);
 		
 		for(Team team : listTeams){
-			RowAdminTeamWebBean row = new RowAdminTeamWebBean();
+			RowAdminTeamBean row = new RowAdminTeamBean();
 			row.setIdTeam(team.getIdTeam());
 			row.setName(team.getName());
 			row.setType(team.getType());

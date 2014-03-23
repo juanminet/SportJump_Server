@@ -52,6 +52,13 @@ public interface CalendarService {
 	public List<CalendarEvent> findAllEventByTeam(Team team);
 	
 	/**
+	 * Find all events belong to a team with his trainings
+	 * @param team
+	 * @return
+	 */
+	public List<CalendarEvent> findAllEventCompleteByTeam(Team team);
+	
+	/**
 	 * Remove an calendar event
 	 * @param event
 	 */

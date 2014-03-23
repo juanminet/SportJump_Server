@@ -1,4 +1,4 @@
-package es.uma.sportjump.sjs.web.controller.beans;
+package es.uma.sportjump.sjs.web.beans;
 
 import java.util.Date;
 

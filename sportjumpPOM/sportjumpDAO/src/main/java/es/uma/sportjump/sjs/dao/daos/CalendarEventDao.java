@@ -43,11 +43,12 @@ public interface CalendarEventDao {
 	
 	
 	/**
-	 * Get list of all events belong to a group given by parameter 
+	 * Get list of all events belong to a group given by parameter Lazy
 	 * @param id
 	 * @return the list with all events
 	 */
-	public List<CalendarEvent> getEventsByGroup(Long idTeam);
+	public List<CalendarEvent> getEventsByGroup(Long idTeam);	
+
 	
 	/**
 	 * Remove event
@@ -60,6 +61,5 @@ public interface CalendarEventDao {
 	 * @param calendarEventToUpdate
 	 */
 	public void updateEvent(CalendarEvent calendarEventToUpdate);
-
 	
 }

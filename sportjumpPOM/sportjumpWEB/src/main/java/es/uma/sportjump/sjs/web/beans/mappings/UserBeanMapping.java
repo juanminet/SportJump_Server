@@ -1,9 +1,9 @@
-package es.uma.sportjump.sjs.web.rest.beans.mappings;
+package es.uma.sportjump.sjs.web.beans.mappings;
 
 import es.uma.sportjump.sjs.model.entities.Athlete;
-import es.uma.sportjump.sjs.web.rest.beans.AthleteRestBean;
+import es.uma.sportjump.sjs.web.beans.AthleteRestBean;
 
-public class UserRestBeanMapping {
+public class UserBeanMapping {
 	
 	public static AthleteRestBean athleteRestBeanFromAthleteEntity(Athlete athlete){
 		AthleteRestBean athleteRestBean = new AthleteRestBean();

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import es.uma.sportjump.sjs.web.controller.beans.ExerciseWebBean;
+import es.uma.sportjump.sjs.web.beans.ExerciseBean;
 
 public class TrainingDayCommand {
 	
@@ -15,7 +15,7 @@ public class TrainingDayCommand {
 	private String type;
 	private String description;
 	
-	List<ExerciseWebBean> trainingDayList;
+	List<ExerciseBean> trainingDayList;
 	
 	
 	public Long getId() {
@@ -42,10 +42,10 @@ public class TrainingDayCommand {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<ExerciseWebBean> getTrainingDayList() {
+	public List<ExerciseBean> getTrainingDayList() {
 		return trainingDayList;
 	}
-	public void setTrainingDayList(List<ExerciseWebBean> trainingDayList) {
+	public void setTrainingDayList(List<ExerciseBean> trainingDayList) {
 		this.trainingDayList = trainingDayList;
 	}
 	

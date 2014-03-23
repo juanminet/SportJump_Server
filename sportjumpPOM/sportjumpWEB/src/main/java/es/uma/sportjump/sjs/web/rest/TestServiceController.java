@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import es.uma.sportjump.sjs.web.controller.beans.ExerciseWebBean;
+import es.uma.sportjump.sjs.web.beans.ExerciseBean;
 
 
 @Controller
@@ -33,11 +33,11 @@ public class TestServiceController {
 	
 	@RequestMapping( method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public  @ResponseBody ExerciseWebBean getValue(){			
+	public  @ResponseBody ExerciseBean getValue(){			
 		
 		System.out.println("Test for GET Method with JSON request body. [id " + 3 + "]");	
 		
-		ExerciseWebBean res = new ExerciseWebBean();
+		ExerciseBean res = new ExerciseBean();
 		res.setName("OK");
 		return res;
 	}

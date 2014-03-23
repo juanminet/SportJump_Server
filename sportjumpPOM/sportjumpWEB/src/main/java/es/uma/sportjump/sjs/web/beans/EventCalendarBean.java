@@ -1,7 +1,7 @@
-package es.uma.sportjump.sjs.web.controller.beans;
+package es.uma.sportjump.sjs.web.beans;
 
 
-public class EventCalendarJSON {
+public class EventCalendarBean {
 	
 	private Long id;
 	private String title;

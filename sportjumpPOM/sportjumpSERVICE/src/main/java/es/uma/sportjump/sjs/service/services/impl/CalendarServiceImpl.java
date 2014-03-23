@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.uma.sportjump.sjs.dao.daos.CalendarEventDao;
+import es.uma.sportjump.sjs.dao.daos.TrainingDao;
 import es.uma.sportjump.sjs.model.entities.CalendarEvent;
 import es.uma.sportjump.sjs.model.entities.Team;
 import es.uma.sportjump.sjs.model.entities.Training;
@@ -19,6 +20,9 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	@Autowired
 	CalendarEventDao calendarEventDao;
+	
+	@Autowired
+	TrainingDao trainingDao;
 
 	
 	@Transactional
@@ -64,6 +68,21 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<CalendarEvent> findAllEventByTeam(Team team) {
 		return calendarEventDao.getEventsByGroup(team.getIdTeam());
 	}
+	
+	@Override
+	public List<CalendarEvent> findAllEventCompleteByTeam(Team team) {
+		
+		List<CalendarEvent> res = calendarEventDao.getEventsByGroup(team.getIdTeam());
+		
+		for (CalendarEvent event : res){
+			
+			Long idTraining = event.getTraining().getIdTraining();
+			event.setTraining(trainingDao.getCompleteTrainingById(idTraining));
+			
+		}
+		return res;
+	}
+
 
 	
 	@Transactional(propagation=Propagation.REQUIRED)
@@ -93,5 +112,4 @@ public class CalendarServiceImpl implements CalendarService {
 		calendarEventToModify.setEventDate(date);
 		//calendarEventDao.updateEvent(calendarEventToModify);
 	}
-
 }

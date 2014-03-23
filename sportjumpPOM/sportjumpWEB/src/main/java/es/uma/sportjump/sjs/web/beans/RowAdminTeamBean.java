@@ -1,6 +1,6 @@
-package es.uma.sportjump.sjs.web.controller.beans;
+package es.uma.sportjump.sjs.web.beans;
 
-public class RowAdminTeam {
+public class RowAdminTeamBean {
 	
 	private Long idTeam;
 	private String name;

@@ -92,6 +92,5 @@ public class CalendarEventDaoMockImpl implements CalendarEventDao {
 	public CalendarEvent getCompleteEventgById(Long id) {
 		return getEventgById(id);
 	}
-
 	
 }

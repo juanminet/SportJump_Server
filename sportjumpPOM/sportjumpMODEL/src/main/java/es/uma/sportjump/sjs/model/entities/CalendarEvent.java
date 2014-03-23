@@ -21,7 +21,7 @@ import javax.persistence.UniqueConstraint;
 )
 @NamedQueries({
 	@NamedQuery(name="findAllCalendarEventsByTeam",
-				query="Select c from CalendarEvent c left join fetch c.training where c.team.idTeam = :idTeam"),
+				query="Select c from CalendarEvent c left join fetch c.training where c.team.idTeam = :idTeam"),	
 	@NamedQuery(name="findCalendarEventByDateAndTeam",
 				query="Select c from CalendarEvent c where c.team.idTeam = :idTeam and c.eventDate = :eventDate"),
 	@NamedQuery(name="findfetchCalendarEventById",

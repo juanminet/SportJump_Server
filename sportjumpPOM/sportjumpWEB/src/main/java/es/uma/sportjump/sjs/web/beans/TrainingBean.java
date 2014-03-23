@@ -1,24 +1,17 @@
-package es.uma.sportjump.sjs.web.controller.beans;
+package es.uma.sportjump.sjs.web.beans;
 
 import java.util.List;
 
-public class ExerciseWebBean {
+public class TrainingBean {
 	
-	private Long id;
 	private String name;
 	private String type;
 	private String description;
 	
-	private List<String> listExercise;
-
+	private List<ExerciseBean> listBlock;
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
+	
 
 	public String getName() {
 		return name;
@@ -44,11 +37,11 @@ public class ExerciseWebBean {
 		this.description = description;
 	}
 
-	public List<String> getListExercise() {
-		return listExercise;
+	public List<ExerciseBean> getListBlock() {
+		return listBlock;
 	}
 
-	public void setListExercise(List<String> listExercise) {
-		this.listExercise = listExercise;
+	public void setListBlock(List<ExerciseBean> listBlock) {
+		this.listBlock = listBlock;
 	}
 }

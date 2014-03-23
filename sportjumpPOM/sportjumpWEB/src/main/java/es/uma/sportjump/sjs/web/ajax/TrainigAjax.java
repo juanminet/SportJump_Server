@@ -21,9 +21,9 @@ import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 import es.uma.sportjump.sjs.model.entities.Training;
 import es.uma.sportjump.sjs.service.services.ExerciseService;
 import es.uma.sportjump.sjs.service.services.TrainingService;
-import es.uma.sportjump.sjs.web.ajax.util.ComonAjaxUtils;
-import es.uma.sportjump.sjs.web.controller.beans.ExerciseWebBean;
-import es.uma.sportjump.sjs.web.controller.beans.TrainingWebBean;
+import es.uma.sportjump.sjs.web.beans.ExerciseBean;
+import es.uma.sportjump.sjs.web.beans.TrainingBean;
+import es.uma.sportjump.sjs.web.beans.mappings.TrainingBeanMapping;
 
 
 @Controller
@@ -38,14 +38,14 @@ public class TrainigAjax<E> {
 
 	@RequestMapping(value ="/day/{idTrainingDay}" ,  method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody TrainingWebBean getTrainingDay(@PathVariable("idTrainingDay") Long idTrainingDay){					
+	public @ResponseBody TrainingBean getTrainingDay(@PathVariable("idTrainingDay") Long idTrainingDay){					
 	
 		Training training = trainingService.findTraining(idTrainingDay);	
 		 
 		if (training == null){
 			throw new EmptyResultDataAccessException("Training element not found", 1);			
 		}
-		TrainingWebBean result = ComonAjaxUtils.fillTrainingWebBean(training);
+		TrainingBean result = TrainingBeanMapping.fillTrainingBean(training);
 		return result;
 	}	
 	
@@ -53,7 +53,7 @@ public class TrainigAjax<E> {
 
 	@RequestMapping(value ="/exercise/{idExerciseBlock}" ,  method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody ExerciseWebBean getExerciseBlock(@PathVariable("idExerciseBlock") Long idExerciseBlock){					
+	public @ResponseBody ExerciseBean getExerciseBlock(@PathVariable("idExerciseBlock") Long idExerciseBlock){					
 	
 		ExerciseBlock exererciseBlock = exerciseService.findExerciseBlock(idExerciseBlock);
 		if (exererciseBlock == null){
@@ -61,14 +61,14 @@ public class TrainigAjax<E> {
 		}
 		
 		
-		ExerciseWebBean result = ComonAjaxUtils.fillExerciseBlock(exererciseBlock);
+		ExerciseBean result = TrainingBeanMapping.fillExerciseBlock(exererciseBlock);
 		return result;
 	}
 	
 	
 	@RequestMapping(value ="/exercise/name/{nameExerciseBlock}" ,  method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody ExerciseWebBean getExerciseBlockByName(@PathVariable("nameExerciseBlock") String nameExerciseBlock,  HttpSession session){	
+	public @ResponseBody ExerciseBean getExerciseBlockByName(@PathVariable("nameExerciseBlock") String nameExerciseBlock,  HttpSession session){	
 		
 		Coach  coach = (Coach) session.getAttribute("loggedUser");	
 	
@@ -78,27 +78,27 @@ public class TrainigAjax<E> {
 		}
 		
 		
-		ExerciseWebBean result = ComonAjaxUtils.fillExerciseBlock(exererciseBlock);
+		ExerciseBean result = TrainingBeanMapping.fillExerciseBlock(exererciseBlock);
 		return result;
 	}
 	
 	
 	@RequestMapping(value ="/exercise/names/{namesExerciseBlock}" ,  method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody TrainingWebBean getTrainingDay(@PathVariable("namesExerciseBlock") String  names,  HttpSession session){					
+	public @ResponseBody TrainingBean getTrainingDay(@PathVariable("namesExerciseBlock") String  names,  HttpSession session){					
 	
 		
 		
-		TrainingWebBean result = new TrainingWebBean();
+		TrainingBean result = new TrainingBean();
 		
 		String[] nameArray = names.split("-");
 		Coach  coach = (Coach) session.getAttribute("loggedUser");		
-		List<ExerciseWebBean> listExerciseWebBean = new ArrayList<ExerciseWebBean>();
+		List<ExerciseBean> listExerciseWebBean = new ArrayList<ExerciseBean>();
 		
 		for(String name : nameArray){
 			ExerciseBlock block = exerciseService.findExerciseBlockByNameAndCoach(name, coach);
 			
-			listExerciseWebBean.add(ComonAjaxUtils.fillExerciseBlock(block));
+			listExerciseWebBean.add(TrainingBeanMapping.fillExerciseBlock(block));
 		}
 		
 		result.setListBlock(listExerciseWebBean);				

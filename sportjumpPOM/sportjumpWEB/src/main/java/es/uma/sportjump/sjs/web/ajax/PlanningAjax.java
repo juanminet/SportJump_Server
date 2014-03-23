@@ -1,7 +1,5 @@
 package es.uma.sportjump.sjs.web.ajax;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +24,11 @@ import es.uma.sportjump.sjs.service.services.ExerciseService;
 import es.uma.sportjump.sjs.service.services.TrainingService;
 import es.uma.sportjump.sjs.service.services.UserService;
 import es.uma.sportjump.sjs.web.ajax.exceptions.AjaxException;
-import es.uma.sportjump.sjs.web.ajax.util.ComonAjaxUtils;
-import es.uma.sportjump.sjs.web.controller.beans.EventBean;
-import es.uma.sportjump.sjs.web.controller.beans.EventCalendarJSON;
-import es.uma.sportjump.sjs.web.controller.beans.TrainingWebBean;
+import es.uma.sportjump.sjs.web.beans.EventBean;
+import es.uma.sportjump.sjs.web.beans.EventCalendarBean;
+import es.uma.sportjump.sjs.web.beans.TrainingBean;
+import es.uma.sportjump.sjs.web.beans.mappings.CalendarEventBeanMapping;
+import es.uma.sportjump.sjs.web.beans.mappings.TrainingBeanMapping;
 
 
 @Controller
@@ -50,37 +49,20 @@ public class PlanningAjax<E> {
 
 	@RequestMapping(value ="/group/{idGroup}" ,  method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody List<EventCalendarJSON> getTrainingDay(@PathVariable("idGroup") Long idGroup){	
+	public @ResponseBody List<EventCalendarBean> getTrainingDay(@PathVariable("idGroup") Long idGroup){	
 		
 		Team team = userService.findTeam(idGroup);	
 		
 		
 		List<CalendarEvent> calendarEventList = calendarService.findAllEventByTeam(team);
 		
-		List<EventCalendarJSON> eventList = fillEvents(calendarEventList);
+		List<EventCalendarBean> eventList = CalendarEventBeanMapping.fillEvents(calendarEventList);
 
 		return eventList;
 	}	
 	
 	
-	private List<EventCalendarJSON> fillEvents(	List<CalendarEvent> calendarEventList) {
 
-		List<EventCalendarJSON> result = new ArrayList<EventCalendarJSON>();
-		for(CalendarEvent event : calendarEventList){
-			EventCalendarJSON eventCalendarJSON = new EventCalendarJSON();
-			eventCalendarJSON.setId(event.getIdEvent());
-			
-			
-			SimpleDateFormat sdf=new java.text.SimpleDateFormat("yyyy-MM-dd");
-			
-			
-			eventCalendarJSON.setStart(sdf.format(event.getEventDate()));
-			eventCalendarJSON.setTitle(event.getTraining().getName());
-			
-			result.add(eventCalendarJSON);
-		}
-		return result;
-	}
 
 
 	@RequestMapping(value ="/save" ,  method = RequestMethod.POST)	
@@ -104,7 +86,7 @@ public class PlanningAjax<E> {
 	
 	@RequestMapping(value ="/{idEvent}" ,  method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody TrainingWebBean getTraining(@PathVariable("idEvent") Long idEvent){					
+	public @ResponseBody TrainingBean getTraining(@PathVariable("idEvent") Long idEvent){					
 	
 		CalendarEvent calendarEvent = calendarService.findEvent(idEvent);
 		if(calendarEvent == null){
@@ -115,7 +97,7 @@ public class PlanningAjax<E> {
 		if (training == null){
 			throw new EmptyResultDataAccessException("Training element not found", 1);			
 		}
-		TrainingWebBean result = ComonAjaxUtils.fillTrainingWebBean(training);
+		TrainingBean result = TrainingBeanMapping.fillTrainingBean(training);
 		return result;
 	}	
 	

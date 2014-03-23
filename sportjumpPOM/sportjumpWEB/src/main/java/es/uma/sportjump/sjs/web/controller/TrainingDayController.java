@@ -19,7 +19,7 @@ import es.uma.sportjump.sjs.model.entities.ExerciseBlock;
 import es.uma.sportjump.sjs.model.entities.Training;
 import es.uma.sportjump.sjs.service.services.ExerciseService;
 import es.uma.sportjump.sjs.service.services.TrainingService;
-import es.uma.sportjump.sjs.web.controller.beans.ExerciseWebBean;
+import es.uma.sportjump.sjs.web.beans.ExerciseBean;
 import es.uma.sportjump.sjs.web.controller.commands.TrainingDayCommand;
 
 
@@ -150,9 +150,9 @@ public class TrainingDayController {
 		List<ExerciseBlock> exerciseBlockList = training.getListExerciseBlock();
 		
 		if (exerciseBlockList != null){
-			List<ExerciseWebBean> exerciseBlockCommandList  = new ArrayList<ExerciseWebBean>();
+			List<ExerciseBean> exerciseBlockCommandList  = new ArrayList<ExerciseBean>();
 			for (ExerciseBlock exerciseBlock : exerciseBlockList){
-				ExerciseWebBean exerciseWebBean = new ExerciseWebBean();
+				ExerciseBean exerciseWebBean = new ExerciseBean();
 				exerciseWebBean.setId(exerciseBlock.getIdExerciseBlock());
 				exerciseWebBean.setName(exerciseBlock.getName());
 				exerciseBlockCommandList.add(exerciseWebBean);
@@ -165,12 +165,12 @@ public class TrainingDayController {
 	}
 
 	private List<ExerciseBlock> getExerciseBlocks(TrainingDayCommand trainingCommand, Coach coach) {
-		List<ExerciseWebBean> eserciseWebBeanList = trainingCommand.getTrainingDayList();
+		List<ExerciseBean> eserciseWebBeanList = trainingCommand.getTrainingDayList();
 		List<ExerciseBlock> exerciseBlockList = null;	
 		
 		if (eserciseWebBeanList != null){			
 			exerciseBlockList = new ArrayList<ExerciseBlock>();	
-			for (ExerciseWebBean exerciseWebBean: eserciseWebBeanList){
+			for (ExerciseBean exerciseWebBean: eserciseWebBeanList){
 				String name = exerciseWebBean.getName();
 				ExerciseBlock exerciseBlock = exerciseService.findExerciseBlockByNameAndCoach(name, coach);
 				

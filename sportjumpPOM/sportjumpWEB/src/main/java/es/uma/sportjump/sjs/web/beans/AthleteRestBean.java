@@ -1,4 +1,4 @@
-package es.uma.sportjump.sjs.web.rest.beans;
+package es.uma.sportjump.sjs.web.beans;
 
 
 public class AthleteRestBean  extends UserRestBean{

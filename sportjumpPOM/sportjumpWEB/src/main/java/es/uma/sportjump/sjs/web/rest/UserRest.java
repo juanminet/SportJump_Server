@@ -1,5 +1,6 @@
 package es.uma.sportjump.sjs.web.rest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -11,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import es.uma.sportjump.sjs.model.entities.Athlete;
 import es.uma.sportjump.sjs.service.services.UserService;
-import es.uma.sportjump.sjs.web.rest.beans.AthleteRestBean;
-import es.uma.sportjump.sjs.web.rest.beans.mappings.UserRestBeanMapping;
+import es.uma.sportjump.sjs.web.beans.AthleteRestBean;
+import es.uma.sportjump.sjs.web.beans.mappings.UserBeanMapping;
 
 
 @Controller
@@ -21,6 +22,8 @@ public class UserRest {
 	
 	@Autowired
 	UserService userService;	
+	
+	Logger log = Logger.getLogger(UserRest.class);
 
 	
 	@RequestMapping(value="/athlete/{userName}", method = RequestMethod.GET)
@@ -29,9 +32,9 @@ public class UserRest {
 		
 		Athlete athlete = userService.findAthletesByUserName(userName);
 		
-		System.out.println("Test for GET Method with JSON request body. [userName " + userName + "]");	
+		log.info("GET in method [getAthlete] with PathVariable [userName :" + userName + "]");	
 		
 
-		return UserRestBeanMapping.athleteRestBeanFromAthleteEntity(athlete);
+		return UserBeanMapping.athleteRestBeanFromAthleteEntity(athlete);
 	}
 }

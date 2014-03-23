@@ -17,7 +17,7 @@ import es.uma.sportjump.sjs.model.entities.Team;
 import es.uma.sportjump.sjs.model.entities.Training;
 import es.uma.sportjump.sjs.service.services.TrainingService;
 import es.uma.sportjump.sjs.service.services.UserService;
-import es.uma.sportjump.sjs.web.controller.beans.RowAdminTeamWebBean;
+import es.uma.sportjump.sjs.web.beans.RowAdminTeamBean;
 
 @Controller
 @RequestMapping("/action/planning")
@@ -36,7 +36,7 @@ public class PlanningController {
 	public String groupList(Model model, HttpSession session) {		
 		
 		Coach  coach = (Coach) session.getAttribute("loggedUser");
-		List<RowAdminTeamWebBean> listTeams = 	fillAdminTeams(coach);		
+		List<RowAdminTeamBean> listTeams = 	fillAdminTeams(coach);		
 		model.addAttribute("listTeams", listTeams);
 		
 		return PLANNING_GROUP_LIST;		
@@ -53,12 +53,12 @@ public class PlanningController {
 
 	
 	
-	private List<RowAdminTeamWebBean> fillAdminTeams(Coach coach) {
-		List<RowAdminTeamWebBean> listAdminTeams = new ArrayList<RowAdminTeamWebBean>();
+	private List<RowAdminTeamBean> fillAdminTeams(Coach coach) {
+		List<RowAdminTeamBean> listAdminTeams = new ArrayList<RowAdminTeamBean>();
 		List<Team> listTeams = userService.findTeamsByCoach(coach);
 		
 		for(Team team : listTeams){
-			RowAdminTeamWebBean row = new RowAdminTeamWebBean();
+			RowAdminTeamBean row = new RowAdminTeamBean();
 			row.setIdTeam(team.getIdTeam());
 			row.setName(team.getName());
 			row.setType(team.getType());
